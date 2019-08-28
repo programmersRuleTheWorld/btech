@@ -1,0 +1,1 @@
+<img class="img-fluid rounded m-auto" src='images/heroanim.gif'>

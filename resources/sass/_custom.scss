@@ -1,0 +1,153 @@
+@import 'variables';
+
+@media(max-width: 700px){
+    
+    html{
+        font-size: .55rem;
+    }
+
+    input.form-control{
+        font-size: .8em;
+    }
+
+    input.select{
+        font-size: .8em;
+    }
+}
+
+html{
+    font-size: 1rem;
+}
+
+html body{
+    background-color: black;
+    background-image: url('../../public/images/logos/btlogogrey_bd.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: stretch;
+    background-attachment: fixed;
+}
+
+p{
+    padding: 0 5%;
+    text-indent: 2em;
+    font-size: 1em;
+}
+
+#app{
+    opacity: .6;
+}
+
+a.navbar-brand{
+    font-size: 1.4em;
+}
+
+.nav-link{
+    font-weight: bold;
+    font-size: 1em;
+    color: black;
+    border-radius: 25px;
+}
+.nav-link:hover{
+    animation-name: menutrans1;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+
+li > .dropdown-menu{
+    background: black;
+    border: 1px solid $warning;
+    padding: 0;
+}
+
+li > .dropdown-menu > a.dropdown-item{
+    background: transparent;
+    color: $warning;
+    font-size: 1.25em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+li > .dropdown-menu > a.dropdown-item:hover{
+    animation-name: menutrans2;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    color: black;
+}
+
+@keyframes menutrans1{
+    to{
+        color: $warning;
+        background: black;
+    }
+}
+
+@keyframes menutrans2{
+    to{
+        color: black;
+        background: $warning;
+        border: 1px solid black;
+    }
+}
+
+input.form-control{
+    background: black;
+    color: $warning;
+    border: none;
+}
+
+select.form-control{
+    background: black;
+    color: $warning;
+    border: none;
+    appearance: none;
+}
+
+input.form-control:focus{
+    border: 2px solid $warning;
+    background: grey;
+    color: $warning;
+}
+
+select.form-control:focus{
+    border: 2px solid $warning;
+    background: grey;
+    color: $warning;
+}
+
+a.page-link{
+    background: black;
+    color: $warning;
+}
+
+a.page-link:active{
+    background: $warning;
+    color: black;
+}
+
+textarea#body{
+    background: black;
+    color: $warning;
+}
+
+textarea#body:focus{
+    background: grey;
+    color: $warning;
+}
+
+textarea#project{
+    background: black;
+    color: $warning;
+    height: 100%;
+    width: 100%;
+}
+
+textarea#project:focus{
+    background: grey;
+    color: $warning;
+}
+
+.card{
+    min-height: 100%;
+    max-height: 100%;
+}
