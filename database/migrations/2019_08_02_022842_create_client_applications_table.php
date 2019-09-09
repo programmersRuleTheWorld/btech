@@ -21,6 +21,7 @@ class CreateClientApplicationsTable extends Migration
             $table->string('number')->nullable();
             $table->string('selection');
             $table->mediumText('project');
+            $table->string('conf_num');
             $table->timestamps();
         });
     }

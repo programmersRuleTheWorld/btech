@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\ClientApplication;
 use App\Mail\ClientApplicationSubmitted;
+use Mail;
 
 class ClientApplicationsController extends Controller
 {
@@ -53,15 +55,17 @@ class ClientApplicationsController extends Controller
         $clientapplication->selection = $request->input('selection');
         $clientapplication->project = $request->input('project');
         if(auth()->check()){$clientapplication->user_id = auth()->user()->id;}
-        $clientapplication->ref_id = rand(100000000,999999999);
+        $clientapplication->ref_id = rand(10000,99999);
+        $clientapplication->conf_num = rand(10000,99999);
         $clientapplication->save();
 
-        \Mail::to($clientapplication->email)
+        Mail::to($clientapplication->email)
         ->send(new ClientApplicationSubmitted($clientapplication));
 
         return redirect()->route('index')->with("success", "Your project has successfully been submitted. You will hear
-        back from us within one business day! Please retain this reference number for your records, in case you
-        wish to link this to an account later: $clientapplication->ref_id. A copy of your submission has been sent to $clientapplication->email for your records.");
+        back from us within one business day. A copy of your submission has been sent to $clientapplication->email for your 
+        records. It's important that you retain the reference ID and confirmation numbers included if you wish to add
+        this project to an account if you create one later.");
     }
 
     /**
@@ -93,7 +97,7 @@ class ClientApplicationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $ref_id, $request)
+    public function update(Request $request, $ref_id)
     {
      //   
     }
@@ -111,15 +115,14 @@ class ClientApplicationsController extends Controller
         return redirect()->route('dashboard')->with('success', 'Your project has successfully been deleted.');
     }
 
-    public function appendrefid(Request $request, $ref_id){
-        $validatedData = $this->validate($request, [
-            'updatedrefid' => 'required'
-        ]);
+    public function appendto(Request $request){
+        $this->validate($request, ['updatedrefid' => 'required']);
+        $ref_id = $request->input('updatedrefid');
+        $user = (auth()->user()->id);
 
-        /* ----- Study eloquent collections to create appendRefId later
-        
-        $updatedRefId = $validatedData;
-        ClientApplication::find($updatedRefId)->*/
+    }
+
+    public function removefrom(){
 
     }
 }

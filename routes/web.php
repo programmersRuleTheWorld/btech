@@ -20,7 +20,8 @@ Route::get('/admin', 'PagesController@admin')->name('admin');
 
 //custom ClientApplicationsController routes
 
-Route::post('/clientapplications/{id}/addrefid', 'ClientApplicationsController@appendrefid')->name('clientapplications.appendrefid');
+Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appendto')->name('clientapplications.appendto');
+Route::patch('/clientapplications/removefrom', 'ClientApplicationsController@removefrom')->name('clientapplications.removefrom');
 
 //posts controller
 Route::resource('posts', 'PostsController');

@@ -32,8 +32,8 @@ class DashboardController extends Controller
             [
             'posts' => $user->posts,
             'affiliate_id' => $user->affiliate_id,
-            'projects' => $user->clientapplication,
-            'user' => $user->name
+            'clientapplications' => $user->clientapplications,
+            'user' => $user->name,
             ]
         );
     }

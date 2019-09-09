@@ -5,15 +5,14 @@ Thank you for contacting {{ config('app.name') }}! Below, you'll find the detail
 for your proposed project, which you can use to add it to your account later, if you choose to make one. This feature is
 currently still in development, but you'll be one of the first to know when it's available!<br><br>
 
-@component('mail::panel')
-Name: {{ $clientapplication->name }}
-Company: {{ $clientapplication->company }}
-Email Address: {{ $clientapplication->email }}
-Phone Number: {{ $clientapplication->number }}
-Service Type: {{ $clientapplication->selection }}
-Project Description: {{ $clientapplication->project }}
+Name: {{ $clientapplication->name }}<br>
+Company: {{ $clientapplication->company }}<br>
+Email Address: {{ $clientapplication->email }}<br>
+Phone Number: {{ $clientapplication->number }}<br>
+Service Type: {{ $clientapplication->selection }}<br>
+Project Description: {{ $clientapplication->project }}<br>
+Confirmation Number: {{ $clientapplication->conf_num }}<br>
 Reference ID: [{{ $clientapplication->ref_id }}]
-@endcomponent
 
 Thanks,<br>
 {{ config('app.name') }}<br><br>

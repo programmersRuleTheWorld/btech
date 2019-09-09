@@ -22,46 +22,46 @@
                             Submitted At
                         </th>
                         <th>
-                            <form action="// route('clientapplications.addrefid', [$clientapplication->ref_id]) }}" method="POST">
+                            <form action="{{ route('clientapplications.appendto') }}" method="POST">
                                 @method('PATCH')
                                 @csrf
                                 <div class="form-row">
-                                <input class="form-control" id="updatedrefid" name="updatedrefid" type="integer" maxlength="9" placeholder="Type Ref ID ex. 991923314">
+                                <input class="form-control" id="updatedrefid" name="updatedrefid" maxlength="5" placeholder="Type Ref ID ex. 99192">
                                 <button class="btn btn-dark text-warning" type="submit">Add Project</button>
                                 </div>
                             </form>
                         </th>
-                    @if(count($projects) > 0)
-                        @foreach($projects as $project)   
+                    @if(count($clientapplications) > 0)
+                        @foreach($clientapplications as $clientapplication)   
                         <tr>
                             <td>
-                                {{ $project->name }}
+                                {{ $clientapplication->name }}
                             </td>
                             <td>
-                                {{ $project->company }}
+                                {{ $clientapplication->company }}
                             </td>
                             <td>
-                                {{ $project->email }}
+                                {{ $clientapplication->email }}
                             </td>
                             <td>
-                                {{ $project->number }}
+                                {{ $clientapplication->number }}
                             </td>
-                            @if(strlen($project->project) >= 26)
+                            @if(strlen($clientapplication->project) >= 26)
                             <td>
-                                {{ substr($project->project, 0, 25).'...' }}
+                                {{ substr($clientapplication->project, 0, 25).'...' }}
                             </td>
                                 @else
                             <td>
-                                {{ $project->project }}
+                                {{ $clientapplication->project }}
                             </td>
                                 @endif
                             <td>
-                                {{ $project->created_at }}
+                                {{ $clientapplication->created_at }}
                             </td>
                             <td>
-                                <form action="{{ route('clientapplications.destroy', [$project->ref_id]) }}" method="POST">
+                                <form action="{{ route('clientapplications.removefrom', [$clientapplication->ref_id]) }}" method="POST">
                                     @csrf
-                                    @method('DELETE')                           
+                                    @method('PATCH')                           
                                     <button type="submit" class="btn btn-dark text-warning" >Delete</button>
                                 </form>
                                 </td>
