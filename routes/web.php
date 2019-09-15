@@ -16,12 +16,14 @@ Route::get('/', 'PagesController@index')->name('index');
 Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/blog', 'PagesController@blog')->name('blog');
+Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 Route::get('/admin', 'PagesController@admin')->name('admin');
 
 //custom ClientApplicationsController routes
 
 Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appendto')->name('clientapplications.appendto');
-Route::patch('/clientapplications/removefrom', 'ClientApplicationsController@removefrom')->name('clientapplications.removefrom');
+Route::patch('/clientapplications/removefrom/{clientapplication}', 'ClientApplicationsController@removefrom')->name('clientapplications.removefrom');
+Route::patch('/clientapplications/revokeall', 'ClientApplicationsController@revokeall')->name('clientapplications.revokeall');
 
 //posts controller
 Route::resource('posts', 'PostsController');

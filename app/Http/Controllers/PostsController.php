@@ -107,9 +107,4 @@ class PostsController extends Controller
         $post->delete();
         return redirect()->route('dashboard')->with('success', 'Post deleted');
     }
-
-    public function appendrefid(ClientApplication $ref_id, Request $request){
-        $this->validate($request, ['updatedrefid' => 'required']);
-        $clientapplication->update(['user_id' => auth()->user()->id]);        
-    }
 }

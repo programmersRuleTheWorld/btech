@@ -1,6 +1,24 @@
+
 <h3 class="text-center">
         My Projects
     </h3>
+    <form class="col m-auto" action="{{ route('clientapplications.appendto') }}" method="POST">
+            @method('PATCH')
+            @csrf
+            <div class="row">
+                <div class="col-md-6">
+                <input class="form-control mb-2" name="ref_id" maxlength="15" placeholder="Type Ref ID ex. 4645213846">
+                </div>
+                <div class="col-md-6">
+                <input class="form-control mb-2" name="auth_code" maxlength="128" placeholder="Copy and paste Auth Code">
+                </div>
+                <button class="btn btn-dark text-warning" type="submit">Add Project</button>
+        </form>
+        <form class="col m-auto" action="{{ route('clientapplications.revokeall') }}" method="POST">
+            @method('PATCH')
+            @csrf
+            <button class="btn btn-dark text-warning" type="submit">Revoke</button>
+        </form>
     <table class="table table-borderless">
                     <tr>
                         <th>
@@ -20,16 +38,6 @@
                         </th>
                         <th>
                             Submitted At
-                        </th>
-                        <th>
-                            <form action="{{ route('clientapplications.appendto') }}" method="POST">
-                                @method('PATCH')
-                                @csrf
-                                <div class="form-row">
-                                <input class="form-control" id="updatedrefid" name="updatedrefid" maxlength="5" placeholder="Type Ref ID ex. 99192">
-                                <button class="btn btn-dark text-warning" type="submit">Add Project</button>
-                                </div>
-                            </form>
                         </th>
                     @if(count($clientapplications) > 0)
                         @foreach($clientapplications as $clientapplication)   
@@ -62,9 +70,17 @@
                                 <form action="{{ route('clientapplications.removefrom', [$clientapplication->ref_id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')                           
-                                    <button type="submit" class="btn btn-dark text-warning" >Delete</button>
+                                    <button type="submit" class="btn btn-dark text-warning" >Remove</button>
                                 </form>
-                                </td>
+                            </td>
+                            <td>
+                                <form action="{{ route('clientapplications.destroy', [$clientapplication->ref_id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')                           
+                                    <button type="submit" class="btn btn-dark text-warning" onclick="alert('This option will permanently delete this project and cannot be undone; continue?')">Delete</button>
+                                </form>
+                            </td>
+                            
                                 @endforeach
                             </tr>
                     @else

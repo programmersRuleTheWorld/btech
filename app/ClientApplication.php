@@ -10,6 +10,10 @@ class ClientApplication extends Model
     return $this->belongsTo('App\User');
     }
 
+    public function note(){
+        return $this->hasMany('App\Note');
+    }
+
     protected $primaryKey = 'ref_id';
 
     public $incrementing = false;

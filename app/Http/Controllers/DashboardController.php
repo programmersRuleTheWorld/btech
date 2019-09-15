@@ -30,10 +30,10 @@ class DashboardController extends Controller
         $user = User::find($user_id);
         return view('dashboard')->with(
             [
-            'posts' => $user->posts,
+            'posts' => $user->post,
             'affiliate_id' => $user->affiliate_id,
-            'clientapplications' => $user->clientapplications,
-            'user' => $user->name,
+            'clientapplications' => $user->clientapplication,
+            'user' => $user->name
             ]
         );
     }

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'reffered_by', 'affiliate_id',
+        'name', 'email', 'password', 'referred_by', 'affiliate_id',
     ];
 
     /**
@@ -37,12 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
+    public function post(){
         return $this->hasMany('App\Post');
-    }
-
-    public function clientapplications(){
-        return $this->hasMany('App\ClientApplication');
     }
 
     public function affiliateid(){

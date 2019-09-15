@@ -12,7 +12,8 @@ Phone Number: {{ $clientapplication->number }}<br>
 Service Type: {{ $clientapplication->selection }}<br>
 Project Description: {{ $clientapplication->project }}<br>
 Confirmation Number: {{ $clientapplication->conf_num }}<br>
-Reference ID: [{{ $clientapplication->ref_id }}]
+Reference ID: {{ $clientapplication->ref_id }}<br>
+Auth Code: {{ $clientapplication->auth_code }}
 
 Thanks,<br>
 {{ config('app.name') }}<br><br>

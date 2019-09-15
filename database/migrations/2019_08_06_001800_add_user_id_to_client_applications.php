@@ -14,7 +14,7 @@ class AddUserIdToClientApplications extends Migration
     public function up()
     {
         Schema::table('client_applications', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id')->nullable()->foreign('user_id')->references('id')->on('users');
         });
     }
 
