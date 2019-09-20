@@ -1,20 +1,20 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('content')
-<h1 class="text-center">Posts</h1>
     <div class="col-md-6 m-auto">
+            <h1 class="text-center">Posts</h1>
         @if(count($posts) >= 1)
             @foreach($posts as $post)
-                <a href="/posts/{{$post->id}}" class="text-dark">
-                    <div class="card bg-warning m-2">
+                <a href="/posts/{{ $post->id }}" class="$blue">
+                    <div class="card bg- white  m-2">
                         @if($post->title >= 30)
-                        <h3 class="text-center">{{ substr($post->title, 0, 29).'...' }}</h3>
+                        <h3 class="text-center">{{ substr($post->title, 0, 29) . '...' }}</h3>
                         @else
                         <h3 class="text-center">{{ $post->title }}</h3>
                         @endif
                         <h5 class="text-center">{{ $post->user->name }}</h5>
                         @if($post->body >= 525)
-                        <p>{{ substr($post->body, 0, 524).'...' }}</p>
+                        <p>{{ substr($post->body, 0, 524) . '...' }}</p>
                         @else
                         <p>{{ $post->body }}</p>
                         @endif                        

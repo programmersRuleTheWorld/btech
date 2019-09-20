@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 class ClientApplication extends Model
@@ -14,13 +15,23 @@ class ClientApplication extends Model
         return $this->hasMany('App\Note');
     }
 
+    public function updateAuthCode(){
+        $this->auth_code = Uuid::uuid4();
+        $this->save();
+    }
+
+    protected $attributes = [
+        'status' => 'follow-up'
+    ];
+
+    protected $fillable = [
+        'name'
+    ];
+
     protected $primaryKey = 'ref_id';
 
     public $incrementing = false;
 
     protected $keyType = 'string';
 
-    protected $fillable = [
-        'user_id',
-    ];
 }

@@ -1,10 +1,10 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="row">
     <div class="col-md-6 m-auto">
-        <div class="card bg-warning">
+        <div class="card bg- white ">
             <div class="card-header text-center">
                 About Me
             </div>

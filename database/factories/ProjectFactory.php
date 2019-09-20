@@ -17,7 +17,9 @@ $factory->define(ClientApplication::class, function (Faker $faker) {
         'selection' => 'buttsbuttsbutts',
         'auth_code' => Uuid::uuid4(),
         'number' => mt_rand(),
+        'status' => 'late',
         'project' => $faker->sentence,
-        'user_id' => 1
+        'user_id' => 1,
+        'dev_id' => 1
     ];
 });

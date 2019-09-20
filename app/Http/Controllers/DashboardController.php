@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\ClientApplication;
-use ClientApplicationsController;
+use App\Post;
 
 class DashboardController extends Controller
 {
@@ -26,14 +26,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
+        $user = auth()->user();
+        $jobs = ClientApplication::paginate(10);
+        $user->clientapplication = ClientApplication::paginate(5);
+        $user->post = Post::paginate(5);
         return view('dashboard')->with(
             [
             'posts' => $user->post,
             'affiliate_id' => $user->affiliate_id,
             'clientapplications' => $user->clientapplication,
-            'user' => $user->name
+            'jobs' => $jobs,
+            'user' => $user
             ]
         );
     }

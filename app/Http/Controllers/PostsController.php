@@ -90,9 +90,11 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'body' => 'required|max:2000',
         ]);
-        Post::whereId($id)->update($validatedData);
 
-        return view('dashboard')->with('id', $id);
+        $post = Post::find($id);
+        $post->update($validatedData);
+
+        return redirect()->route('dashboard.index', [$post->id]);
     }
 
     /**

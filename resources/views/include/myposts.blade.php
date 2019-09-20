@@ -1,7 +1,7 @@
                     <h3 class="text-center">
                             My Posts
                         </h3>
-                        <table class="table table-borderless">
+                        <table class="table table-hover table-striped table-condensed">
                                         <tr>
                                             <th>
                                                 Post Title
@@ -10,7 +10,9 @@
                                                 Published On
                                             </th>
                                             <th>
-                                                    <a class="btn btn-dark text-warning" href="/posts/create">Create Post</a>
+                                                <a class="btn btn-dark text-blue" href="/posts/create">Create Post</a>
+                                            </th>
+                                            <th>
                                             </th>
                                         </tr>
                                         @if(count($posts) > 0)
@@ -18,14 +20,14 @@
                                                 <tr>
                                                     @if(strlen($post->title) >= 26)
                                                     <td>
-                                                        <a class="text-dark" href="/posts/{{ $post->id }}">
-                                                        {{ substr($post->title, 0, 25).'...' }}
+                                                        <a class="$blue" href="/posts/{{ $post->id }}">
+                                                        <u>{{ substr($post->title, 0, 25).'...' }}</u>
                                                         </a>
                                                     </td>
                                                     @else    
                                                     <td>
-                                                        <a class="text-dark" href="/posts/{{ $post->id }}">
-                                                            {{ $post->title }}
+                                                        <a class="$blue" href="/posts/{{ $post->id }}">
+                                                            <u>{{ $post->title }}</u>
                                                         </a>
                                                     </td>
                                                     @endif
@@ -33,7 +35,7 @@
                                                 {{ $post->created_at }}
                                             </td>
                                                     <td>
-                                                        <a class="btn btn-dark text-warning" href="/posts/{{ $post->id }}">
+                                                        <a class="btn btn-dark text-blue" href="/posts/{{ $post->id }}">
                                                             Edit
                                                         </a>
                                                     </td>
@@ -41,7 +43,7 @@
                                                         <form action="{{ route('posts.destroy', [$post->id]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')                           
-                                                                <button type="submit" class="btn btn-dark text-warning" >Delete</button>
+                                                                <button type="submit" class="btn btn-dark text-blue" >Delete</button>
                                                         </form>
                                                     </td>
                                                     @endforeach
@@ -50,3 +52,5 @@
                                             <p class="text-center col-md-6">Nothing posted yet!</p>
                                         @endif
                                     </table>
+
+                                    {{ $posts->links() }}

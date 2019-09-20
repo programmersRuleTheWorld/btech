@@ -1,17 +1,17 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('content')
 
-<div class="row mb-3">
-    <div class="col-md-4">
-        <div class="card bg-warning">
+<div class="row">
+    <div class="col-md-4 mb-2">
+        <div class="card bg- white ">
             <div class="card-body">
-@include('include/featuredpost')
+@include('include.featuredpost')
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card bg-warning">
+    <div class="col-md-4 mb-2">
+        <div class="card bg- white ">
             <div class="card-body">
                     <h5 class="text-center">
                         Welcome to Bertram Technologies! Need a new website or mobile app, maintenance for an existing one,
@@ -21,13 +21,12 @@
                         Let us know today!
                     </h2>
                         Fields marked * required
-@include('include/clientapplication')
+@include('include.clientapplication')
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card bg-warning">
-@include('include/heroanimation')
+    <div class="col-md-4 mb-2">
+        <div class="card bg- white ">
         </div>
     </div>
 </div>

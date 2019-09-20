@@ -1,6 +1,6 @@
     @if(count($posts) > 0)
             @foreach($posts as $post)
-            <a class="text-dark" href="/posts/{{ $post->id }}">
+            <a class="$blue" href="/posts/{{ $post->id }}">
                         <h5 class="text-center">The Latest From B-Tech</h5>
                     <div class="text-center">
                     @if(strlen($post->title) >= 30)

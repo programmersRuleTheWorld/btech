@@ -19,7 +19,7 @@ class ClientApplicationsController extends Controller
      */
     public function index()
     {
-        $clientapplication = ClientApplication::with('user')->get();
+        
     }
 
     /**
@@ -78,7 +78,8 @@ class ClientApplicationsController extends Controller
      */
     public function show($ref_id)
     {
-        //
+        $clientapplication = ClientApplication::find($ref_id);
+        return view('clientapplications/show')->with('clientapplication', $clientapplication);
     }
 
     /**
@@ -89,7 +90,8 @@ class ClientApplicationsController extends Controller
      */
     public function edit($ref_id)
     {
-        //
+        $clientapplication = ClientApplication::find($ref_id);
+        return view('clientapplications/edit')->with('clientapplication', $clientapplication);
     }
 
     /**
@@ -101,7 +103,13 @@ class ClientApplicationsController extends Controller
      */
     public function update(Request $request, $ref_id)
     {
-     //   
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        $clientapplication = ClientApplication::find($ref_id);
+        $clientapplication->name = $request->input('name');
+        $clientapplication->save();
+        return redirect()->route('clientapplications.show', [$clientapplication->ref_id]);
     }
 
     /**
@@ -122,48 +130,45 @@ class ClientApplicationsController extends Controller
         $ref_id = $request->input('ref_id');
         $auth_code = $request->input('auth_code');
         $user_id = auth()->user()->id;
-        if(DB::table('client_applications')->where('ref_id', $ref_id)->orWhere('auth_code', $auth_code)->exists())
-        {
-            if(DB::table('client_applications')->where(['ref_id' => $ref_id, 'auth_code' => $auth_code])->exists())
+        $clientapplication = ClientApplication::find($ref_id);
+        if($clientapplication){
+            if($clientapplication->ref_id == $ref_id && $clientapplication->auth_code == $auth_code)
             {
-                DB::table('client_applications')->where(['ref_id' => $ref_id, 'auth_code' => $auth_code])->update(['user_id' => $user_id]);
-                return redirect()->route('dashboard')->with('success', "Project $ref_id has been successfully added to your account!");
+                $clientapplication->update(['user_id' => $user_id]);
+                return redirect()->route('dashboard')->with('success', "Project $ref_id has been successfully added to your account.");
             }
-            elseif(DB::table('client_applications')->where('ref_id', '!=', $ref_id)->where('auth_code', $auth_code)->exists())
-            {
-                return redirect()->route('dashboard')->with('error', "Please ensure you've entered your Reference ID correctly and try again.");
-            }
-            elseif(DB::table('client_applications')->where('ref_id', $ref_id)->where('auth_code', '!=', $auth_code)->exists())
-            {
-                return redirect()->route('dashboard')->with('error', "Please ensure you've entered your Authorization Code correctly and try again.");
+            elseif($clientapplication->ref_id == $ref_id && $clientapplication->auth_code != $auth_code){
+                return redirect()->route('dashboard')->with('error', "Please make sure you have entered your Authorization Code correctly.");
             }
         }
-        else
-        {
-            return redirect()->route('dashboard')->with('error', "Project $ref_id does not fucking exist.");
+        else{
+            return redirect()->route('dashboard')->with('error', "Project $ref_id does not exist.");
         }
+
 
     }
 
     public function removefrom($ref_id){
         $clientapplication = ClientApplication::find($ref_id);
         $clientapplication->update(['user_id' => NULL]);
-        return redirect()->route('dashboard')->with('success', 'Your project has successfully been removed from your account.');
+        return redirect()->route('dashboard')->with('success', "Your project has successfully been removed from your account,
+        but you can re-add it later if you wish to.");
     }
 
     public function revokeall(){
         $user = auth()->user();
-        if(ClientApplication::where(['user_id' => $user->id])->exists())
+        $clientapplication = ClientApplication::where('user_id', $user->id)->get();
+        if($clientapplication)
         {
-            $clientapplication = ClientApplication::where(['user_id' => $user->id])->update(['auth_code' => Uuid::uuid4()]);
+        $clientapplication->each->updateAuthCode();
             return redirect()->route('dashboard')->with('success', "All of your authorization codes have been reset and e-mailed to you.
             Security is our top priority!");
         }
             else
-                {
-                return redirect()->route('dashboard')->with('error', "You have no projects associated with your account, and therefore no auth
-                codes to revoke.");
-                }
+            {
+            return redirect()->route('dashboard')->with('error', "You have no projects associated with your account, and therefore no auth
+            codes to revoke.");
+            }
 
             /*      Pre-transition Query Builder code  
                     if(DB::table('client_applications')->where(['user_id' => $user->id])->exists())

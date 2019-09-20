@@ -20,6 +20,9 @@ class CreateClientApplicationsTable extends Migration
             $table->string('email');
             $table->string('number')->nullable();
             $table->string('selection');
+            $table->string('status')->nullable();
+            $table->integer('user_id')->nullable()->foreign('user_id')->references('id')->on('users');
+            $table->integer('dev_id')->nullable()->foreign('dev_id')->references('id')->on('users');
             $table->mediumText('project');
             $table->string('auth_code');
             $table->timestamps();

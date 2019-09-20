@@ -1,9 +1,18 @@
+// Variables
 @import 'variables';
 
-@media(max-width: 700px){
+html{
+    font-size: 1rem;
+}
+
+@media(max-width: 1000px){
     
     html{
         font-size: .55rem;
+    }
+
+    a.navbar-brand{
+        font-size: 2em;
     }
 
     input.form-control{
@@ -13,10 +22,9 @@
     input.select{
         font-size: .8em;
     }
-}
-
-html{
-    font-size: 1rem;
+    a{
+        font-size: .8em
+    }
 }
 
 html body{
@@ -24,7 +32,7 @@ html body{
     background-image: url('../../public/images/logos/btlogogrey_bd.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: stretch;
+    background-size: contain;
     background-attachment: fixed;
 }
 
@@ -35,7 +43,7 @@ p{
 }
 
 #app{
-    opacity: .6;
+    opacity: .8;
 }
 
 a.navbar-brand{
@@ -46,6 +54,7 @@ a.navbar-brand{
     font-weight: bold;
     font-size: 1em;
     color: black;
+    border: 1px solid transparent;
     border-radius: 25px;
 }
 .nav-link:hover{
@@ -56,43 +65,42 @@ a.navbar-brand{
 
 li > .dropdown-menu{
     background: black;
-    border: 1px solid $warning;
+    border: 1px transparent;
     padding: 0;
 }
 
 li > .dropdown-menu > a.dropdown-item{
     background: transparent;
-    color: $warning;
+    color: $blue;
     font-size: 1.25em;
     border: 1px solid black;
-    box-sizing: border-box;
 }
 
 li > .dropdown-menu > a.dropdown-item:hover{
-    animation-name: menutrans2;
+    animation-name: menutrans1;
     animation-duration: .5s;
     animation-fill-mode: forwards;
-    color: black;
 }
 
 @keyframes menutrans1{
     to{
-        color: $warning;
+        color: $blue;
         background: black;
+        border: 1px solid $blue;
     }
 }
 
 @keyframes menutrans2{
     to{
-        color: black;
-        background: $warning;
+        color: $blue;
+        background: black;
         border: 1px solid black;
     }
 }
 
 input.form-control{
     background: black;
-    color: $warning;
+    color: $blue;
     border: none;
 }
 
@@ -104,25 +112,20 @@ select.form-control{
 }
 
 input.form-control:focus{
-    border: 2px solid $warning;
-    background: grey;
-    color: $warning;
+    animation-name: menutrans1;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
 }
 
 select.form-control:focus{
-    border: 2px solid $warning;
-    background: grey;
-    color: $warning;
-}
-
-a.page-link{
+    border: 1px solid $blue;
     background: black;
-    color: $warning;
+    color: $blue;
 }
 
-a.page-link:active{
-    background: $warning;
-    color: black;
+.pagination{
+    border: none;
+    margin-left: 2%;
 }
 
 textarea#body{
@@ -150,4 +153,46 @@ textarea#project:focus{
 .card{
     min-height: 100%;
     max-height: 100%;
+}
+
+.follow-up{
+    background: blue;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.urgent{
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.on-time{
+    background: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.complete{
+    background: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.late{
+    background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.unpaid{
+    background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }

@@ -18,7 +18,7 @@ class CreateNotesTable extends Migration
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
             $table->string('ref_id')->foreign('ref_id')->references('ref_id')->on('client_applications');
             $table->string('title');
-            $table->string('body');
+            $table->string('comment');
             $table->timestamps();
         });
     }
