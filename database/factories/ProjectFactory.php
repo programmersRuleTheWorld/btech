@@ -16,10 +16,8 @@ $factory->define(ClientApplication::class, function (Faker $faker) {
         'email' => $faker->email . '@ex.net',
         'selection' => 'buttsbuttsbutts',
         'auth_code' => Uuid::uuid4(),
-        'number' => mt_rand(),
-        'status' => 'late',
+        'number' => mt_rand(0000000000,9999999999),
         'project' => $faker->sentence,
-        'user_id' => 1,
-        'dev_id' => 1
+        'user_id' => NULL
     ];
 });

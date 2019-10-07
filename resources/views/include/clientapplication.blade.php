@@ -36,5 +36,5 @@
                     <div class="form-group">
                         <textarea id="project" name="project" class="form-control  mb-2" placeholder="A brief description of your project..."></textarea>
                     </div>
-                    <button class="btn btn-dark text-blue" type="submit">Submit</button>    
+                    <button class="btn btn-dark text-primary" type="submit">Submit</button>    
                </form>

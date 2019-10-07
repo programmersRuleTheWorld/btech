@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'referred_by', 'affiliate_id',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -37,15 +39,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function post(){
+    public function posts(){
         return $this->hasMany('App\Post');
     }
 
-    public function affiliateid(){
-        return $this->hasOne('App\AffiliateID');
+    public function clientapplications(){
+        return $this->hasMany('App\ClientApplication');
     }
 
-    public function clientapplication(){
-        return $this->hasMany('App\ClientApplication');
+    public function ticketcomments(){
+        return $this->hasMany('App\TicketComment');
     }
 }

@@ -14,6 +14,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
+        $this->middleware('verified', ['except' => ['store']]);
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
     public function index()
@@ -107,6 +108,6 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('dashboard')->with('success', 'Post deleted');
+        return redirect()->route('dashboard')->with('success', 'Post Deleted');
     }
 }

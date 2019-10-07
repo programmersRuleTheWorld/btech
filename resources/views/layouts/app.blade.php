@@ -23,14 +23,8 @@
                <div class="container-fluid">   
     <div id="app">
         @include('include/messages')
-        <nav class="navbar navbar-expand-md navbar-light mt-3 bg-white ">
-            <div class="container">
-                <a class="navbar-brand p-0" href="{{ url('/') }}" >
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                                <img src={{ url("images/logos/btlogogrey_bd.png") }} width="8%">
                         @include('...include.navbar')
-            <div class="jumbotron mt-3 bg- white ">
+            <div class="jumbotron mt-3 bg-info ">
                 <main class="py-4">
                     @yield('content')
                 </main>

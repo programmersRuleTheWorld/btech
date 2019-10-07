@@ -11,6 +11,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\ClientApplication',1)->create();
+        factory('App\ClientApplication',999999)->create();
     }
 }

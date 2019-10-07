@@ -25,9 +25,14 @@ Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appen
 Route::patch('/clientapplications/removefrom/{clientapplication}', 'ClientApplicationsController@removefrom')->name('clientapplications.removefrom');
 Route::patch('/clientapplications/revokeall', 'ClientApplicationsController@revokeall')->name('clientapplications.revokeall');
 
+//custom ClientApplicationComments routes
+
+Route::post('/clientapplicationcomments/store/{comment}')->name('clientapplicationcomments.store');
+
 //posts controller
 Route::resource('posts', 'PostsController');
 Route::resource('clientapplications', 'ClientApplicationsController');
+Route::resource('clientapplicationcomments', 'ClientApplicationCommentsController');
 
 Auth::routes([ 'register' => true,
                 'reset' => true,

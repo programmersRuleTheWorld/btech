@@ -68,7 +68,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'affiliate_id' => rand(10000000000,99999999999),
         ]);
 
         \Mail::to($user->email)

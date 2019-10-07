@@ -1,3 +1,9 @@
+<nav class="navbar navbar-expand-md navbar-light mt-3 bg-info">
+        <div class="container">
+            <a class="navbar-brand p-0" href="{{ url('/') }}" >
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <img src={{ url("images/logos/btlogogrey_bd.png") }} width="8%">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -38,11 +44,11 @@
         @guest 
                 <!-- Authentication Links -->
 
-            <!--<li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link text-center" href="{{ route('login') }}">
                     {{ __('Login') }}
                 </a>
-            </li>!-->
+            </li>
         
             @if (Route::has('register'))
                 <li class="nav-item">

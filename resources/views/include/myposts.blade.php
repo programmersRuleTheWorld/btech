@@ -10,7 +10,7 @@
                                                 Published On
                                             </th>
                                             <th>
-                                                <a class="btn btn-dark text-blue" href="/posts/create">Create Post</a>
+                                                <a class="btn btn-dark text-primary" href="/posts/create">Create Post</a>
                                             </th>
                                             <th>
                                             </th>
@@ -20,13 +20,13 @@
                                                 <tr>
                                                     @if(strlen($post->title) >= 26)
                                                     <td>
-                                                        <a class="$blue" href="/posts/{{ $post->id }}">
+                                                        <a class="" href="/posts/{{ $post->id }}">
                                                         <u>{{ substr($post->title, 0, 25).'...' }}</u>
                                                         </a>
                                                     </td>
                                                     @else    
                                                     <td>
-                                                        <a class="$blue" href="/posts/{{ $post->id }}">
+                                                        <a class="" href="/posts/{{ $post->id }}">
                                                             <u>{{ $post->title }}</u>
                                                         </a>
                                                     </td>
@@ -35,7 +35,7 @@
                                                 {{ $post->created_at }}
                                             </td>
                                                     <td>
-                                                        <a class="btn btn-dark text-blue" href="/posts/{{ $post->id }}">
+                                                        <a class="btn btn-dark text-primary" href="/posts/{{ $post->id }}">
                                                             Edit
                                                         </a>
                                                     </td>
@@ -43,7 +43,7 @@
                                                         <form action="{{ route('posts.destroy', [$post->id]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')                           
-                                                                <button type="submit" class="btn btn-dark text-blue" >Delete</button>
+                                                                <button type="submit" class="btn btn-dark text-primary" >Delete</button>
                                                         </form>
                                                     </td>
                                                     @endforeach

@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-6 m-auto">
-        <div class="card bg- white ">
+        <div class="card bg-info ">
             <div class="card-header text-center">
                 About Me
             </div>

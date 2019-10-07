@@ -16,6 +16,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('verified');
         $this->middleware('auth');
     }
 
@@ -28,12 +29,11 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $jobs = ClientApplication::paginate(10);
-        $user->clientapplication = ClientApplication::paginate(5);
-        $user->post = Post::paginate(5);
+        $user->clientapplication = ClientApplication::where('user_id', $user->id)->paginate(5);
+        $user->post = Post::where('user_id', $user->id)->paginate(5);
         return view('dashboard')->with(
             [
             'posts' => $user->post,
-            'affiliate_id' => $user->affiliate_id,
             'clientapplications' => $user->clientapplication,
             'jobs' => $jobs,
             'user' => $user

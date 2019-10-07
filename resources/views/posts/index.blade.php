@@ -5,8 +5,8 @@
             <h1 class="text-center">Posts</h1>
         @if(count($posts) >= 1)
             @foreach($posts as $post)
-                <a href="/posts/{{ $post->id }}" class="$blue">
-                    <div class="card bg- white  m-2">
+                <a href="/posts/{{ $post->id }}" class="">
+                    <div class="card bg-info  m-2">
                         @if($post->title >= 30)
                         <h3 class="text-center">{{ substr($post->title, 0, 29) . '...' }}</h3>
                         @else

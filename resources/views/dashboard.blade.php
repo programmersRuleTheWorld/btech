@@ -9,19 +9,19 @@
 @endif
 <div class="row mb-5">
     <div class="col-md-5">
-        <div class="card bg- white ">
+        <div class="card bg-info ">
             @include('include.myposts')
         </div>
     </div>
 <div class="col-md-7">
-        <div class="card bg- white ">
+        <div class="card bg-info ">
             @include('include.myprojects')
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card bg- white ">
+        <div class="card bg-info ">
             @include('include.myjobs')
         </div>
     </div>

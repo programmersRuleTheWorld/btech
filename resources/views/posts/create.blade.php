@@ -11,7 +11,7 @@
             <input id="title" name="title" type="text" class="form-control" placeholder="Title...">
                 <textarea id="body" name="body" class="form-control mt-3 mb-3" placeholder="Your motherfucking blog post here, BITCH.">
                 </textarea>
-                <button type="submit" class="btn btn-dark text-blue">
+                <button type="submit" class="btn btn-dark text-primary">
                     Submit Post
                 </button>
             </div>

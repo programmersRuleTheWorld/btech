@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ClientApplication;
+use App\ClientApplicationComment;
 use App\User;
 use App\Mail\ClientApplicationSubmitted;
 use Ramsey\Uuid\Uuid;
@@ -12,6 +13,12 @@ use Mail;
 
 class ClientApplicationsController extends Controller
 {
+    public $clientapplication;
+
+    public function __construct(){
+        $this->middleware('verified', ['except' => ['store']]);
+        $this->middleware('auth', ['except' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -79,7 +86,13 @@ class ClientApplicationsController extends Controller
     public function show($ref_id)
     {
         $clientapplication = ClientApplication::find($ref_id);
-        return view('clientapplications/show')->with('clientapplication', $clientapplication);
+        $comments = ClientApplicationComment::where(['parent_ref_id' => $ref_id])->get();
+        
+        return view('clientapplications/show')->with([
+            'clientapplication' => $clientapplication,
+            'ref_id' => $ref_id,
+            'comments' => $comments
+            ]);
     }
 
     /**
@@ -104,12 +117,25 @@ class ClientApplicationsController extends Controller
     public function update(Request $request, $ref_id)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'company' => 'required',
+            'email' => 'required',
+            'selection' => 'required',
+            'project' => 'required',
+            'status' => 'required'
         ]);
+        
         $clientapplication = ClientApplication::find($ref_id);
         $clientapplication->name = $request->input('name');
+        $clientapplication->company = $request->input('company');
+        $clientapplication->number = $request->input('number');
+        $clientapplication->email = $request->input('email');
+        $clientapplication->selection = $request->input('selection');
+        $clientapplication->project = $request->input('project');
+        $clientapplication->status = $request->input('status');
         $clientapplication->save();
-        return redirect()->route('clientapplications.show', [$clientapplication->ref_id]);
+
+        return redirect()->route('clientapplications.show', [$clientapplication->ref_id])->with('success', "Client information updated successfully.");
     }
 
     /**
@@ -121,7 +147,7 @@ class ClientApplicationsController extends Controller
     public function destroy($ref_id)
     {
         $clientapplication = ClientApplication::find($ref_id);
-        $clientapplication->delete();
+        $clientapplication->forceDelete();
         return redirect()->route('dashboard')->with('success', 'Your project has successfully been deleted.');
     }
 
@@ -134,7 +160,7 @@ class ClientApplicationsController extends Controller
         if($clientapplication){
             if($clientapplication->ref_id == $ref_id && $clientapplication->auth_code == $auth_code)
             {
-                $clientapplication->update(['user_id' => $user_id]);
+                $clientapplication->user_id = $user_id;
                 return redirect()->route('dashboard')->with('success', "Project $ref_id has been successfully added to your account.");
             }
             elseif($clientapplication->ref_id == $ref_id && $clientapplication->auth_code != $auth_code){
@@ -150,7 +176,7 @@ class ClientApplicationsController extends Controller
 
     public function removefrom($ref_id){
         $clientapplication = ClientApplication::find($ref_id);
-        $clientapplication->update(['user_id' => NULL]);
+        $clientapplication->delete();
         return redirect()->route('dashboard')->with('success', "Your project has successfully been removed from your account,
         but you can re-add it later if you wish to.");
     }
@@ -158,7 +184,7 @@ class ClientApplicationsController extends Controller
     public function revokeall(){
         $user = auth()->user();
         $clientapplication = ClientApplication::where('user_id', $user->id)->get();
-        if($clientapplication)
+        if(count($clientapplication) > 0)
         {
         $clientapplication->each->updateAuthCode();
             return redirect()->route('dashboard')->with('success', "All of your authorization codes have been reset and e-mailed to you.
@@ -169,19 +195,5 @@ class ClientApplicationsController extends Controller
             return redirect()->route('dashboard')->with('error', "You have no projects associated with your account, and therefore no auth
             codes to revoke.");
             }
-
-            /*      Pre-transition Query Builder code  
-                    if(DB::table('client_applications')->where(['user_id' => $user->id])->exists())
-        {
-        DB::table('client_applications')->update(['auth_code' => Uuid::uuid4()]);
-        return redirect()->route('dashboard')->with('success', "All of your authorization codes have been reset and e-mailed to you.
-        Security is our top priority!");
-        }
-        else
-        {
-        return redirect()->route('dashboard')->with('error', "You have no projects associated with your account, and therefore no auth
-        codes to revoke.");
-        }
-            */
     }
 }

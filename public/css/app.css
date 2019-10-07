@@ -128,7 +128,7 @@ input.form-control {
 
 select.form-control {
   background: black;
-  color: #ccaa00;
+  color: #3490dc;
   border: none;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -136,12 +136,8 @@ select.form-control {
 }
 
 input.form-control:focus {
-  -webkit-animation-name: menutrans1;
-          animation-name: menutrans1;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  background: black;
+  color: #3490dc;
 }
 
 select.form-control:focus {
@@ -157,29 +153,39 @@ select.form-control:focus {
 
 textarea#body {
   background: black;
-  color: #ccaa00;
+  color: #3490dc;
+}
+
+textarea#comment {
+  background: black;
+  color: #3490dc;
+  border: #3490dc;
+}
+
+textarea#comment:focus {
+  background: black;
+  color: #3490dc;
 }
 
 textarea#body:focus {
   background: grey;
-  color: #ccaa00;
+  color: #3490dc;
 }
 
 textarea#project {
   background: black;
-  color: #ccaa00;
+  color: #3490dc;
   height: 100%;
   width: 100%;
 }
 
 textarea#project:focus {
   background: grey;
-  color: #ccaa00;
+  color: #3490dc;
 }
 
 .card {
   min-height: 100%;
-  max-height: 100%;
 }
 
 .follow-up {
