@@ -25,6 +25,10 @@ class PagesController extends Controller
         return view('posts/index')->with('posts', $posts);
     }
 
+    public function services(){
+        return view('pages/services');
+    }
+
     public function privacy(){
         return view('pages/privacy');
     }

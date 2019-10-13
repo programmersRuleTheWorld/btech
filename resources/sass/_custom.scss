@@ -28,10 +28,10 @@ html{
 
 html body{
     background-color: black;
-    background-image: url('../../public/images/logos/btlogogrey_bd.png');
+    //background-image: url('../../public/images/mainbg.jpeg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-attachment: fixed;
 }
 
@@ -42,11 +42,18 @@ p{
 }
 
 #app{
-    opacity: .8;
+    opacity: .9;
 }
 
 a.navbar-brand{
     font-size: 1.4em;
+}
+
+#btlogo{
+    min-width: 40px;
+    max-width: 55px;
+    margin-right: auto;
+    padding-left: 1%;
 }
 
 .nav-link{
@@ -130,22 +137,26 @@ select.form-control:focus{
 textarea#body{
     background: black;
     color: $blue;
+    border: none;
 }
 
 textarea#comment{
     background: black;
     color: $blue;
     border: $blue;
+    border: none;
 }
 
 textarea#comment:focus{
     background: black;
     color: $blue;
+    border: none;
 }
 
 textarea#body:focus{
-    background: grey;
+    background: black;
     color: $blue;
+    border: none;
 }
 
 textarea#project{
@@ -153,11 +164,13 @@ textarea#project{
     color: $blue;
     height: 100%;
     width: 100%;
+    border: none;
 }
 
 textarea#project:focus{
-    background: grey;
+    background: black;
     color: $blue;
+    border: none;
 }
 
 .card{
@@ -205,3 +218,67 @@ textarea#project:focus{
     font-weight: bold;
     text-align: center;
 }
+  
+  ol.carousel-indicators {
+    position: absolute;
+    bottom: 4%;
+    margin: 0;
+    width: auto;
+  }
+  
+  ol.carousel-indicators li,
+  ol.carousel-indicators li.active {
+    float: left;
+    width: 90%;
+    height: 10px;
+    margin: 5;
+    border-radius: 25px;
+    border: 0;
+    background: blue;
+}
+  
+  ol.carousel-indicators li.active {
+    background: rgb(0, 140, 255);
+    border-radius: 25%;
+  }
+
+  .carousel-caption{
+      background: black;
+      border-radius: 0%;
+      opacity: .9;
+      margin-bottom:10%;
+      padding: 4%;
+      border: 1px solid transparent;
+      animation-name: featuredborder;
+      animation-direction: both;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+  }
+
+  @keyframes featuredborder{
+      from{
+          border: 1px solid transparent;
+      }     
+      0%{
+          border: 1px solid magenta;
+      } 
+      20%{
+          border: 1px solid cyan;
+      }
+      40%{
+          border: 1px solid red;
+      }
+      60%{
+          border: 1px solid purple;
+      }
+      80%{
+          border: 1px solid green;
+      }
+      100%{
+          border: 1px solid yellow;
+      }
+  }
+
+  #appwarning{
+      font-size: .9em;
+  }

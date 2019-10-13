@@ -1,3 +1,4 @@
+    
                 <form action="{{ route('clientapplications.store') }}" method="POST">
                 @csrf
                 <div class="row">
@@ -20,7 +21,7 @@
                     </div>
                     <div class="col-md-6">
                     <div class="form-group">
-                        <input id="number" name="number" class="form-control mb-2" type="tel" pattern="[1-9]{10}" maxlength="10" placeholder="Phone Number (No dashes or spaces)">
+                        <input id="number" name="number" class="form-control mb-2" type="tel" pattern="[1-9]{10}" maxlength="10" placeholder="Phone Number (Numbers only)">
                     </div>
                     </div>
                 </div>
@@ -28,13 +29,15 @@
                         <select class="form-control" name="selection" id="selection">
                             <option value="Web Design/Development">Website Design/Development</option>
                             <option value="DevOps Management">DevOps</option>
+                            <option value="Mobile App">Mobile App</option>
                             <option value="Security Analysis">Security Analysis</option>
                             <option value="Custom Proposal">Custom Proposal</option>
                             <option value="Legacy Code">Legacy Code</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea id="project" name="project" class="form-control  mb-2" placeholder="A brief description of your project..."></textarea>
+                        <textarea id="project" name="project" class="form-control  mb-2" placeholder="A brief description of your project... preexisting or new site? Budgetary and time constraints? Biggest challenges so far?..."></textarea>
                     </div>
-                    <button class="btn btn-dark text-primary" type="submit">Submit</button>    
+                    <button class="btn btn-dark text-info" type="submit">Submit</button>    
+                    
                </form>

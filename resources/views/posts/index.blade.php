@@ -3,9 +3,9 @@
 @section('content')
     <div class="col-md-6 m-auto">
             <h1 class="text-center">Posts</h1>
-        @if(count($posts) >= 1)
+        @if(count($posts) > 0)
             @foreach($posts as $post)
-                <a href="/posts/{{ $post->id }}" class="">
+                <a href={{ route('posts.show', [$post->id]) }} class="text-dark">
                     <div class="card bg-info  m-2">
                         @if($post->title >= 30)
                         <h3 class="text-center">{{ substr($post->title, 0, 29) . '...' }}</h3>

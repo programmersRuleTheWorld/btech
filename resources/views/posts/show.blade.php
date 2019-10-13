@@ -13,9 +13,9 @@
                     </div>
                 </div>
                 <div class="row ml-2">
-            <a href="/posts" class="btn btn-dark text-primary m-1">Back</a>
+            <a href="/posts" class="btn btn-dark text-info m-1">Back</a>
             @if(!Auth::guest() && Auth::user()->id == $post->user_id)
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-dark text-primary m-1">Edit</a>
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
             </div>
             @endif
             </div>

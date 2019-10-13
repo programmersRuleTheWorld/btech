@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\ClientApplicationComment;
 use App\ClientApplication;
 use App\Mail\CommentAdded;
-use Mail;
 use Illuminate\Http\Request;
+use Mail;
 
 class ClientApplicationCommentsController extends Controller
 {
@@ -17,7 +17,7 @@ class ClientApplicationCommentsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -54,8 +54,8 @@ class ClientApplicationCommentsController extends Controller
         $comment->clientapplication->updated_at = ClientApplication::where(['ref_id' => $comment->parent_ref_id])->update(['updated_at' => now()]);
         $comment->save();
 
-        Mail::to($comment->clientapplication->email)
-        ->send(new CommentAdded($comment));
+        /*Mail::to($comment->clientapplication->email)
+        ->send(new CommentAdded($comment));*/
 
         return redirect()->back()->with('success', "Comment has been successfully attached to client application $comment->parent_ref_id.");
     }

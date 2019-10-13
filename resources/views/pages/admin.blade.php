@@ -10,7 +10,7 @@
                 <div class="card-body">
             <input class="form-control form-group" label="Username" placeholder="Username...">
             <input class="form-control form-group" type="password" label="Password" placeholder="Password...">
-            <button class="btn btn-dark text-primary" type="submit">Login</button>
+            <button class="btn btn-dark text-info" type="submit">Login</button>
                 </div>
             </div>
         </div>

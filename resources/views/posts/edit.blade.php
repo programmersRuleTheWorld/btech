@@ -10,14 +10,14 @@
                 <input id="title" name="title" type="text" class="form-control" value="{{ $post->title }}">
                 <textarea id="body" name="body" class="form-control mt-3 mb-3 bg-infoblack">{{ $post->body }}</textarea>
             <div class="row">
-            <button type="submit" class="btn btn-dark m-1 ">
+            <button type="submit" class="btn btn-dark text-info m-1 ">
                     Submit Post
             </button>
     </form>
         <form action="{{ route('posts.destroy', [$post->id]) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-dark m-1 " >Delete</button>
+            <button type="submit" class="btn btn-dark text-info m-1 " >Delete</button>
             </div>
         </form>
         </div>

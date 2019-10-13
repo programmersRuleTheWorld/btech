@@ -55,7 +55,8 @@ class ClientApplicationsController extends Controller
             'selection' => 'required',
             'project' => 'required'
         ]);
-
+        
+        $user = auth()->user();
         $clientapplication = new ClientApplication;
         $clientapplication->name = $request->input('name');
         $clientapplication->company = $request->input('company');
@@ -63,18 +64,25 @@ class ClientApplicationsController extends Controller
         $clientapplication->number = $request->input('number');
         $clientapplication->selection = $request->input('selection');
         $clientapplication->project = $request->input('project');
-        if(auth()->check()){$clientapplication->user_id = auth()->user()->id;}
+        if($user){$clientapplication->user_id = $user->id;}
         $clientapplication->ref_id = mt_rand(100000000000000,999999999999999);
         $clientapplication->auth_code = Uuid::uuid4();
         $clientapplication->save();
-
+        
         Mail::to($clientapplication->email)
         ->send(new ClientApplicationSubmitted($clientapplication));
 
+        if(!$user){
         return redirect()->route('index')->with("success", "Your project has successfully been submitted. You will hear
         back from us within one business day. A copy of your submission has been sent to $clientapplication->email for your 
-        records. It's important that you retain the reference ID and confirmation numbers included if you wish to add
+        records. It's important that you retain the Reference ID and Authorization Code included if you wish to add
         this project to an account if you create one later.");
+        }
+        else{
+            return redirect()->route('index')->with("success", "$user->name, your project has successfully been submitted. You will hear
+        back from us within one business day. A copy of your submission has been sent to $clientapplication->email for your 
+        records. It's important that you retain the Reference ID and Authorization Code for your records.");
+        }
     }
 
     /**
@@ -172,13 +180,6 @@ class ClientApplicationsController extends Controller
         }
 
 
-    }
-
-    public function removefrom($ref_id){
-        $clientapplication = ClientApplication::find($ref_id);
-        $clientapplication->delete();
-        return redirect()->route('dashboard')->with('success', "Your project has successfully been removed from your account,
-        but you can re-add it later if you wish to.");
     }
 
     public function revokeall(){

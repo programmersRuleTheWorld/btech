@@ -11,11 +11,10 @@ Email Address: {{ $clientapplication->email }}<br>
 Phone Number: {{ $clientapplication->number }}<br>
 Service Type: {{ $clientapplication->selection }}<br>
 Project Description: {{ $clientapplication->project }}<br>
-Confirmation Number: {{ $clientapplication->conf_num }}<br>
 Reference ID: {{ $clientapplication->ref_id }}<br>
 Auth Code: {{ $clientapplication->auth_code }}
 
 Thanks,<br>
-{{ config('app.name') }}<br><br>
+{{ config('app.name') }} <img src="../../../public/images/logos/btlogogradient_bg.png"><br><br>
 Note: (This message is sent from an unmonitored mailbox; please do not reply to this message)
 @endcomponent

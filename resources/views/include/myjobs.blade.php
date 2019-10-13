@@ -1,5 +1,5 @@
         <h3 class="text-center">Open Contracts</h3>
-        <table class="table table-hover table-striped table-condensed">
+        <table class="table table-striped table-hover  table-condensed">
             <tr class="bg-info  ">
                 <th>
                     Company
@@ -20,7 +20,7 @@
         @foreach($jobs as $job)
             <tr>
                 <td>
-                    <a href="/clientapplications/{{ $job->ref_id }}" class="">    
+                    <a class="text-dark" href="/clientapplications/{{ $job->ref_id }}" class="">    
                     <u>{{ $job->company }}</u>
                     </a>
                 </td>

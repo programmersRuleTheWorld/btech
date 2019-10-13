@@ -8,8 +8,8 @@
     <div class="card-header">
         <h3 class="text-center">Client Information</h3>
     </div>
-        <table class="table table-hover table-striped table-condensed">
-            <tr><td class="table-striped">Status: @include('include.clientapplication_status')
+        <table class="table table-striped table-hover  table-condensed">
+            <tr><td class="">Status: @include('include.clientapplication_status')
             <tr><th>Reference Identification Number:</th><td>{{ $clientapplication->ref_id }}</td></tr>
             <tr><th>Client Name:</th><td>{{ $clientapplication->name }}</td></tr>
             <tr><th>Client Company:</th><td>{{ $clientapplication->company }}</td></tr>
@@ -25,7 +25,7 @@
 </div>
 </div>
 <div class="col-md-6"> 
-    <div class="card bg-info">
+    <div class="card bg-info p-2">
         <div class="card-header">
             <h3 class="text-center">
                 Ticket Comments

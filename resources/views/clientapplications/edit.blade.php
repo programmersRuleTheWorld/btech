@@ -64,14 +64,14 @@
         </div>
 
         
-            <button type="submit" class="btn btn-dark m-1 ">
+            <button type="submit" class="btn btn-dark text-info m-1 ">
                     Submit Client Information
             </button>
     </form>
         <form action="{{ route('clientapplications.destroy', [$clientapplication->ref_id]) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-dark m-1" >Delete</button>
+            <button type="submit" class="btn btn-dark text-info m-1" >Delete</button>
             </div>
         </form>
         </div>

@@ -1,7 +1,6 @@
     @if(count($posts) > 0)
             @foreach($posts as $post)
-            <a class="" href="/posts/{{ $post->id }}">
-                        <h5 class="text-center">The Latest From B-Tech</h5>
+            <a class="text-dark" href="/posts/{{ $post->id }}">
                     <div class="text-center">
                     @if(strlen($post->title) >= 30)
                     <h4>{{ substr($post->title, 0,29).'...' }}</h4>

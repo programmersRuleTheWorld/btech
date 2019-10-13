@@ -46,11 +46,13 @@ class PostsController extends Controller
         'body' => 'required'
         ]);
 
+        $user = auth()->user();
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body'); 
-        $post->user_id = auth()->user()->id;
+        $post->user_id = $user->id;
         $post->save();
+
         return redirect()->route('dashboard')->with('success','Post Created');
        }
 
@@ -95,7 +97,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->update($validatedData);
 
-        return redirect()->route('dashboard.index', [$post->id]);
+        return redirect()->route('dashboard', [$post->id]);
     }
 
     /**

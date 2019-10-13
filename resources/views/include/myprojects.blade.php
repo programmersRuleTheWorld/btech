@@ -12,15 +12,15 @@
                 <div class="col-md-6">
                 <input class="form-control mb-2" name="auth_code" maxlength="128" placeholder="Copy and paste Auth Code">
                 </div>
-                <button class="btn btn-dark text-primary" type="submit">Add Project</button>
+                <button class="btn btn-dark text-info" type="submit">Add Project</button>
         </form>
         <form class="col m-auto" action="{{ route('clientapplications.revokeall') }}" method="POST">
             @method('PATCH')
             @csrf
-            <button class="btn btn-dark text-primary" type="submit">Reset Auth Codes</button>
+            <button class="btn btn-dark text-info" type="submit">Reset Auth Codes</button>
         </form>
     </div>
-    <table class="table table-hover table-striped table-condensed">
+    <table class="table table-striped table-hover table-condensed">
                     <tr>
                         <th>
                             Name
@@ -42,7 +42,7 @@
                                 {{ $clientapplication->name }}
                             </td>
                             <td>
-                                <a href="/clientapplications/{{ $clientapplication->ref_id }}" class="">
+                                <a class="text-dark" href="/clientapplications/{{ $clientapplication->ref_id }}" class="">
                                     <u>{{ $clientapplication->company }}</u>
                                 </a>
                             </td>
@@ -50,19 +50,11 @@
                                 {{ $clientapplication->email }}
                             </td>
                             <td>
-                                <div class="row">
-                                <div class="form-group">
-                                <form action="{{ route('clientapplications.removefrom', [$clientapplication->ref_id]) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')                           
-                                    <button type="submit" class="btn btn-dark text-primary" >Remove</button>
-                                </form>
-                                </div>
                                 <div class="form-group">
                                 <form action="{{ route('clientapplications.destroy', [$clientapplication->ref_id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')                           
-                                    <button type="submit" class="btn btn-dark text-primary" onclick="alert('This option will permanently delete this project and cannot be undone; continue?')">Delete</button>
+                                    <button type="submit" class="btn btn-dark text-info" onclick="alert('This option will permanently delete this project and cannot be undone; continue?')">Delete</button>
                                 </form>
                                 </div>
                             </div>

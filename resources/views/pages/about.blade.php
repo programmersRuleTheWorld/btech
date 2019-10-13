@@ -3,14 +3,14 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-6 m-auto">
+    <div class="col m-auto">
         <div class="card bg-info ">
-            <div class="card-header text-center">
-                About Me
+            <div class="card-header">
+                <h3 class="text-center">About Me</h3>
             </div>
-                <img src="images/meandjoe.jpg" class="card-img-top img-responsive">
                 <div class="card-body">
-                    <p>My name is Robert Jonathan Bertram. Born four months early in Albany, New York in 1993, I grew up in a 
+                        <img src={{ asset('images/meandjoe.jpg') }} width="30%" class="rounded-circle float-left">
+                        <p>My name is Robert Jonathan Bertram. Born four months early in Albany, New York in 1993, I grew up in a 
                         secluded Massachusetts town called Great Barrington. Having some of the best public education in the 
                         country, this was fortunate. 
                         Unfortunately after graduating high-school one year early in 2010, all would not go well. My parents lost

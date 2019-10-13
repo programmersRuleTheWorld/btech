@@ -23,7 +23,7 @@
         </div>
     </div>
             <input type="hidden" value="{{ $ref_id }}" name="ref_id">
-            <button class="btn btn-dark text-primary" type="submit">Comment</button>    
+            <button class="btn btn-dark text-info" type="submit">Comment</button>    
        </form>
 
        @foreach($comments as $comment)
