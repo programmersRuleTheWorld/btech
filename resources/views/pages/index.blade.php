@@ -27,7 +27,7 @@
                         Let us know today!
                     </h2>
                     <div id="appwarning" class="alert bg-warning col mb-2 m-auto text-center text-dark">
-                            Before you complete the Client Application, you should <a class="text-dark" href={{ route('register') }}><b>create an account</b></a>!
+                            Before you complete the Client Application, you should <a class="text-dark" href={{ route('register') }}><b>create an account</b></a>! This allows you to track your project status anytime you want!
                         </div>                        
                         Fields marked * required
 @include('include.clientapplication')

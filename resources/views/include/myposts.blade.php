@@ -26,7 +26,7 @@
                                                     </td>
                                                     @else    
                                                     <td>
-                                                        <a class="" href="/posts/{{ $post->id }}">
+                                                        <a class="text-dark" href="/posts/{{ $post->id }}">
                                                             <u>{{ $post->title }}</u>
                                                         </a>
                                                     </td>
