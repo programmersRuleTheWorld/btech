@@ -1,0 +1,337 @@
+@import 'variables';
+
+html{
+    font-size: 1rem;
+}
+
+@media(max-width: 1300px){
+
+    .carousel-caption > h6{
+        font-size: .8em;
+    }
+
+    a.navbar-brand{
+        font-size: 1em;
+        text-align: center;
+    }
+
+    input.form-control{
+        font-size: .8em;
+    }
+
+    input.select{
+        font-size: .8em;
+    }
+
+    a.nav-link{
+        font-size: .7em;
+    }
+}
+
+@media(min-width: 1301px){
+
+    .carousel-caption > h6{
+        font-size: 1.3em;
+    }
+}
+
+html body{
+    background-color: black;
+    background-image: url('../../public/images/btlogogrey_bd.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: fixed;
+}
+
+a{
+    text-decoration-line: underline;
+}
+p{
+    padding: 0 5%;
+    text-indent: 2em;
+    font-size: 1em;
+}
+
+#app{
+    opacity: .9;
+}
+
+a.navbar-brand{
+    font-size: 1.4em;
+}
+
+#btlogo{
+    min-width: 50px;
+    width: 8%;
+    max-width: 67px;
+    margin-right: auto;
+    padding-left: 1%;
+}
+
+.nav-link{
+    font-weight: bold;
+    font-size: .8em;
+    color: black;
+    border: 1px solid transparent;
+    border-radius: 25px;
+}
+.nav-link:hover{
+    animation-name: menutrans1;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+
+li > .dropdown-menu{
+    background: black;
+    border: 1px transparent;
+    padding: 0;
+}
+
+li > .dropdown-menu > a.dropdown-item{
+    background: transparent;
+    color: $blue;
+    font-size: 1.25em;
+    border: 1px solid black;
+}
+
+li > .dropdown-menu > a.dropdown-item:hover{
+    animation-name: menutrans1;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes menutrans1{
+    to{
+        color: $blue;
+        background: black;
+        border: 1px solid $blue;
+    }
+}
+
+@keyframes menutrans2{
+    to{
+        color: $blue;
+        background: black;
+        border: 1px solid black;
+    }
+}
+
+input.form-control{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+select.form-control{
+    background: black;
+    color: $blue;
+    border: none;
+    appearance: none;
+}
+
+input.form-control:focus{
+    background: black;
+    color: $blue;
+
+}
+
+select.form-control:focus{
+    border: 1px solid $blue;
+    background: black;
+    color: $blue;
+}
+
+//pagination customizations
+
+.pagination{
+    border: transparent;
+    margin-left: 2%;
+}
+
+textarea#body{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+textarea#comment{
+    background: black;
+    color: $blue;
+    border: $blue;
+    border: none;
+}
+
+textarea#cbody{
+    background: black;
+    color: $blue;
+    border: $blue;
+    border: none;
+}
+
+textarea#comment:focus{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+textarea#body:focus{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+textarea#cbody:focus{
+    background: black;
+    color: $blue;
+    border: $blue;
+    border: none;
+}
+
+td{
+    max-height: 100%;
+}
+
+textarea#project{
+    background: black;
+    color: $blue;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+textarea#project:focus{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+textarea#project_show{
+    background: black;
+    color: $blue;
+    border: none;
+}
+
+textarea#item_description{
+    background: black;
+    color: $blue;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.card{
+    min-height: 100%;
+}
+
+.follow-up{
+    background: blue;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.urgent{
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.on-time{
+    background: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.complete{
+    background: green;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.late{
+    background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.unpaid{
+    background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.incomplete{
+    background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+  
+  ol.carousel-indicators {
+    margin: 0;
+    width: auto;
+  }
+  
+  ol.carousel-indicators li,
+  ol.carousel-indicators li.active {
+    float: left;
+    width: 95%;
+    height: 5px;
+    border: 1px solid black;
+    background: blue;
+}
+  
+  ol.carousel-indicators li.active {
+    background: rgb(0, 140, 255);
+    height: 8px;
+  }
+
+  .carousel-inner{
+    overflow: auto;
+  }
+
+  .carousel-caption{
+    background: black;
+    opacity: .9;
+    padding: 1% 1%;
+    margin-bottom: 10%;
+    border: 1px solid transparent;
+    animation-name: featuredborder;
+    animation-direction: both;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes featuredborder{
+      from{
+          border: 1px solid transparent;
+      }     
+      0%{
+          border: 1px solid magenta;
+      } 
+      20%{
+          border: 1px solid cyan;
+      }
+      40%{
+          border: 1px solid red;
+      }
+      60%{
+          border: 1px solid purple;
+      }
+      80%{
+          border: 1px solid green;
+      }
+      100%{
+          border: 1px solid yellow;
+      }
+  }
+
+  #appwarning{
+      font-size: .9em;
+  }
