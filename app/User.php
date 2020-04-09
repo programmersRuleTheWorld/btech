@@ -17,13 +17,11 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'name', 'email', 'password', 'affiliate_id', 'referred_by',
+        'first_name', 'last_name', 'company_name', 'email', 'phone_number', 'password', 'affiliate_id', 'referred_by',
     ];
 
     protected $attributes = [
         'user_balance' => 0.00,
-        'affiliate_balance' => 0.00,
-        'commission_rate' => .10,
     ];
 
     /**
@@ -67,6 +65,16 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany('App\Post');
+    }
+
+    public function affiliatecampaign()
+    {
+        return $this->belongsTo('App\AffiliateCampaign', 'id', 'user_id');
+    }
+
+    public function affiliatecampaigns()
+    {
+        return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
     }
     
 }

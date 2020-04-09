@@ -61,7 +61,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts/show')->with('post', $post);
     }
 
     /**
@@ -72,7 +72,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts/edit')->with('post', $post);
     }
 
     /**
@@ -84,7 +84,20 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'post_title' => 'required',
+            'post_body' => 'required',
+        ]);
+
+        $post->update([
+            'post_title' => $request->input('post_title'),
+            'post_body' => $request->input('post_body'),
+        ]);
+
+        $post->save();
+
+        return redirect()->route('posts.show', [$post->post_id])->with('success', "Post $post->post_id 
+        successfully updated!");
     }
 
     /**

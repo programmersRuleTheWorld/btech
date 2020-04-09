@@ -134,22 +134,24 @@ class ClientApplicationsController extends Controller
     public function update(Request $request, $ref_id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'company' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company_name' => 'required',
             'email' => 'required',
             'selection' => 'required',
-            'project' => 'required',
-            'status' => 'required'
+            'project_type' => 'required',
+            'project_status' => 'required'
         ]);
         
         $clientapplication = ClientApplication::find($ref_id);
-        $clientapplication->name = $request->input('name');
-        $clientapplication->company = $request->input('company');
-        $clientapplication->number = $request->input('number');
+        $clientapplication->first_name = $request->input('first_name');
+        $clientapplication->last_name = $request->input('last_name');
+        $clientapplication->company_name = $request->input('company_name');
+        $clientapplication->phone_number = $request->input('phone_number');
         $clientapplication->email = $request->input('email');
-        $clientapplication->selection = $request->input('selection');
-        $clientapplication->project = $request->input('project');
-        $clientapplication->status = $request->input('status');
+        $clientapplication->project_type = $request->input('project_type');
+        $clientapplication->project_description = $request->input('project_description');
+        $clientapplication->status = $request->input('project_status');
         $clientapplication->save();
 
         return redirect()->route('clientapplications.show', [$clientapplication->ref_id])->with('success', "Client information updated successfully!");

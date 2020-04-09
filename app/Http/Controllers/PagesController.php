@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 use Feeds;
 
 class PagesController extends Controller
@@ -73,9 +74,12 @@ class PagesController extends Controller
         return view('pages/service_agreement');
     }
 
-    public function affiliate()
+    public function affiliate_details()
     {
-        return view('pages/affiliate');
+        $user = auth()->user();
+        $clients = User::where('referred_by', $user->affiliate_id)->get();
+
+        return view('pages/affiliate_details')->with('clients', $clients);
     }
 
     public function admin()

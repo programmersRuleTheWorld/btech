@@ -19,7 +19,7 @@ Route::get('/services', 'PagesController@services')->name('services');
 Route::get('/blog', 'PagesController@blog')->name('blog');
 Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 Route::get('/service_agreement', 'PagesController@service_agreement')->name('service_agreement');
-Route::get('/affiliate_details', 'PagesController@affiliate')->name('affiliate_details');
+Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('affiliate_details');
 Route::get('/admin', 'PagesController@admin')->name('admin');
 
 //custom ClientApplicationsController routes
@@ -42,9 +42,11 @@ Route::resource('posts', 'PostsController');
 Route::resource('clientapplications', 'ClientApplicationsController');
 Route::resource('clientapplicationcomments', 'ClientApplicationCommentsController');
 Route::resource('breakdownitems', 'BreakdownItemsController');
+Route::resource('profiles', 'ProfilesController');
 
 Auth::routes([
     'register' => false,
+    'verify' => false,
 ]);
 
 Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistrationForm')->name('register');

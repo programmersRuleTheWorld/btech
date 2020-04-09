@@ -57,13 +57,16 @@
         @else
             <li class="nav-item dropdown text-center">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     
                     
                     <a class="dropdown-item text-center" href="{{ route('dashboard') }}">
+                        {{ __('Dashboard') }}
+                    </a>
+                    <a class="dropdown-item text-center" href="{{ route('profiles.show', [Auth::user()->id]) }}">
                         {{ __('My Profile') }}
                     </a>
 

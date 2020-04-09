@@ -16,16 +16,16 @@
                                         @if(count($posts) > 0)
                                             @foreach($posts as $post)   
                                                 <tr class="text-center">
-                                                    @if(strlen($post->title) >= 26)
+                                                    @if(strlen($post->post_title) >= 26)
                                                     <td>
                                                         <a class="text-dark" href="/posts/{{ $post->post_id }}">
-                                                        <u>{{ substr($post->title, 0, 25).'...' }}</u>
+                                                        <u>{{ substr($post->post_title, 0, 25).'...' }}</u>
                                                         </a>
                                                     </td>
                                                     @else    
                                                     <td>
                                                         <a class="text-dark" href="/posts/{{ $post->post_id }}">
-                                                            <b>{{ $post->title }}</b>
+                                                            <b>{{ $post->post_title }}</b>
                                                         </a>
                                                     </td>
                                                     @endif
@@ -33,7 +33,7 @@
                                                 {{ $post->created_at }}
                                             </td>
                                                     <td>
-                                                        <a class="btn btn-dark text-info" href="/posts/{{ $post->post_id }}">
+                                                        <a class="btn btn-dark text-info" href="/posts/{{ $post->post_id }}/edit">
                                                             Edit
                                                         </a>
                                                     </td>

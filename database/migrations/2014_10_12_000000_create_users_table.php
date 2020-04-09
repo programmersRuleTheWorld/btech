@@ -15,10 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('company_name')->nullable();
+            $table->string('phone_number')->nullable();
             $table->decimal('user_balance', 8, 2);
-            $table->decimal('affiliate_balance', 8, 2);
-            $table->decimal('commission_rate', 2, 2);
             $table->string('email')->unique();
             $table->string('affiliate_id')->unique();
             $table->string('referred_by')->nullable();

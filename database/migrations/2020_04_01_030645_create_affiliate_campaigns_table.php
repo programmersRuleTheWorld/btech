@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAffiliateCampaignsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('affiliate_campaigns', function (Blueprint $table) {
+            $table->bigIncrements('affiliate_campaign_id');
+            $table->string('affiliate_id')->foreign('affiliate_id')->references('referred_by')->on('users');
+            $table->string('user_id')->foreign('user_id')->references('id')->on('users');
+            $table->decimal('commission_rate', 2, 2);
+            $table->decimal('campaign_balance', 2, 2);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('affiliates');
+    }
+}
