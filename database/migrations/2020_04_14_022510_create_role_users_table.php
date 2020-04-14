@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceContractsTable extends Migration
+class CreateRoleUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateServiceContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_contracts', function (Blueprint $table) {
-            $table->bigIncrements('contract_id');
+        Schema::create('role_users', function (Blueprint $table) {
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications');
+            $table->integer('role_id')->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateServiceContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_contracts');
+        Schema::dropIfExists('role_users');
     }
 }

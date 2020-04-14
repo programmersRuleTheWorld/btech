@@ -57,11 +57,6 @@ class User extends Authenticatable
         return $this->hasMany('App\ClientApplicationComment');
     }
     
-    public function servicecontracts()
-    {
-        return $this->hasMany('App\ServiceContract');
-    }
-    
     public function posts()
     {
         return $this->hasMany('App\Post');
@@ -76,5 +71,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'role_user');
+    }
+
     
 }

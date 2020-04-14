@@ -31,7 +31,7 @@ class CreateAffiliateCampaign
         {
             return AffiliateCampaign::create([
                 'affiliate_id' => $event->user->referred_by,
-                'user_id' => $event->user->id,
+                'referred_user_id' => $event->user->id,
             ]);
         }
     }
