@@ -15,7 +15,8 @@ class PagesController extends Controller
     }
     
     public function index(){
-        $posts = Post::latest()->take(1)->with('user')->get();
+        $user = auth()->user();
+        $posts = Post::latest()->take(3)->with('user')->get();
         
         $feed = Feeds::make(
             
@@ -34,6 +35,7 @@ class PagesController extends Controller
             return view('pages/index')->with(
             [
                 'posts' => $posts,
+                'user' => $user,
                 'feed' => $feed,
                 'title' => $title,
                 'permalink' => $permalink,

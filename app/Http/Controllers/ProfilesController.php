@@ -87,7 +87,7 @@ class ProfilesController extends Controller
         'company_name' => $request->input('company_name'),
         ]);
 
-        return back()->with('success', "Your personal information has been updated!");
+        return back();
     }
 
     /**

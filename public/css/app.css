@@ -35,7 +35,7 @@ html {
 
 html body {
   background-color: black;
-  background-image: url(/images/btlogogrey_bd.png?1a30ca01d43b46789c81a06339e082a3);
+  background-image: url(/images/btlogobluegradient.svg?5f0234d1804fd09675c673c5db1eae71);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -54,7 +54,7 @@ p {
 }
 
 #app {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 a.navbar-brand {

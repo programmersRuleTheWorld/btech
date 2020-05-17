@@ -33,15 +33,15 @@
 <div class="col-md-7">
         <div class="card bg-info ">
             <div class="card-header">
-                <div class="col-md-3">
-                    <div class="text-success text-center bg-dark text-left">
-                        My balance: ${{ $user->user_balance }}
-                    </div>
-                </div>
                 <div class="col-md-6 m-auto">
                     <h3 class="text-center">
                         My Projects
                     </h3>
+                </div>
+            </div>
+            <div class="col-md-3 mt-2">
+                <div class="text-success text-center bg-dark text-left">
+                    My balance: ${{ $user->user_balance }}
                 </div>
             </div>
             @include('dashboard.include.myprojects')

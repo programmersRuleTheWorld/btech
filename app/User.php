@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
@@ -17,7 +18,14 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'first_name', 'last_name', 'company_name', 'email', 'phone_number', 'password', 'affiliate_id', 'referred_by',
+        'first_name', 
+        'last_name', 
+        'company_name', 
+        'email', 
+        'phone_number', 
+        'password', 
+        'affiliate_id', 
+        'referred_by',
     ];
 
     protected $attributes = [
@@ -71,11 +79,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
     }
-
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role', 'role_user');
-    }
-
-    
 }

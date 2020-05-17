@@ -10,7 +10,7 @@ class AffiliateCampaign extends Model
     protected $primaryKey = 'affiliate_campaign_id';
 
     protected $fillable = [
-        'affiliate_id', 'user_id',
+        'affiliate_id', 'referred_user_id',
     ];
 
     protected $attributes = [
