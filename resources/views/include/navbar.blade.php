@@ -3,7 +3,7 @@
             <a class="navbar-brand p-0" href="{{ url('/') }}" >
                 <b><small>Bertram Technologies</small></b>
             </a>
-            <img src={{ asset("images/logos/btlogoblack.svg") }} id="btlogo">
+            <img src={{ asset("images/logos/btlogoredgradient.svg") }} id="btlogo">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon"></span>
 </button>

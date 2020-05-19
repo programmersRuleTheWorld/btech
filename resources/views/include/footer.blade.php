@@ -14,6 +14,6 @@
             </ul>
         </nav>
                 <div class="text-center">
-                        &copy;Copyright 2019 Bertram Technologies Corporation All Rights Reserved
+                        &copy;Copyright 2020 Bertram Technologies Corporation All Rights Reserved
                 </div>
         </footer>

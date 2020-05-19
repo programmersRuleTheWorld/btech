@@ -9,38 +9,48 @@
     <div class="card-body text-center">
         Details on individuals and businesses you've signed up are below. The more clients whose needs
         you help Bertram Technologies fill, the more you'll make!
-
+    </div>
+</div>
+<div class="card bg-info">
+    <div class="card-header bg-danger text-center">
+        
+    </div>
         <div class="table-responsive">
             <table class="table table-borderless table-sm table-hover table-condensed">
                 <tr>
                     <td>
-                        First Name
+                        Company Name
                     </td>
                     <td>
-                        Last Name
+                        Sign-on Date
                     </td>
                     <td>
-                        Poopy Email
+                        Commission Rate
+                    </td>
+                    <td>
+                        Earnings
                     </td>
                 </tr>
-                @foreach($clients as $client)
+                @foreach($affiliate_campaigns as $affiliate_campaign)
                 <tr>
                     <td>
-                        {{ $client->first_name }}
+                        {{ $affiliate_campaign->referred_user->company_name ?? '' }}
                     </td>
                     <td>
-                        {{ $client->last_name }}
+                        {{ $affiliate_campaign->created_at }}
                     </td>
                     <td>
-                        {{ $client->email }}
+                        {{ $affiliate_campaign->commission_rate }}
                     </td>
-                    <td>
+                    <td class="bg-dark text-success">
+                        ${{ $affiliate_campaign->campaign_balance }}
                     </td>
                 </tr>
                 @endforeach
             </table>
         </div>
     </div>
+</div>
 </div>
 
 @endsection

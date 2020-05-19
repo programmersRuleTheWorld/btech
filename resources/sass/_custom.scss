@@ -4,6 +4,30 @@ html{
     font-size: 1rem;
 }
 
+//COVID style
+
+    .flashy{
+        animation-name: flashy;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+    }
+
+    @keyframes flashy{
+        from{
+            background: red;
+            color: white;
+        }
+        50%{
+            background: white;
+            color: red;
+        }
+        100%{
+            background: red;
+            color: white;
+        }
+    }
+
 @media(max-width: 1300px){
 
     .carousel-caption > h6{
@@ -37,7 +61,7 @@ html{
 
 html body{
     background-color: black;
-    background-image: url('../../public/images/logos/btlogobluegradient.svg');
+    background-image: url('../../public/images/logos/btlogoredgradient.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

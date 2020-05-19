@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class AffiliateCampaign extends Model
 {
 
-    protected $primaryKey = 'affiliate_campaign_id';
+    protected $primaryKey = 'affiliate_id';
+    public $incrementing = 'false';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'affiliate_id', 'referred_user_id',
@@ -24,6 +26,6 @@ class AffiliateCampaign extends Model
 
     public function referred_user()
     {
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User', 'id', 'referred_user_id');
     }
 }

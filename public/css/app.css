@@ -4,6 +4,51 @@ html {
   font-size: 1rem;
 }
 
+.flashy {
+  -webkit-animation-name: flashy;
+          animation-name: flashy;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+@-webkit-keyframes flashy {
+  from {
+    background: red;
+    color: white;
+  }
+
+  50% {
+    background: white;
+    color: red;
+  }
+
+  100% {
+    background: red;
+    color: white;
+  }
+}
+
+@keyframes flashy {
+  from {
+    background: red;
+    color: white;
+  }
+
+  50% {
+    background: white;
+    color: red;
+  }
+
+  100% {
+    background: red;
+    color: white;
+  }
+}
+
 @media (max-width: 1300px) {
   .carousel-caption > h6 {
     font-size: 0.8em;
@@ -35,7 +80,7 @@ html {
 
 html body {
   background-color: black;
-  background-image: url(/images/btlogobluegradient.svg?5f0234d1804fd09675c673c5db1eae71);
+  background-image: url(/images/btlogoredgradient.svg?131a66af86c2063a44a7b657130dfcf2);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

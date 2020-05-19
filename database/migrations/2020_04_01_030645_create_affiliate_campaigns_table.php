@@ -15,9 +15,9 @@ class CreateAffiliateCampaignsTable extends Migration
     {
         Schema::create('affiliate_campaigns', function (Blueprint $table) {
             $table->string('affiliate_id')->foreign('affiliate_id')->references('referred_by')->on('users');
-            $table->string('referred_user_id')->foreign('referred_user_id')->references('id')->on('users');
+            $table->string('referred_user_id')->foreign('referred_user_id')->references('id')->on('users')->unique();
             $table->decimal('commission_rate', 2, 2);
-            $table->decimal('campaign_balance', 2, 2);
+            $table->decimal('campaign_balance', 5, 2);
             $table->primary(['affiliate_id', 'referred_user_id']);
             $table->timestamps();
         });

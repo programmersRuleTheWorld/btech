@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CovidRedirect;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +45,7 @@ Route::resource('clientapplications', 'ClientApplicationsController');
 Route::resource('clientapplicationcomments', 'ClientApplicationCommentsController');
 Route::resource('breakdownitems', 'BreakdownItemsController');
 Route::resource('profiles', 'ProfilesController');
+Route::resource('affiliatecampaigns', 'AffiliateCampaignsController');
 
 Auth::routes([
     'register' => false,
@@ -53,3 +56,9 @@ Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistration
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/COVID-19_EMERGENCY_MESSAGE', function()
+{
+    return view('pages.covid_notice');
+})->name('covid.notice');
+Route::post('/covidform', 'CovidFormsController@store')->name('covid.form');

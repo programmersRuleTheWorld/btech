@@ -72,7 +72,7 @@ class User extends Authenticatable
 
     public function affiliatecampaign()
     {
-        return $this->belongsTo('App\AffiliateCampaign', 'id', 'user_id');
+        return $this->belongsTo('App\AffiliateCampaign', 'id', 'referred_user_id');
     }
 
     public function affiliatecampaigns()
