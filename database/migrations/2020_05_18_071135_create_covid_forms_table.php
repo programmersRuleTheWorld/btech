@@ -17,6 +17,7 @@ class CreateCovidFormsTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('email')->unique();
+	    $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

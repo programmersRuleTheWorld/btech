@@ -16,6 +16,7 @@ class PagesController extends Controller
     }
     
     public function index(){
+        $title = "Home";
         $user = auth()->user();
         $posts = Post::latest()->take(3)->with('user')->get();
         
@@ -41,49 +42,58 @@ class PagesController extends Controller
                 'title' => $title,
                 'permalink' => $permalink,
                 'image' => $image,
-                'items' => $items
+                'items' => $items,
+                'title' => $title,
                 ]
             );
     }
     
     public function about()
     {
-        return view('pages/about');
+        $title = "About";
+        return view('pages/about')->with('title', $title);
     }
     
     public function contact()
     {
-        return view('pages/contact');
+        $title = "Contact";
+        return view('pages/contact')->with('title', $title);
     }
     
     public function blog()
     {
+        $title = "Blog";
         $posts = Post::all();
-        return view('posts/index')->with('posts', $posts);
+        return view('posts/index')->with(['posts' => $posts, 'title' => $title]);
     }
 
     public function services()
     {
-        return view('pages/services');
+        $title = "Services";
+        return view('pages/services')->with('title', $title);
     }
 
     public function privacy()
     {
-        return view('pages/privacy');
+        $title = "Privacy Policy";
+        return view('pages/privacy_policy')->with('title', $title);
     }
 
     public function service_agreement()
     {
-        return view('pages/service_agreement');
+        $title = "Service Agreement";
+        return view('pages/service_agreement')->with('title', $title);
     }
 
     public function affiliate_details()
     {
+        $title = "My Affiliate Details";
         $user = auth()->user();
         $affiliate_campaigns = AffiliateCampaign::where('affiliate_id', $user->affiliate_id)->get();
 
         return view('pages.affiliate_details')->with([
             'affiliate_campaigns' => $affiliate_campaigns,
+            'title' => $title,
         ]);
     }
 

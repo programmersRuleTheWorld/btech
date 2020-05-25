@@ -19,7 +19,7 @@ Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/services', 'PagesController@services')->name('services');
 Route::get('/blog', 'PagesController@blog')->name('blog');
-Route::get('/privacy', 'PagesController@privacy')->name('privacy');
+Route::get('/privacy_policy', 'PagesController@privacy')->name('privacy');
 Route::get('/service_agreement', 'PagesController@service_agreement')->name('service_agreement');
 Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('affiliate_details');
 Route::get('/admin', 'PagesController@admin')->name('admin');
@@ -59,6 +59,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/COVID-19_EMERGENCY_MESSAGE', function()
 {
-    return view('pages.covid_notice');
+    $title = "Emergency Notice";
+    return view('pages.covid_notice')->with('title', $title);
 })->name('covid.notice');
 Route::post('/covidform', 'CovidFormsController@store')->name('covid.form');
+Route::get('/thanks', function(){$covid = App\CovidForm::find(1); return new App\Mail\Covid($covid);});

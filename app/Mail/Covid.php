@@ -2,25 +2,25 @@
 
 namespace App\Mail;
 
-use App\CovidForm;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MsgRecvd extends Mailable
+class Covid extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $covidform;
+	public $covid;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(CovidForm $covidform)
+    public function __construct($covid)
     {
-        $this->covidform = $covidform;
+        $this->covid = $covid;
     }
 
     /**
@@ -30,7 +30,6 @@ class MsgRecvd extends Mailable
      */
     public function build()
     {
-        return $this->from('marketing.relations@bertramtechnologies.com')->subject('1099 Marketing Opportunity')
-        ->markdown('emails.covid.submitted');
+        return $this->from('marketing@bertramtechnologies.com')->markdown('emails.covid.submitted');
     }
 }

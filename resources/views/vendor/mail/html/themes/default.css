@@ -166,8 +166,9 @@ img {
 }
 
 .footer p {
-    color: #aeaeae;
-    font-size: 12px;
+    color: black;
+    font-size: 1em;
+    font-weight: bold;
     text-align: center;
 }
 

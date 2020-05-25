@@ -53,7 +53,7 @@
                 <div class="card bg-info">
                 We will never sell or share your information without consent; please see our
                 <a  class="text-dark font-weight-bold" href="{{ route('privacy') }}">Privacy Policy</a> for more information.
-       <form action="{{ route('covid.form') }}" method="POST">
+       <form id="covid_form" action="{{ route('covid.form') }}" method="POST">
             @csrf
                 <div class="form-group">
                     <div class="form-row col-md">
@@ -71,8 +71,16 @@
                         <input type="email" name="email" class="form-control form-control-sm" placeholder="Enter your e-mail address here...">
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="form-row col-md">
+                        <label for="Comment">
+                            <b>Optional</b> How did you hear about this opportunity?
+                        </label>
+                        <textarea id="body" type="text" name="comment" class="form-control form-control-sm placeholder="Enter your Comment here..."></textarea>
+                    </div>
+                </div>
             <div class="row">
-                <button class="btn btn-dark text-info ml-4" type="submit">Submit</button>
+                <button class="g-recaptcha btn btn-dark text-info ml-4" data-theme="dark" data-sitekey="6Lc4ufsUAAAAALPQKf15me6YEOxXZQkeaLGTIPHT" data-callback="onSubmit" data-action="submit">Submit</button>
             </div>
         </form>
         </div>
@@ -84,5 +92,11 @@
     @endif
     </div>
 </div>
+
+<script>
+    function onSubmit(token) {
+      document.getElementById("covid_form").submit();
+    }
+</script> 
 
 @endsection
