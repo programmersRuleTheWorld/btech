@@ -20,7 +20,7 @@
         </form>
     </div>
     <div class="table-responsive">
-    <table class="table table-borderless table-sm table-hover table-condensed">
+    <table class="table table-borderless table-sm table-condensed">
             <tr class="text-center">
                         <th>
                             Name
@@ -36,12 +36,12 @@
                         @foreach($clientapplications as $clientapplication)   
                         <tr class="text-center">
                             <th>
-                                {{ $clientapplication->name }}
+                                <a class="text-dark" href="/clientapplications/{{ $clientapplication->ref_id }}">
+                                    <u>{{ $clientapplication->getName() }}</u>
+                                </a>
                             </th>
                             <th>
-                                <a class="text-dark" href="/clientapplications/{{ $clientapplication->ref_id }}" class="">
-                                    <u>{{ $clientapplication->company }}</u>
-                                </a>
+                                    <i>{{ $clientapplication->getCompanyName() }}</i>
                             </th>
                             <th>
                                 {{ $clientapplication->email }}

@@ -15,8 +15,7 @@
               @foreach($items as $item)
               @if($loop->first)
             <div class="carousel-item img-fluid active">
-              <a href={{ $permalink }}>
-                <img src={{ asset("images/logos/btlogoredgradient2.svg") }} class="d-block w-100" alt="...">
+                <a href="{{ $item->get_permalink() }}">
               <div class="carousel-caption d-block">
                 @if(strlen($item->get_title()) > 39 || strlen($item->get_description()) > 39)
                 <h6 class="text-info"><b>{{ substr($item->get_title(),0,40) . '...' }}</b></h6>
@@ -30,8 +29,7 @@
             </div>
             @else
                 <div class="carousel-item">
-                <a href={{ $permalink }}>
-                <img src={{ asset("images/logos/btlogoredgradient2.svg") }} class="d-block w-100" alt="...">
+                <a href="{{ $item->get_permalink() }}">
                 <div class="carousel-caption d-block">
                   @if(strlen($item->get_title()) > 39 || strlen($item->get_description()) > 39)
                   <h6 class="text-info"><b>{{ substr($item->get_title(),0,40) . '...' }}</b></h6>

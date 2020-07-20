@@ -1,5 +1,5 @@
                         <div class="table-responsive">
-                        <table class="table table-borderless table-sm table-hover  table-condensed">
+                        <table class="table table-borderless table-sm  table-condensed">
                                         <tr class="text-center">
                                             <th>
                                                 Post Title

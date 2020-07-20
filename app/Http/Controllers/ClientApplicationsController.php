@@ -48,30 +48,43 @@ class ClientApplicationsController extends Controller
 
         $this->validate($request, [
             'first_name' => 'required',
-            'company' => 'required',
             'email' => 'required',
             'project_type' => 'required',
-            'project_description' => 'required'
         ]);
         
         $user = auth()->user();
         $clientapplication = new ClientApplication;
         $clientapplication->first_name = $request->input('first_name');
         $clientapplication->last_name = $request->input('last_name');
-        $clientapplication->company = $request->input('company');
+        $clientapplication->company_name = $request->input('company_name');
         $clientapplication->email = $request->input('email');
         $clientapplication->phone_number = $request->input('phone_number');
         $clientapplication->project_type = $request->input('project_type');
+        $clientapplication->existing_site = $request->input('existing_site');
+        $clientapplication->site_type = $request->input('site_type');
+        $clientapplication->gov_contract = $request->input('gov_contract');
+        $clientapplication->where_hosted = $request->input('where_hosted');
+        $clientapplication->site_url = $request->input('site_url');
+        $clientapplication->backend_type = $request->input('backend_type');
+        $clientapplication->backend_framework = $request->input('backend_framework');
+        $clientapplication->frontend_framework = $request->input('frontend_framework');
+        $clientapplication->backend_framework_type = $request->input('backend_framework_type');
+        $clientapplication->frontend_framework_type = $request->input('frontend_framework_type');
+        $clientapplication->is_platform = $request->input('is_platform');
+        $clientapplication->platform_type = $request->input('platform_type');
+        $clientapplication->db_type = $request->input('db_type');
+        $clientapplication->test_scope = $request->input('test_scope');
+        $clientapplication->security_incidents = $request->input('security_incidents');
+        $clientapplication->legacy_backend_type = $request->input('legacy_backend_type');
+        $clientapplication->new_or_existing_app = $request->input('new_or_existing_app');
+        $clientapplication->app_store = $request->input('app_store');
         $clientapplication->project_description = $request->input('project_description');
         if($user){$clientapplication->user_id = $user->id;}
         $clientapplication->ref_id = mt_rand(100000000000000,999999999999999);
         $clientapplication->auth_code = Uuid::uuid4();
-        /*
-        Mail::to($clientapplication->email)->send(new ClientApplicationSubmitted($clientapplication));
-        */
         $clientapplication->auth_code = Hash::make($clientapplication->auth_code);
         $clientapplication->save();
-
+        
         if(!$user)
         {
         return redirect()->route('index')->with("success", "your project 
@@ -90,6 +103,7 @@ class ClientApplicationsController extends Controller
             your records.");
         }
     }
+    
 
     /**
      * Display the specified resource.
@@ -132,26 +146,34 @@ class ClientApplicationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $ref_id)
-    {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'company_name' => 'required',
-            'email' => 'required',
-            'selection' => 'required',
-            'project_type' => 'required',
-            'project_status' => 'required'
-        ]);
-        
+    {        
         $clientapplication = ClientApplication::find($ref_id);
         $clientapplication->first_name = $request->input('first_name');
         $clientapplication->last_name = $request->input('last_name');
         $clientapplication->company_name = $request->input('company_name');
-        $clientapplication->phone_number = $request->input('phone_number');
         $clientapplication->email = $request->input('email');
-        $clientapplication->project_type = $request->input('project_type');
+        $clientapplication->phone_number = $request->input('phone_number');
+        $clientapplication->project_type = $request->input('project_type');        
+        $clientapplication->existing_site = $request->input('existing_site');
+        $clientapplication->site_type = $request->input('site_type');
+        $clientapplication->gov_contract = $request->input('gov_contract');
+        $clientapplication->where_hosted = $request->input('where_hosted');
+        $clientapplication->site_url = $request->input('site_url');
+        $clientapplication->backend_type = $request->input('backend_type');
+        $clientapplication->backend_framework = $request->input('backend_framework');
+        $clientapplication->frontend_framework = $request->input('frontend_framework');
+        $clientapplication->backend_framework_type = $request->input('backend_framework_type');
+        $clientapplication->frontend_framework_type = $request->input('frontend_framework_type');
+        $clientapplication->is_platform = $request->input('is_platform');
+        $clientapplication->platform_type = $request->input('platform_type');
+        $clientapplication->db_type = $request->input('db_type');
+        $clientapplication->test_scope = $request->input('test_scope');
+        $clientapplication->security_incidents = $request->input('security_incidents');
+        $clientapplication->legacy_backend_type = $request->input('legacy_backend_type');
+        $clientapplication->new_or_existing_app = $request->input('new_or_existing_app');
+        $clientapplication->app_store = $request->input('app_store');
         $clientapplication->project_description = $request->input('project_description');
-        $clientapplication->status = $request->input('project_status');
+        $clientapplication->project_status = $request->input('project_status');
         $clientapplication->save();
 
         return redirect()->route('clientapplications.show', [$clientapplication->ref_id])->with('success', "Client information updated successfully!");
@@ -176,19 +198,19 @@ class ClientApplicationsController extends Controller
 
     public function appendto(Request $request){
         $this->validate($request, ['ref_id' => 'required', 'auth_code' => 'required']);
+        $user = auth()->user();
         $ref_id = $request->input('ref_id');
         $auth_code = $request->input('auth_code');
         $user_id = auth()->user()->id;
         $clientapplication = ClientApplication::find($ref_id);
 
-        if($clientapplication){
-            //APPENDTO NOT EXECUTING PROPERLY WITH THIS IF CONDITION, FUCKED UP, FIX THIS SHIT GOD DAMNIT!!!
+        if(isset($clientapplication)){
             if($clientapplication->ref_id == $ref_id && $clientapplication->auth_code == Hash::check($auth_code, $clientapplication->auth_code))
             {
                 $clientapplication->user_id = $user_id;
                 $clientapplication->save();
                 
-                return redirect()->route('dashboard')->with('success', "Project $ref_id has been successfully added to your account.");
+                return redirect()->route('dashboard')->with('success', "Congratulations $user->first_name, $ref_id has been successfully added to your account.");
             }
         else{
             return redirect()->route('dashboard')->with('error', "Project $ref_id does not exist.");

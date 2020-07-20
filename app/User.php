@@ -29,6 +29,7 @@ class User extends Authenticatable
 
     protected $attributes = [
         'user_balance' => 0.00,
+        'user_spend' => 0.00,
     ];
 
     /**
@@ -77,5 +78,55 @@ class User extends Authenticatable
     public function affiliatecampaigns()
     {
         return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
+    }
+
+    // user getters
+
+    public function getName()
+    {
+        if(isset($this->last_name))
+        {        
+        return $this->first_name . ' ' . $this->last_name;
+        }
+        else
+        {
+        return $this->first_name;
+        }
+    }
+
+    public function getEmail()
+    {
+        if(isset($this->email))
+        {
+            return $this->email;
+        }
+        else
+        {
+            return 'No email set';
+        }
+    }
+
+    public function getPhoneNumber()
+    {
+        if(isset($this->phone_number))
+        {
+            return $this->phone_number;
+        }
+        else
+        {
+            return 'Phone number not set';
+        }
+    }
+
+    public function getCompanyName()
+    {
+        if(isset($this->company_name))
+        {
+            return $this->company_name;
+        }
+        else
+        {
+            return 'No company name set';
+        }
     }
 }

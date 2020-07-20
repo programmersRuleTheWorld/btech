@@ -332,6 +332,10 @@ textarea#item_description{
     animation-iteration-count: infinite;
   }
 
+  .form-check-input{
+      display: 'none';
+  }
+
   @keyframes featuredborder{
       from{
           border: 1px solid transparent;

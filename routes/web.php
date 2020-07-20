@@ -49,18 +49,9 @@ Route::resource('affiliatecampaigns', 'AffiliateCampaignsController');
 
 Auth::routes([
     'register' => false,
-    'verify' => false,
 ]);
 
 Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
-Route::get('/COVID-19_EMERGENCY_MESSAGE', function()
-{
-    $title = "Emergency Notice";
-    return view('pages.covid_notice')->with('title', $title);
-})->name('covid.notice');
-Route::post('/covidform', 'CovidFormsController@store')->name('covid.form');
-Route::get('/thanks', function(){$covid = App\CovidForm::find(1); return new App\Mail\Covid($covid);});

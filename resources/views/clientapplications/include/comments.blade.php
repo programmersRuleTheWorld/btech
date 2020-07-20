@@ -31,7 +31,7 @@
             <button class="btn btn-dark text-info" type="submit">Comment</button>    
        </form>
        <div class="table-responsive">
-       <table class="table table-borderless table-sm table-hover table-condensed">
+       <table class="table table-borderless table-sm table-condensed">
                 <tr>
                     <th>
                         Author

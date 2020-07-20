@@ -16,7 +16,7 @@
         
     </div>
         <div class="table-responsive">
-            <table class="table table-borderless table-sm table-hover table-condensed">
+            <table class="table table-borderless table-sm table-condensed">
                 <tr>
                     <td>
                         Company Name

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-<table class="table table-borderless table-sm table-hover table-condensed">
+<table class="table table-borderless table-sm table-condensed">
     <tr class="text-center">
         <th>
             Company
@@ -19,18 +19,12 @@
         @foreach($jobs as $job)
             <tr class="text-center">
                 <td>
-                    @if(!$job->user)
                     <a class="text-info bg-dark" href="/clientapplications/{{ $job->ref_id }}">    
-                        <u>{{ $job->company }}</u>
+                        <u>{{ $job->getName() }}</u>
                     </a>
-                    @else
-                    <a class="text-dark" href="/clientapplications/{{ $job->ref_id }}">    
-                        <u>{{ $job->company }}</u>
-                    </a>
-                    @endif
                 </td>
                 <td>
-                    {{ $job->project_description }}
+                    <i>{{ $job->getProjectDescription() }}</i>
                 </td>
                 <td>
                     {{ $job->project_type }}

@@ -12,19 +12,10 @@
             Edit
         </a>
         
-        Name: {{ $user->first_name . ' ' . $user->last_name }}<br><hr>
-        Email Address: {{ $user->email }}<br><hr>
-        Phone Number: @if(!$user->phone_number)
-        No phone number set<br>
-        @else
-        {{ $user->phone_number }}<br>
-        @endif
-        <hr>
-        Company Name: @if(!$user->company_name)
-        No company name set
-        @else
-        {{ $user->company_name }}
-        @endif<br>
+        Name: {{ $user->getName() }} <br><hr>
+        Email Address: {{ $user->getEmail() }} <br><hr>
+        Phone Number: {{ $user->getPhoneNumber() }} <br><hr>
+        Company Name: {{ $user->getCompanyName() }} <br>
     </div>
 </div>
 

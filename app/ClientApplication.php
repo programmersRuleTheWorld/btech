@@ -38,16 +38,242 @@ class ClientApplication extends Model
 
     public function clientapplicationcomments()
     {
-        return $this->hasMany('App\ClientApplicationComment', 'ref_id', 'parent_ref_id');
+        return $this->hasMany('App\ClientApplicationComment', 'parent_ref_id', 'ref_id');
     }
 
     public function breakdownitem()
     {
-        return $this->hasMany('App\BreakdownItem', 'ref_id', 'parent_ref_id');
+        return $this->hasMany('App\BreakdownItem', 'parent_ref_id', 'ref_id');
     }
 
     public function servicecontract()
     {
-        return $this->hasOne('App\ServiceContract', 'ref_id', 'parent_ref_id');
+        return $this->hasOne('App\ServiceContract', 'parent_ref_id', 'ref_id');
+    }
+
+    //client application getters
+
+    public function getProjectStatus()
+    {
+        if(isset($this->project_status))
+        {
+            return $this->project_status;
+        }
+    }
+
+    public function getName()
+    {
+        if(isset($this->last_name))
+        {
+            return $this->first_name . ' ' . $this->last_name;
+        }
+        else
+        {
+            return $this->first_name;
+        }
+    }
+
+    public function getRefID()
+    {
+        if(isset($this->ref_id))
+        {
+            return $this->ref_id;
+        }
+    }
+    
+    public function getEmail()
+    {
+        if(isset($this->email))
+        {
+            return $this->email;
+        }
+    }
+    
+    public function getPhoneNumber()
+    {
+        if(isset($this->phone_number))
+        {
+            return $this->phone_number;
+        }
+        else
+        {
+            return 'No phone number set';
+        }
+    }
+    
+    public function getCompanyName()
+    {
+        if(isset($this->company_name))
+        {
+            return $this->company_name;
+        }
+        else
+        {
+            return 'No company name set';
+        }
+    }
+        
+    public function getProjectType()
+    {
+        if(isset($this->project_type))
+        {
+            return $this->project_type;
+        }
+    }
+    
+    public function getExistingSite()
+    {
+        if(isset($this->existing_site))
+        {
+            return $this->existing_site;
+        }
+    }
+
+    public function getSiteType()
+    {
+        if(isset($this->site_type))
+        {
+            return $this->site_type;
+        }
+    }
+
+    public function getGovContract()
+    {
+        if(isset($this->gov_contract))
+        {
+            return $this->gov_contract;
+        }
+    }
+
+    public function getWhereHosted()
+    {
+        if(isset($this->where_hosted))
+        {
+            return $this->where_hosted;
+        }
+    }
+
+    public function getSiteURL()
+    {
+        if(isset($this->site_url))
+        {
+            return $this->site_url;
+        }
+    }
+
+    public function getBackendType()
+    {
+        if(isset($this->backend_type))
+        {
+            return $this->backend_type;
+        }
+    }
+    
+    public function getBackendFramework()
+    {
+        if(isset($this->backend_framework))
+        {
+            return $this->backend_framework;
+        }
+    }
+    
+    public function getFrontendFramework()
+    {
+        if(isset($this->frontend_framework))
+        {
+            return $this->frontend_framework;
+        }
+    }
+
+    public function getBackendFrameworkType()
+    {
+        if(isset($this->backend_framework_type))
+        {
+            return $this->backend_framework_type;
+        }
+    }
+
+    public function getFrontendFrameworkType()
+    {
+        if(isset($this->frontend_framework_type))
+        {
+            return $this->frontend_framework_type;
+        }
+    }
+
+    public function getPlatform()
+    {
+        if(isset($this->is_platform))
+        {
+            return $this->is_platform;
+        }
+    }
+
+    public function getPlatformType()
+    {
+        if(isset($this->platform_type))
+        {
+            return $this->platform_type;
+        }
+    }
+
+    public function getDBType()
+    {
+        if(isset($this->db_type))
+        {
+            return $this->db_type;
+        }
+    }
+
+    public function getTestScope()
+    {
+        if(isset($this->test_scope))
+        {
+            return $this->test_scope;
+        }
+    }
+
+    public function getSecurityIncidents()
+    {
+        if(isset($this->security_incidents))
+        {
+            return $this->security_incidents;
+        }
+    }
+
+    public function getLegacyBackendType()
+    {
+        if(isset($this->legacy_backend_type))
+        {
+            return $this->backend_type;
+        }
+    }
+
+    public function getNewOrExistingApp()
+    {
+        if(isset($this->new_or_existing_app))
+        {
+            return $this->new_or_existing_app;
+        }
+    }
+
+    public function getAppStore()
+    {
+        if(isset($this->app_store))
+        {
+            return $this->app_store;
+        }
+    }
+
+    public function getProjectDescription()
+    {
+        if(isset($this->project_description))
+        {
+            return $this->project_description;
+        }
+        else
+        {
+            return 'No project description available.';
+        }
     }
 }

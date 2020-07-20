@@ -379,6 +379,10 @@ ol.carousel-indicators li.active {
           animation-iteration-count: infinite;
 }
 
+.form-check-input {
+  display: "none";
+}
+
 @-webkit-keyframes featuredborder {
   from {
     border: 1px solid transparent;
