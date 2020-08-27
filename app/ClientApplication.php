@@ -36,19 +36,24 @@ class ClientApplication extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function developers()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public function clientapplicationcomments()
     {
         return $this->hasMany('App\ClientApplicationComment', 'parent_ref_id', 'ref_id');
     }
 
-    public function breakdownitem()
+    public function breakdownitems()
     {
         return $this->hasMany('App\BreakdownItem', 'parent_ref_id', 'ref_id');
     }
 
-    public function servicecontract()
+    public function servicecontracts()
     {
-        return $this->hasOne('App\ServiceContract', 'parent_ref_id', 'ref_id');
+        return $this->hasMany('App\ServiceContract', 'parent_ref_id', 'ref_id');
     }
 
     //client application getters

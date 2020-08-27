@@ -1,17 +1,17 @@
-@if($comment->comment_status === "update")
+@if($clientApplicationComment->comment_status === "update")
     <td class="complete">
 @endif
-@if($comment->comment_status === "bug")
+@if($clientApplicationComment->comment_status === "bug")
     <td class="unpaid">
 @endif
-@if($comment->comment_status === "complete")
+@if($clientApplicationComment->comment_status === "complete")
     <td class="complete">
 @endif
-@if($comment->comment_status === "cost-adjustment")
+@if($clientApplicationComment->comment_status === "cost-adjustment")
     <td class="urgent">
 @endif
-@if($comment->comment_status === "extension")
+@if($clientApplicationComment->comment_status === "extension")
     <td class="late">
 @endif
-{{ strToUpper($comment->comment_status) }}
+{{ strToUpper($clientApplicationComment->comment_status) }}
     </td>

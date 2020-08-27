@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\URL;
 
 class BreakdownItemsController extends Controller
 {
+    public function __construct()
+    {
+        //$this->authorizeResource(BreakdownItem::class, 'breakdownitem');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,11 +47,11 @@ class BreakdownItemsController extends Controller
 
         $user = auth()->user();
 
-        $breakdownitem = new BreakdownItem();
-        $breakdownitem->parent_ref_id = $request->input('ref_id');
-        $breakdownitem->user_id = $user->id;
-        $breakdownitem->item_description = $request->input('item_description');
-        $breakdownitem->save();
+        $breakdownItem = new BreakdownItem();
+        $breakdownItem->parent_ref_id = $request->input('ref_id');
+        $breakdownItem->user_id = $user->id;
+        $breakdownItem->item_description = $request->input('item_description');
+        $breakdownItem->save();
 
         return redirect()->back()->with('success', "Breakdown Item added!");
     }
@@ -55,10 +59,10 @@ class BreakdownItemsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $item_id
+     * @param  int  $breakdownItem
      * @return \Illuminate\Http\Response
      */
-    public function show($item_id)
+    public function show($breakdownItem)
     {
         //
     }
@@ -66,10 +70,10 @@ class BreakdownItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $item_id
+     * @param  int  $breakdownItem
      * @return \Illuminate\Http\Response
      */
-    public function edit($item_id)
+    public function edit($breakdownItem)
     {
         //
     }
@@ -78,84 +82,83 @@ class BreakdownItemsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $item_id
+     * @param  int  $breakdownItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $item_id)
+    public function update(Request $request, $breakdownItem)
     {
         $validatedData = $this->validate($request, [
             'item_description' => 'required',
             'item_status' => 'required'
             ]);
 
-            $breakdownitem = BreakdownItem::find($item_id);
-            $breakdownitem->update([$validatedData]);
-            $breakdownitem->save();
+            $breakdownItem = BreakdownItem::find($breakdownItem);
+            $breakdownItem->update([$validatedData]);
+            $breakdownItem->save();
 
             return redirect()->back()->with('success', "Breakdown Item saved!");
     }
 
-    public function updatePrice(Request $request, $item_id){
-        
-        $breakdownitem = BreakdownItem::find($item_id);
+    public function updatePrice(Request $request, $breakdownItem){
+        $breakdownItem = BreakdownItem::find($breakdownItem);
 
         //add in user validation to billing!!!
 
-        if($breakdownitem->clientapplication->user){
-        $breakdownitem->clientapplication->user->user_balance -= $breakdownitem->clientapplication->project_balance;
-        $breakdownitem->clientapplication->user->save();}
+        if($breakdownItem->clientapplication->user){
+        $breakdownItem->clientapplication->user->user_balance -= $breakdownItem->clientapplication->project_balance;
+        $breakdownItem->clientapplication->user->save();}
 
-        $breakdownitem->clientapplication->project_balance -= $breakdownitem->item_balance;
-        $breakdownitem->clientapplication->save();
+        $breakdownItem->clientapplication->project_balance -= $breakdownItem->item_balance;
+        $breakdownItem->clientapplication->save();
 
-        $breakdownitem->item_balance = $request->input('item_balance');
-        $breakdownitem->save();
+        $breakdownItem->item_balance = $request->input('item_balance');
+        $breakdownItem->save();
 
-        $breakdownitem->clientapplication->project_balance += $breakdownitem->item_balance;
-        $breakdownitem->clientapplication->save();
+        $breakdownItem->clientapplication->project_balance += $breakdownItem->item_balance;
+        $breakdownItem->clientapplication->save();
 
-        if($breakdownitem->clientapplication->user){
-        $breakdownitem->clientapplication->user->user_balance += $breakdownitem->clientapplication->project_balance;
-        $breakdownitem->clientapplication->user->save();}
+        if($breakdownItem->clientapplication->user){
+        $breakdownItem->clientapplication->user->user_balance += $breakdownItem->clientapplication->project_balance;
+        $breakdownItem->clientapplication->user->save();}
 
-        return redirect()->back()->with('success', "Item $breakdownitem->item_id has been changed to $$breakdownitem->item_balance.");
+        return redirect()->back()->with('success', "Item $breakdownItem->item_id has been changed to $$breakdownItem->item_balance.");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $item_id
+     * @param  int  $breakdownItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy($item_id)
+    public function destroy($breakdownItem)
     {
-        $breakdownitem = BreakdownItem::find($item_id);
-        $breakdownitem->clientapplication->updated_at = ClientApplication::where(['ref_id' => $breakdownitem->parent_ref_id])->update(['updated_at' => now()]);
-        $breakdownitem->clientapplication->project_balance -= $breakdownitem->item_balance;
-        $breakdownitem->clientapplication->save();
-        $breakdownitem->delete();
+        $breakdownItem = BreakdownItem::find($breakdownItem);
+        $breakdownItem->clientapplication->updated_at = ClientApplication::where(['ref_id' => $breakdownItem->parent_ref_id])->update(['updated_at' => now()]);
+        $breakdownItem->clientapplication->project_balance -= $breakdownItem->item_balance;
+        $breakdownItem->clientapplication->save();
+        $breakdownItem->delete();
         
         return redirect()->back()->with('success', "Breakdown Item deleted!");
     }
 
     /**
      * Set isComplete status on item.
-     * @param int $item_id
+     * @param int $breakdownItem
      * @return \Illuminate\Http\Response
      */
-    public function isComplete($item_id){
-        $breakdownitem = BreakdownItem::find($item_id);
-        if($breakdownitem->exists())
+    public function isComplete($breakdownItem){
+        $breakdownItem = BreakdownItem::find($breakdownItem);
+        if($breakdownItem->exists())
             {
-                if($breakdownitem->item_status == false)
+                if($breakdownItem->item_status == false)
                 {
-                $breakdownitem->update(['item_status' => true]);
-                return redirect()->back()->with('success', "Breakdown Item $breakdownitem->item_id has successfully been completed!");
+                $breakdownItem->update(['item_status' => true]);
+                return redirect()->back()->with('success', "Breakdown Item $breakdownItem->item_id has successfully been completed!");
             }
-            elseif($breakdownitem->item_status = true)
+            elseif($breakdownItem->item_status = true)
             {
-                $breakdownitem->update(['item_status' => false]);
-                return redirect()->back()->with('error', "Breakdown Item $breakdownitem->item_id has been reverted back to incomplete.");
+                $breakdownItem->update(['item_status' => false]);
+                return redirect()->back()->with('error', "Breakdown Item $breakdownItem->item_id has been reverted back to incomplete.");
             }
         }
         else

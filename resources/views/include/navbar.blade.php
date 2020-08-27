@@ -3,7 +3,7 @@
             <a class="navbar-brand p-0" href="{{ url('/') }}" >
                 <b><small>Bertram Technologies</small></b>
             </a>
-            <img src={{ asset("images/logos/btlogoredgradient2.svg") }} id="btlogo">
+            <img src={{ asset("images/logos/btlogogreygradient.svg") }} id="btlogo">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -66,7 +66,12 @@
                     <a class="dropdown-item text-center" href="{{ route('dashboard') }}">
                         {{ __('Dashboard') }}
                     </a>
-                    <a class="dropdown-item text-center" href="{{ route('profiles.show', [Auth::user()->id]) }}">
+                    @if(Auth::user()->isAdmin() === true)
+                    <a class="dropdown-item text-center" href="{{ route('admin') }}">
+                        {{ __('Admin Panel') }}
+                    </a>
+                    @endif
+                    <a class="dropdown-item text-center" href="{{ route('users.show', [Auth::user()->id]) }}">
                         {{ __('My Profile') }}
                     </a>
 

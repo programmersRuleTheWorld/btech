@@ -3,7 +3,7 @@
 namespace App\Listeners\Users\Created;
 
 use App\AffiliateCampaign;
-use Illuminate\Auth\Events\Registered;
+use App\Events\UserCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -22,17 +22,16 @@ class CreateAffiliateCampaign
     /**
      * Handle the event.
      *
-     * @param  Registered  $event
+     * @param  UserCreated  $event
      * @return void
      */
-    public function handle(Registered $event)
-    {        
-        if($event->user->referred_by != NULL)
-        {
-            return AffiliateCampaign::create([
-                'affiliate_id' => $event->user->referred_by,
-                'referred_user_id' => $event->user->id,
-            ]);
-        }
+    public function handle(UserCreated $event)
+    {
+        $affiliateCampaign = new AffiliateCampaign();
+        $affiliateCampaign->affiliate_id = $event->user->referred_by;
+        $affiliateCampaign->referred_user_id = $event->user->id;
+        $affiliateCampaign->save();
+
+        dd($event);
     }
 }

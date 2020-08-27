@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-class ProfilesController extends Controller
+class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,43 +45,39 @@ class ProfilesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-        return view('pages/profiles/show')->with('user', $user);
+        return view('pages/users/show')->with('user', $user);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-        return view('pages/profiles/edit')->with('user', $user);
+        return view('pages/users/edit')->with('user', $user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
         ]);
-
-        $user = User::find($id);
 
         $user->update([$request,
         'first_name' => $request->input('first_name'),
@@ -93,14 +93,21 @@ class ProfilesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->delete();
 
         return back()->with('success', 'User deleted!');
+    }
+
+    public function updateRole(Request $request, User $user)
+    {
+        $role = $request->input('role');
+        $user->roles()->toggle([$role]);
+
+        return back();
     }
 }

@@ -8,7 +8,7 @@
             Your Personal Information
         </div>
         <div class="card-body">
-        <a href="/profiles/{{ $user->id }}/edit">
+        <a href="/users/{{ $user->id }}/edit">
             Edit
         </a>
         

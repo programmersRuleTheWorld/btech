@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Post;
 use App\User;
 use App\AffiliateCampaign;
 use App\ClientApplication;
 use Feeds;
+use App\Role;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -20,17 +23,14 @@ class PagesController extends Controller
         $user = auth()->user();
         $posts = Post::latest()->take(3)->with('user')->get();
         
-        $feed = Feeds::make(
-            
-                'http://www.csoonline.com/index.rss'
-            
-            );
+        $feed = Feeds::make('https://www.techrepublic.com/rssfeeds/topic/security/?feedType=rssfeeds');
         $feed->set_image_handler('handler_image.php','image');
         $feed->set_cache_location('mysql://root:root@localhost:3306/btech?prefix=sp_');
+        $feed->handle_content_type();
         $feed->init();      
 
-            $items = $feed->get_items(0,5);
-
+            $items = $feed->get_items(0,10);
+            
             return view('pages/index')->with(
             [
                 'posts' => $posts,
@@ -64,12 +64,15 @@ class PagesController extends Controller
 
     public function privacy()
     {
-        return view('pages/privacy_policy');
+        $privacyPolicy = DB::table('agreements')->value('privacy_policy');
+        return view('pages/privacy_policy')->with('privacyPolicy', $privacyPolicy);
     }
 
     public function service_agreement()
     {
-        return view('pages/service_agreement');
+        $serviceAgreement = DB::table('service_agreement')->value('data');
+        return view('pages/service_agreement')->with('service_agreement', $serviceAgreement
+    );
     }
 
     public function affiliate_details()
@@ -84,16 +87,25 @@ class PagesController extends Controller
 
     public function admin()
     {
+        $user = auth()->user();
+        if(Gate::forUser($user)->allows('show-admin'))
+        {
         $count = 1;
         $users = User::paginate('10', ['*'], 'users');
-        $clientapplications = ClientApplication::all();
-//        $issues = Issue::all();
+        $clientApplications = ClientApplication::all();
+        $roles = Role::all();
 
         return view('pages/admin')->with([
             'users' => $users,
-            'clientapplications' => $clientapplications,  
-            'count' => $count,          
+            'clientApplications' => $clientApplications,  
+            'count' => $count,
+            'roles' => $roles,          
         ]);
+        }
+        else
+        {
+            return redirect()->route('dashboard')->with('error', 'You are not permitted to access this resource. This attempt has been logged.');
+        }
     }
     
 }

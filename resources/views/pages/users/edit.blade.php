@@ -7,7 +7,7 @@
         <div class="card-header text-center">
             Your Personal Information
         </div>
-        <form action="{{ route('profiles.update', [$user->id]) }}" method="POST">
+        <form action="{{ route('users.update', [$user->id]) }}" method="POST">
         @method('PUT')
         @csrf
             <div class="card-body">

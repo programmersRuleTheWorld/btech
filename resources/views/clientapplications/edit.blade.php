@@ -6,43 +6,43 @@
         <h1 class="text-center">Edit Client Information</h1>
     </div>
     <div class="card-body">
-    <form action={{ route('clientapplications.update', [$clientapplication->ref_id]) }} method="POST">
+    <form action="{{ route('clientapplications.update', [$clientApplication->ref_id]) }}" method="POST">
+        <input type="hidden" id="ref_id" name="ref_id" value="{{ $clientApplication->ref_id }}">
         @csrf
         @method('PUT')
-        <input type="hidden" id="ref_id" name="ref_id" value="{{ $clientapplication->ref_id }}">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input class="form-control form-control-sm" name="first_name" value="{{ $clientapplication->first_name }}" placeholder="First Name">
+                    <input class="form-control form-control-sm" name="first_name" value="{{ $clientApplication->first_name }}" placeholder="First Name">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input class="form-control form-control-sm" name="last_name" value="{{ $clientapplication->last_name }}" placeholder="Last Name">
+                    <input class="form-control form-control-sm" name="last_name" value="{{ $clientApplication->last_name }}" placeholder="Last Name">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input class="form-control form-control-sm" name="company_name" value="{{ $clientapplication->company_name }}" placeholder="Company Name">
+                    <input class="form-control form-control-sm" name="company_name" value="{{ $clientApplication->company_name }}" placeholder="Company Name">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input class="form-control form-control-sm" name="email" value="{{ $clientapplication->email }}" placeholder="Email Address">
+                    <input class="form-control form-control-sm" name="email" value="{{ $clientApplication->email }}" placeholder="Email Address">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <input class="form-control form-control-sm" name="phone_number" value="{{ $clientapplication->phone_number }}" placeholder="Phone Number">
+                    <input class="form-control form-control-sm" name="phone_number" value="{{ $clientApplication->phone_number }}" placeholder="Phone Number">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <select class="form-control form-control-sm" name="project_type" value="{{ $clientapplication->project_type }}">
+                    <select class="form-control form-control-sm" name="project_type" value="{{ $clientApplication->project_type }}">
                             <option value="Web Design/Development">Website Design/Development</option>
                             <option value="DevOps Management">DevOps</option>
                             <option value="Security Analysis">Security Analysis</option>
@@ -55,13 +55,14 @@
         <div class="row">
             <div class="col-md-6">
                     <div class="form-group">
-                        <select class="form-control form-control-sm" name="project_status" value="{{ $clientapplication->project_status }}" placeholder="A brief description of your project... preexisting or new site? Budgetary and time constraints? Biggest challenges so far?...">
+                        <select class="form-control form-control-sm" name="project_status" value="{{ $clientApplication->project_status }}" placeholder="A brief description of your project... preexisting or new site? Budgetary and time constraints? Biggest challenges so far?...">
                             <option value="follow-up">Follow Up</option>
                             <option value="on-time">On-Time</option>
                             <option value="late">Late</option>
                             <option value="urgent">Urgent</option>
                             <option value="unpaid">Unpaid</option>
                             <option value="complete">Complete</option>
+                            <option value="refund">Refund</option>
                         </select>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <textarea class="form-control form-control-sm" id="project_show" name="project_description"> {{ $clientapplication->project_description }} </textarea>
+                    <textarea class="form-control form-control-sm" id="project_show" name="project_description"> {{ $clientApplication->project_description }} </textarea>
                 </div>
             </div>
         </div>
@@ -79,11 +80,13 @@
                     Submit Client Information
             </button>
     </form>
-        <form action={{ route('clientapplications.destroy', [$clientapplication->ref_id]) }} method="POST">
+    @can('delete', $clientApplication)
+        <form action={{ route('clientapplications.destroy', [$clientApplication->ref_id]) }} method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-dark text-info m-1" >Delete</button>
         </form>
+    @endcan
     </div>
 
 @endsection

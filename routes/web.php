@@ -30,22 +30,20 @@ Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appen
 Route::patch('/clientapplications/removefrom/{clientapplication}', 'ClientApplicationsController@removefrom')->name('clientapplications.removefrom');
 Route::patch('/clientapplications/revokeall', 'ClientApplicationsController@revokeall')->name('clientapplications.revokeall');
 
-//custom ClientApplicationComments routes
-
-Route::post('/clientapplicationcomments/store/{clientapplicationcomment}')->name('clientapplicationcomments.store');
-
-//custom BreakdownItems routes
-
-Route::patch('/breakdownitems/updateprice/{breakdownitem}', 'BreakdownItemsController@updatePrice')->name('breakdownitems.updateprice');
-Route::post('/breakdownitems/iscomplete/{breakdownitem}', 'BreakdownItemsController@isComplete')->name('breakdownitems.iscomplete');
-
 Route::resource('contactus', 'ContactUsController');
 Route::resource('posts', 'PostsController');
 Route::resource('clientapplications', 'ClientApplicationsController');
 Route::resource('clientapplicationcomments', 'ClientApplicationCommentsController');
 Route::resource('breakdownitems', 'BreakdownItemsController');
-Route::resource('profiles', 'ProfilesController');
-Route::resource('affiliatecampaigns', 'AffiliateCampaignsController');
+Route::resource('users', 'UsersController');
+Route::resource('servicecontracts', 'ServiceContractsController');
+
+//custom BreakdownItems routes    
+Route::put('/breakdownitems/updateprice/{breakdownitem}', 'BreakdownItemsController@updatePrice')->name('breakdownitems.updateprice');
+Route::post('/breakdownitems/iscomplete/{breakdownitem}', 'BreakdownItemsController@isComplete')->name('breakdownitems.iscomplete');
+
+//when setting updateRole as patch request, any request will replace update for some reason
+Route::put('/users/{user}', 'UsersController@updateRole')->name('users.updateRole');
 
 Auth::routes([
     'register' => false,

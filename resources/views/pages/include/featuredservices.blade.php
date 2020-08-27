@@ -20,7 +20,7 @@
               <img src={{ asset('images/featuredservices/devops.jpeg') }} class="d-block w-100" alt="...">
               <div class="carousel-caption d-block">
                 <h6 class="text-info"><b>Deployment, Hosting & Operations</b></h6>
-                <h6 class="text-info">We deploy, host, and operate your site on-call - 25 hours a day, 8 days a week.</h6>
+                <h6 class="text-info">We deploy, host, and operate your site on-call - 24 hours a day, 7 days a week.</h6>
               </div>
             </div>
             <div class="carousel-item">
@@ -48,7 +48,7 @@
               <img src={{ asset('images/featuredservices/pentest.jpeg') }} class="d-block w-100" alt="...">
               <div class="carousel-caption d-block">
                 <h6 class="text-info"><b>Penetration Testing & Security Analysis</b></h6>
-                <h6 class="text-info">We'll work with you to identify security vulnerabilities in your website or server infrastructure.</h6>
+                <h6 class="text-info">Need some peace of mind? A certified cybersecurity specialist will work with you to identify security vulnerabilities in your website or server infrastructure.</h6>
               </div>
             </div>
           <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">

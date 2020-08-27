@@ -2,7 +2,7 @@
 <table class="table table-borderless table-sm table-condensed">
     <div class="col-md-6 m-1 ml-auto">
         <div class="text-success text-center bg-dark">
-            Project balance: ${{ $clientapplication->project_balance }}
+            Project balance: ${{ $clientApplication->project_balance }}
         </div>
     </div>
     <tr>
@@ -10,15 +10,21 @@
             Reference Identification Number:
         </td>
         <td>
-           {{ $clientapplication->getRefID() }}
+           {{ $clientApplication->getRefID() }}
         </td>
+    </tr>
+    <tr>
+        <td>
+            Project Status:
+        </td>
+            @include('clientapplications.include.clientapplication_status')
     </tr>
     <tr>
         <td>
             Name:
         </td>
         <td>
-            {{ $clientapplication->getName() }}
+            {{ $clientApplication->getName() }}
         </td>
     </tr>
     <tr>
@@ -26,7 +32,7 @@
             Company Name:
         </td>
         <td>
-        {{ $clientapplication->getCompanyName() }}
+        {{ $clientApplication->getCompanyName() }}
         </td>
     </tr>
     <tr>
@@ -34,7 +40,7 @@
             Phone Number:
         </td>
         <td>
-        {{ $clientapplication->getPhoneNumber() }}
+        {{ $clientApplication->getPhoneNumber() }}
         </td>
     </tr>
     <tr>
@@ -42,186 +48,186 @@
             Project Type:
         </td>
         <td>
-        {{ $clientapplication->getProjectType() }}
+        {{ $clientApplication->getProjectType() }}
         </td>
     </tr>
-    @if(isset($clientapplication->existing_site))
+    @if(isset($clientApplication->existing_site))
     <tr>
         <td>
             Existing Site;
         </td>
         <td>
-        {{ $clientapplication->getExistingSite() }}
+        {{ $clientApplication->getExistingSite() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->site_type))
+    @if(isset($clientApplication->site_type))
     <tr>
         <td>
             Site Type:
         </td>
         <td>
-        {{ $clientapplication->getSiteType() }}
+        {{ $clientApplication->getSiteType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->gov_contract))
+    @if(isset($clientApplication->gov_contract))
     <tr>
         <td>
             Government Contract:
         </td>
         <td>
-        {{ $clientapplication->getGovContract() }}
+        {{ $clientApplication->getGovContract() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->where_hosted))
+    @if(isset($clientApplication->where_hosted))
     <tr>
         <td>
             Hosting Provider:
         </td>
         <td>
-        {{ $clientapplication->getWhereHosted() }}
+        {{ $clientApplication->getWhereHosted() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->site_url))
+    @if(isset($clientApplication->site_url))
     <tr>
         <td>
             Current Site URL:
         </td>
         <td>
-        {{ $clientapplication->getSiteURL() }}
+        {{ $clientApplication->getSiteURL() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->backend_type))
+    @if(isset($clientApplication->backend_type))
     <tr>
         <td>
             Backend Type:
         </td>
         <td>
-        {{ $clientapplication->getBackendType() }}
+        {{ $clientApplication->getBackendType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->backend_framework))
+    @if(isset($clientApplication->backend_framework))
     <tr>
         <td>
             Backend Framework:
         </td>
         <td>
-        {{ $clientapplication->getBackendFramework() }}
+        {{ $clientApplication->getBackendFramework() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->frontend_framework))
+    @if(isset($clientApplication->frontend_framework))
     <tr>
         <td>
             Frontend Framework:
         </td>
         <td>
-        {{ $clientapplication->getFrontendFramework() }}
+        {{ $clientApplication->getFrontendFramework() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->backend_framework_type))
+    @if(isset($clientApplication->backend_framework_type))
     <tr>
         <td>
             Backend Framework Type:
         </td>
         <td>
-        {{ $clientapplication->getBackendFrameworkType() }}
+        {{ $clientApplication->getBackendFrameworkType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->frontend_framework_type))
+    @if(isset($clientApplication->frontend_framework_type))
     <tr>
         <td>
             Frontend Framework Type:
         </td>
         <td>
-        {{ $clientapplication->getFrontendFrameworkType() }}
+        {{ $clientApplication->getFrontendFrameworkType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->is_platform))
+    @if(isset($clientApplication->is_platform))
     <tr>
         <td>
             Platform:
         </td>
         <td>
-        {{ $clientapplication->getPlatform() }}
+        {{ $clientApplication->getPlatform() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->platform_type))
+    @if(isset($clientApplication->platform_type))
     <tr>
         <td>
             Platform Type:
         </td>
         <td>
-        {{ $clientapplication->getPlatformType() }}
+        {{ $clientApplication->getPlatformType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->get_db_type))
+    @if(isset($clientApplication->get_db_type))
     <tr>
         <td>
             Database Type:
         </td>
         <td>
-        {{ $clientapplication->getDBType() }}
+        {{ $clientApplication->getDBType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->test_scope))
+    @if(isset($clientApplication->test_scope))
     <tr>
         <td>
             Test Scope:
         </td>
         <td>
-        {{ $clientapplication->getTestScope() }}
+        {{ $clientApplication->getTestScope() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->security_incidents))
+    @if(isset($clientApplication->security_incidents))
     <tr>
         <td>
             Security Incidents:
         </td>
         <td>
-        {{ $clientapplication->getSecurityIncidents() }}
+        {{ $clientApplication->getSecurityIncidents() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->legacy_backend_type))
+    @if(isset($clientApplication->legacy_backend_type))
     <tr>
         <td>
             Legacy Backend Type:
         </td>
         <td>
-        {{ $clientapplication->getLegacyBackendType() }}
+        {{ $clientApplication->getLegacyBackendType() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->new_or_existing_app))
+    @if(isset($clientApplication->new_or_existing_app))
     <tr>
         <td>
             New or Existing App:
         </td>
         <td>
-        {{ $clientapplication->getNewOrExistingApp() }}
+        {{ $clientApplication->getNewOrExistingApp() }}
         </td>
     </tr>
     @endif
-    @if(isset($clientapplication->app_store))
+    @if(isset($clientApplication->app_store))
     <tr>
         <td>
             App Store:
         </td>
         <td>
-        {{ $clientapplication->getAppStore() }}
+        {{ $clientApplication->getAppStore() }}
         </td>
     </tr>
     @endif
@@ -229,5 +235,5 @@
     </div>
     <div class="row ml-2">
         <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
-        <a href="/clientapplications/{{$clientapplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
+        <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
     </div>

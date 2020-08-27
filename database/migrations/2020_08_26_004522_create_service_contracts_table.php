@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCovidFormsTable extends Migration
+class CreateServiceContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCovidFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('covid_forms', function (Blueprint $table) {
+        Schema::create('service_contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('email')->unique();
-	    $table->string('comment')->nullable();
+            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications');
+            $table->string('name');
+            $table->text('service_agreement');
+            $table->text('privacy_policy');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCovidFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('covid_forms');
+        Schema::dropIfExists('service_contracts');
     }
 }

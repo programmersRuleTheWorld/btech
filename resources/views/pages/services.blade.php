@@ -46,7 +46,7 @@
                 <h3 class="text-center">Security Analysis / Penetration Testing</h3>
             </div>
             <p>
-            An increasingly important aspect of computing in the era of the Cloud, we can test your website, database and hosting server for weaknesses. What we do next is up to you – whether we stop at delivering you a report, or taking actionable steps to secure your assets, that call’s up to you.
+            An increasingly important aspect of computing in the era of the cloud, a cybersecurity specialist can test your website, database and hosting server for weaknesses. What we do next is up to you – whether we stop at delivering you a report, or taking actionable steps to secure your assets, you're in control.
             </p>
         </div>
     </div>

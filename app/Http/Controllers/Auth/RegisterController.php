@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Events\UserCreated;
 
 class RegisterController extends Controller
 {
@@ -73,7 +74,7 @@ class RegisterController extends Controller
     {
         $data['affiliate_id'] = 'XOR' . random_int(0,999999999999);
 
-        return User::create([
+        User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'company_name' => $data['company_name'],
@@ -83,5 +84,13 @@ class RegisterController extends Controller
             'affiliate_id' => $data['affiliate_id'],
             'referred_by' => $data['referred_by'],
         ]);
+
+        $user = User::latest()->first();
+        $affiliate_id = User::where('affiliate_id', $user->referred_by)->first();
+        if($user->referred_by !== null && $affiliate_id != null)
+        {
+        event(new UserCreated($user));
+        }
+        return $user;
     }
 }

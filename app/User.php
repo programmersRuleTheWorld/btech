@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -80,17 +81,55 @@ class User extends Authenticatable
         return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'role_users');
+    }
+
+    public function jobs()
+    {
+        return $this->belongsToMany('App\ClientApplication', 'developer_client_applications', 'dev_id', 'ref_id');
+    }
+
+    public function isAdmin()
+    {
+        foreach($this->roles as $role)
+        {
+            if($role->slug == 'admin-user')
+            {
+                return true;
+            }
+        }
+        return null;
+    }
+
+    public function getPermission($slug)
+    {
+        if($this->roles()->count() > 0)
+        foreach($this->roles as $role)
+        {
+            foreach($role->permissions as $permission)
+            {
+                if($permission->slug == $slug)
+                {
+                return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     // user getters
 
     public function getName()
     {
         if(isset($this->last_name))
         {        
-        return $this->first_name . ' ' . $this->last_name;
+            return $this->first_name . ' ' . $this->last_name;
         }
         else
         {
-        return $this->first_name;
+            return $this->first_name;
         }
     }
 

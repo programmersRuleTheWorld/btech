@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use User;
+use Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\Response;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,12 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        ClientApplication::class => ClientApplicationPolicy::class,
+        ClientApplicationComment::class => ClientApplicationPolicy::class,
+        BreakdownItem::class => BreakdownItemPolicy::class,
+        User::class => UserPolicy::class,
+        AffiliateCampaign::class => AffiliateCampaignPolicy::class,
+        ServiceContract::class => ServiceContractPolicy::class,
     ];
 
     /**
@@ -25,6 +33,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('show-admin', function($user)
+        {
+            return $user->isAdmin();
+        });
+
+        Gate::define('show-dashboard', function($user)
+        {
+            return $user->getPermission('show-dashboard');
+        });
     }
 }

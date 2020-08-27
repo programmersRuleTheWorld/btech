@@ -20,8 +20,9 @@
     </div>
 </div>
 <div class="row mb-5">
+@can('create', App\Post::class)
     <div class="col-md-5">
-        <div class="card bg-info ">
+        <div class="card bg-info">
             <div class="card-header text-center">
                 <h3>
                     My Posts
@@ -30,8 +31,9 @@
             @include('dashboard.include.myposts')
         </div>
     </div>
-<div class="col-md-7">
-        <div class="card bg-info ">
+@endcan
+<div class="col-md">
+        <div class="card bg-info">
             <div class="card-header">
                 <div class="col-md-6 m-auto">
                     <h3 class="text-center">
@@ -48,6 +50,7 @@
         </div>
     </div>
 </div>
+@can('viewAny', App\ClientApplication::class)
 <div class="row">
     <div class="col-md-12">
         <div class="card bg-info">
@@ -60,5 +63,6 @@
         </div>
     </div>
 </div>
+@endcan
     
 @endsection

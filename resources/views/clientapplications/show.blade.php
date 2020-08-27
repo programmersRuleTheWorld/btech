@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="row">
     <div class="col-md-4 mb-2">
         <div class="card bg-info">
@@ -22,7 +21,10 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row">@if($clientApplication->project_status === "on-time")
+    <td class="on-time">
+@endif
+
     <div class="col-md mb-2"> 
         <div class="card bg-info">
             <div class="card-header">
@@ -31,18 +33,6 @@
                 </h3>
             </div>
         @include('clientapplications.include.breakdownlist')
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md mb-2">
-        <div class="card bg-info">
-            <div class="card-header">
-                <h3 class="text-center">
-                    Billing
-                </h3>
-            </div>
-            @include('clientapplications.include.billing_show')
         </div>
     </div>
 </div>

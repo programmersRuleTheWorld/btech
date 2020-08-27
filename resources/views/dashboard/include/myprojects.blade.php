@@ -17,8 +17,8 @@
             @method('PATCH')
             @csrf
             <button class="btn btn-dark text-info" type="submit">Reset Auth Codes</button>
+        </div>
         </form>
-    </div>
     <div class="table-responsive">
     <table class="table table-borderless table-sm table-condensed">
             <tr class="text-center">
@@ -32,27 +32,29 @@
                             Contact E-mail
                         </th>
                     </tr>
-                    @if(count($clientapplications) > 0)
-                        @foreach($clientapplications as $clientapplication)   
+                    @if(count($clientApplications) > 0)
+                        @foreach($clientApplications as $clientApplication)   
                         <tr class="text-center">
                             <th>
-                                <a class="text-dark" href="/clientapplications/{{ $clientapplication->ref_id }}">
-                                    <u>{{ $clientapplication->getName() }}</u>
+                                <a class="text-dark" href="/clientapplications/{{ $clientApplication->ref_id }}">
+                                    <u>{{ $clientApplication->getName() }}</u>
                                 </a>
                             </th>
                             <th>
-                                    <i>{{ $clientapplication->getCompanyName() }}</i>
+                                    <i>{{ $clientApplication->getCompanyName() }}</i>
                             </th>
                             <th>
-                                {{ $clientapplication->email }}
+                                {{ $clientApplication->email }}
                             </th>
                             <th>
                                 <div class="form-group">
-                                <form action="{{ route('clientapplications.destroy', [$clientapplication->ref_id]) }}" method="POST">
+                                @can('delete', $clientApplication)
+                                <form action="{{ route('clientapplications.destroy', [$clientApplication->ref_id]) }}" method="POST">
                                     @csrf
-                                    @method('DELETE')                           
+                                    @method('DELETE')                       
                                     <button type="submit" class="btn btn-dark text-info">Delete</button>
                                 </form>
+                                @endcan
                                 </div>
                             </tr>                        
                                 @endforeach
@@ -63,4 +65,4 @@
                 </table>
             </div>
 
-                        {{ $clientapplications->links() }}
+                        {{ $clientApplications->links() }}

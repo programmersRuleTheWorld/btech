@@ -1,0 +1,256 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Permission;
+
+class PermissionSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $storeClientApplication = new Permission();
+        $storeClientApplication->name = 'Store Client Application';
+        $storeClientApplication->slug = 'store-client-application';
+        $storeClientApplication->category = 'Client';
+        $storeClientApplication->save();
+        $editClientApplication = new Permission();
+        $editClientApplication->name = 'Edit Client Application';
+        $editClientApplication->slug = 'edit-client-application';
+        $editClientApplication->category = 'Client';
+        $editClientApplication->save();
+        $updateClientApplication = new Permission();
+        $updateClientApplication->name = 'Update Client Application';
+        $updateClientApplication->slug = 'update-client-application';
+        $updateClientApplication->category = 'Client';
+        $updateClientApplication->save();
+        $showClientApplication = new Permission();
+        $showClientApplication->name = 'Show Client Application';
+        $showClientApplication->slug = 'show-client-application';
+        $showClientApplication->category = 'Client';
+        $showClientApplication->save();
+        $deleteClientApplication = new Permission();
+        $deleteClientApplication->name = 'Delete Client Application';
+        $deleteClientApplication->slug = 'delete-client-application';
+        $deleteClientApplication->category = 'Client';
+        $deleteClientApplication->save();
+        $appendClientApplication = new Permission();
+        $appendClientApplication->name = 'Append Client Application';
+        $appendClientApplication->slug = 'append-client-application';
+        $appendClientApplication->category = 'Client';
+        $appendClientApplication->save();
+        $removeClientApplication = new Permission();
+        $removeClientApplication->name = 'Remove Client Application';
+        $removeClientApplication->slug = 'remove-client-application';
+        $removeClientApplication->category = 'Client';
+        $removeClientApplication->save();
+        $revokeAuthCodes = new Permission();
+        $revokeAuthCodes->name = 'Revoke Auth Codes';
+        $revokeAuthCodes->slug = 'revoke-auth-codes';
+        $revokeAuthCodes->category = 'Client';
+        $revokeAuthCodes->save();
+
+        $storeBreakDownItem = new Permission();
+        $storeBreakDownItem->name = 'Store Breakdown Item';
+        $storeBreakDownItem->slug = 'store-breakdown-item';
+        $storeBreakDownItem->category = 'Developer';
+        $storeBreakDownItem->save();
+        $editBreakDownItem = new Permission();
+        $editBreakDownItem->name = 'Edit Breakdown Item';
+        $editBreakDownItem->slug = 'edit-breakdown-item';
+        $editBreakDownItem->category = 'Developer';
+        $editBreakDownItem->save();
+        $updateBreakDownItem = new Permission();
+        $updateBreakDownItem->name = 'Update Breakdown Item';
+        $updateBreakDownItem->slug = 'update-breakdown-item';
+        $updateBreakDownItem->category = 'Developer';
+        $updateBreakDownItem->save();
+        $updateBreakDownItemPrice = new Permission();
+        $updateBreakDownItemPrice->name = 'Update Breakdown Item Price';
+        $updateBreakDownItemPrice->slug = 'update-breakdown-item-price';
+        $updateBreakDownItemPrice->category = 'Developer';
+        $updateBreakDownItemPrice->save();
+        $showBreakDownItem = new Permission();
+        $showBreakDownItem->name = 'Show Breakdown Item';
+        $showBreakDownItem->slug = 'show-breakdown-item';
+        $showBreakDownItem->category = 'Developer';
+        $showBreakDownItem->save();
+        $deleteBreakDownItem = new Permission();
+        $deleteBreakDownItem->name = 'Delete Breakdown Item';
+        $deleteBreakDownItem->slug = 'delete-breakdown-item';
+        $deleteBreakDownItem->category = 'Developer';
+        $deleteBreakDownItem->save();
+
+        $storeClientApplicationComment = new Permission();
+        $storeClientApplicationComment->name = 'Store Client Application Comment';
+        $storeClientApplicationComment->slug = 'store-client-application-comment';
+        $storeClientApplicationComment->category = 'Developer';
+        $storeClientApplicationComment->save();
+        $editClientApplicationComment = new Permission();
+        $editClientApplicationComment->name = 'Edit Client Application Comment';
+        $editClientApplicationComment->slug = 'edit-client-application-comment';
+        $editClientApplicationComment->category = 'Developer';
+        $editClientApplicationComment->save();
+        $updateClientApplicationComment = new Permission();
+        $updateClientApplicationComment->name = 'Update Client Application Comment';
+        $updateClientApplicationComment->slug = 'update-client-application-comment';
+        $updateClientApplicationComment->category = 'Developer';
+        $updateClientApplicationComment->save();
+        $showClientApplicationComment = new Permission();
+        $showClientApplicationComment->name = 'Show Client Application Comment';
+        $showClientApplicationComment->slug = 'show-client-application-comment';
+        $showClientApplicationComment->category = 'Client';
+        $showClientApplicationComment->save();
+        $deleteClientApplicationComment = new Permission();
+        $deleteClientApplicationComment->name = 'Delete Client Application Comment';
+        $deleteClientApplicationComment->slug = 'delete-client-application-comment';
+        $deleteClientApplicationComment->category = 'Developer';
+        $deleteClientApplicationComment->save();
+
+
+        $storeContactUs = new Permission();
+        $storeContactUs->name = 'Store Contact Us';
+        $storeContactUs->slug = 'store-contact-us';
+        $storeContactUs->category = 'Client';
+        $storeContactUs->save();
+        $editContactUs = new Permission();
+        $editContactUs->name = 'Edit Contact Us';
+        $editContactUs->slug = 'edit-contact-us';
+        $editContactUs->category = 'Admin';
+        $editContactUs->save();
+        $updateContactUs = new Permission();
+        $updateContactUs->name = 'Update Contact Us';
+        $updateContactUs->slug = 'update-contact-us';
+        $updateContactUs->category = 'Admin';
+        $updateContactUs->save();
+        $showContactUs = new Permission();
+        $showContactUs->name = 'Show Contact Us';
+        $showContactUs->slug = 'show-contact-us';
+        $showContactUs->category = 'Admin';
+        $showContactUs->save();
+        $deleteContactUs = new Permission();
+        $deleteContactUs->name = 'Delete Contact Us';
+        $deleteContactUs->slug = 'delete-contact-us';
+        $deleteContactUs->category = 'Admin';
+        $deleteContactUs->save();
+
+        $storePost = new Permission();
+        $storePost->name = 'Store Post';
+        $storePost->slug = 'store-post';
+        $storePost->category = 'Admin';
+        $storePost->save();
+        $editPost = new Permission();
+        $editPost->name = 'Edit Post';
+        $editPost->slug = 'edit-post';
+        $editPost->category = 'Admin';
+        $editPost->save();
+        $updatePost = new Permission();
+        $updatePost->name = 'Update Post';
+        $updatePost->slug = 'update-post';
+        $updatePost->category = 'Admin';
+        $updatePost->save();
+        $showPost = new Permission();
+        $showPost->name = 'Show Post';
+        $showPost->slug = 'show-post';
+        $showPost->category = 'Client';
+        $showPost->save();
+        $deletePost = new Permission();
+        $deletePost->name = 'Delete Post';
+        $deletePost->slug = 'delete-post';
+        $deletePost->category = 'Admin';
+        $deletePost->save();
+
+        $storeAffiliateCampaign = new Permission();
+        $storeAffiliateCampaign->name = 'Store Affiliate Campaign';
+        $storeAffiliateCampaign->slug = 'store-affiliate-campaign';
+        $storeAffiliateCampaign->category = 'Client';
+        $storeAffiliateCampaign->save();
+        $editAffiliateCampaign = new Permission();
+        $editAffiliateCampaign->name = 'Edit Affiliate Campaign';
+        $editAffiliateCampaign->slug = 'edit-affiliate-campaign';
+        $editAffiliateCampaign->category = 'Admin';
+        $editAffiliateCampaign->save();
+        $updateAffiliateCampaign = new Permission();
+        $updateAffiliateCampaign->name = 'Update Affiliate Campaign';
+        $updateAffiliateCampaign->slug = 'update-affiliate-campaign';
+        $updateAffiliateCampaign->category = 'Admin';
+        $updateAffiliateCampaign->save();
+        $showAffiliateCampaign = new Permission();
+        $showAffiliateCampaign->name = 'Show Affiliate Campaign';
+        $showAffiliateCampaign->slug = 'show-affiliate-campaign';
+        $showAffiliateCampaign->category = 'Client';
+        $showAffiliateCampaign->save();
+        $deleteAffiliateCampaign = new Permission();
+        $deleteAffiliateCampaign->name = 'Delete Affiliate Campaign';
+        $deleteAffiliateCampaign->slug = 'delete-affiliate-campaign';
+        $deleteAffiliateCampaign->category = 'Admin';
+        $deleteAffiliateCampaign->save();
+
+        $storeUser = new Permission();
+        $storeUser->name = 'Store User';
+        $storeUser->slug = 'store-user';
+        $storeUser->category = 'Developer';
+        $storeUser->save();
+        $editUser = new Permission();
+        $editUser->name = 'Edit User';
+        $editUser->slug = 'edit-user';
+        $editUser->category = 'Client';
+        $editUser->save();
+        $updateUser = new Permission();
+        $updateUser->name = 'Update User';
+        $updateUser->slug = 'update-user';
+        $updateUser->category = 'Client';
+        $updateUser->save();
+        $updateUserRole = new Permission();
+        $updateUserRole->name = 'Update User Role';
+        $updateUserRole->slug = 'update-user-role';
+        $updateUserRole->category = 'Admin';
+        $updateUserRole->save();
+        $showUser = new Permission();
+        $showUser->name = 'Show User';
+        $showUser->slug = 'show-user';
+        $showUser->category = 'Client';
+        $showUser->save();
+        $deleteUser = new Permission();
+        $deleteUser->name = 'Delete User';
+        $deleteUser->slug = 'delete-user';
+        $deleteUser->category = 'Admin';
+        $deleteUser->save();
+
+        $showDashboard = new Permission();
+        $showDashboard->name = 'Show Dashboard';
+        $showDashboard->slug = 'show-dashboard';
+        $showDashboard->category = 'Client';
+        $showDashboard->save();
+
+        $storeServiceContract = new Permission();
+        $storeServiceContract->name = 'Store Service Contract';
+        $storeServiceContract->slug = 'store-sevice-contract';
+        $storeServiceContract->category = 'Developer';
+        $storeServiceContract->save();
+        $storeServiceContract = new Permission();
+        $storeServiceContract->name = 'Edit Service Contract';
+        $storeServiceContract->slug = 'edit-sevice-contract';
+        $storeServiceContract->category = 'Developer';
+        $storeServiceContract->save();
+        $storeServiceContract = new Permission();
+        $storeServiceContract->name = 'Update Service Contract';
+        $storeServiceContract->slug = 'update-sevice-contract';
+        $storeServiceContract->category = 'Developer';
+        $storeServiceContract->save();
+        $storeServiceContract = new Permission();
+        $storeServiceContract->name = 'Show Service Contract';
+        $storeServiceContract->slug = 'show-sevice-contract';
+        $storeServiceContract->category = 'Client';
+        $storeServiceContract->save();
+        $storeServiceContract = new Permission();
+        $storeServiceContract->name = 'Delete Service Contract';
+        $storeServiceContract->slug = 'delete-sevice-contract';
+        $storeServiceContract->category = 'Developer';
+        $storeServiceContract->save();
+        
+    }
+}

@@ -1,8 +1,8 @@
-@if($breakdownitem->item_status == true)
+@if($breakdownItem->item_status == true)
     <td class="complete border border-info">
         COMPLETE
 @endif
-@if($breakdownitem->item_status == false)
+@if($breakdownItem->item_status == false)
     <td class="incomplete border border-info">
         INCOMPLETE
     @endif

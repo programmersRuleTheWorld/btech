@@ -1,5 +1,6 @@
-
-    <form class="m-2" action={{ route('clientapplicationcomments.store') }} method="POST">
+@can('create', App\ClientApplicationComment::class)
+    <form class="m-2" action="{{ route('clientapplicationcomments.store') }}" method="POST">
+        <input type="hidden" value="{{ $ref_id }}" name="ref_id">
         @csrf
         @method('POST')
 <div class="row">
@@ -27,9 +28,9 @@
                 </div>
             </div>
         </div>
-            <input type="hidden" value={{ $ref_id }} name="ref_id">
             <button class="btn btn-dark text-info" type="submit">Comment</button>    
        </form>
+       @endcan
        <div class="table-responsive">
        <table class="table table-borderless table-sm table-condensed">
                 <tr>
@@ -45,30 +46,32 @@
                     <th>
                         Status
                     </th>
-       @foreach($comments as $comment)
+       @foreach($clientApplicationComments as $clientApplicationComment)
                 <tr>
                     <td>
-                    {{ $comment->user->name }}
+                    {{ $clientApplicationComment->user->first_name . ' ' . $clientApplicationComment->user->last_name[0] . '.' }}
                     </td>
                     <td>
-                    <b>{{ $comment->comment_title }}</b>
+                    <b>{{ $clientApplicationComment->comment_title }}</b>
                     </td>
                     <td>
-                    {{ $comment->updated_at }}
+                    {{ $clientApplicationComment->updated_at }}
                     </td>
                     @include('clientapplications.include.comment_status')
                     <td>
-                    <form action="{{ route('clientapplicationcomments.destroy', [$comment->comment_id]) }}" method="POST">
+                    @can('delete', $clientApplicationComment)
+                    <form action="{{ route('clientapplicationcomments.destroy', [$clientApplicationComment->comment_id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                     <button class="btn btn-dark text-info" type="submit">Delete</button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             <tr>
                 <td>
                     <h5 class="text-center">
-                        {{ $comment->comment_body }}
+                        {{ $clientApplicationComment->comment_body }}
                     </h5>
                 </td>
             </tr>

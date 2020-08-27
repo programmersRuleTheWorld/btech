@@ -31,12 +31,12 @@ class DashboardController extends Controller
         $user = auth()->user();
         $clients = User::where('referred_by', $user->affiliate_id)->get();
         $jobs = ClientApplication::paginate(5, ['*'], 'jobs');
-        $user->clientapplication = ClientApplication::where(['user_id' => $user->id])->paginate(5, ['*'], 'clientApplications');
+        $user->clientApplications = ClientApplication::where(['user_id' => $user->id])->paginate(5, ['*'], 'clientApplications');
         $user->post = Post::where(['user_id' => $user->id])->paginate(5, ['*'], 'posts');
         return view('dashboard/show')->with(
             [
             'posts' => $user->post,
-            'clientapplications' => $user->clientapplication,
+            'clientApplications' => $user->clientApplications,
             'jobs' => $jobs,
             'clients' => $clients,
             'user' => $user,

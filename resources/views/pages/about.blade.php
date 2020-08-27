@@ -11,25 +11,12 @@
                 <div class="card-body">
                         <img src={{ asset('images/meandjoe.jpg') }} width="30%" class="rounded-circle float-left">
                         <p>
-                            Founder Robert Bertram is an obsessive and single-minded programmer who's
-                            spent many years perfecting his craft. Having traveled Asia and finding
-                            other cultures fascinating, he spends most of his time when not programming
-                            learning a new language, watching documentaries or relaxing at home
-                            with his partner and service dog.
+                            I'm Robert Bertram, but you can call me Robbie; I'm a certified cybersecurity analyst and programmer. After years of self-taught programming across various frameworks, I founded Bertram Technologies Corporation in December, 2019, to bring affordable, efficient, and secure software development to the business market, and work tirelessly to that end.
                         </p>
                         <p>
-                            Having a lifelong visual disability called retinopathy of prematurity,
-                            he has long struggled to live a "normal" life - in 2016 he got his first
-                            license, and in 2018 he passed the Motorcycle Safety Foundation's Basic Rider
-                            Course in Orlando, Florida.
+                            I have had more challenges in life than the average individual, and those challenges have informed my resillience. For years I'd stayed awake into the long hours of the night solving programming problems, no matter how small, unpaid. I have long looked forward to the day that I can apply that dedication and insight to the needs of my clients.
                         </p>
-                        <p>
-                            Having grown up in the hills of Berkshire County, Massachusetts, but also
-                            being a native New Yorker, Mr. Bertram plans on returning to New York City,
-                            while turning Berkshire County into a telecommuting tech hub to create the type of 
-                            opportunities for young people that he wished he'd had a decade ago.
-                        </p>
-                </div>
+                    </div>
         </div>
     </div>
     <div class="col-md-6">
@@ -38,16 +25,12 @@
                 <h3 class="text-center">About the Company</h3>
             </div>
                 <div class="card-body">
-                        <img src={{ asset('images/logos/btlogoredgradient.svg') }} width="30%" class="rounded-circle float-left">
+                        <img src="{{ asset('images/logos/btlogogreygradient.svg') }}" width="30%" class="rounded-circle float-left">
                         <p>
-                            Bertram Technologies, formally named Bertram Technologies Corporation, 
-                            was incorporated on December 1st, 2019 in Albany, New York. Mr. Bertram 
-                            is CEO and sole shareholder.
+                            Bertram Technologies, formally established as Bertram Technologies Corporation, provides affordable, efficient, and secure software development services to individuals and businesses. 
                         </p>
                         <p>
-                            As services are added and revenues grow, the Corporation looks forward
-                            to hiring permanent employees, predominantly in the Berkshire County area,
-                            to serve as hourly support staff.
+                            From web, to mobile, to native software development, Bertram Technologies does it all. For security reasons, no one project is <b>ever</b> outsourced in its entirety. We take pride in providing security, quality and information assurance to the specifications of our clients.
                         </p>
                 </div>
         </div>

@@ -4,52 +4,11 @@ html {
   font-size: 1rem;
 }
 
-.flashy {
-  -webkit-animation-name: flashy;
-          animation-name: flashy;
-  -webkit-animation-duration: 5s;
-          animation-duration: 5s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-}
-
-@-webkit-keyframes flashy {
-  from {
-    background: red;
-    color: white;
-  }
-
-  50% {
-    background: white;
-    color: red;
-  }
-
-  100% {
-    background: red;
-    color: white;
-  }
-}
-
-@keyframes flashy {
-  from {
-    background: red;
-    color: white;
-  }
-
-  50% {
-    background: white;
-    color: red;
-  }
-
-  100% {
-    background: red;
-    color: white;
-  }
-}
-
 @media (max-width: 1300px) {
+  html {
+    font-size: 0.6em;
+  }
+
   .carousel-caption > h6 {
     font-size: 0.8em;
   }
@@ -80,9 +39,8 @@ html {
 
 html body {
   background-color: black;
-  background-image: url(/images/btlogoredgradient2.svg?2c345f86aadad19ba4682583d8a8f9d1);
+  background-image: url(/images/btlogogreygradient.svg?a1b23af332b9584c7aeb257466983c7d);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: contain;
   background-attachment: fixed;
 }
@@ -99,7 +57,7 @@ p {
 }
 
 #app {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 a.navbar-brand {
@@ -109,9 +67,8 @@ a.navbar-brand {
 #btlogo {
   min-width: 50px;
   width: 8%;
-  max-width: 67px;
+  max-width: 60px;
   margin-right: auto;
-  padding-left: 1%;
 }
 
 .nav-link {
@@ -291,6 +248,10 @@ textarea#item_description {
   min-height: 100%;
 }
 
+.card-limited {
+  max-height: 500px;
+}
+
 .follow-up {
   background: blue;
   color: white;
@@ -327,7 +288,7 @@ textarea#item_description {
 }
 
 .unpaid {
-  background: red;
+  background: black;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -335,6 +296,13 @@ textarea#item_description {
 
 .incomplete {
   background: red;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.refund {
+  background: black;
   color: white;
   font-weight: bold;
   text-align: center;

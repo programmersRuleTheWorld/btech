@@ -10,6 +10,10 @@ use Mail;
 
 class ClientApplicationCommentsController extends Controller
 {
+    public function __construct()
+    {
+        //$this->authorizeResource(ClientApplicationComment::class, 'clientapplicationcomment');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,17 +49,14 @@ class ClientApplicationCommentsController extends Controller
         ]);
 
         $user = auth()->user();
-        $comment = new ClientApplicationComment();
-        $comment->parent_ref_id = $request->input('ref_id');
-        $comment->user_id = $user->id;
-        $comment->comment_title = $request->input('comment_title');
-        $comment->comment_body = $request->input('comment_body');
-        $comment->comment_status = $request->input('comment_status');
-        $comment->clientapplication->updated_at = ClientApplication::where(['ref_id' => $comment->parent_ref_id])->update(['updated_at' => now()]);
-        $comment->save();
-
-        /*Mail::to($comment->clientapplication->email)
-        ->send(new CommentAdded($comment));*/
+        $clientApplicationComment = new ClientApplicationComment();
+        $clientApplicationComment->parent_ref_id = $request->input('ref_id');
+        $clientApplicationComment->user_id = $user->id;
+        $clientApplicationComment->comment_title = $request->input('comment_title');
+        $clientApplicationComment->comment_body = $request->input('comment_body');
+        $clientApplicationComment->comment_status = $request->input('comment_status');
+        $clientApplicationComment->clientApplication->updated_at = ClientApplication::where(['ref_id' => $clientApplicationComment->parent_ref_id])->update(['updated_at' => now()]);
+        $clientApplicationComment->save();
 
         return redirect()->back()->with('success', "Comment added!");
     }
@@ -63,10 +64,10 @@ class ClientApplicationCommentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ClientApplicationComment  $comment
+     * @param  \App\ClientApplicationComment  $clientApplicationComment
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientApplicationComment $comment_id)
+    public function show(ClientApplicationComment $clientApplicationComment)
     {
         //
     }
@@ -74,10 +75,10 @@ class ClientApplicationCommentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ClientApplicationComment  $comment
+     * @param  \App\ClientApplicationComment  $clientApplicationComment
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientApplicationComment $comment_id)
+    public function edit(ClientApplicationComment $clientApplicationComment)
     {
         //
     }
@@ -86,10 +87,10 @@ class ClientApplicationCommentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ClientApplicationComment  $comment
+     * @param  \App\ClientApplicationComment  $clientApplicationComment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientApplicationComment $comment)
+    public function update(Request $request, ClientApplicationComment $clientApplicationComment)
     {
         //
     }
@@ -97,14 +98,14 @@ class ClientApplicationCommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ClientApplicationComment  $comment
+     * @param  \App\ClientApplicationComment  $clientApplicationComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($comment_id)
+    public function destroy($clientApplicationComment)
     {
-        $comment = ClientApplicationComment::find($comment_id);
-        $commentUpdate = ClientApplication::find($comment->parent_ref_id)->update(['updated_at' => now()]);
-        $comment->delete();
+        $clientApplicationComment = ClientApplicationComment::find($clientApplicationComment);
+        $commentUpdate = ClientApplication::find($clientApplicationComment->parent_ref_id)->update(['updated_at' => now()]);
+        $clientApplicationComment->delete();
 
         return redirect()->back()->with('success',"Comment deleted!");
     }

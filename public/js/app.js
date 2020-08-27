@@ -37766,7 +37766,7 @@ if (window.location.pathname == '/') {
       backendFrameworkType.setDisplayState('none');
       frontendFrameworkType.setDisplayState('none');
       isPlatform.setDisplayState('block');
-      platformType.setDisplayState('block');
+      platformType.setDisplayState('none');
       dbType.setDisplayState('block');
       testScope.setDisplayState('block');
       securityIncidents.setDisplayState('block');

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -110,6 +115,6 @@ class PostsController extends Controller
     {
         $post->delete();
 
-        return redirect()->back()->with('success', 'Post deleted!');
+        return redirect()->route('dashboard')->with('success', 'Post deleted!');
     }
 }

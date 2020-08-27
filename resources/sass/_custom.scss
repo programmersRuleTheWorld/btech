@@ -4,31 +4,11 @@ html{
     font-size: 1rem;
 }
 
-//COVID style
-
-    .flashy{
-        animation-name: flashy;
-        animation-duration: 5s;
-        animation-iteration-count: infinite;
-        animation-fill-mode: both;
-    }
-
-    @keyframes flashy{
-        from{
-            background: red;
-            color: white;
-        }
-        50%{
-            background: white;
-            color: red;
-        }
-        100%{
-            background: red;
-            color: white;
-        }
-    }
-
 @media(max-width: 1300px){
+    
+    html{
+        font-size: .6em;
+    }
 
     .carousel-caption > h6{
         font-size: .8em;
@@ -46,7 +26,7 @@ html{
     input.select{
         font-size: .8em;
     }
-
+    
     a.nav-link{
         font-size: .7em;
     }
@@ -61,9 +41,8 @@ html{
 
 html body{
     background-color: black;
-    background-image: url('../../public/images/logos/btlogoredgradient2.svg');
+    background-image: url('../../public/images/logos/btlogogreygradient.svg');
     background-repeat: no-repeat;
-    background-position: center;
     background-size: contain;
     background-attachment: fixed;
 }
@@ -78,7 +57,7 @@ p{
 }
 
 #app{
-    opacity: .8;
+    opacity: .9;
 }
 
 a.navbar-brand{
@@ -88,9 +67,8 @@ a.navbar-brand{
 #btlogo{
     min-width: 50px;
     width: 8%;
-    max-width: 67px;
+    max-width: 60px;
     margin-right: auto;
-    padding-left: 1%;
 }
 
 .nav-link{
@@ -248,6 +226,10 @@ textarea#item_description{
     min-height: 100%;
 }
 
+.card-limited{
+    max-height: 500px;
+}
+
 .follow-up{
     background: blue;
     color: white;
@@ -284,7 +266,7 @@ textarea#item_description{
 }
 
 .unpaid{
-    background: red;
+    background: black;
     color: white;
     font-weight: bold;
     text-align: center;
@@ -292,6 +274,13 @@ textarea#item_description{
 
 .incomplete{
     background: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.refund{
+    background: black;
     color: white;
     font-weight: bold;
     text-align: center;

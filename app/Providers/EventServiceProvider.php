@@ -17,8 +17,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-            '\App\Listeners\Users\Created\CreateAffiliateCampaign',
-        ],
+            ],
+            'App\Events\UserCreated' => [
+            'App\Listeners\Users\Created\AssignClientRole',
+            'App\Listeners\Users\Created\CreateAffiliateCampaign'
+            ],
     ];
 
     /**

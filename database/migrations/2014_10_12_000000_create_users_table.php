@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('company_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->decimal('user_balance', 8, 2);
-            $table->string('email')->unique();
+            $table->string('email');//->unique();
             $table->string('affiliate_id')->unique();
             $table->string('referred_by')->nullable();
             $table->decimal('user_spend', 8, 2);
