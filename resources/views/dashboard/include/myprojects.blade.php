@@ -17,35 +17,31 @@
             @method('PATCH')
             @csrf
             <button class="btn btn-dark text-info" type="submit">Reset Auth Codes</button>
-        </div>
+                </div>
         </form>
     <div class="table-responsive">
     <table class="table table-borderless table-sm table-condensed">
             <tr class="text-center">
                         <th>
-                            Name
+                            Service Type:
                         </th>
                         <th>
-                            Company
+                            Contact E-mail:
                         </th>
                         <th>
-                            Contact E-mail
+                            Project Status:
                         </th>
                     </tr>
                     @if(count($clientApplications) > 0)
                         @foreach($clientApplications as $clientApplication)   
                         <tr class="text-center">
                             <th>
-                                <a class="text-dark" href="/clientapplications/{{ $clientApplication->ref_id }}">
-                                    <u>{{ $clientApplication->getName() }}</u>
-                                </a>
-                            </th>
-                            <th>
-                                    <i>{{ $clientApplication->getCompanyName() }}</i>
+                                <u><a class="text-dark" href="{{ route('clientapplications.show', [$clientApplication]) }}">{{ $clientApplication->project_type }}</a></u>
                             </th>
                             <th>
                                 {{ $clientApplication->email }}
                             </th>
+                                @include('include.status')
                             <th>
                                 <div class="form-group">
                                 @can('delete', $clientApplication)
@@ -64,5 +60,4 @@
                     @endif
                 </table>
             </div>
-
                         {{ $clientApplications->links() }}

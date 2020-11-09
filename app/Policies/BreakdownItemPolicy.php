@@ -34,7 +34,7 @@ class BreakdownItemPolicy
      */
     public function view(User $user, BreakdownItem $breakdownItem)
     {
-        //
+        return $user->getPermission('show-breakdown-item');
     }
 
     /**
@@ -74,7 +74,7 @@ class BreakdownItemPolicy
 
     public function isComplete(User $user, BreakdownItem $breakdownItem)
     {
-        return $user->getPermission('update-breakdown-item');
+        return $user->getPermission('update-breakdown-item-status');
     }
 
     public function updatePrice(User $user)

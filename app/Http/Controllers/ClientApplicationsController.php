@@ -11,18 +11,17 @@ use App\ClientApplicationComment;
 use App\User;
 use App\BreakdownList;
 use App\BreakdownItem;
-use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Facades\DB;
 use App\ServiceContract;
-use PDF;
+use App\SupportTicket;
+use App\SupportTicketComment;
+use App\Events\ClientApplications\ClientApplicationCreated;
+use App\Events\ClientApplications\ClientApplicationUpdated;
+use Ramsey\Uuid\Uuid;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ClientApplicationsController extends Controller
 {    
-    public function __construct()
-    {
-        //$this->authorizeResource(ClientApplication::class, 'clientapplication');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -56,19 +55,22 @@ class ClientApplicationsController extends Controller
             'first_name' => 'required',
             'email' => 'required',
             'project_type' => 'required',
+            'due_date' => 'required|max:10',
         ]);
 
         $user = auth()->user();
         $clientApplication = new ClientApplication;
-        $clientApplication->first_name = $request->input('first_name');
+        $clientApplication->first_name =  $request->input('first_name');
         $clientApplication->last_name = $request->input('last_name');
         $clientApplication->company_name = $request->input('company_name');
         $clientApplication->email = $request->input('email');
         $clientApplication->phone_number = $request->input('phone_number');
         $clientApplication->project_type = $request->input('project_type');
+        $clientApplication->due_date = new Carbon($request->input('due_date'));
         $clientApplication->existing_site = $request->input('existing_site');
         $clientApplication->site_type = $request->input('site_type');
         $clientApplication->gov_contract = $request->input('gov_contract');
+        $clientApplication->domain_name = $request->input('domain_name');
         $clientApplication->where_hosted = $request->input('where_hosted');
         $clientApplication->site_url = $request->input('site_url');
         $clientApplication->backend_type = $request->input('backend_type');
@@ -88,6 +90,8 @@ class ClientApplicationsController extends Controller
         if($user){$clientApplication->user_id = $user->id;}
         $clientApplication->ref_id = mt_rand(100000000000000,999999999999999);
         $clientApplication->auth_code = Uuid::uuid4();
+        $auth = $clientApplication->auth_code;
+        event(new ClientApplicationCreated($clientApplication));
         $clientApplication->auth_code = Hash::make($clientApplication->auth_code);
         $clientApplication->save();
         
@@ -123,7 +127,9 @@ class ClientApplicationsController extends Controller
         $clientApplication = ClientApplication::find($clientApplication);
         $this->authorize('view', $clientApplication);
         $clientApplicationComments = ClientApplicationComment::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $breakdownListDeposits = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id, ['list_deposit', '>', 0.00]])->get();
         $serviceContracts = ServiceContract::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $count = 1;
         return view('clientapplications/show')->with([
@@ -134,7 +140,9 @@ class ClientApplicationsController extends Controller
             'serviceContracts' => $serviceContracts,
             'count' => $count,
             'user' => $user,
-            'serviceContracts' => $serviceContracts
+            'serviceContracts' => $serviceContracts,
+            'breakdownLists' => $breakdownLists,
+            'breakdownListDeposits' => $breakdownListDeposits,
             ]);
     }
 
@@ -167,7 +175,8 @@ class ClientApplicationsController extends Controller
         $clientApplication->company_name = $request->input('company_name');
         $clientApplication->email = $request->input('email');
         $clientApplication->phone_number = $request->input('phone_number');
-        $clientApplication->project_type = $request->input('project_type');        
+        $clientApplication->project_type = $request->input('project_type');   
+        $clientApplication->due_date = new Carbon($request->input('due_date'));     
         $clientApplication->existing_site = $request->input('existing_site');
         $clientApplication->site_type = $request->input('site_type');
         $clientApplication->gov_contract = $request->input('gov_contract');
@@ -186,9 +195,29 @@ class ClientApplicationsController extends Controller
         $clientApplication->legacy_backend_type = $request->input('legacy_backend_type');
         $clientApplication->new_or_existing_app = $request->input('new_or_existing_app');
         $clientApplication->app_store = $request->input('app_store');
+        if($clientApplication->project_deposit_rate != $request->input('project_deposit_rate'))
+        {
+        $clientApplication->project_deposit_rate = $request->input('project_deposit_rate');
+        $clientApplication->project_deposit = $clientApplication->project_balance * $clientApplication->project_deposit_rate;
+        if($clientApplication->breakdownItems->count() > 0)
+        {
+            foreach($clientApplication->breakdownLists as $breakdownList)
+            {
+                foreach($breakdownList->breakdownItems as $breakdownItem)
+                    {
+                        $breakdownItem->item_deposit = $breakdownItem->item_balance * $clientApplication->project_deposit_rate;
+                        $breakdownItem->breakdownList->list_deposit = $breakdownItem->breakdownList->list_balance * $clientApplication->project_deposit_rate;
+                        $breakdownItem->breakdownList->save();
+                        $breakdownItem->save();
+                    }
+                }
+            }
+        }
         $clientApplication->project_description = $request->input('project_description');
         $clientApplication->project_status = $request->input('project_status');
         $clientApplication->save();
+
+        event(new ClientApplicationUpdated($clientApplication));
 
         return redirect()->route('clientapplications.show', [$clientApplication->ref_id])->with('success', "Client information updated successfully!");
     }
@@ -216,20 +245,21 @@ class ClientApplicationsController extends Controller
     public function appendTo(Request $request){
 
         $user = auth()->user();
-        $clientApplication = $request->input('ref_id');
-        $clientApplication = ClientApplication::find($clientApplication);
+        $ref_id = $request->input('ref_id');
+        $clientApplication = ClientApplication::find($ref_id);
         $this->validate($request, ['ref_id' => 'required', 'auth_code' => 'required']);
         $auth_code = $request->input('auth_code');
         $user_id = auth()->user()->id;
         
-
+        
         if(isset($clientApplication)){
-            if($clientApplication->ref_id == $clientApplication && $clientApplication->auth_code == Hash::check($auth_code, $clientApplication->auth_code))
+            if($clientApplication->ref_id == $ref_id && $clientApplication->auth_code == Hash::check($auth_code, $clientApplication->auth_code))
             {
+                $this->authorize('appendTo', $clientApplication);
                 $clientApplication->user_id = $user_id;
                 $clientApplication->save();
                 
-                return redirect()->route('dashboard')->with('success', "$user->first_name, $clientApplication has been successfully added to your account.");
+                return redirect()->route('dashboard')->with('success', "$user->first_name, Client Application $clientApplication->ref_id has been successfully added to your account.");
             }
         }
         else{

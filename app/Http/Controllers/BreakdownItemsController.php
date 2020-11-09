@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BreakdownItem;
 use App\ClientApplication;
+use App\Events\BreakdownItems\BreakdownItemStatusChange;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -11,7 +12,7 @@ class BreakdownItemsController extends Controller
 {
     public function __construct()
     {
-        //$this->authorizeResource(BreakdownItem::class, 'breakdownitem');
+        //$this->authorizeResource(BreakdownItem::class, 'App\BreakdownItem');
     }
     /**
      * Display a listing of the resource.
@@ -44,15 +45,17 @@ class BreakdownItemsController extends Controller
         $validatedData = $this->validate($request, [
             'item_description' => 'required | max: 1000'
         ]);
-
+        $this->authorize('create', BreakdownItem::class);
         $user = auth()->user();
-
         $breakdownItem = new BreakdownItem();
         $breakdownItem->parent_ref_id = $request->input('ref_id');
+        $breakdownItem->parent_list_id = $request->input('parent_list_id');
         $breakdownItem->user_id = $user->id;
+        $breakdownItem->frontend = $request->input('frontend');
         $breakdownItem->item_description = $request->input('item_description');
         $breakdownItem->save();
-
+        event(new BreakdownItemStatusChange($breakdownItem));
+        
         return redirect()->back()->with('success', "Breakdown Item added!");
     }
 
@@ -93,35 +96,47 @@ class BreakdownItemsController extends Controller
             ]);
 
             $breakdownItem = BreakdownItem::find($breakdownItem);
+            $this->authorize('update', $breakdownItem);
             $breakdownItem->update([$validatedData]);
-            $breakdownItem->save();
+            $breakdownItem->save(); 
 
             return redirect()->back()->with('success', "Breakdown Item saved!");
     }
 
     public function updatePrice(Request $request, $breakdownItem){
         $breakdownItem = BreakdownItem::find($breakdownItem);
-
-        //add in user validation to billing!!!
-
-        if($breakdownItem->clientapplication->user){
-        $breakdownItem->clientapplication->user->user_balance -= $breakdownItem->clientapplication->project_balance;
-        $breakdownItem->clientapplication->user->save();}
-
-        $breakdownItem->clientapplication->project_balance -= $breakdownItem->item_balance;
-        $breakdownItem->clientapplication->save();
-
+        $this->authorize('updatePrice', $breakdownItem);
+        if($request->input('item_balance') != $breakdownItem->item_balance)
+        {
+        if(isset($breakdownItem->user))
+        {
+            $breakdownItem->user->user_balance -= $breakdownItem->clientApplication->project_balance;
+        }
+        $breakdownItem->breakdownList->list_balance -= $breakdownItem->item_balance;
+        $breakdownItem->breakdownList->list_deposit -= $breakdownItem->item_deposit;
+        $breakdownItem->clientApplication->project_balance -= $breakdownItem->item_balance;
+        $breakdownItem->clientApplication->project_deposit -= $breakdownItem->item_deposit;
         $breakdownItem->item_balance = $request->input('item_balance');
+        $breakdownItem->item_deposit = $breakdownItem->item_balance * $breakdownItem->breakdownList->clientApplication->project_deposit_rate;
+        $breakdownItem->breakdownList->list_balance += $breakdownItem->item_balance;
+        $breakdownItem->breakdownList->list_deposit += $breakdownItem->item_deposit;
+        $breakdownItem->clientApplication->project_balance += $breakdownItem->item_balance;
+        $breakdownItem->clientApplication->project_deposit += $breakdownItem->item_deposit;
+        if(isset($breakdownItem->user))
+        {
+            $breakdownItem->user->user_balance += $breakdownItem->clientApplication->project_balance;
+        }
+        $breakdownItem->breakdownList->save();
+        $breakdownItem->clientApplication->save();
+        $breakdownItem->user->save();
         $breakdownItem->save();
 
-        $breakdownItem->clientapplication->project_balance += $breakdownItem->item_balance;
-        $breakdownItem->clientapplication->save();
-
-        if($breakdownItem->clientapplication->user){
-        $breakdownItem->clientapplication->user->user_balance += $breakdownItem->clientapplication->project_balance;
-        $breakdownItem->clientapplication->user->save();}
-
         return redirect()->back()->with('success', "Item $breakdownItem->item_id has been changed to $$breakdownItem->item_balance.");
+        }
+        else
+        {
+            return redirect()->back()->with('error', "The input price must be different from the existing price.");
+        }
     }
 
     /**
@@ -132,15 +147,22 @@ class BreakdownItemsController extends Controller
      */
     public function destroy($breakdownItem)
     {
-        $breakdownItem = BreakdownItem::find($breakdownItem);
-        $breakdownItem->clientapplication->updated_at = ClientApplication::where(['ref_id' => $breakdownItem->parent_ref_id])->update(['updated_at' => now()]);
-        $breakdownItem->clientapplication->project_balance -= $breakdownItem->item_balance;
-        $breakdownItem->clientapplication->save();
+        $breakdownItem = BreakdownItem::find($breakdownItem); 
+        $this->authorize('delete', $breakdownItem);
+        $breakdownItem->breakdownList->list_balance -= $breakdownItem->item_balance;
+        $breakdownItem->clientApplication->project_balance -= $breakdownItem->item_balance;
+        $breakdownItem->clientApplication->project_deposit -= $breakdownItem->item_deposit;
+        if(isset($breakdownItem->clientApplication->user))
+        {
+            $breakdownItem->user->user_balance -= $breakdownItem->item_balance;
+            $breakdownItem->user->save();
+        }
+        $breakdownItem->breakdownList->save();
+        $breakdownItem->clientApplication->save();
         $breakdownItem->delete();
         
         return redirect()->back()->with('success', "Breakdown Item deleted!");
-    }
-
+        }
     /**
      * Set isComplete status on item.
      * @param int $breakdownItem
@@ -148,16 +170,21 @@ class BreakdownItemsController extends Controller
      */
     public function isComplete($breakdownItem){
         $breakdownItem = BreakdownItem::find($breakdownItem);
+        $this->authorize('isComplete', $breakdownItem);
         if($breakdownItem->exists())
+        {
+            if($breakdownItem->item_status == false)
             {
-                if($breakdownItem->item_status == false)
-                {
-                $breakdownItem->update(['item_status' => true]);
+                $breakdownItem->item_status = true;
+                $breakdownItem->save();
+                event(new BreakdownItemStatusChange($breakdownItem));
                 return redirect()->back()->with('success', "Breakdown Item $breakdownItem->item_id has successfully been completed!");
             }
             elseif($breakdownItem->item_status = true)
             {
-                $breakdownItem->update(['item_status' => false]);
+                $breakdownItem->item_status = false;
+                $breakdownItem->save();
+                event(new BreakdownItemStatusChange($breakdownItem));
                 return redirect()->back()->with('error', "Breakdown Item $breakdownItem->item_id has been reverted back to incomplete.");
             }
         }

@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if (session('status'))
+@if(session('status'))
 <div class="alert alert-success" role="alert">
     {{ session('status') }}
 </div>
@@ -19,9 +19,23 @@
         </div>
     </div>
 </div>
-<div class="row mb-5">
+<div class="row mb-2">
+    <div class="col-md">
+        <div class="card bg-info">
+            <div class="card-header text-center">
+                <h3>
+                    My Operations
+                </h3>
+            </div>
+            <div class="card-body">
+            @include('dashboard.include.myoperations')
+            </div>
+        </div>
+    </div>
+</div>
 @can('create', App\Post::class)
-    <div class="col-md-5">
+<div class="row mb-2">
+    <div class="col-md-12">
         <div class="card bg-info">
             <div class="card-header text-center">
                 <h3>
@@ -31,8 +45,10 @@
             @include('dashboard.include.myposts')
         </div>
     </div>
+</div>
 @endcan
-<div class="col-md">
+<div class="row">
+    <div class="col-md-12">
         <div class="card bg-info">
             <div class="card-header">
                 <div class="col-md-6 m-auto">
@@ -41,6 +57,7 @@
                     </h3>
                 </div>
             </div>
+            <div class="card-body">
             <div class="col-md-3 mt-2">
                 <div class="text-success text-center bg-dark text-left">
                     My balance: ${{ $user->user_balance }}
@@ -50,19 +67,4 @@
         </div>
     </div>
 </div>
-@can('viewAny', App\ClientApplication::class)
-<div class="row">
-    <div class="col-md-12">
-        <div class="card bg-info">
-            <div class="card-header">
-                <h3 class="text-center">
-                    Open Projects
-                </h3>
-            </div>
-            @include('dashboard.include.myjobs')
-        </div>
-    </div>
-</div>
-@endcan
-    
 @endsection

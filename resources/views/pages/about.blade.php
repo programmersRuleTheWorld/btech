@@ -25,7 +25,7 @@
                 <h3 class="text-center">About the Company</h3>
             </div>
                 <div class="card-body">
-                        <img src="{{ asset('images/logos/btlogogreygradient.svg') }}" width="30%" class="rounded-circle float-left">
+                        <img src="{{ asset('images/logos/btlogobladerunner.svg') }}" width="30%" class="rounded-circle float-left">
                         <p>
                             Bertram Technologies, formally established as Bertram Technologies Corporation, provides affordable, efficient, and secure software development services to individuals and businesses. 
                         </p>

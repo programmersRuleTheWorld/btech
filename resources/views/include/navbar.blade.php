@@ -3,7 +3,7 @@
             <a class="navbar-brand p-0" href="{{ url('/') }}" >
                 <b><small>Bertram Technologies</small></b>
             </a>
-            <img src={{ asset("images/logos/btlogogreygradient.svg") }} id="btlogo">
+            <img src={{ asset("images/logos/btlogobladerunner.svg") }} id="btlogo">
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -70,7 +70,16 @@
                     <a class="dropdown-item text-center" href="{{ route('admin') }}">
                         {{ __('Admin Panel') }}
                     </a>
+                    
+                    <a class="dropdown-item text-center" href="{{ route('development_center') }}">
+                        {{ __('Development Center') }}
+                    </a>
+                    
+                    <a class="dropdown-item text-center" href="{{ route('operations_center') }}">
+                        {{ __('Operations Center') }}
+                    </a>
                     @endif
+
                     <a class="dropdown-item text-center" href="{{ route('users.show', [Auth::user()->id]) }}">
                         {{ __('My Profile') }}
                     </a>
@@ -78,6 +87,7 @@
                     <a class="dropdown-item text-center" href="{{ route('affiliate_details' ) }}">
                         {{ __('Affiliate Details') }}
                     </a>
+
                     <a class="dropdown-item text-center" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">

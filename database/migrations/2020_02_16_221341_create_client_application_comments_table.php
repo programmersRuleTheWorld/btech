@@ -16,7 +16,7 @@ class CreateClientApplicationCommentsTable extends Migration
         Schema::create('client_application_comments', function (Blueprint $table) {
             $table->bigIncrements('comment_id');
             $table->integer('user_id')->foreign('user_id')->references('id')->on('users');
-            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications');
+            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications')->onDelete('cascade');
             $table->string('comment_title')->nullable();
             $table->mediumText('comment_body');
             $table->string('comment_status');

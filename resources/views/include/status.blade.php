@@ -1,20 +1,20 @@
-@if($job->project_status === "follow-up")
+@if($clientApplication->project_status === "follow-up")
     <td class="follow-up">
 @endif
-@if($job->project_status === "unpaid")
+@if($clientApplication->project_status === "unpaid")
     <td class="unpaid">
 @endif
-@if($job->project_status === "complete")
+@if($clientApplication->project_status === "complete")
     <td class="complete">
 @endif
-@if($job->project_status === "urgent")
+@if($clientApplication->project_status === "urgent")
     <td class="urgent">
 @endif
-@if($job->project_status === "late")
+@if($clientApplication->project_status === "late")
     <td class="late">
 @endif
-@if($job->project_status === "on-time")
+@if($clientApplication->project_status === "on-time")
     <td class="on-time">
 @endif
-{{ strToUpper($job->project_status) }}
+{{ strToUpper($clientApplication->project_status) }}
     </td>

@@ -6,11 +6,11 @@
     <div class="card bg-info">
         <div class="card-header text-center">
             Your Personal Information
-        </div>
-        <div class="card-body">
-        <a href="/users/{{ $user->id }}/edit">
+        <a class="btn btn-dark text-info m-2 float-right" href="/users/{{ $user->id }}/edit">
             Edit
         </a>
+        </div>
+        <div class="card-body">
         
         Name: {{ $user->getName() }} <br><hr>
         Email Address: {{ $user->getEmail() }} <br><hr>

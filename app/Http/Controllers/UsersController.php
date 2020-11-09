@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -73,21 +74,55 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $oldPassword = $request->input('old_password');
+        $newPassword = bcrypt($request->input('new_password'));
+        $confirmPassword = $request->input('confirm_password');
+
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
         ]);
 
-        $user->update([$request,
-        'first_name' => $request->input('first_name'),
-        'last_name' => $request->input('last_name'),
-        'email' => $request->input('email'),
-        'phone_number' => $request->input('phone_number'),
-        'company_name' => $request->input('company_name'),
-        ]);
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        
+        if($oldPassword !== null && Hash::check($oldPassword, $user->password) === true)
+        {
+            if(Hash::check($confirmPassword, $newPassword) === true)
+            {
+                if(Hash::check($oldPassword, $newPassword) === true)
+                {
+                    return back()->with('error', "Your new password cannot be the same as your old password. Please try again.");
+                }
+            $this->validate($request, [
+/*                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required', */
+                'old_password' => 'required|min:8',
+                'new_password' => 'required|min:8',
+                'confirm_password' => 'required|min:8',
+            ]);
 
-        return back();
+            $user->password = $newPassword;
+
+            return back()->with('success', "User information and password updated!");
+            }
+            else
+            {
+                return back()->with('error', "New password and password confirmation field mismatch; please try again.");
+            }
+        }
+        elseif($oldPassword !== null && Hash::check($oldPassword, $user->password) === false)
+        {
+            return back()->with('error', "Old password mismatch, please try again.");
+        }
+
+        $user->save();
+
+        return back()->with('success', "User information updated!");
+
     }
 
     /**

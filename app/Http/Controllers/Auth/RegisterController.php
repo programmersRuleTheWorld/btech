@@ -86,11 +86,9 @@ class RegisterController extends Controller
         ]);
 
         $user = User::latest()->first();
-        $affiliate_id = User::where('affiliate_id', $user->referred_by)->first();
-        if($user->referred_by !== null && $affiliate_id != null)
-        {
+
         event(new UserCreated($user));
-        }
+
         return $user;
     }
 }

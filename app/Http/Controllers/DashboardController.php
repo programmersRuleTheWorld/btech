@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\ClientApplication;
 use App\Post;
-use App\AffiliateCampaign;
+use App\Operation;
 
 class DashboardController extends Controller
 {
@@ -30,15 +30,15 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $clients = User::where('referred_by', $user->affiliate_id)->get();
-        $jobs = ClientApplication::paginate(5, ['*'], 'jobs');
-        $user->clientApplications = ClientApplication::where(['user_id' => $user->id])->paginate(5, ['*'], 'clientApplications');
-        $user->post = Post::where(['user_id' => $user->id])->paginate(5, ['*'], 'posts');
-        return view('dashboard/show')->with(
+        $clientApplications = ClientApplication::where(['user_id' => $user->id])->paginate(5, ['*'], 'clientApplications');
+        $operations = Operation::where('user_id', $user->id)->get();
+        $posts = Post::where(['user_id' => $user->id])->paginate(5, ['*'], 'posts');
+        return view('dashboard.show')->with(
             [
-            'posts' => $user->post,
-            'clientApplications' => $user->clientApplications,
-            'jobs' => $jobs,
+            'posts' => $posts,
+            'clientApplications' => $clientApplications,
             'clients' => $clients,
+            'operations' => $operations,
             'user' => $user,
             ]
         );

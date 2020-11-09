@@ -40,10 +40,31 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md">
+                    <div class="col-md-6">
                         <div class="form-group">
                             Company Name: 
-                            <input type="text" name="company_name" class="form-control form-control-sm" value="{{ $user->company_name }}"> 
+                            <input type="text" name="company_name" class="form-control form-control-sm" value="{{ $user->company_name }}" placeholder="If applicable, please enter your Company Name here..."> 
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">(Only fill out these if changing your password, otherwise leave blank):</div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Old Password:
+                            <input type="password" name="old_password" class="form-control form-control-sm" placeholder="Current password...">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            New Password:
+                            <input type="password" name="new_password" class="form-control form-control-sm" placeholder="New password...">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Confirm New Password:
+                            <input type="password" name="confirm_password" class="form-control form-control-sm" placeholder="Confirm new password...">
                         </div>
                     </div>
                 </div>

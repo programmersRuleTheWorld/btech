@@ -2,14 +2,16 @@
 
 namespace App;
 
+use App\Role;
+use Laravel\Cashier\Billable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Role;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +33,7 @@ class User extends Authenticatable
     protected $attributes = [
         'user_balance' => 0.00,
         'user_spend' => 0.00,
+        'user_earnings' => 0.00,
     ];
 
     /**
@@ -51,17 +54,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function clientapplications()
+    public function clientApplications()
     {
         return $this->hasMany('App\ClientApplication');
     }
     
-    public function breakdownitems()
+    public function breakdownItems()
     {
         return $this->hasMany('App\BreakdownItem');
     }
     
-    public function clientapplicationcomments()
+    public function clientApplicationComments()
     {
         return $this->hasMany('App\ClientApplicationComment');
     }
@@ -71,12 +74,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
-    public function affiliatecampaign()
+    public function affiliateCampaign()
     {
         return $this->belongsTo('App\AffiliateCampaign', 'id', 'referred_user_id');
     }
 
-    public function affiliatecampaigns()
+    public function affiliateCampaigns()
     {
         return $this->hasMany('App\AffiliateCampaign', 'affiliate_id', 'affiliate_id');
     }
@@ -91,11 +94,26 @@ class User extends Authenticatable
         return $this->belongsToMany('App\ClientApplication', 'developer_client_applications', 'dev_id', 'ref_id');
     }
 
+    public function operations()
+    {
+        return $this->hasMany('App\Operation');
+    }
+
+    public function securityAnalyses()
+    {
+        return $this->hasMany('App\SecurityAnalysis');
+    }
+
+    public function threatItems()
+    {
+        return $this->hasMany('App\ThreatItem');
+    }
+
     public function isAdmin()
     {
         foreach($this->roles as $role)
         {
-            if($role->slug == 'admin-user')
+            if($role->slug === 'admin-user')
             {
                 return true;
             }
@@ -106,6 +124,7 @@ class User extends Authenticatable
     public function getPermission($slug)
     {
         if($this->roles()->count() > 0)
+        {
         foreach($this->roles as $role)
         {
             foreach($role->permissions as $permission)
@@ -116,7 +135,7 @@ class User extends Authenticatable
                 }
             }
         }
-        return false;
+        }
     }
     
     // user getters

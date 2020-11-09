@@ -3,6 +3,7 @@ clientApplication = document.getElementById('client_application');
 currentDiv = document.getElementById('project');
 projectType = document.getElementById('project_type');
 wrapper = document.getElementById('wrapper');
+companyName = document.getElementById('company_name');
 
 function makeFormRow(args)
 {
@@ -91,6 +92,13 @@ return formGroup, formCol, this.inputType;
         option2 = new Option('Yes', 'Yes');
         govContract.tagName.add(option1);
         govContract.tagName.add(option2);
+
+        domainName = new makeInput(
+            inputType = 'input', 
+            id = 'domain_name', 
+            innerText = 'What domain name would you like?', 
+            placeholder = 'Desired domain name...',
+            );    
 
         whereHosted = new makeInput('input', 
         id = 'where_hosted', 
@@ -313,7 +321,7 @@ return formGroup, formCol, this.inputType;
     appStore.tagName.add(option3);
     
     formRow0 = new makeFormRow([govContract.tagName.parentNode.parentNode, existingSite.tagName.parentNode.parentNode]);
-    formRow1 = new makeFormRow([siteType.tagName.parentNode.parentNode, whereHosted.tagName.parentNode.parentNode]);
+    formRow1 = new makeFormRow([siteType.tagName.parentNode.parentNode, whereHosted.tagName.parentNode.parentNode, domainName.tagName.parentNode.parentNode]);
     formRow2 = new makeFormRow([siteURL.tagName.parentNode.parentNode, backendType.tagName.parentNode.parentNode]);
     formRow3 = new makeFormRow([backendFramework.tagName.parentNode.parentNode, frontendFramework.tagName.parentNode.parentNode]);
     formRow4 = new makeFormRow([backendFrameworkType.tagName.parentNode.parentNode, frontendFrameworkType.tagName.parentNode.parentNode]);

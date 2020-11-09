@@ -55,7 +55,7 @@ class PostsController extends Controller
         $post->post_body = $request->input('post_body');
         $post->save();
     
-        return view('posts/show')->with('post', $post);
+        return view('posts.show')->with('post', $post);
     }
 
     /**
@@ -66,7 +66,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts/show')->with('post', $post);
+        return view('posts.show')->with('post', $post);
     }
 
     /**

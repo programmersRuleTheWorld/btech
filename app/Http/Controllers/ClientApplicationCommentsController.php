@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\ClientApplicationComment;
-use App\ClientApplication;
-use App\Mail\CommentAdded;
+use App\Events\ClientApplicationComments\ClientApplicationCommentCreated;
 use Illuminate\Http\Request;
-use Mail;
 
 class ClientApplicationCommentsController extends Controller
 {
     public function __construct()
     {
-        //$this->authorizeResource(ClientApplicationComment::class, 'clientapplicationcomment');
+        $this->authorizeResource(ClientApplicationComment::class, 'App\ClientApplicationComment');
     }
     /**
      * Display a listing of the resource.
@@ -57,6 +55,8 @@ class ClientApplicationCommentsController extends Controller
         $clientApplicationComment->comment_status = $request->input('comment_status');
         $clientApplicationComment->clientApplication->updated_at = ClientApplication::where(['ref_id' => $clientApplicationComment->parent_ref_id])->update(['updated_at' => now()]);
         $clientApplicationComment->save();
+
+        event(new ClientApplicationCommentCreated($clientApplicationComment));
 
         return redirect()->back()->with('success', "Comment added!");
     }

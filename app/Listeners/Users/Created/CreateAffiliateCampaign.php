@@ -4,6 +4,7 @@ namespace App\Listeners\Users\Created;
 
 use App\AffiliateCampaign;
 use App\Events\UserCreated;
+use App\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -27,11 +28,13 @@ class CreateAffiliateCampaign
      */
     public function handle(UserCreated $event)
     {
+        $affiliate_id = User::where('affiliate_id', $event->user->referred_by)->first();
+        if($event->user->referred_by != null && $affiliate_id != null)
+        {
         $affiliateCampaign = new AffiliateCampaign();
         $affiliateCampaign->affiliate_id = $event->user->referred_by;
         $affiliateCampaign->referred_user_id = $event->user->id;
         $affiliateCampaign->save();
-
-        dd($event);
+        }
     }
 }

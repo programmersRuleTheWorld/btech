@@ -62,7 +62,7 @@ class AgreementSeeder extends Seeder
         <div class="col-md-6 mb-2 ml-auto mr-auto">
     <div class="card bg-info">
         <div class="card-header">
-            <h3 class="text-center">Privacy Policy</h3>
+            <h3 class="text-center"><b>Privacy Policy</b></h3>
         </div>
     <p>Bertram Technologies Corporation operates the www.bertramtechnologies.com website, which provides the SERVICE.</p>
     

@@ -30,7 +30,7 @@ class AffiliateCampaignPolicy
      */
     public function view(User $user, AffiliateCampaign $affiliateCampaign)
     {
-        //
+        return $user->getPermission('show-affiliate-campaign') && $affiliateCampaign->affiliate_id == $user->affiliate_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class AffiliateCampaignPolicy
      */
     public function update(User $user, AffiliateCampaign $affiliateCampaign)
     {
-        //
+        return $user->getPermission('update-affiliate-campaign');
     }
 
     /**
@@ -65,7 +65,7 @@ class AffiliateCampaignPolicy
      */
     public function delete(User $user, AffiliateCampaign $affiliateCampaign)
     {
-        //
+        
     }
 
     /**

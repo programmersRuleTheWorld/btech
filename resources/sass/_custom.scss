@@ -41,10 +41,14 @@ html{
 
 html body{
     background-color: black;
-    background-image: url('../../public/images/logos/btlogogreygradient.svg');
+    background-image: url('../../public/images/logos/btlogobladerunner.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-attachment: fixed;
+}
+
+th{
+    word-wrap: normal;
 }
 
 a{
@@ -103,6 +107,20 @@ li > .dropdown-menu > a.dropdown-item:hover{
     animation-fill-mode: forwards;
 }
 
+.flashy1
+{
+    animation-name: flashy1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.flashy2
+{
+    animation-name: flashy2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
 @keyframes menutrans1{
     to{
         color: $blue;
@@ -116,6 +134,37 @@ li > .dropdown-menu > a.dropdown-item:hover{
         color: $blue;
         background: black;
         border: 1px solid black;
+    }
+}
+
+
+@keyframes flashy1{
+    0%{
+        color: red;
+        background: transparent;
+    }
+    50%{
+        color: black;
+        background: red;
+    }
+    100%{
+        color: red;
+        background: transparent;
+    }
+}
+
+@keyframes flashy2{
+    0%{
+        color: aquamarine;
+        background: transparent;
+    }
+    50%{
+        color: black;
+        background: aquamarine;
+    }
+    100%{
+        color: aquamarine;
+        background: transparent;
     }
 }
 
@@ -202,6 +251,22 @@ textarea#project{
     border: none;
 }
 
+textarea#support_ticket{
+    background: black;
+    color: $blue;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+textarea#support_ticket_comment{
+    background: black;
+    color: $blue;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
 textarea#project:focus{
     background: black;
     color: $blue;
@@ -228,6 +293,8 @@ textarea#item_description{
 
 .card-limited{
     max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .follow-up{

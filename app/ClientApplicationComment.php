@@ -17,7 +17,7 @@ class ClientApplicationComment extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function clientapplication()
+    public function clientApplication()
     {
         return $this->belongsTo('App\ClientApplication', 'parent_ref_id', 'ref_id');
     }

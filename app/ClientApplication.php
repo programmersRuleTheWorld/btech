@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use App\Events\ClientApplications\AuthCodesReset;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class ClientApplication extends Model
@@ -16,8 +18,17 @@ class ClientApplication extends Model
 
     protected $attributes = [
         'project_status' => 'follow-up',
-        'project_balance' => 0.00
+        'project_balance' => 0.00,
+        'project_deposit' => 0.00,
+        'project_deposit_rate' => 0.20,
+        'support' => false,
+        'vulnerability' => false,
+        'bug' => false,
+        'balance_payment_status' => false,
+        'deposit_payment_status' => false,
     ];
+
+    protected $casts = ['due_date' => 'date:m-d-Y'];
     
     protected $fillable = [
         'name', 'company', 'email', 'phone_number', 'project_type', 'user_id'
@@ -26,9 +37,9 @@ class ClientApplication extends Model
     public function updateAuthCode()
     {
         $this->auth_code = Uuid::uuid4();
-        //find way to e-mail pre-hashed value to user
-        $this->auth_code = Hash::make($this->auth_code);
-        $this->save();
+
+//        $this->auth_code = Hash::make($this->auth_code);
+//        $this->save();
     }
 
     public function user()
@@ -36,24 +47,34 @@ class ClientApplication extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function developers()
-    {
-        return $this->belongsToMany('App\User');
-    }
-
-    public function clientapplicationcomments()
+    public function clientapplicationComments()
     {
         return $this->hasMany('App\ClientApplicationComment', 'parent_ref_id', 'ref_id');
     }
 
-    public function breakdownitems()
+    public function breakdownLists()
+    {
+        return $this->hasMany('App\BreakdownList', 'parent_ref_id', 'ref_id');
+    }
+
+    public function breakdownItems()
     {
         return $this->hasMany('App\BreakdownItem', 'parent_ref_id', 'ref_id');
     }
 
-    public function servicecontracts()
+    public function serviceContracts()
     {
         return $this->hasMany('App\ServiceContract', 'parent_ref_id', 'ref_id');
+    }
+
+    public function operations()
+    {
+        return $this->hasMany('App\Operation', 'parent_ref_id', 'ref_id');
+    }
+
+    public function repos()
+    {
+        return $this->hasMany('App\Repo', 'parent_ref_id', 'ref_id');
     }
 
     //client application getters
@@ -63,6 +84,15 @@ class ClientApplication extends Model
         if(isset($this->project_status))
         {
             return $this->project_status;
+        }
+    }
+
+    public function getDueDate()
+    {
+        if(isset($this->due_date))
+        {
+            $carbon = new Carbon();
+            return $carbon->parse($this->due_date)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->due_date)->day;
         }
     }
 
@@ -131,6 +161,14 @@ class ClientApplication extends Model
         if(isset($this->existing_site))
         {
             return $this->existing_site;
+        }
+    }
+
+    public function getDomainName()
+    {
+        if(isset($this->domain_name))
+        {
+            return $this->domain_name;
         }
     }
 
@@ -274,7 +312,7 @@ class ClientApplication extends Model
     {
         if(isset($this->project_description))
         {
-            return $this->project_description;
+            return substr($this->project_description, 0, 150) . '...';
         }
         else
         {

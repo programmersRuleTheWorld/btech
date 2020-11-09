@@ -19,9 +19,11 @@ class AuthServiceProvider extends ServiceProvider
         ClientApplication::class => ClientApplicationPolicy::class,
         ClientApplicationComment::class => ClientApplicationPolicy::class,
         BreakdownItem::class => BreakdownItemPolicy::class,
+        BreakdownList::class => BreakdownListPolicy::class,
         User::class => UserPolicy::class,
         AffiliateCampaign::class => AffiliateCampaignPolicy::class,
         ServiceContract::class => ServiceContractPolicy::class,
+        SecurityAnalysis::class => SecurityAnalysisPolicy::class,
     ];
 
     /**
@@ -41,6 +43,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('show-dashboard', function($user)
         {
             return $user->getPermission('show-dashboard');
+        });
+
+        Gate::define('show-development', function($user)
+        {
+            return $user->isAdmin();
+        });
+
+        Gate::define('show-operations', function($user)
+        {
+            return $user->isAdmin();
         });
     }
 }

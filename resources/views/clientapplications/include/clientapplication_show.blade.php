@@ -51,6 +51,14 @@
         {{ $clientApplication->getProjectType() }}
         </td>
     </tr>
+    <tr>
+        <td>
+            Project Due Date:
+        </td>
+        <td>
+        {{ $clientApplication->getDueDate() }}
+        </td>
+    </tr>
     @if(isset($clientApplication->existing_site))
     <tr>
         <td>
@@ -58,6 +66,16 @@
         </td>
         <td>
         {{ $clientApplication->getExistingSite() }}
+        </td>
+    </tr>
+    @endif
+    @if(isset($clientApplication->domain_name))
+    <tr>
+        <td>
+            Domain Name;
+        </td>
+        <td>
+        {{ $clientApplication->getDomainName() }}
         </td>
     </tr>
     @endif
@@ -233,7 +251,20 @@
     @endif
         </table>
     </div>
-    <div class="row ml-2">
+    <div class="row ml-2">G
+    @if($clientApplication->deposit_payment_status == true)
+        <form action="{{ route('client_application_payment', [$clientApplication]) }}" method="POST">
+    @else($clientApplication->deposit_payment_status == false)
+        <form action="{{ route('client_application_deposit', [$clientApplication]) }}" method="POST">
+    @endif
+        @csrf
         <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
         <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
+            <input type="hidden" value="{{ $clientApplication }}" name="clientApplication">
+    @if($clientApplication->deposit_payment_status == true && $breakdownListDeposits->count() > 0)
+            <button class="btn btn-dark text-info" type="submit">Make Payment</button>
+    @elseif($clientApplication->deposit_payment_status == false && $breakdownListDeposits->count() > 0)
+            <button class="btn btn-dark text-info" type="submit">Make Deposit</button>
+    @endif
+        </form>
     </div>

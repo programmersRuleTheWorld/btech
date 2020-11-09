@@ -15,6 +15,7 @@ class CreateClientApplicationsTable extends Migration
     {
         Schema::create('client_applications', function (Blueprint $table) {
             $table->string('ref_id');
+            $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users')->nullable()->onDelete('cascade');
             $table->string('auth_code');
             $table->string('first_name');
             $table->string('last_name')->nullable();
@@ -25,6 +26,7 @@ class CreateClientApplicationsTable extends Migration
             $table->string('existing_site')->nullable();
             $table->string('site_type')->nullable();
             $table->string('gov_contract');
+            $table->string('domain_name')->nullable();
             $table->string('where_hosted')->nullable();
             $table->string('site_url')->nullable();
             $table->string('backend_type')->nullable();
@@ -42,8 +44,15 @@ class CreateClientApplicationsTable extends Migration
             $table->string('app_store')->nullable();
             $table->mediumText('project_description')->nullable();
             $table->string('project_status');
+            $table->boolean('support');
+            $table->boolean('vulnerability');
+            $table->boolean('bug');
+            $table->boolean('balance_payment_status');
+            $table->boolean('deposit_payment_status');
             $table->decimal('project_balance', 8, 2);
-            $table->integer('user_id')->foreign('user_id')->references('id')->on('users')->nullable();
+            $table->decimal('project_deposit_rate', 8, 2);
+            $table->decimal('project_deposit', 8, 2);
+            $table->date('due_date');
             $table->timestamps();
         });
     }

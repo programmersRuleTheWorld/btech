@@ -10,7 +10,7 @@ class ClientApplicationCommentPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
+    public function before(User $user, $ability)
     {
         return $user->isAdmin();
     }
@@ -35,7 +35,7 @@ class ClientApplicationCommentPolicy
      */
     public function view(User $user, ClientApplicationComment $clientApplicationComment)
     {
-        //
+        return $user->getPermission('view-client-application-comment') && $user->id == $clientApplicationComment->clientApplication->user_id;
     }
 
     /**

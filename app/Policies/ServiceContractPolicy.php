@@ -35,7 +35,7 @@ class ServiceContractPolicy
      */
     public function view(User $user, ServiceContract $serviceContract)
     {
-        //
+        return $user->getPermission('view-service-contract') && $user->id == $serviceContract->clientApplication->user_id;
     }
 
     /**

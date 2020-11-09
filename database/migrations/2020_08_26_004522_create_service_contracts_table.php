@@ -15,7 +15,8 @@ class CreateServiceContractsTable extends Migration
     {
         Schema::create('service_contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications');
+            $table->string('parent_ref_id')->foreign('parent_ref_id')->references('ref_id')->on('client_applications')->onDelete('cascade');
+            $table->string('control_number');
             $table->string('name');
             $table->text('service_agreement');
             $table->text('privacy_policy');

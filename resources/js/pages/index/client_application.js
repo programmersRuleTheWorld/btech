@@ -28,6 +28,7 @@ if(window.location.pathname == '/')
     existingSite.setDisplayState('block');
     siteType.setDisplayState('block');
     govContract.setDisplayState('block');
+    domainName.setDisplayState('block');
     whereHosted.setDisplayState('none');
     siteURL.setDisplayState('none');
     backendType.setDisplayState('none');
@@ -44,6 +45,13 @@ if(window.location.pathname == '/')
     newOrExistingApp.setDisplayState('none');
     appStore.setDisplayState('none');
    
+    govContract.onchange = function()
+    {
+        if(govContract.tagName.value == 'No')
+        {
+            document.write('lol')
+        }
+    }
     projectType.onchange = function()
     {
         if(projectType.value == 'Web Design/Development')
@@ -51,6 +59,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('block');
         siteType.setDisplayState('block');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('none');
         siteURL.setDisplayState('none');
         backendType.setDisplayState('none');
@@ -72,6 +81,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('none');
         siteType.setDisplayState('none');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('block');
         siteURL.setDisplayState('block');
         backendType.setDisplayState('block');
@@ -93,6 +103,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('none');
         siteType.setDisplayState('none');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('none');
         siteURL.setDisplayState('none');
         backendType.setDisplayState('none');
@@ -114,6 +125,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('none');
         siteType.setDisplayState('none');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('block');
         siteURL.setDisplayState('block');
         backendType.setDisplayState('block');
@@ -135,6 +147,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('none');
         siteType.setDisplayState('none');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('none');
         siteURL.setDisplayState('none');
         backendType.setDisplayState('none');
@@ -156,6 +169,7 @@ if(window.location.pathname == '/')
         existingSite.setDisplayState('none');
         siteType.setDisplayState('none');
         govContract.setDisplayState('block');
+        domainName.setDisplayState('none');
         whereHosted.setDisplayState('none');
         siteURL.setDisplayState('none');
         backendType.setDisplayState('none');
@@ -181,6 +195,7 @@ if(window.location.pathname == '/')
             whereHosted.setDisplayState('none');
             siteURL.setDisplayState('none');
             backendType.setDisplayState('none');
+            domainName.setDisplayState('block');
             backendFramework.setDisplayState('none');
             frontendFramework.setDisplayState('none');
             backendFrameworkType.setDisplayState('none');
@@ -193,6 +208,7 @@ if(window.location.pathname == '/')
             whereHosted.setDisplayState('block');
             siteURL.setDisplayState('block');
             backendType.setDisplayState('block');
+            domainName.setDisplayState('none');
             backendFramework.setDisplayState('block');
             frontendFramework.setDisplayState('block');
             backendFrameworkType.setDisplayState('none');

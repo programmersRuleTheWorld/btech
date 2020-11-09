@@ -23,8 +23,7 @@
                 </div>
             <div class="card-body">
                     <h5 class="text-center text-dark">
-                        Welcome to Bertram Technologies Corporation! Need a new website or mobile app, maintenance for an existing one,
-                        or a custom web project or legacy code work in a language like COBOL or C?
+                        We create, test and host high-security software applications for web, mobile and more. Do you have a project that needs fulfilled?
                     </h5>
                     <h2 class="text-center">
                         Let us know today!
@@ -44,7 +43,9 @@
                 <div class="card-header text-center">
                         <h3>Our Services</h3>
                     </div>
+                    <div class="card-body">
             @include('pages.include.featuredservices')
+                    </div>
         </div>
     </div>
 </div>

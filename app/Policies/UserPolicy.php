@@ -33,7 +33,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        return $user->getPermission('show-user');
+        return $user->getPermission('show-user') === true;
     }
 
     /**
@@ -59,6 +59,11 @@ class UserPolicy
         return $user->getPermission('update-user');
     }
 
+    public function updateRole(User $user)
+    {
+        return $user->getPermission('update-user-role');
+    }
+
     /**
      * Determine whether the user can delete the model.
      *
@@ -68,7 +73,7 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        //
+        
     }
 
     /**
