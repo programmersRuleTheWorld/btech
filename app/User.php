@@ -187,4 +187,5 @@ class User extends Authenticatable
             return 'No company name set';
         }
     }
+
 }

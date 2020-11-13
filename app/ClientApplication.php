@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 use App\Events\ClientApplications\AuthCodesReset;
 use Carbon\Carbon;
+use Models\Mutators\ClientApplicationMutator;
 use Illuminate\Support\Facades\Hash;
 
 class ClientApplication extends Model
@@ -77,7 +78,7 @@ class ClientApplication extends Model
         return $this->hasMany('App\Repo', 'parent_ref_id', 'ref_id');
     }
 
-    //client application getters
+    //getters
 
     public function getProjectStatus()
     {
@@ -292,7 +293,7 @@ class ClientApplication extends Model
         }
     }
 
-    public function getNewOrExistingApp()
+    public function getNewOrExistingAppApp()
     {
         if(isset($this->new_or_existing_app))
         {
@@ -319,4 +320,328 @@ class ClientApplication extends Model
             return 'No project description available.';
         }
     }
+
+    //mutators
+
+    public function setFirstNameAttribute($value)
+    {
+
+        $this->attributes['first_name'] = encrypt($value);
+    }
+
+    public function setLastNameAttribute($value)
+    {
+
+        $this->attributes['last_name'] = encrypt($value);
+    }
+
+    public function setCompanyNameAttribute($value)
+    {
+
+        $this->attributes['company_name'] = encrypt($value);
+    }
+
+    public function setEmailAttribute($value)
+    {
+
+        $this->attributes['email'] = encrypt($value);
+    }
+
+    public function setPhoneNumberAttribute($value)
+    {
+
+        $this->attributes['phone_number'] = encrypt($value);
+    }
+
+    public function setProjectTypeAttribute($value)
+    {
+
+        $this->attributes['project_type'] = encrypt($value);
+    }
+
+    public function setExistingSiteAttribute($value)
+    {
+
+        $this->attributes['existing_site'] = encrypt($value);
+    }
+
+    public function setSiteTypeAttribute($value)
+    {
+
+        $this->attributes['site_type'] = encrypt($value);
+    }
+
+    public function setGovContractAttribute($value)
+    {
+
+        $this->attributes['gov_contract'] = encrypt($value);
+    }
+
+    public function setDomainNameAttribute($value)
+    {
+
+        $this->attributes['domain_name'] = encrypt($value);
+    }
+
+    public function setWhereHostedAttribute($value)
+    {
+
+        $this->attributes['where_hosted'] = encrypt($value);
+    }
+
+    public function setSiteUrlAttribute($value)
+    {
+
+        $this->attributes['site_url'] = encrypt($value);
+    }
+
+    public function setBackendTypeAttribute($value)
+    {
+
+        $this->attributes['backend_type'] = encrypt($value);
+    }
+
+    public function setBackendFrameworkAttribute($value)
+    {
+
+        $this->attributes['backend_framework'] = encrypt($value);
+    }
+
+    public function setFrontendFrameworkAttribute($value)
+    {
+
+        $this->attributes['frontend_framework'] = encrypt($value);
+    }
+
+    public function setIsPlatformAttribute($value)
+    {
+
+        $this->attributes['is_platform'] = encrypt($value);
+    }
+
+    public function setPlatformTypeAttribute($value)
+    {
+
+        $this->attributes['platform_type'] = encrypt($value);
+    }
+
+    public function setDbTypeAttribute($value)
+    {
+
+        $this->attributes['db_type'] = encrypt($value);
+    }
+
+    public function setTestScopeAttribute($value)
+    {
+
+        $this->attributes['test_scope'] = encrypt($value);
+    }
+
+    public function setSecurityIncidentsAttribute($value)
+    {
+
+        $this->attributes['security_incidents'] = encrypt($value);
+    }
+
+    public function setLegacyBackendTypeAttribute($value)
+    {
+
+        $this->attributes['legacy_backend_type'] = encrypt($value);
+    }
+
+    public function setNewOrExistingAppAttribute($value)
+    {
+
+        $this->attributes['new_or_existing_app'] = encrypt($value);
+    }
+
+    public function setAppStoreAttribute($value)
+    {
+
+        $this->attributes['app_store'] = encrypt($value);
+    }
+
+    public function setProjectDescriptionAttribute($value)
+    {
+
+        $this->attributes['project_description'] = encrypt($value);
+    }
+
+    public function setVulnerabilityAttribute($value)
+    {
+
+        $this->attributes['vulnerability'] = encrypt($value);
+    }
+
+    public function setBugAttribute($value)
+    {
+
+        $this->attributes['bug'] = encrypt($value);
+    }
+
+        //accessors
+
+        public function getFirstNameAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getLastNameAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getCompanyNameAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getEmailAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getPhoneNumberAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getProjectTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getExistingSiteAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getSiteTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getGovContractAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getDomainNameAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getWhereHostedAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getSiteUrlAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getBackendTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getBackendFrameworkAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getFrontendFrameworkAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getIsPlatformAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getPlatformTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getDbTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getTestScopeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getSecurityIncidentsAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getLegacyBackendTypeAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getNewOrExistingAppAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getAppStoreAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getProjectDescriptionAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getVulnerabilityAttribute($value)
+        {
+    
+            return decrypt($value);
+        }
+    
+        public function getBugAttribute($value)
+        {
+    
+            return decrypt($value);
+        }    
+
+    
+
+
+
+    
+
+    
 }

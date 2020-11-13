@@ -1,3 +1,5 @@
+if(typeof(ref_id) != 'undefined' && window.location.pathname == '/clientapplications/' + ref_id.value + '/payment')
+{
     const stripe = Stripe('pk_test_PizxswoWx6ETSdrqta2omBy400RkXKyv20');
 
     const elements = stripe.elements();
@@ -21,3 +23,4 @@ cardButton.addEventListener('click', async (e) => {
 'successesx'
     }
 });
+}
