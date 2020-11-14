@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "axios": "^0.19.2",
+        "jquery-input-mask-phone-number": "^1.0.15",
         "js-datepicker": "^5.16.0"
     }
 }
