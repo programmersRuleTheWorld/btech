@@ -37,10 +37,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'auth' => [
-            \App\Http\Middleware\TwoFactorAuthentication::class,
-        ],
-
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
