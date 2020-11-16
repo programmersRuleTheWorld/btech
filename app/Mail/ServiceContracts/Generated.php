@@ -11,6 +11,8 @@ class Generated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $serviceContract;
+
     /**
      * Create a new message instance.
      *

@@ -11,6 +11,8 @@ class Opened extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $threatItem;
+
     /**
      * Create a new message instance.
      *

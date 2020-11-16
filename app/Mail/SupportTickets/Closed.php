@@ -11,6 +11,8 @@ class Closed extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $supportTicket;
+
     /**
      * Create a new message instance.
      *

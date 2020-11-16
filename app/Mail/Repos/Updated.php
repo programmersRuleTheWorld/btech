@@ -11,6 +11,8 @@ class Updated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $repo;
+
     /**
      * Create a new message instance.
      *

@@ -5,9 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card bg-info">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header text-center"><h3>{{ __('Login') }}</h3></div>
 
                 <div class="card-body">
+                    <div class="panel bg-dark border border-danger m-3 p-1">
+                        <b class="text-danger text-center">For your security, you will need to complete e-mail-based Two-Factor Authentication (2FA); during login, a One-Time Password (OTP) will be sent to the e-mail address we have on file for you. You will need to enter this OTP successfully in order to complete the login process.</b>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

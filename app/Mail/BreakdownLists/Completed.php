@@ -11,6 +11,8 @@ class Completed extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $breakdownList;
+
     /**
      * Create a new message instance.
      *

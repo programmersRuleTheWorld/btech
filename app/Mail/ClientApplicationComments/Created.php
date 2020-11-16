@@ -11,6 +11,8 @@ class Created extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $clientApplicationComment;
+
     /**
      * Create a new message instance.
      *

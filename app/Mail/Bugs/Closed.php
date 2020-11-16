@@ -11,6 +11,8 @@ class Closed extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $bug;
+
     /**
      * Create a new message instance.
      *

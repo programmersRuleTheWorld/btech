@@ -11,6 +11,8 @@ class Created extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $securityAnalysis;
+
     /**
      * Create a new message instance.
      *
