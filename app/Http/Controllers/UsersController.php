@@ -107,6 +107,8 @@ class UsersController extends Controller
 
             $user->password = $newPassword;
 
+            $user->save();
+
             return back()->with('success', "User information and password updated!");
             }
             else

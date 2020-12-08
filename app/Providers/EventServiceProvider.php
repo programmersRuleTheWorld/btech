@@ -26,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\AffiliateCampaigns\AffiliateCampaignUpdated' => [
             'App\Listeners\AffiliateCampaigns\Updated',
         ],
+        'App\Events\BreakdownItems\BreakdownItemCreated' => [
+            'App\Listeners\BreakdownItems\Created',
+        ],
         'App\Events\BreakdownItems\BreakdownItemStatusChange' => [
                 'App\Listeners\BreakdownItems\StatusChange',
         ],

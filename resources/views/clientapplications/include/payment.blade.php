@@ -2,6 +2,10 @@
 
 @section('content')
 
+<input type="hidden" value="{{ csrf_token() }}" id="token">
+<input type="hidden" value="{{ $idempotencyKey }}" id="idempotencyKey">
+<input type="hidden" value="{{ $clientApplication->ref_id }}" id="refId">
+
 <div class="row">
     <div class="col-md-6">
         <div class="card bg-info mr-auto">
@@ -9,7 +13,7 @@
             <h3>Make A Payment:</h3>
             </div>
             <div class="card-body">
-            @if($selectedList != null && $selectedList->list_balance > 0)
+            @if($selectedList != null && $selectedList->list_balance > 0 || $clientApplication->deposit_payment_status === 0)
             @include('include.payment_interface')
             @else
             Payment controls are currently unavailable, please choose a Breakdown List with payable items.

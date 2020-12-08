@@ -26,8 +26,8 @@ Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('aff
 Route::get('/operations_center', 'PagesController@operations_center')->name('operations_center')->middleware('two_factor_authentication');
 Route::get('/development_center', 'PagesController@development_center')->name('development_center')->middleware('two_factor_authentication');
 Route::get('/admin', 'PagesController@admin')->name('admin')->middleware('two_factor_authentication');
-Route::post('/{clientapplication}/payment', 'PagesController@client_application_payment')->name('client_application_payment')->middleware('two_factor_authentication');
-Route::post('/{clientapplication}/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit')->middleware('two_factor_authentication');
+Route::post('/{clientapplication}/payment', 'PagesController@client_application_payment')->name('client_application_payment');
+Route::post('/{clientapplication}/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit');
 
 //custom ClientApplicationsController routes
 Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appendto')->name('clientapplications.appendto')->middleware('two_factor_authentication');
@@ -90,7 +90,11 @@ Auth::routes([
 //2fa routes
 
 Route::get('/2fa', 'TwoFactorController@show2faForm')->name('2fa')->middleware('auth');
-Route::post('/2fa', 'TwoFactorController@verifyToken');
+Route::post('/2fa', 'TwoFactorController@verifyToken')->name('2fa.verify');
+
+//payment intents generation route
+
+Route::post('/paymentintents', 'PaymentIntentsController@generate')->name('paymentIntents');
 
 //custom login route
 Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistrationForm')->name('register');

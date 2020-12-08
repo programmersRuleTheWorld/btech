@@ -133,64 +133,39 @@ class PagesController extends Controller
     public function client_application_deposit(Request $request, $clientApplication)
     {
         $user = auth()->user();
+        $clientApplication = ClientApplication::find($clientApplication);
         $selectedList = null;
         $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id, ['list_deposit', '>', 0]])->get();
-        $clientApplication = ClientApplication::find($clientApplication);
-
-        \Stripe\Stripe::setApiKey('sk_test_uGWrYmvc6dffLA1mwZBIA3V200P6ARmUpX');
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $clientApplication->project_deposit * 100,
-            'currency' => 'usd',
-            'customer' => $user->stripe_id,
-            'payment_method_types' => ['card'],
-            'receipt_email' => $user->email,
-            'description' => "Bertram Technologies Deposit",
-            ]);
-
+        $idempotencyKey = UUID::Uuid4();
 
         return view('clientapplications.include.payment')->with([
             'clientApplication' => $clientApplication,
             'selectedList' => $selectedList,
+            'idempotencyKey' => $idempotencyKey,
         ]);
     }
 
     public function client_application_payment(Request $request, $clientApplication)
     {
         $user = auth()->user();
+
         $selectedList = $request->input('selected_value');
         $clientApplication = ClientApplication::find($clientApplication);
         $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $idempotencyKey = UUID::Uuid4();
 
         if(BreakdownList::find($selectedList) != null)
         {
             $selectedList = BreakdownList::find($selectedList);
             if($selectedList->list_deposit > 0.00)
             {
-        \Stripe\Stripe::setApiKey('sk_test_uGWrYmvc6dffLA1mwZBIA3V200P6ARmUpX');
-        $intent = \Stripe\PaymentIntent::create([
-            'amount' => $selectedList->list_balance * 100,
-            'currency' => 'usd',
-            'customer' => $user->stripe_id,
-            'payment_method_types' => ['card'],
-            'receipt_email' => $user->email,
-            'description' => "Bertram Technologies Balance",
-            ]);
-
             return view('clientapplications.include.payment')->with([
             'clientApplication' => $clientApplication, 
             'breakdownLists' => $breakdownLists,
             'selectedList' => $selectedList,
-            'intent' => $intent,
+            'idempotencyKey' => $idempotencyKey,
             ]);
-        }
-        else
-        {
-            return view('clientapplications.include.payment')->with([
-                'clientApplication' => $clientApplication, 
-                'breakdownLists' => $breakdownLists,
-                'selectedList' => $selectedList,
-            ]);
-        }
+            }
         }
         else
         {
@@ -198,6 +173,7 @@ class PagesController extends Controller
             'clientApplication' => $clientApplication, 
             'breakdownLists' => $breakdownLists,
             'selectedList' => null,
+            'idempotencyKey' => $idempotencyKey,
             ]);
         }
     }

@@ -47,8 +47,7 @@ class CreateClientApplicationsTable extends Migration
             $table->boolean('support');
             $table->boolean('vulnerability');
             $table->boolean('bug');
-            $table->boolean('balance_payment_status');
-            $table->boolean('deposit_payment_status');
+            $table->string('payment_status');
             $table->decimal('project_balance', 8, 2);
             $table->decimal('project_deposit_rate', 8, 2);
             $table->decimal('project_deposit', 8, 2);

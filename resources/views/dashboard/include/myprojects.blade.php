@@ -11,12 +11,12 @@
                 </div>
             </div>
                 <div class="form-row">
-                <button class="btn btn-dark text-info" type="submit">Add Project</button>
+                <button class="btn btn-dark text-info m-1" type="submit">Add Project</button>
         </form>
         <form class="col m-auto" action="{{ route('clientapplications.revokeall') }}" method="POST">
             @method('PATCH')
             @csrf
-            <button class="btn btn-dark text-info" type="submit">Reset Auth Codes</button>
+            <button class="btn btn-dark text-info m-1" type="submit">Reset Auth Codes</button>
                 </div>
         </form>
     <div class="table-responsive">

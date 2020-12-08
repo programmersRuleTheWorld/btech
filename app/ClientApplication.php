@@ -25,8 +25,7 @@ class ClientApplication extends Model
         'support' => false,
         'vulnerability' => false,
         'bug' => false,
-        'balance_payment_status' => false,
-        'deposit_payment_status' => false,
+        'payment_status' => null,
     ];
 
     protected $casts = ['due_date' => 'date:m-d-Y'];

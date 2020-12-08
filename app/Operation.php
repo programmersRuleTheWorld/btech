@@ -7,7 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Operation extends Model
 {
 
-    protected $fillable = ['domain_host', 'server_host', 'public_ip', 'operation_type', 'server_type', 'domain_name', 'uptime_status', 'payment_status'];
+    protected $attributes = [
+        'uptime_status' => 'running',
+        'server_type' => 'primary',
+    ];
+
+    protected $fillable = [
+        'domain_host',
+        'server_host',
+        'public_ip',
+        'operation_type',
+        'server_type',
+        'domain_name',
+        'uptime_status',
+        'payment_status'
+    ];
 
     public function clientApplication()
     {

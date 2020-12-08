@@ -40,8 +40,6 @@ class StatusChange
             {
                 $breakdownItem->breakdownList->list_status = true;
                 $breakdownItem->breakdownList->save();
-
-                Mail::to($event->breakdownItem->breakdownList->clientApplication->email)->send(new MailCompleted($event->breakdownItem->breakdownList));
             }
         }
         Mail::to($event->breakdownItem->clientApplication->email)->send(new MailStatusChange($event->breakdownItem));
