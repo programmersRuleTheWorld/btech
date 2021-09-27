@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ClientApplicationComment;
+use App\ClientApplication;
 use App\Events\ClientApplicationComments\ClientApplicationCommentCreated;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,8 @@ class ClientApplicationCommentsController extends Controller
             'comment_status' => 'required'
         ]);
 
+        return 'lol';
+
         $user = auth()->user();
         $clientApplicationComment = new ClientApplicationComment();
         $clientApplicationComment->parent_ref_id = $request->input('ref_id');
@@ -58,7 +61,9 @@ class ClientApplicationCommentsController extends Controller
 
         event(new ClientApplicationCommentCreated($clientApplicationComment));
 
-        return redirect()->back()->with('success', "Comment added!");
+        $clientApplication = ClientApplication::find($request->input('ref_id'));
+
+        return redirect()->route('clientapplications.show', [$clientApplication])->with('success', "Comment added!");
     }
 
     /**

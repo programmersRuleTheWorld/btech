@@ -1,4 +1,9 @@
+// Variables
 @import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
 
 html{
     font-size: 1rem;
@@ -42,15 +47,18 @@ html{
     .carousel-caption > h6{
         font-size: 1.3em;
     }
+
 }
 
 html body{
     background-color: black;
-    background-image: url('../../public/images/logos/btlogobladerunner.svg');
+    background-image: url('../../public/images/btlogo.gif');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
     background-attachment: fixed;
 }
+
 
 th{
     word-wrap: normal;
@@ -59,7 +67,8 @@ th{
 a{
     text-decoration-line: underline;
 }
-p{
+
+.card > p{
     padding: 0 5%;
     text-indent: 2em;
     font-size: 1em;
@@ -244,10 +253,6 @@ textarea#cbody:focus{
     border: none;
 }
 
-td{
-    max-height: 100%;
-}
-
 textarea#project{
     background: black;
     color: $blue;
@@ -303,68 +308,62 @@ textarea#item_description{
 }
 
 .follow-up{
-    background: blue;
+    background-color: blue;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
 .urgent{
-    background: yellow;
+    background-color: yellow;
     color: black;
     font-weight: bold;
     text-align: center;
 }
 
 .on-time{
-    background: green;
+    background-color: green;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
 .complete{
-    background: green;
+    background-color: green;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
 .late{
-    background: red;
+    background-color: red;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
 .unpaid{
-    background: black;
+    background-color: black;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
-.incomplete{
-    background: red;
+.incomplete, td{
+    background-color: red;
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
 .refund{
-    background: black;
+    background-color: black;
     color: white;
     font-weight: bold;
     text-align: center;
 }
   
-  ol.carousel-indicators {
-    margin: 0;
-    width: auto;
-  }
-  
-  ol.carousel-indicators li,
-  ol.carousel-indicators li.active {
+  .carousel-indicators.button.active {
     float: left;
     width: 95%;
     height: 5px;
@@ -372,7 +371,7 @@ textarea#item_description{
     background: blue;
 }
   
-  ol.carousel-indicators li.active {
+.carousel-indicators.button.active {
     background: rgb(0, 140, 255);
     height: 8px;
   }

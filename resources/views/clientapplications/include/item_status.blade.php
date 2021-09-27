@@ -1,9 +1,9 @@
 @if($breakdownItem->item_status == true)
-    <td class="complete border border-info">
+    <div class="bg-success border border-info biStatusField">
         COMPLETE
 @endif
 @if($breakdownItem->item_status == false)
-    <td class="incomplete border border-info">
+    <div class="bg-danger border border-info biStatusField">
         INCOMPLETE
-    @endif
-</td>
+@endif
+    </div>

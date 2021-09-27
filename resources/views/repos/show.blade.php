@@ -10,7 +10,7 @@
 <form action="{{ route('repos.update', [$repo]) }}" method="POST">
 @method('PUT')
 @csrf
-            <div class="row">
+            <div class="row mb-2">
             <div class="col-md-4">
                 <div class="form-group">
                     Repo Type:
@@ -38,14 +38,14 @@
             <form action="{{ route('bugs.store') }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $repo->id }}" name="repo_id">
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col">
                     <div class="card bg-info">
                         <div class="card-header text-center">
                         <h3>Bug Tracker</h3>
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     Branch:
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                                 </form>
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="card card-limited bg-info col-md-6">
                                     <div class="card-header bg-danger text-center text-light">
                                         <h3>Open</h3>

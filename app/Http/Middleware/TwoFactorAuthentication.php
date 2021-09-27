@@ -17,7 +17,8 @@ class TwoFactorAuthentication
      */
     public function handle($request, Closure $next)
     {
-        
+        return $next($request);
+        /*
         if(auth()->user())
         {
             $user = auth()->user();
@@ -34,6 +35,7 @@ class TwoFactorAuthentication
         {
             return redirect()->route('login');
         }
+        */
 
     }
 }

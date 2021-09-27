@@ -17,11 +17,6 @@ class BreakdownList extends Model
 
     protected $fillable = ['list_status'];
 
-    protected $casts = [
-        'list_balance' => 'integer',
-        'list_deposit' => 'integer',
-    ];
-
     public function clientApplication()
     {
         return $this->belongsTo('App\ClientApplication', 'parent_ref_id', 'ref_id');
@@ -30,6 +25,11 @@ class BreakdownList extends Model
     public function breakdownItems()
     {
         return $this->hasMany('App\BreakdownItem', 'parent_list_id', 'list_id');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction', 'parent_list_id', 'list_id');
     }
 
     public function getDueDate()

@@ -50,7 +50,7 @@ class ThreatItemsController extends Controller
 
         event(new ThreatItemOpened($threatItem));
 
-        return redirect()->route('securityanalyses.index', [$request])->with('success', "Bumfucks created in anus");
+        return redirect()->route('securityanalyses.index', [$request])->with('success', "Threat Item successfully opened");
     }
 
     /**
@@ -103,7 +103,7 @@ class ThreatItemsController extends Controller
             $threatItem->save();
             event(new ThreatItemOpened($threatItem));
 
-            return redirect()->back()->with('success', "Threat Item reopened.");
+            return redirect()->back()->with('success', "Threat Item successfully reopened.");
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Listeners\BreakdownItems;
 
 use App\Events\BreakdownItems\BreakdownItemStatusChange;
+use App\BreakdownItem;
 use App\Mail\BreakdownItems\StatusChange as MailStatusChange;
 use App\Mail\BreakdownLists\Completed as MailCompleted;
 use Illuminate\Support\Facades\Mail;
@@ -29,19 +30,18 @@ class StatusChange
      */
     public function handle(BreakdownItemStatusChange $event)
     {
-        foreach($event->breakdownItem->breakdownList->breakdownItems as $breakdownItem)
+        $breakdownItems = BreakdownItem::where('parent_list_id', $event->breakdownItem->parent_list_id)->get();
+        if($breakdownItems->containsStrict('item_status', 0) == true)
         {
-            if($breakdownItem->item_status == false)
-            {
-                $breakdownItem->breakdownList->list_status = false;
-                return $breakdownItem->breakdownList->save();
-            }
-            else
-            {
-                $breakdownItem->breakdownList->list_status = true;
-                $breakdownItem->breakdownList->save();
-            }
+            $event->breakdownItem->breakdownList->list_status = 0;
+            $event->breakdownItem->breakdownList->save();
         }
-        Mail::to($event->breakdownItem->clientApplication->email)->send(new MailStatusChange($event->breakdownItem));
+        elseif($breakdownItems->containsStrict('item_status', 0) == false)
+        {
+            $event->breakdownItem->breakdownList->list_status = 1;
+            $event->breakdownItem->breakdownList->save();
+        }
+        return;
     }
 }
+

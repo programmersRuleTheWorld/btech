@@ -1,99 +1,76 @@
 @if($breakdownLists->count() > 0)
-<div class="table-responsive">
-<table class="table table-borderless table-sm table-condensed">
-<tr class="text-center">
+<div class="row text-center">
     
-    <th>
-        <b>Priority</b>
-    </th>
-    <th>
+    <div class="col">
+        <b>Item</b>
+    </div>
+    <div class="col">
         <b>Description</b>
-    </th>
-        <th>
+    </div>
+        <div class="col">
         <b>Status</b>
-    </th>
-    <th>
+    </div>
+    <div class="col">
         <b>Updated At</b>
-    </th>
-    <th>
-    </th>
-    <th>
-    </th>
-    <th>
+    </div>
+    <div class="col">
         Price
-    </th>
-</tr>
+    </div>
+</div>
 
     @foreach($breakdownList->breakdownItems as $breakdownItem)
-    <tr class="text-center">
-            <td>
+    <div class="row text-center biField">
+            <div class="col">
                 {{ $count++ }}
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 <b>{{ $breakdownItem->item_description }}</b>
-            </td>
+            </div>
+            <div class="col">
                 @include('clientapplications.include.item_status')
-            <td>
+            </div>    
+            <div class="col">
                 <small>{{ $breakdownItem->updated_at }}</small>
-            </td>
-            <td>
+            </div>
+            <div class="col">
             @can('update', $breakdownItem)
-                <form action="{{ route('breakdownitems.iscomplete', [$breakdownItem->item_id]) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-dark text-info">Status</button>
-                </form>
+            <input type="hidden" class="itemId" value="{{$breakdownItem->item_id}}">
+            @csrf
+            <button type="submit" class="btn btn-dark text-info biStatusUpdateButton">Status</button>
             @endcan   
-            </td>
-            <td>
+            </div>
             @can('delete', $breakdownItem)
-            <form action="{{ route('breakdownitems.destroy', [$breakdownItem->item_id]) }}" method="POST">
+            <div class="col">
                     @csrf
-                    @method('DELETE')
-                <button class="btn btn-dark text-info" type="submit">Delete</button>
-            </form>
+                <button class="btn btn-dark text-info biDeleteButton" type="submit">Delete</button>
+            </div>
             @endcan
-            </td>
             @can('updatePrice', $breakdownItem)
-            <td>
-                <form action="{{ route('breakdownitems.updateprice', [$breakdownItem->item_id]) }}" method="POST">
+            <div class="col">
                     @csrf
-                    @method('PUT')
-                    <input type="input" class="form-control" name="item_balance" value="{{ $breakdownItem->item_balance }}">
-                    <button class="btn btn-dark text-info m-2" type="submit">Submit</button>
-                </form>
-            </td>
+                    <input type="input" class="form-control biPriceValue" name="item_balance" value="{{ $breakdownItem->item_balance }}">
+                    <button class="btn btn-dark text-info m-2 biPriceUpdateButton" type="submit">Submit</button>
+            </div>
             @endcan
             @if($breakdownItem->item_balance > 0.00)
-            <td class="text-success bg-dark text-left border border-info">
+            <div class="text-success bg-dark text-left border border-info biPriceField">
                 ${{ $breakdownItem->item_balance }}
-            </td>
+            </div>
             @else
-            <td class="text-danger bg-dark text-left border border-info">
+            <div class="text-danger bg-dark text-left border border-info biPriceField col-md-3" id="biPrice" value="{{ $breakdownItem->item_price }}">
                 NO CHARGE
-            </td>
-            @endif
-        </tr>   
+                </div>
+                @endif
+            </div>
             
     @endforeach
-    <tr>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td class="text-center">
+    <div class="row">
+        <div class="col col-md-3">
             Subtotal:
-        </td>
-        <td class="text-success bg-dark text-left border border-info">
+        </div>
+        <div class="text-success bg-dark text-left border border-info blPriceField col-md-3">
             ${{ $breakdownList->list_balance }}
-        </td>
-    </tr>
-    </table>
+        </div>
     </div>
 @else
 <h3>No breakdown lists available at this time.</h3>

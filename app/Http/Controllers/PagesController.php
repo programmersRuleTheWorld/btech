@@ -9,7 +9,9 @@ use App\User;
 use App\AffiliateCampaign;
 use App\ClientApplication;
 use App\SupportTicket;
+use App\Transaction;
 use App\Operation;
+use App\BreakdownItem;
 use App\BreakdownList;
 use Feeds;
 use App\Role;
@@ -18,7 +20,6 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
-
     public function __construct(){
         $this->middleware('verified', ['except' => ['index', 'services', 'about', 'contact', 'privacy', 'service_agreement', 'blog', 'affiliate']]);
     }
@@ -33,7 +34,7 @@ class PagesController extends Controller
         $feed->handle_content_type();
         $feed->init();      
 
-            $items = $feed->get_items(0,10);
+            $items = $feed->get_items(0,6);
             
             return view('pages.index')->with(
             [
@@ -86,7 +87,7 @@ class PagesController extends Controller
         $completedProjects = 0;
         foreach($affiliateCampaigns as $affiliateCampaign)
         {
-            $completedProjects =+ ClientApplication::where(['project_status' => "follow-up", 'user_id' => $affiliateCampaign->referred_user_id])->count();
+            $completedProjects = ClientApplication::where(['project_status' => "complete", 'user_id' => $affiliateCampaign->referred_user_id])->count();
         }
 
         return view('pages.affiliate_details')->with([
@@ -96,108 +97,50 @@ class PagesController extends Controller
         ]);
     }
 
-    public function development_center(Request $request)
+    public function client_application_payment(Request $request)
     {
         $user = auth()->user();
-        if(Gate::forUser($user)->allows('show-development'))
-        {
-        $user = auth()->user();
-        $clientApplications = ClientApplication::paginate(5, ['*'], 'jobs');
-        return view('pages.development_center')->with([
-            'clientApplications' => $clientApplications,
-        ]);
-        }
-        else
-        {
-            return redirect()->route('dashboard')->with('error', "You are not permitted to access this resource. This attempt has been logged.");
-        }
-    }
+        $clientApplication = ClientApplication::find($request->input('ref_id'));
+        $breakdownLists = BreakdownList::where('parent_ref_id', $clientApplication->ref_id)
+        ->where(['list_deposit' => 0])->where('list_balance', '>', 0)->get();
 
-    public function operations_center()
-    {
-        $user = auth()->user();
-        if(Gate::forUser($user)->allows('show-operations'))
-        {
-        $operations = Operation::paginate(5, ['*'], 'operations');
-
-        return view('pages.operations_center')->with([
-            'operations' => $operations,
-        ]);
-        }
-        else
-        {
-            return redirect()->route('dashboard')->with('error', 'You are not permitted to access this resource. This attempt has been logged.');
-        }
-    }
-
-    public function client_application_deposit(Request $request, $clientApplication)
-    {
-        $user = auth()->user();
-        $clientApplication = ClientApplication::find($clientApplication);
-        $selectedList = null;
-        $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id, ['list_deposit', '>', 0]])->get();
-        $idempotencyKey = UUID::Uuid4();
-
-        return view('clientapplications.include.payment')->with([
+        return view('pages.payment.payment')->with([
             'clientApplication' => $clientApplication,
-            'selectedList' => $selectedList,
-            'idempotencyKey' => $idempotencyKey,
+            'breakdownLists' => $breakdownLists,
         ]);
     }
 
-    public function client_application_payment(Request $request, $clientApplication)
+    public function client_application_deposit(Request $request)
     {
         $user = auth()->user();
 
-        $selectedList = $request->input('selected_value');
-        $clientApplication = ClientApplication::find($clientApplication);
-        $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
-        $idempotencyKey = UUID::Uuid4();
+        $breakdownLists = BreakdownList::where('parent_ref_id', $request->input('ref_id'))
+        ->where('list_deposit', '>', 0)->get();
+        $breakdownItems = BreakdownItem::where('parent_ref_id', $request->input('ref_id'))
+        ->where('item_deposit', '>', 0)->get();
 
-        if(BreakdownList::find($selectedList) != null)
-        {
-            $selectedList = BreakdownList::find($selectedList);
-            if($selectedList->list_deposit > 0.00)
-            {
-            return view('clientapplications.include.payment')->with([
-            'clientApplication' => $clientApplication, 
+        return view('pages.payment.deposit')->with([
             'breakdownLists' => $breakdownLists,
-            'selectedList' => $selectedList,
-            'idempotencyKey' => $idempotencyKey,
-            ]);
-            }
-        }
-        else
-        {
-            return view('clientapplications.include.payment')->with([
-            'clientApplication' => $clientApplication, 
-            'breakdownLists' => $breakdownLists,
-            'selectedList' => null,
-            'idempotencyKey' => $idempotencyKey,
-            ]);
-        }
+            'breakdownItems' => $breakdownItems,
+        ]);
     }
 
-    public function admin()
+    public function client_application_services()
     {
         $user = auth()->user();
-        if(Gate::forUser($user)->allows('show-admin'))
-        {
-        $count = 1;
-        $users = User::paginate('10', ['*'], 'users');
-        $supports = ClientApplication::where(['support' => true])->get();
-        $vulnerabilities = ClientApplication::where(['vulnerability' => true])->get();
-        $bugs = ClientApplication::where(['bug' => true])->get();
-        $roles = Role::all();
+        $clientApplication = ClientApplication::find($request->input('ref_id'));
+        return view('pages.payment.services_payment')->with('clientApplication', $clientApplication);
+    }
 
-        return view('pages.admin')->with([
-            'users' => $users,
-            'supports' => $supports,  
-            'vulnerabilities' => $vulnerabilities,
-            'count' => $count,
-            'roles' => $roles,          
-            'bugs' => $bugs,
-        ]);
+    public function admin($user = null)
+    {
+        if(Gate::forUser(auth()->user())->allows('show-admin'))
+        {
+            $user = User::find($user);
+            
+            return view('pages.admin')->with([
+                'user' => $user,
+                ]);
         }
         else
         {

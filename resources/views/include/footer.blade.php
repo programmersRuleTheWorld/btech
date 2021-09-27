@@ -14,6 +14,7 @@
             </ul>
         </nav>
                 <div class="text-center">
-                        &copy;Copyright 2020 Bertram Technologies Corporation All Rights Reserved
+                        &copy;Copyright 2021 Bertram Technologies Corporation All Rights Reserved
+                        <img src="{{ asset('images/btlogoMinified.gif') }}" id="btlogoFooter">
                 </div>
         </footer>

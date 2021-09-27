@@ -15,6 +15,7 @@ class CreateClientApplicationsTable extends Migration
     {
         Schema::create('client_applications', function (Blueprint $table) {
             $table->string('ref_id');
+            $table->string('project_name');
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users')->nullable()->onDelete('cascade');
             $table->string('auth_code');
             $table->string('first_name');
@@ -49,8 +50,8 @@ class CreateClientApplicationsTable extends Migration
             $table->boolean('bug');
             $table->string('payment_status');
             $table->decimal('project_balance', 8, 2);
-            $table->decimal('project_deposit_rate', 8, 2);
             $table->decimal('project_deposit', 8, 2);
+            $table->decimal('project_deposit_rate', 8, 2);
             $table->date('due_date');
             $table->timestamps();
         });

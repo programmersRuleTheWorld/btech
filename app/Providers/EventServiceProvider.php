@@ -19,30 +19,24 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         'App\Events\UserCreated' => [
-                'App\Listeners\Users\Created\AssignClientRole',
-                'App\Listeners\Users\Created\CreateAffiliateCampaign',
-                'App\Listeners\Users\Created\CreateStripeCustomer',
+            'App\Listeners\Users\Created\AssignClientRole',
+            'App\Listeners\Users\Created\CreateAffiliateCampaign',
+            'App\Listeners\Users\Created\CreateStripeCustomer',
         ],
         'App\Events\AffiliateCampaigns\AffiliateCampaignUpdated' => [
             'App\Listeners\AffiliateCampaigns\Updated',
         ],
-        'App\Events\BreakdownItems\BreakdownItemCreated' => [
-            'App\Listeners\BreakdownItems\Created',
-        ],
         'App\Events\BreakdownItems\BreakdownItemStatusChange' => [
-                'App\Listeners\BreakdownItems\StatusChange',
-        ],
-        'App\Events\BreakdownItems\BreakdownItemBalancePaymentStatusChanged' => [
-            'App\Listeners\BreakdownItems\BalancePaymentStatusChanged',
-        ],
-        'App\Events\BreakdownItems\BreakdownItemDepositPaymentStatusChanged' => [
-            'App\Listeners\BreakdownItems\DepositPaymentStatusChanged',
+            'App\Listeners\BreakdownItems\StatusChange',
+            ],
+        'App\Events\BreakdownItems\BreakdownItemPaymentStatusChange' => [
+            'App\Listeners\BreakdownItems\PaymentStatusChange',
         ],
         'App\Events\BreakdownLists\BreakdownListCreated' => [
             'App\Listeners\BreakdownLists\Created',
         ],
         'App\Events\SupportTickets\SupportTicketOpened' => [
-                'App\Listeners\SupportTickets\Opened',
+            'App\Listeners\SupportTickets\Opened',
             ],
             'App\Events\SupportTickets\SupportTicketClosed' => [
                 'App\Listeners\SupportTickets\Closed',
@@ -62,9 +56,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Events\ClientApplications\ClientApplicationCreated' => [
                 'App\Listeners\ClientApplications\Created',
             ],
-            'App\Events\ClientApplications\ClientApplicationStatusChange' => [
-                'App\Listeners\ClientApplications\StatusChange',
-            ],
             'App\Events\ClientApplications\ClientApplicationAuthCodesReset' => [
                 'App\Listeners\ClientApplications\AuthCodesReset',
             ],
@@ -76,6 +67,13 @@ class EventServiceProvider extends ServiceProvider
             ],
             'App\Events\ClientApplications\ClientApplicationCompleted' => [
                 'App\Listeners\ClientApplications\AddCompletedToAffiliateCampaign',
+                'App\Listeners\ClientApplications\CompleteClientApplication',
+            ],
+            'App\Events\ClientApplications\ClientApplicationDepositPaid' => [
+                'App\Listeners\ClientApplications\Deposit\Paid',
+            ],
+            'App\Events\ClientApplications\ClientApplicationPaymentPaid' => [
+                'App\Listeners\ClientApplications\Payment\Paid',
             ],
             'App\Events\Operations\OperationUpdated' => [
                 'App\Listeners\Operations\Updated',

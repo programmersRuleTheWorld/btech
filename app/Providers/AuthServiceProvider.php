@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use User;
-use Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
@@ -24,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         AffiliateCampaign::class => AffiliateCampaignPolicy::class,
         ServiceContract::class => ServiceContractPolicy::class,
         SecurityAnalysis::class => SecurityAnalysisPolicy::class,
+        Service::class => ServicePolicy::class,
     ];
 
     /**
@@ -45,14 +44,19 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getPermission('show-dashboard');
         });
 
-        Gate::define('show-development', function($user)
+        Gate::define('adminSearch', function($user)
         {
             return $user->isAdmin();
         });
 
-        Gate::define('show-operations', function($user)
+        Gate::define('generate-paymentintent-payment', function($user, $breakdownList)
         {
-            return $user->isAdmin();
+            return $breakdownList->clientApplication->user_id == $user->id;
+        });
+
+        Gate::define('generate-paymentintent-deposit', function($user, $clientApplication)
+        {
+            return $clientApplication->user_id == $user->id;
         });
     }
 }

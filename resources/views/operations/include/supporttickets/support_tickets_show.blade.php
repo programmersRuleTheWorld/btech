@@ -2,7 +2,7 @@
 @foreach($operation->supportTickets as $supportTicket)
 @if($supportTicket->status == 'open')
 <div class="card-body">
-                <div class="row">
+                <div class="row mb-2">
                 <h3 class="text-center m-auto">{{ $supportTicket->title }}</h3>
                 <div class="float-right mr-4 m-3 pr-2 pl-2 incomplete">{{ $supportTicket->status }}</div>
                 @can('delete', $supportTicket)

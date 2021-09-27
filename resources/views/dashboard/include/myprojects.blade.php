@@ -2,7 +2,7 @@
     <form class="col m-auto p-3" action="{{ route('clientapplications.appendto') }}" method="POST">
             @method('PATCH')
             @csrf
-            <div class="form-row">
+            <div class="row mb-2">
                 <div class="col-md-6">
                 <input class="form-control mb-2" name="ref_id" maxlength="15" placeholder="Type Ref ID ex. 4645213846">
                 </div>
@@ -10,7 +10,7 @@
                 <input class="form-control mb-2" name="auth_code" maxlength="128" placeholder="Copy and paste Auth Code">
                 </div>
             </div>
-                <div class="form-row">
+                <div class="row mb-2">
                 <button class="btn btn-dark text-info m-1" type="submit">Add Project</button>
         </form>
         <form class="col m-auto" action="{{ route('clientapplications.revokeall') }}" method="POST">

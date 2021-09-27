@@ -12,7 +12,7 @@ class AgreementSeeder extends Seeder
     public function run()
     {
         $serviceAgreement = '
-        <div class="row">
+        <div class="row mb-2">
         <div class="col-md-6 mb-2 ml-auto mr-auto">
         <div class="card bg-info">
         <div class="card-header">
@@ -33,7 +33,7 @@ class AgreementSeeder extends Seeder
         </div>
         </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
         <div class="col-md-6 mb-2 ml-auto mr-auto">
         <div class="card bg-info">
         <div class="card-header">

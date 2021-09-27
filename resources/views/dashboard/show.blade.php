@@ -47,7 +47,7 @@
     </div>
 </div>
 @endcan
-<div class="row">
+<div class="row mb-2">
     <div class="col-md-12">
         <div class="card bg-info">
             <div class="card-header">

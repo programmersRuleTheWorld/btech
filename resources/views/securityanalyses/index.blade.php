@@ -12,7 +12,7 @@
                 @csrf
                 <input type="hidden"value="{{ $securityAnalysis->id }}" name="security_analysis_id">
                 <input type="hidden"value="{{ $securityAnalysis->operation->id }}" name="operation_id">
-        <div class="row">
+        <div class="row mb-2">
         <div class="col-md-3">    
                 <div class="form-group">
                     Attack Severity:
@@ -49,7 +49,7 @@
                 </form>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-12">
             @include('securityanalyses.include.threatitems.index')
             </div>

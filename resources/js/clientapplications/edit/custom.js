@@ -1,5 +1,6 @@
 if(typeof(ref_id) != 'undefined' && window.location.pathname == '/clientapplications/' + ref_id.value + '/edit')
 {
+refId = document.getElementById('ref_id');
 services = document.getElementById('services');
 currentDiv = document.getElementById('project');
 projectType = document.getElementById('project_type');
@@ -42,7 +43,7 @@ function makeFormField(tagName, className, id, innerText, placeholder)
 
 function makeInput(inputType, id, innerText, placeholder)
 {
-//formRow = new makeFormField('div', 'form-row', 'form_row' + i, null, null );
+//formRow = new makeFormField('div', 'row', 'form_row' + i, null, null );
 formCol = new makeFormField('div', 'col-md-4 mt-auto', null, null, null);
 formGroup = new makeFormField('div', 'form-group', null, innerText, null);
 this.inputType = new makeFormField(inputType, 'form-control form-control-sm', id, null, placeholder);
@@ -320,4 +321,34 @@ return formGroup, formCol, this.inputType;
     formRow3 = new makeFormRow([frontendFrameworkType.tagName.parentNode.parentNode, isPlatform.tagName.parentNode.parentNode, platformType.tagName.parentNode.parentNode]);
     formRow4 = new makeFormRow([dbType.tagName.parentNode.parentNode, testScope.tagName.parentNode.parentNode, securityIncidents.tagName.parentNode.parentNode]);
     formRow5 = new makeFormRow([legacyBackendType.tagName.parentNode.parentNode, newOrExistingApp.tagName.parentNode.parentNode, appStore.tagName.parentNode.parentNode]);
+    
+
+        var httpRequest = new XMLHttpRequest();
+        var data = {'refId':refId.value};
+            httpRequest.onloadend = function()
+        {
+            resp = JSON.parse(httpRequest.responseText);
+            govContract.tagName.value = resp['gov_contract'];
+            existingSite.tagName.value = resp['existing_site'];
+            siteType.tagName.value = resp['site_type'];
+            whereHosted.tagName.value = resp['where_hosted'];
+            siteURL.tagName.value = resp['site_url'];
+            backendType.tagName.value = resp['backend_type'];
+            backendFramework.tagName.value = resp['backend_framework'];
+            frontendFramework.tagName.value = resp['frontend_framework'];
+            backendFrameworkType.tagName.value = resp['backend_framework_type'];
+            frontendFrameworkType.tagName.value = resp['frontend_framework_type'];
+            isPlatform.tagName.value = resp['is_platform'];
+            platformType.tagName.value = resp['platform_type'];
+            dbType.tagName.value = resp['db_type'];
+            testScope.tagName.value = resp['test_scope'];
+            securityIncidents.tagName.value = resp['security_incidents'];
+            legacyBackendType.tagName.value = resp['legacy_backend_type'];
+            newOrExistingApp.tagName.value = resp['new_or_existing_app'];
+            appStore.tagName.value = resp['app_store'];
+        }
+    httpRequest.open('POST', '/clientapplication/data', true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.setRequestHeader('X-CSRF-TOKEN', csrf.value);
+    httpRequest.send(JSON.stringify(data));
 }

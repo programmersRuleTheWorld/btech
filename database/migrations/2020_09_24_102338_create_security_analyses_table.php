@@ -17,7 +17,7 @@ class CreateSecurityAnalysesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('operation_id')->foreign('operation_id')->references('id')->on('operations')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('severity')->nullable();
             $table->timestamps();
         });

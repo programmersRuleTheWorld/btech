@@ -7,7 +7,7 @@
         {{ $operation->operation_type }} <br>
     </div>
     <div class="card-body">
-    <div class="row">
+    <div class="row mb-2">
             <div class="col-md-4">    
                     Domain Host: {{ $operation->domain_host }}
             </div>
@@ -18,7 +18,7 @@
                 Public IP: {{ $operation->public_ip }}
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-4">    
                 Server Type: {{ $operation->server_type }}
             </div>
@@ -29,7 +29,7 @@
                 Uptime Status: {{ ucfirst($operation->uptime_status) }}>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-4">    
                 Payment Status: {{ ucfirst($operation->payment_status) }}
             </div>

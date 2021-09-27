@@ -11,7 +11,7 @@
         @method('PUT')
         @csrf
             <div class="card-body">
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col-md">
                         <div class="form-group">
                             First Name: 
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col-md">
                         <div class="form-group">
                             Email Address: 
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col-md-6">
                         <div class="form-group">
                             Company Name: 
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="text-center">(Only fill out these if changing your password, otherwise leave blank):</div>
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col-md-4">
                         <div class="form-group">
                             Old Password:

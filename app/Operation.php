@@ -9,6 +9,7 @@ class Operation extends Model
 
     protected $attributes = [
         'uptime_status' => 'running',
+        'payment_status' => 'unpaid',
         'server_type' => 'primary',
     ];
 
@@ -41,5 +42,10 @@ class Operation extends Model
     public function securityAnalyses()
     {
         return $this->hasMany('App\SecurityAnalysis');
+    }
+
+    public function services()
+    {
+        return $this->hasMany('App\Service', 'parent_operation_id');
     }
 }

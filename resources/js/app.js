@@ -1,6 +1,12 @@
+require('./pages/index/openingterminal');
 require('./bootstrap');
+require('./pages/admin_panel/logic.js');
+require('./pages/payment/payment/breakdownlist_visibility');
+require('./pages/payment/payment/datahydration');
+require('./pages/payment/deposit/breakdownlist_visibility');
 require('./pages/index/client_application');
 require('./clientapplications/edit/custom');
-require('./stripeconstruct');
 require('./datepicker');
 require('./phonemask');
+require('./clientapplications/show/datahydration');
+require('./clientapplications/show/breakdownlist_visibility');

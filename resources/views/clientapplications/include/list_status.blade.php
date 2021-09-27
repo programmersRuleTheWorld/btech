@@ -1,9 +1,8 @@
 @if($breakdownList->list_status == true)
-    <div class="complete border border-info">
+    <div class="complete border border-info blStatusField">
         COMPLETE
-@endif
-@if($breakdownList->list_status == false)
-    <div class="incomplete border border-info">
+@elseif($breakdownList->list_status == false)
+    <div class="incomplete border border-info blStatusField">
         INCOMPLETE
-    @endif
-</div>
+@endif
+    </div>

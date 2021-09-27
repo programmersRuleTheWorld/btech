@@ -14,14 +14,16 @@ class ClientApplicationCompleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $clientApplication;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($clientApplication)
     {
-        //
+        $this->clientApplication = $clientApplication;
     }
 
     /**

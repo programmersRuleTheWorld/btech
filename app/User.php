@@ -109,6 +109,11 @@ class User extends Authenticatable
         return $this->hasMany('App\ThreatItem');
     }
 
+    public function services()
+    {
+        return $this->hasMany('App\Service', 'parent_user_id');
+    }
+
     public function isAdmin()
     {
         foreach($this->roles as $role)

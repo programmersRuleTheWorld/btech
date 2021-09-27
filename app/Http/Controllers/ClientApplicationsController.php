@@ -14,8 +14,10 @@ use App\BreakdownItem;
 use App\ServiceContract;
 use App\SupportTicket;
 use App\SupportTicketComment;
+use App\Transaction;
 use App\Events\ClientApplications\ClientApplicationCreated;
 use App\Events\ClientApplications\ClientApplicationUpdated;
+use App\Events\BreakdownItems\BreakdownItemPaymentStatusChange;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -62,6 +64,7 @@ class ClientApplicationsController extends Controller
         $clientApplication = new ClientApplication;
         $clientApplication->first_name =  $request->input('first_name');
         $clientApplication->last_name = $request->input('last_name');
+        $clientApplication->project_name = $request->input('project_name');
         $clientApplication->company_name = $request->input('company_name');
         $clientApplication->email = $request->input('email');
         $clientApplication->phone_number = $request->input('phone_number');
@@ -97,16 +100,16 @@ class ClientApplicationsController extends Controller
         
         if(!$user)
         {
-        return redirect()->route('index')->with("success", "your project 
-        has successfully been submitted to the Client Assessment Bureau. You will hear 
+        return redirect()->route('index')->with("success", "Your project 
+        has successfully been submitted. You will hear 
         back from us within one business day. A copy of your submission has been 
         sent to $clientApplication->email for your records. It's important that 
         you retain the Reference ID and Authorization Code included if you wish to 
         add this project to an account if you create one later.");
         }
         else{
-            return redirect()->route('index')->with("success", "$user->name, Your project 
-            has successfully been submitted to the Client Assessment Bureau. You will hear 
+            return redirect()->route('index')->with("success", "$user->first_name, Your project 
+            has successfully been submitted. You will hear 
             back from us within one business day. A copy of your submission has 
             been sent to $clientApplication->email for your records. It's 
             important that you retain the Reference ID and Authorization Code for 
@@ -129,8 +132,9 @@ class ClientApplicationsController extends Controller
         $clientApplicationComments = ClientApplicationComment::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id])->get();
-        $breakdownListDeposits = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id, ['list_deposit', '>', 0.00]])->get();
         $serviceContracts = ServiceContract::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $transactions = Transaction::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $deposits = Transaction::where(['parent_ref_id' => $clientApplication->ref_id, 'transaction_type' => 'deposit'])->get();
         $count = 1;
         return view('clientapplications/show')->with([
             'clientApplication' => $clientApplication,
@@ -142,7 +146,8 @@ class ClientApplicationsController extends Controller
             'user' => $user,
             'serviceContracts' => $serviceContracts,
             'breakdownLists' => $breakdownLists,
-            'breakdownListDeposits' => $breakdownListDeposits,
+            'transactions' => $transactions,
+            'deposits' => $deposits,
             ]);
     }
 
@@ -172,6 +177,7 @@ class ClientApplicationsController extends Controller
         $this->authorize('update', $clientApplication);
         $clientApplication->first_name = $request->input('first_name');
         $clientApplication->last_name = $request->input('last_name');
+        $clientApplication->project_name = $request->input('project_name');
         $clientApplication->company_name = $request->input('company_name');
         $clientApplication->email = $request->input('email');
         $clientApplication->phone_number = $request->input('phone_number');
@@ -201,17 +207,17 @@ class ClientApplicationsController extends Controller
         $clientApplication->project_deposit = $clientApplication->project_balance * $clientApplication->project_deposit_rate;
         if($clientApplication->breakdownItems->count() > 0)
         {
-            foreach($clientApplication->breakdownLists as $breakdownList)
-            {
-                foreach($breakdownList->breakdownItems as $breakdownItem)
+            $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id])->where('item_balance', '!=', '0')->get();
+                foreach($breakdownItems as $breakdownItem)
                     {
                         $breakdownItem->item_deposit = $breakdownItem->item_balance * $clientApplication->project_deposit_rate;
                         $breakdownItem->breakdownList->list_deposit = $breakdownItem->breakdownList->list_balance * $clientApplication->project_deposit_rate;
                         $breakdownItem->breakdownList->save();
                         $breakdownItem->save();
+
+                        event(new BreakdownItemPaymentStatusChange($breakdownItem));
                     }
                 }
-            }
         }
         $clientApplication->project_description = $request->input('project_description');
         $clientApplication->project_status = $request->input('project_status');

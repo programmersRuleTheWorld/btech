@@ -1,18 +1,17 @@
 <nav class="navbar navbar-expand-md navbar-light mt-2 mb-2 bg-info">
-        <div class="container">
-            <a class="navbar-brand p-0" href="{{ url('/') }}" >
-                <b><small>Bertram Technologies</small></b>
-            </a>
-            <img src="{{ asset('images/logos/btlogobladerunner.svg') }}" id="btlogo">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-    <span class="navbar-toggler-icon"></span>
-</button>
+  <div class="container-fluid col-6 m-auto">
+    <a class="navbar-brand" href="{{ url('/') }}">
+        <b><small>Bertram Technologies</small></b>
+    </a>
+    <img src="{{ asset('images/btlogoMinified.gif') }}" id="btlogo">
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <!-- Right Side Of Navbar -->
-    <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+      <li class="nav-item">
                 <a class="nav-link text-center" href="{{ route('index') }}">
                     {{ __('Home') }}
                 </a>
@@ -28,17 +27,18 @@
                 </a>
             </li>
             
-            <li class="nav-item">
-                <a class="nav-link text-center" href="{{ route('blog') }}">
+            <!-- <li class="nav-item">
+                <a class="nav-link text-center" href="[[ route('blog') ]]">
                     {{ __('Blog') }}
-                </a>
+                </a> !-->
             </li>
             <li class="nav-item">
                 <a class="nav-link text-center" href="{{ route('contact') }}">
                     {{ __('Contact') }}
                 </a>
             </li>
-        
+
+      <li class="nav-item dropdown">
         @guest 
                 <!-- Authentication Links -->
 
@@ -55,10 +55,10 @@
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown text-center">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
-                </a>
+            <li class="nav-item dropdown">
+            <button class="btn btn-info nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                    
+                {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
+            </button>
                 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     
@@ -69,14 +69,6 @@
                     @if(Auth::user()->isAdmin() === true)
                     <a class="dropdown-item text-center" href="{{ route('admin') }}">
                         {{ __('Admin Panel') }}
-                    </a>
-                    
-                    <a class="dropdown-item text-center" href="{{ route('development_center') }}">
-                        {{ __('Development Center') }}
-                    </a>
-                    
-                    <a class="dropdown-item text-center" href="{{ route('operations_center') }}">
-                        {{ __('Operations Center') }}
                     </a>
                     @endif
 
@@ -100,7 +92,7 @@
                 </div>
             </li>
         @endguest
-    </ul>
-</div>
-</div>
+      </ul>
+    </div>
+  </div>
 </nav>

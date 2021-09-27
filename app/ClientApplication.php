@@ -25,7 +25,7 @@ class ClientApplication extends Model
         'support' => false,
         'vulnerability' => false,
         'bug' => false,
-        'payment_status' => null,
+        'payment_status' => 'nocharge',
     ];
 
     protected $casts = ['due_date' => 'date:m-d-Y'];
@@ -77,13 +77,23 @@ class ClientApplication extends Model
         return $this->hasMany('App\Repo', 'parent_ref_id', 'ref_id');
     }
 
+    public function transactions()
+    {
+	    return $this->hasMany('App\Transaction', 'parent_ref_id', 'ref_id');
+    }
+
+    public function services()
+    {
+        return $this->hasMany('App\Service', 'parent_ref_id', 'ref_id');
+    }
+
     //getters
 
     public function getProjectStatus()
     {
         if(isset($this->project_status))
         {
-            return $this->project_status;
+            return strToUpper($this->project_status);
         }
     }
 
@@ -105,6 +115,14 @@ class ClientApplication extends Model
         else
         {
             return $this->first_name;
+        }
+    }
+
+    public function getProjectName()
+    {
+        if(isset($this->project_name))
+        {
+            return $this->project_name;
         }
     }
 
@@ -292,7 +310,7 @@ class ClientApplication extends Model
         }
     }
 
-    public function getNewOrExistingAppApp()
+    public function getNewOrExistingApp()
     {
         if(isset($this->new_or_existing_app))
         {

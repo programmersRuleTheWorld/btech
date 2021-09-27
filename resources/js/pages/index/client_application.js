@@ -220,7 +220,7 @@ if(window.location.pathname == '/')
 
     backendFramework.tagName.onchange = function()
     {
-        if(backendFramework.tagName.value =='Yes')
+        if(backendFramework.tagName.value == 'Yes')
         {
             backendFrameworkType.setDisplayState('block');
         }

@@ -12,7 +12,7 @@
         <form action="{{ route('operations.update', [$operation->id]) }}" method="POST">
         @method('PUT')
         @csrf
-    <div class="row">
+    <div class="row mb-2">
             <div class="col-md-4">    
                 <div class="form-group">
                     Domain Host:
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-4">    
                 <div class="form-group">
                 Server Type:
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-4">    
                 <div class="form-group">
                 Payment Status:
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div  class="row">
+        <div  class="row mb-2">
         <form action="{{ route('operations.update', [$operation->id]) }}" method="POST">
         @csrf
         @method('PUT')

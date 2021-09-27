@@ -7,7 +7,7 @@
         Affiliate Details
     </div>
     <div class="card-body text-center">
-        <div class="row">
+        <div class="row mb-2">
             <div class="panel bg-info col-md-8">
             Details on individuals and businesses you've signed up are below. The more clients whose needs
             you help Bertram Technologies fill, the more you'll make!

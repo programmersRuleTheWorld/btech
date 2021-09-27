@@ -17,8 +17,8 @@ class CreateAffiliateCampaignsTable extends Migration
             $table->bigIncrements('id');
             $table->string('affiliate_id')->foreign('affiliate_id')->references('referred_by')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('referred_user_id')->foreign('referred_user_id')->references('id')->on('users')->unique()->onDelete('cascade');
-            $table->decimal('commission_rate', 2, 2);
-            $table->decimal('campaign_balance', 5, 2);
+            $table->decimal('commission_rate', 3, 2);
+            $table->decimal('campaign_balance', 9, 2);
             $table->timestamps();
         });
     }

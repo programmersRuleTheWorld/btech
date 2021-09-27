@@ -11,6 +11,9 @@ $lightblue: lightblue;
 */
 .qs-datepicker-container {
   font-size: 1em;
+  background-image: url('../../public/images/btlogo.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: sans-serif;
   color: aquamarine;
   position: absolute;
@@ -118,7 +121,7 @@ $lightblue: lightblue;
     width: calc(100% / 3);
     cursor: pointer;
     opacity: .8;
-    transition: opacity $transition / 2;
+    transition: opacity $transition * 0.5;
 
     &.active, &:hover {
       background-color: aquamarine;
@@ -148,8 +151,8 @@ $lightblue: lightblue;
 }
 
 .qs-arrow {
-  height: $width / 10;
-  width: $width / 10;
+  height: $width * 0.1;
+  width: $width * 0.1;
   position: relative;
   cursor: pointer;
   border-radius: $radius;
@@ -169,7 +172,7 @@ $lightblue: lightblue;
 
   &:after {
     content: '';
-    border: ($width / 40) solid transparent;
+    border: ($width * 0.025) solid transparent;
     position: absolute;
     top: 50%;
     transition: border .2s;
@@ -217,9 +220,6 @@ $lightblue: lightblue;
   display: flex;
   flex-wrap: wrap;
   padding: $width * .02;
-  background-image: url('../../public/images/logos/btlogobladerunner.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
   filter: blur(0px);
   transition: filter $transition;
 
@@ -230,7 +230,7 @@ $lightblue: lightblue;
 
 .qs-square {
   width: calc(100% / 7);
-  height: $width / 10;
+  height: $width * 0.1;
   display: flex;
   align-items: center;
   justify-content: center;

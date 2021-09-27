@@ -13,7 +13,7 @@
                     soon as possible. We appreciate your feedback!
                     </div>
                 </div>
-            <div class="form-row">
+            <div class="row mb-2">
                 <div class="col-md">
                     <div class="form-group text-center">
                         <label for="name"></label>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-row">
+            <div class="row mb-2">
                 <div class="col-md">
                     <div class="form-group text-center">
                         <label for="body"></label>

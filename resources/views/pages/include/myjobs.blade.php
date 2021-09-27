@@ -71,7 +71,11 @@
                         @csrf
                         <input type="hidden" name="ref_id" value="{{ $clientApplication->ref_id }}">
                         <div class="form-group">
+                        @if($clientApplication->operations->count() > 0)
                             <button class="btn btn-dark text-info m-2" type="submit">View Ops</a>
+                        @else
+                            <div class="btn btn-dark text-info m-2 disabled">View Ops</div>
+                        @endif
                         </div>
                     </form>
 
@@ -87,7 +91,11 @@
                         @csrf
                         <input type="hidden" name="ref_id" value="{{ $clientApplication->ref_id }}">
                         <div class="form-group">
+                        @if($clientApplication->repos->count() > 0)
                             <button class="btn btn-dark text-info m-2" type="submit">View Repos</button>
+                        @else
+                            <div class="btn btn-dark text-info m-2 disabled">View Repos</div>
+                        @endif
                         </div>
                     </form>
 </div>

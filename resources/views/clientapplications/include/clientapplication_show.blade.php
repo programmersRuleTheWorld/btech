@@ -1,270 +1,290 @@
-<div class="table-responsive">
-<table class="table table-borderless table-sm table-condensed">
+<input type="hidden" id="ref_id" value={{ $clientApplication->ref_id }}>
+
     <div class="col-md-6 m-1 ml-auto">
-        <div class="text-success text-center bg-dark">
+        <div class="text-success text-center bg-dark" id="pBalance">
             Project balance: ${{ $clientApplication->project_balance }}
         </div>
     </div>
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
+            Project Name:
+        </div>
+        <div class="col-md-6">
+           {{ $clientApplication->getProjectName() }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Reference Identification Number:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
            {{ $clientApplication->getRefID() }}
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Project Status:
-        </td>
+        </div>
+        <div class="col-md-6">
             @include('clientapplications.include.clientapplication_status')
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Name:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
             {{ $clientApplication->getName() }}
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Company Name:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getCompanyName() }}
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Phone Number:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getPhoneNumber() }}
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Project Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getProjectType() }}
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             Project Due Date:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getDueDate() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @if(isset($clientApplication->existing_site))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Existing Site;
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getExistingSite() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->domain_name))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Domain Name;
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getDomainName() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->site_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Site Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getSiteType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->gov_contract))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Government Contract:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getGovContract() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->where_hosted))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Hosting Provider:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getWhereHosted() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->site_url))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Current Site URL:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getSiteURL() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->backend_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Backend Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getBackendType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->backend_framework))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Backend Framework:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getBackendFramework() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->frontend_framework))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Frontend Framework:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getFrontendFramework() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->backend_framework_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Backend Framework Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getBackendFrameworkType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->frontend_framework_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Frontend Framework Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getFrontendFrameworkType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->is_platform))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Platform:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getPlatform() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->platform_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Platform Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getPlatformType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->get_db_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Database Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getDBType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->test_scope))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Test Scope:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getTestScope() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->security_incidents))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Security Incidents:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getSecurityIncidents() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->legacy_backend_type))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             Legacy Backend Type:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getLegacyBackendType() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->new_or_existing_app))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             New or Existing App:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getNewOrExistingApp() }}
-        </td>
-    </tr>
+        </div>
+    </div>
     @endif
     @if(isset($clientApplication->app_store))
-    <tr>
-        <td>
+    <div class="row">
+        <div class="col-md-6">
             App Store:
-        </td>
-        <td>
+        </div>
+        <div class="col-md-6">
         {{ $clientApplication->getAppStore() }}
-        </td>
-    </tr>
-    @endif
-        </table>
+        </div>
     </div>
-    <div class="row ml-2">G
-    @if($clientApplication->deposit_payment_status == true)
-        <form action="{{ route('client_application_payment', [$clientApplication]) }}" method="POST">
-    @else($clientApplication->deposit_payment_status == false)
-        <form action="{{ route('client_application_deposit', [$clientApplication]) }}" method="POST">
+    @endif
+
+    <div class="row form-group m-auto">
+    @if($clientApplication->payment_status == 'payment' && ($transactions->sum('transaction_amount') < $clientApplication->project_balance))
+        <form id="paymentForm" action="{{ route('client_application_payment', [$clientApplication]) }}" method="POST">
+    @elseif($clientApplication->payment_status == 'deposit' && ($deposits->sum('transaction_amount') < $clientApplication->project_deposit))
+        <form id="paymentForm" action="{{ route('client_application_deposit', [$clientApplication]) }}" method="POST">        
+    @elseif($clientApplication->payment_status == 'nocharge')    
+    <form id="paymentForm" action="" method="POST">        
     @endif
         @csrf
         <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
         <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
-            <input type="hidden" value="{{ $clientApplication }}" name="clientApplication">
-    @if($clientApplication->deposit_payment_status == true && $breakdownListDeposits->count() > 0)
-            <button class="btn btn-dark text-info" type="submit">Make Payment</button>
-    @elseif($clientApplication->deposit_payment_status == false && $breakdownListDeposits->count() > 0)
-            <button class="btn btn-dark text-info" type="submit">Make Deposit</button>
+            <input type="hidden" value="{{ $clientApplication->ref_id }}" name="clientApplication">
+    @if($clientApplication->payment_status == 'payment' && ($transactions->sum('transaction_amount') < $clientApplication->project_balance))
+            <button class="btn btn-dark text-info" id="caPaymentButton" type="submit">Make Payment</button>
+
+    @elseif($clientApplication->payment_status == 'deposit' && ($deposits->sum('transaction_amount') < $clientApplication->project_deposit))
+            <button class="btn btn-dark text-info" id="caPaymentButton" type="submit">Make Deposit</button>
+    @else
+            <div class="btn btn-dark text-info disabled" id="caPaymentButton">No Charge</div>
     @endif
-        </form>
-    </div>
+
+    @if($clientApplication->services->count() > 0)
+            <button class="btn btn-dark text-info" id="caServicesButton" type="submit">Services Payment</button>
+    @else
+            <button class="btn btn-dark text-info disabled" id="caServicesButton" type="submit">Services Payment</button>            
+    @endif
+            </form>
+        </div>

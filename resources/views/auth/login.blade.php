@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card bg-info">
-                <div class="card-header text-center"><h3>{{ __('Login') }}</h3></div>
+                <div class="card-header">
+                <h3 class="text-center">{{ __('Login') }}</h3>
+                </div>
 
                 <div class="card-body">
                     <div class="panel bg-info border border-dark m-3 p-1">

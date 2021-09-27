@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="card bg-info">
     <div class="card-header">
         <h1 class="text-center">Edit Client Information</h1>
@@ -10,7 +11,13 @@
         <input type="hidden" id="ref_id" name="ref_id" value="{{ $clientApplication->ref_id }}">
         @csrf
         @method('PUT')
-        <div class="row">
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <div class="form-group">
+                    Project Name:
+                    <input class="form-control form-control-sm" name="project_name" value="{{ $clientApplication->project_name }}" placeholder="Project Name">
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     First Name:
@@ -29,14 +36,8 @@
                     <input class="form-control form-control-sm" name="company_name" value="{{ $clientApplication->company_name }}" placeholder="Company Name">
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    E-mail Address:
-                    <input class="form-control form-control-sm" name="email" value="{{ $clientApplication->email }}" placeholder="Email Address">
-                </div>
-            </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-md-3">
                 <div class="form-group">
                     Phone Number:
@@ -72,11 +73,17 @@
                 <div class="col-md-3">    
                     <div class="form-group">
                         Project Due Date:
-                        <input type="text" class="form-control form-control-sm" value="{{ $clientApplication->due_date }}" id="due-date" name="due_date" placeholder="Click to open calendar">
+                        <input type="text" class="form-control form-control-sm due-date" value="{{ $clientApplication->due_date }}"  name="due_date" placeholder="Click to open calendar">
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-2">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        E-mail Address:
+                        <input class="form-control form-control-sm" name="email" value="{{ $clientApplication->email }}" placeholder="Email Address">
+                    </div>
+                </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         Project Deposit Rate:
@@ -86,7 +93,7 @@
             </div>
         <div id="wrapper">
         </div>
-        <div class="row">
+        <div class="row mb-2">
             <div class="col">
                 <div class="form-group">
                     <textarea class="form-control form-control-sm" id="project_show" name="project_description"> {{ $clientApplication->project_description }} </textarea>

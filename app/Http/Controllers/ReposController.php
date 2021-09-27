@@ -21,9 +21,18 @@ class ReposController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $repos = Repo::where(['parent_ref_id' => $request->input('ref_id')])->get();
+
+        if($repos->count() <= 0)
+        {
+            return back()->with('error', "No repositories currently available for this Client Application.");
+        }
+        else
+        {
+        return view('repos.show')->with('repos', $repos);
+        }
     }
 
     /**
@@ -63,16 +72,7 @@ class ReposController extends Controller
      */
     public function show(Request $request)
     {
-        $repos = Repo::where(['parent_ref_id' => $request->input('ref_id')])->get();
 
-        if($repos->count() <= 0)
-        {
-            return back()->with('error', "No repositories currently available for this Client Application.");
-        }
-        else
-        {
-        return view('repos.show')->with('repos', $repos);
-        }
     }
 
     /**

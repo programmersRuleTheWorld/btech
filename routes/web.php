@@ -19,15 +19,19 @@ Route::get('/', 'PagesController@index')->name('index');
 Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/services', 'PagesController@services')->name('services');
-Route::get('/blog', 'PagesController@blog')->name('blog');
+// Route::get('/blog', 'PagesController@blog')->name('blog');
 Route::get('/privacy_policy', 'PagesController@privacy_policy')->name('privacy');
 Route::get('/service_agreement', 'PagesController@service_agreement')->name('service_agreement');
 Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('affiliate_details')->middleware('two_factor_authentication');
-Route::get('/operations_center', 'PagesController@operations_center')->name('operations_center')->middleware('two_factor_authentication');
-Route::get('/development_center', 'PagesController@development_center')->name('development_center')->middleware('two_factor_authentication');
-Route::get('/admin', 'PagesController@admin')->name('admin')->middleware('two_factor_authentication');
-Route::post('/{clientapplication}/payment', 'PagesController@client_application_payment')->name('client_application_payment');
-Route::post('/{clientapplication}/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit');
+Route::get('/admin/{user?}', 'PagesController@admin')->name('admin')->middleware('two_factor_authentication');
+Route::post('/payment', 'PagesController@client_application_payment')->name('client_application_payment');
+Route::post('/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit');
+Route::post('/services_payment', "PagesController@client_application_services")->name('client_application_services');
+Route::post('/dashboard_privileged/{user}', "DashboardController@privileged")->name('dashboard_privileged');
+
+
+//query routes
+Route::post('/admin/querySearch', 'QueriesController@adminSearch')->name('adminSearch');
 
 //custom ClientApplicationsController routes
 Route::patch('/clientapplications/appendto', 'ClientApplicationsController@appendto')->name('clientapplications.appendto')->middleware('two_factor_authentication');
@@ -53,6 +57,7 @@ Route::resource('repos', 'ReposController')->middleware('two_factor_authenticati
 Route::resource('bugs', 'BugsController')->middleware('two_factor_authentication');
 Route::resource('securityanalyses', 'SecurityAnalysesController')->middleware('two_factor_authentication');
 Route::resource('threatitems', 'ThreatItemsController')->middleware('two_factor_authentication');
+Route::resource('transactions', 'TransactionsController')->middleware('two_factor_authentication');
 
 //custom AffiliateCampaigns routes
 Route::get('/affiliatecampaigns/index/{user}', 'AffiliateCampaignsController@index')->name('affiliatecampaigns.index')->middleware('two_factor_authentication');
@@ -60,15 +65,6 @@ Route::patch('/affiliatecampaigns/update/{affiliatecampaign}', 'AffiliateCampaig
 
 //custom SupportTickets routes
 Route::patch('/supporttickets/{supportticket}/iscomplete', 'SupportTicketsController@iscomplete')->name('supporttickets.iscomplete')->middleware('two_factor_authentication');
-
-//custom Operations routes
-Route::get('/operations_center/operations/{operation}', 'OperationsController@show')->name('operations.show')->middleware('two_factor_authentication');
-
-//custom Repos routes
-Route::post('/operations_center/repos', 'ReposController@show')->name('repos.show')->middleware('two_factor_authentication');
-
-//custom Bugs routes
-Route::put('/development_center/repos/bugs/isComplete/{bug}', 'BugsController@isComplete')->name('bugs.iscomplete')->middleware('two_factor_authentication');
 
 //custom ServiceContracts routes
 Route::get('/servicecontracts/download/{servicecontract}', 'ServiceContractsController@download')->name('servicecontracts.download')->middleware('two_factor_authentication');
@@ -94,7 +90,19 @@ Route::post('/2fa', 'TwoFactorController@verifyToken')->name('2fa.verify');
 
 //payment intents generation route
 
-Route::post('/paymentintents', 'PaymentIntentsController@generate')->name('paymentIntents');
+//client application hydration routes
+Route::post('/clientapplication/data', 'DataHydrationController@clientapplication');
+Route::get('/clientapplication/privacy', 'DataHydrationController@privacy');
+Route::post('/breakdownlists/blDateUpdate', 'DataHydrationController@blDateUpdate')->name('blDateUpdate');
+Route::post('/breakdownlists/blDelete', 'DataHydrationController@blDelete')->name('blDelete');
+Route::post('/breakdownitems/biStatusUpdate', 'DataHydrationController@biStatusUpdate')->name('biStatusUpdate');
+Route::post('/breakdownitems/biDelete', 'DataHydrationController@biDelete')->name('biDelete');
+Route::post('/breakdownitems/biPriceUpdate', 'DataHydrationController@biPriceUpdate')->name('biPriceUpdate');
+Route::post('/comments/commentDelete', 'DataHydrationController@commentDelete')->name('commentDelete');
+Route::post('/comments/commentCreate', 'DataHydrationController@commentCreate')->name('commentCreate');
+Route::post('/payment/hydration', 'DataHydrationController@paymentHydration')->name('paymentHydration');
+
+//payment hydration routes
 
 //custom login route
 Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistrationForm')->name('register');

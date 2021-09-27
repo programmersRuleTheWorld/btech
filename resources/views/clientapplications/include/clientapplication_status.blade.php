@@ -1,23 +1,23 @@
 @if($clientApplication->project_status === "follow-up")
-    <td class="follow-up">
+    <div class="follow-up">
 @endif
 @if($clientApplication->project_status === "unpaid")
-    <td class="unpaid">
+    <div class="unpaid">
 @endif
 @if($clientApplication->project_status === "complete")
-    <td class="complete">
+    <div class="complete">
 @endif
 @if($clientApplication->project_status === "urgent")
-    <td class="urgent">
+    <div class="urgent">
 @endif
 @if($clientApplication->project_status === "late")
-    <td class="late">
+    <div class="late">
 @endif
 @if($clientApplication->project_status === "on-time")
-    <td class="on-time">
+    <div class="on-time">
 @endif
 @if($clientApplication->project_status === "refund")
-    <td class="refund">
+    <div class="refund">
 @endif
 {{ strToUpper($clientApplication->project_status) }}
-    </td>
+    </div>
