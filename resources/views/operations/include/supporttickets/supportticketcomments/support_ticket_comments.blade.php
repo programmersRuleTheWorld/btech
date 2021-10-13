@@ -1,41 +1,39 @@
 @if($supportTicket->supportTicketComments->count() > 0)
-<table class="table table-condensed table-borderless">
-    <tr>
-    <th>
-        Respondent:
-    </th>
-    <th>
-        Time:
-    </th>
-    <th>
-        Ticket Comment:
-    </th>
-    </tr>
+    <div class="row">
+        <div class="col">
+            Respondent:
+        </div>
+        <div class="col">
+            Time:
+        </div>
+        <div class="col">
+            Ticket Comment:
+        </div>
+    </div>
 @foreach($supportTicket->supportTicketComments as $supportTicketComment)
-<tr>
-<td>
-    {{ $supportTicketComment->respondent_type }}
-</td>
-<td>
-    {{ $supportTicketComment->created_at }}
-</td>
-<td>
-    {{ $supportTicketComment->comment }}
-</td>
-<td>
-    @can('delete', $supportTicketComment)
-        <form action="{{ route('supportticketcomments.destroy', [$supportTicketComment->id]) }}" method="POST">
-            @method('DELETE')
-            @csrf
-            <button class="btn btn-dark text-info" type="submit">Delete</button>
-        </form>
-    @endcan
-</td>
-</tr>
+<div class="row">
+    <div class="col">
+        {{ $supportTicketComment->respondent_type }}
+    </div>
+    <div class="col">
+        {{ $supportTicketComment->created_at }}
+    </div>
+    <div class="col">
+        {{ $supportTicketComment->comment }}
+    </div>
+    <div class="col">
+        @can('delete', $supportTicketComment)
+            <form action="{{ route('supportticketcomments.destroy', [$supportTicketComment->id]) }}" method="POST">
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-dark text-info" type="submit">Delete</button>
+            </form>
+        @endcan
+    </div>
+</div>
 @endforeach
-</table>
 @else
-<p class="text-center">
-There are not yet any comments on this support ticket
-</p>
+    <p class="text-center">
+        There are not yet any comments on this support ticket
+    </p>
 @endif

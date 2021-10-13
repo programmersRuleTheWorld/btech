@@ -29,16 +29,16 @@ class PaymentStatusChange
     public function handle(BreakdownItemPaymentStatusChange $event)
     {
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id])->get();
-        $deposits = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'deposit'])->get();
         $payments = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'payment'])->get();
+        $deposits = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'deposit'])->get();
 
         if($breakdownItems->count() > 0)
         {
-            if($deposits->sum('transaction_amount') >= $breakdownItems->sum('item_deposit') && $breakdownItems->sum('item_balance') > 0)
+            if($deposits->sum('transaction_amount') >= $breakdownItems->sum('item_deposit') && $breakdownItems->sum('item_deposit') > 0)
             {
                 $event->breakdownItem->clientApplication->payment_status = 'payment';
             }
-            elseif($deposits->sum('transaction_amount') < $breakdownItems->sum('item_deposit') && $breakdownItems->sum('item_balance') > 0)
+            elseif($deposits->sum('transaction_amount') < $breakdownItems->sum('item_deposit') && $breakdownItems->sum('item_deposit') > 0)
             {
                 $event->breakdownItem->clientApplication->payment_status = 'deposit';
             }
@@ -50,20 +50,26 @@ class PaymentStatusChange
                 
             foreach($breakdownItems as $breakdownItem)
             {
-                if($breakdownItem->item_deposit > $breakdownItem->transactions->sum('transaction_amount'))
+                $itemPayment = Transaction::where(['parent_item_id' => $breakdownItem->item_id, 'transaction_type' => 'payment'])->get();
+                $itemDeposit = Transaction::where(['parent_item_id' => $breakdownItem->item_id, 'transaction_type' => 'deposit'])->get();
+                if($breakdownItem->item_deposit > $itemDeposit->sum('transaction_amount'))
                 {
                     $breakdownItem->payment_status = 'deposit';
                 }
-                elseif($breakdownItem->item_deposit <= $breakdownItem->transactions->sum('transaction_amount'))
+                elseif($breakdownItem->item_deposit <= $itemDeposit->sum('transaction_amount'))
                 {
                     $breakdownItem->payment_status = 'payment';
                 }
-                elseif($breakdownItem->item_balance == 0 && $breakdownItem->item_deposit == 0)
+                elseif($breakdownItem->item_balance == 0 && 
+                $breakdownItem->item_deposit == 0 || 
+                $breakdownItem->item_balance == $itemPayment->transaction_amount && 
+                $breakdownItem->item_deposit == $itemDeposit->transaction_amount)
                 {
                     $breakdownItem->payment_status = 'nocharge';
                 }   
                 $breakdownItem->save();
             }
+            return;
         }
     }
 }

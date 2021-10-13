@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-6 mb-2">
+<div class="col mb-2">
     <div class="card bg-info card-limited">
         <div class="card-header">
             <h3 class="text-center">

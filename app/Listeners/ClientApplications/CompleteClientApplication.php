@@ -35,8 +35,6 @@ class CompleteClientApplication
         {
             $clientApplication->project_status = 'complete';
             $clientApplication->save();
-
-            Mail::to($event->clientApplication->email)->send(new MailCreated($event->clientApplication));
         }
     }
 }

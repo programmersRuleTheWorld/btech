@@ -58,8 +58,6 @@ class ReposController extends Controller
         $repo->parent_ref_id = $clientApplication->ref_id;
         $repo->save();
 
-        event(new RepoCreated($repo));
-
         return redirect()->back()->with('success', "A new repo instance has been created for Client Application $clientApplication->ref_id.");
 
     }
@@ -99,8 +97,6 @@ class ReposController extends Controller
         $repo->repo_url = $request->input('repo_url');
         $repo->latest_commit = $request->input('latest_commit');
         $repo->save();
-
-        event(new RepoUpdated($repo));
         
         return redirect()->route('development_center')->with('success', "Repo type \"$repo->repo_type\" for Client Application $repo->parent_ref_id has been successfully updated.");
     }

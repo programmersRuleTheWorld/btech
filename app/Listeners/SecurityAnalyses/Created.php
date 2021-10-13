@@ -3,8 +3,6 @@
 namespace App\Listeners\SecurityAnalyses;
 
 use App\Events\SecurityAnalyses\SecurityAnalysisCreated;
-use App\Mail\SecurityAnalyses\Created as MailCreated;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -28,6 +26,6 @@ class Created
      */
     public function handle(SecurityAnalysisCreated $event)
     {
-        Mail::to($event->securityAnalysis->operation->clientApplication->email)->send(new MailCreated($event->securityAnalysis));
+        //
     }
 }

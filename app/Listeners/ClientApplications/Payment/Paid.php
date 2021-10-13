@@ -31,24 +31,31 @@ class Paid
      */
     public function handle(ClientApplicationPaymentPaid $event)
     {
-        $breakdownList = BreakdownList::find($event->clientApplication);
-        session()->forget('clientId');
+        $breakdownListArray = json_decode($event->clientApplication, true);
 
-        foreach($breakdownList->breakdownItems as $breakdownItem)
-        {
-            if(($breakdownItem->item_balance - $breakdownItem->transactions->sum('transaction_amount')) < $breakdownItem->item_balance)
+            $breakdownLists = collect(BreakdownList::find($breakdownListArray['keys']));
+
+            //        session()->forget('clientId');
+        
+        foreach($breakdownLists as $breakdownList)
+        {        
+            foreach($breakdownList->breakdownItems as $breakdownItem)
             {
-            $transaction = new Transaction();
-            $transaction->parent_item_id = $breakdownItem->item_id;
-            $transaction->parent_ref_id = $breakdownItem->parent_ref_id;
-            $transaction->parent_list_id = $breakdownItem->parent_list_id;
-            $transaction->transaction_description = $breakdownItem->item_description;
-            $transaction->transaction_type = $breakdownItem->clientApplication->payment_status;
-            $transaction->transaction_status = 'paid';
-            $transaction->transaction_amount = ($breakdownItem->item_balance - $breakdownItem->transactions->sum('transaction_amount'));
-            $transaction->save();
-            
-            event(new BreakdownItemPaymentStatusChange($breakdownItem));
+                $payment = Transaction::where(['parent_item_id' => $breakdownItem->item_id, 'transaction_type' => 'payment'])->get();
+                if($breakdownItem->item_balance > $payment->sum('transaction_amount'))
+                {
+                $transaction = new Transaction();
+                $transaction->parent_item_id = $breakdownItem->item_id;
+                $transaction->parent_ref_id = $breakdownItem->parent_ref_id;
+                $transaction->parent_list_id = $breakdownItem->parent_list_id;
+                $transaction->transaction_description = $breakdownItem->item_description;
+                $transaction->transaction_type = $breakdownItem->clientApplication->payment_status;
+                $transaction->transaction_status = 'paid';
+                $transaction->transaction_amount = ($breakdownItem->item_balance - $payment->sum('transaction_amount'));
+                $transaction->save();
+
+                event(new BreakdownItemPaymentStatusChange($breakdownItem));
+                }
             }
         }
     }

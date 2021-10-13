@@ -11,16 +11,14 @@ class Created extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $clientApplication;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($clientApplication)
+    public function __construct()
     {
-        $this->clientApplication = $clientApplication;
+        //
     }
 
     /**
@@ -30,6 +28,6 @@ class Created extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail/clientapplications/created');
+        return $this->markdown('emails.clientapplications.created');
     }
 }

@@ -18,7 +18,7 @@ use Ramsey\Uuid\Uuid;
 Route::get('/', 'PagesController@index')->name('index');
 Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
-Route::get('/services', 'PagesController@services')->name('services');
+Route::get('/company_services', 'PagesController@services')->name('company_services');
 // Route::get('/blog', 'PagesController@blog')->name('blog');
 Route::get('/privacy_policy', 'PagesController@privacy_policy')->name('privacy');
 Route::get('/service_agreement', 'PagesController@service_agreement')->name('service_agreement');
@@ -50,6 +50,7 @@ Route::resource('breakdownlists', 'BreakdownListsController')->middleware('two_f
 Route::resource('breakdownitems', 'BreakdownItemsController')->middleware('two_factor_authentication');
 Route::resource('users', 'UsersController')->middleware('two_factor_authentication');
 Route::resource('servicecontracts', 'ServiceContractsController')->middleware('two_factor_authentication');
+Route::resource('services', 'ServicesController')->middleware('two_factor_authentication');
 Route::resource('supporttickets', 'SupportTicketsController')->middleware('two_factor_authentication');
 Route::resource('supportticketcomments', 'SupportTicketCommentsController')->middleware('two_factor_authentication');
 Route::resource('operations', 'OperationsController')->middleware('two_factor_authentication');
@@ -88,21 +89,28 @@ Auth::routes([
 Route::get('/2fa', 'TwoFactorController@show2faForm')->name('2fa')->middleware('auth');
 Route::post('/2fa', 'TwoFactorController@verifyToken')->name('2fa.verify');
 
+
 //payment intents generation route
+Route::post('/paymentintent', 'PaymentsController@paymentIntent')->middleware('two_factor_authentication');
 
 //client application hydration routes
 Route::post('/clientapplication/data', 'DataHydrationController@clientapplication');
 Route::get('/clientapplication/privacy', 'DataHydrationController@privacy');
 Route::post('/breakdownlists/blDateUpdate', 'DataHydrationController@blDateUpdate')->name('blDateUpdate');
 Route::post('/breakdownlists/blDelete', 'DataHydrationController@blDelete')->name('blDelete');
+Route::post('/breakdownlists/blCreate', 'DataHydrationController@blCreate')->name('blCreate');
 Route::post('/breakdownitems/biStatusUpdate', 'DataHydrationController@biStatusUpdate')->name('biStatusUpdate');
+Route::post('/breakdownitems/biCreate', 'DataHydrationController@biCreate')->name('biCreate');
 Route::post('/breakdownitems/biDelete', 'DataHydrationController@biDelete')->name('biDelete');
 Route::post('/breakdownitems/biPriceUpdate', 'DataHydrationController@biPriceUpdate')->name('biPriceUpdate');
 Route::post('/comments/commentDelete', 'DataHydrationController@commentDelete')->name('commentDelete');
 Route::post('/comments/commentCreate', 'DataHydrationController@commentCreate')->name('commentCreate');
-Route::post('/payment/hydration', 'DataHydrationController@paymentHydration')->name('paymentHydration');
+
+//webhook endpoints
+Route::post('/ca_paid', 'WebhookEventControllers\ClientApplicationPaidController@paymentintent_succeeded');
 
 //payment hydration routes
+Route::post('/payment/hydration', 'DataHydrationController@paymentHydration')->name('paymentHydration');
 
 //custom login route
 Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistrationForm')->name('register');

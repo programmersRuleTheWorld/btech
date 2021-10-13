@@ -30,7 +30,5 @@ class Opened
     {
         $event->supportTicket->operation->clientApplication->support = true;
         $event->supportTicket->operation->clientApplication->save();
-
-        Mail::to($event->supportTicket->operation->clientApplication->email)->send(new MailOpened($event->supportTicket));
     }
 }

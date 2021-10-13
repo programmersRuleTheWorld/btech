@@ -2,26 +2,28 @@
 
     if(window.location.pathname == '/payment') 
     {
-        var totalSelected = document.getElementById('totalSelected');
+        window.totalSelected = document.getElementById('totalSelected');
         var csrf = totalSelected.children[0].value;
-        var checkBoxes = document.getElementsByClassName('checkbox');
-        var checkBoxesArray = Array();
+        window.checkBoxes = document.getElementsByClassName('checkbox');
+        window.payableArray = Array();
 
         for(i = 0; i < checkBoxes.length; i++)
         {            
             checkBoxes[i].onchange = function()
             {
-                var checkBoxesArray = Array();
-
                 for(i = 0; i < checkBoxes.length; i++)
                 {
                     if(checkBoxes[i].checked == true)
                     {
-                    checkBoxesArray.push(checkBoxes[i].value);
+                        payableArray.push(checkBoxes[i].value);
+                    }
+                    else
+                    {
+                        payableArray.pop(checkBoxes[i].value);
                     }
                 }
 
-                const data = { 'checkBoxesArray': checkBoxesArray };
+                const data = { 'payableArray': payableArray };
         
                 fetch('/payment/hydration', {
                 method: 'POST', // or 'PUT'
@@ -39,7 +41,26 @@
                 .catch((error) => {
                 console.error('Error:', error);
                 });
+
+                paymentSubmission()
             }
         }   
+
+        function paymentSubmission()
+{
+  const data = {'payableArray': payableArray, 'pathname': window.location.pathname}
+
+  fetch("/paymentintent", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'X-CSRF-TOKEN': csrf,
+    },
+    body: JSON.stringify(data),
+  })
+    .then(function(result) {
+      return result.json();
+    });  
+}
 
     }

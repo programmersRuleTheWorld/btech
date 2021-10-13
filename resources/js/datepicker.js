@@ -1,11 +1,10 @@
 import datepicker from 'js-datepicker';
 
-if(document.getElementsByClassName('due-date') != typeof('undefined'))
+window.datePicker = function datePicker()
 {
-
     var elems = document.getElementsByClassName('due-date')
-    var array = Array.from(elems)
-    array.forEach((element) =>
+    window.dateArray = Array.from(elems)
+    dateArray.forEach((element) =>
     datepicker(element, {
         formatter: (input, date, instance) => {
             const value = date.toLocaleDateString();
@@ -13,5 +12,11 @@ if(document.getElementsByClassName('due-date') != typeof('undefined'))
         }
     })
     )
+}
 
+
+
+if(document.getElementsByClassName('due-date') != typeof('undefined'))
+{
+    datePicker();
 }

@@ -37,7 +37,5 @@ class Closed
         }
         $threatItem->securityAnalysis->operation->clientApplication->vulnerability = false;
         $threatItem->securityAnalysis->operation->clientApplication->save();
-
-        Mail::to($event->threatItem->securityAnalysis->operation->clientApplication->email)->send(new MailClosed($event->threatItem));
     }
 }

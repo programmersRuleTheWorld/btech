@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('name');
             $table->string('duration');
             $table->unsignedBigInteger('cost');
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();
         });

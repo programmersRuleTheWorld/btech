@@ -43,7 +43,5 @@ class Updated
             $event->clientApplication->payment_status = 'nocharge';
         }
             $event->clientApplication->save();
-
-        Mail::to($event->clientApplication->email)->send(new MailUpdated($event->clientApplication));
     }
 }

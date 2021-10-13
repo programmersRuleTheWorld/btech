@@ -30,7 +30,5 @@ class Opened
     {
         $event->bug->repo->clientApplication->bug = true;
         $event->bug->repo->clientApplication->save();
-
-        Mail::to($event->bug->repo->clientApplication->email)->send(new MailOpened($event->bug));
     }
 }

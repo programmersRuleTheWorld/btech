@@ -17,7 +17,7 @@
         Price
     </div>
 </div>
-
+    <div class="biList">
     @foreach($breakdownList->breakdownItems as $breakdownItem)
     <div class="row text-center biField">
             <div class="col">
@@ -34,9 +34,9 @@
             </div>
             <div class="col">
             @can('update', $breakdownItem)
-            <input type="hidden" class="itemId" value="{{$breakdownItem->item_id}}">
+            <input type="hidden" class="itemId" value="{{ $breakdownItem->item_id }}">
             @csrf
-            <button type="submit" class="btn btn-dark text-info biStatusUpdateButton">Status</button>
+            <buparentNode.tton type="submit" class="btn btn-dark text-info biStatusUpdateButton">Status</button>
             @endcan   
             </div>
             @can('delete', $breakdownItem)
@@ -57,13 +57,14 @@
                 ${{ $breakdownItem->item_balance }}
             </div>
             @else
-            <div class="text-danger bg-dark text-left border border-info biPriceField col-md-3" id="biPrice" value="{{ $breakdownItem->item_price }}">
+            <div class="text-danger bg-dark text-left border border-info biPriceField col-md-3" value="{{ $breakdownItem->item_price }}">
                 NO CHARGE
                 </div>
                 @endif
             </div>
             
     @endforeach
+    </div>
     <div class="row">
         <div class="col col-md-3">
             Subtotal:

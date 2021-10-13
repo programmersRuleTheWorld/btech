@@ -22,8 +22,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="{{ route('services') }}">
-                    {{ __('Services') }}
+                <a class="nav-link text-center" href="{{ route('company_services') }}">
+                    {{ __('Company Services') }}
                 </a>
             </li>
             
@@ -56,7 +56,7 @@
             @endif
         @else
             <li class="nav-item dropdown">
-            <button class="btn btn-info nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                    
+            <button class="btn btn-info nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">                    
                 {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
             </button>
                 

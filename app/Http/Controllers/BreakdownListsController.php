@@ -52,8 +52,6 @@ class BreakdownListsController extends Controller
         $breakdownList->list_description = $request->input('list_description');
         $breakdownList->save();
 
-        event(new BreakdownListCreated($breakdownList));
-
         return redirect()->route('clientapplications.show', $breakdownList->clientApplication)->with('success', "Breakdown List added!");
     }
 

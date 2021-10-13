@@ -1,65 +1,53 @@
 @if($operations->count() > 0)
-<div class="table-responsive">
-    <table class="table table-borderless table-condensed text-center">
-<tr class="font-weight-bold h5">
-    <td>
-        Service Type:
-    </td>
-    <td>
-        Domain Name:
-    </td>
-    <td>
-        Uptime Status:
-    </td>
-    <td>
-        Payment Status:
-    </td>
-</tr>
+
 @foreach($operations as $operation)
 @can('view', $operation)
-<tr>
-    <td>
-        {{ $operation->clientApplication->project_type }}
-    </td>
-    <td>
-    @if($operation->clientApplication->project_type === "Web Design/Development")
-        {{ $operation->domain_name }}
+<div class="row mb-1">
+    <div class="col">
+    Service Type:{{ $operation->clientApplication->project_type }}
+    </div>
+    <div class="col">
+    @if($operation->clientApplication->project_type === "Web Design/Development" && $operation->clientApplication->domain_name != null)
+    Domain Name:{{ $operation->domain_name }}
     @else
-    None specified
+    Domain Name: None specified
     @endif
-    </td>
+    
+    @if($operation->clientApplication->project_type != "Web Design/Development" && $operation->clientApplication->project_name != null)
+    Project Name:{{ $operation->project_name }}
+    @endif
+
+    </div>
     @if($operation->uptime_status === 'running')
-    <td class="bg-success">
+    <div class="col bg-success">
     @elseif($operation->uptime_status === 'maintenance')
-    <td class="bg-alert">
+    <div class="col bg-alert">
     @else
-    <td class="bg-danger">
+    <div class="col bg-danger">
     @endif
-        {{ ucfirst($operation->uptime_status) }}
-    </td>
+        Uptime Status: {{ ucfirst($operation->uptime_status) }}
+    </div>
 
     @if($operation->payment_status === 'paid')
-    <td class="bg-success">
+    <div class="col bg-success">
     @elseif($operation->payment_status === 'unpaid')
-    <td class="bg-danger">
+    <div class="col bg-danger">
     @elseif($operation->payment_status === 'refunded')
-    <td class="bg-alert">
+    <div class="col bg-alert">
     @else
-    <td class>
+    <div class="col" class>
     @endif
-        {{ ucfirst($operation->payment_status) }}
-    </td>
-    <td>
+        Payment Status: {{ ucfirst($operation->payment_status) }}
+    </div>
+    <div class="col">
         <form action="{{ route('operations.show', [$operation]) }}" method="GET">
 
-            <button class="btn btn-dark text-info" type="submit">View Operation</button>
+            <button class="btn btn-dark text-info" type="submit">Submit Support Ticket</button>
         </form>
-    </td>
-</tr>
+    </div>
+</div>
 @endcan
 @endforeach
-    </table>
-</div>
 @else
 <div class="text-center">
 You have no operations currently running.

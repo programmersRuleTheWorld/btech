@@ -24,7 +24,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +35,23 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new Service();
+        $service->parent_operation_id = $request->input('parent_operation_id');
+        $service->parent_user_id = $request->input('parent_user_id');
+        $service->parent_ref_id = $request->input('parent_ref_id');
+        $service->name = $request->input('name');
+        $service->duration = $request->input('duration');
+        $service->cost = $request->input('cost');
+        $service->save();
+        
+        if($service->duration == 'monthly')
+        {
+            return redirect()->back()->with('success', "$service->name created! Your service will start when you submit payment and will be renewed monthly.");
+        }
+        else
+        {
+            return redirect()->back()->with('success', "$service->name created! Your service will start when you submit payment.");
+        }
     }
 
     /**

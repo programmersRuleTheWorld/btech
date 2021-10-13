@@ -38,7 +38,5 @@ class Closed
         }
         $bug->repo->clientApplication->bug = false;
         $bug->repo->clientApplication->save();
-
-        Mail::to($event->bug->repo->clientApplication->email)->send(new MailClosed($event->bug));
     }
 }

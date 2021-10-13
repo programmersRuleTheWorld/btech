@@ -1,39 +1,35 @@
-<div class="table-responsive">
-    <table class="table table-borderless table-condensed">
-        <tr>
-            <th>
+        <div class="row">
+            <div class="col">
                 Attack Severity:
-            </th>
-            <th>
+            </div>
+            <div class="col">
                 Attack Surface:
-            </th>
-            <th>
+            </div>
+            <div class="col">
                 Attack Description:
-            </th>
-            <th>
+            </div>
+            <div class="col">
                 Status:
-            </th>
-        </tr>
+            </div>
+        </div>
 @foreach($securityAnalysis->threatItems as $threatItem)
-        <tr>
-            <td>
+        <div class="row">
+            <div class="col">
                 {{ $threatItem->severity }}
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 {{ $threatItem->attack_surface }}
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 {{ $threatItem->description }}
-            </td>
+            </div>
             @include('securityanalyses.include.threatitems.status')
-            <td>
+            <div class="col">
                 <form action="{{ route('threatitems.iscomplete', [$threatItem]) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <button type="submit" class="btn btn-dark text-info">Status</button>
                 </form>
-            </td>
-        </tr>
+            </div>
+        </div>
 @endforeach
-    </table>
-</div>

@@ -6,8 +6,10 @@ use App\ClientApplication;
 use App\BreakdownItem;
 use App\BreakdownList;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use App\Events\BreakdownItems\BreakdownItemPaymentStatusChange;
 use App\Events\BreakdownItems\BreakdownItemStatusChange;
+use App\Events\BreakdownLists\BreakdownListCreated;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -62,14 +64,43 @@ class DataHydrationController extends Controller
         return;
     }
 
-    public function blStatusUpdate()
-    {
+    public function blCreate(Request $request)
+    {        
+        $this->validate($request,
+         [
+            'blDateField' => 'required',
+            'blTitle' => 'required|max:255',
+            'blDescription' => 'required|max:2000',
+        ]);
+        
+        $breakdownList = new BreakdownList();
+        $breakdownList->parent_ref_id = $request->input('ref_id');
+        $breakdownList->due_date = new Carbon($request->input('due_date'));
+        $breakdownList->list_title = $request->input('blTitle');
+        $breakdownList->list_description = $request->input('blDescription');
+        $breakdownList->save();
 
+
+        echo json_encode([
+            'blDateField' => $breakdownList->getDueDate(),
+            'blDescription' => $breakdownList->list_description,
+            'newBlToken' => $breakdownList->list_id,
+            'blTitle' => $breakdownList->list_title,
+        ]);
+
+        return;
     }
 
     public function blDelete(Request $request)
     {
+        $breakdownList = BreakdownList::find($request->input('blToken'));
+        $this->authorize('delete', $breakdownList);
+        $breakdownList->delete();
 
+        echo json_encode([
+            'deleted' => true,
+        ]);
+        return;
     }
 
     public function biStatusUpdate(Request $request)
@@ -102,6 +133,32 @@ class DataHydrationController extends Controller
         }
     }
 
+    public function biCreate(Request $request)
+    {
+        $user = auth()->user();
+        $breakdownItem = new BreakdownItem();
+        $breakdownItem->item_description = $request->input('biDescription');
+        $breakdownItem->frontend = $request->input('biFrontend');
+        $breakdownItem->parent_ref_id = $request->input('ref_id');
+        $breakdownItem->parent_list_id = $request->input('parent_list_id');
+        $breakdownItem->user_id = $user->id;
+        $breakdownItem->save();
+
+        echo json_encode([
+            'biDescription' => $breakdownItem->item_description,
+            'biFrontend' => $breakdownItem->frontend,
+            'biUpdatedAt' => $breakdownItem->getUpdatedAtDate(),
+            'biToken' => $breakdownItem->item_id,
+            'biPrice' => $breakdownItem->item_balance,
+            'parentRefId' => $breakdownItem->parent_ref_id,
+            'parentListId' => $breakdownItem->parent_list_id,
+        ]);
+
+        return;
+        
+
+    }
+
     public function biDelete(Request $request)
     {
         $breakdownItem = BreakdownItem::find($request->input('biToken')); 
@@ -118,23 +175,15 @@ class DataHydrationController extends Controller
         $breakdownItem->breakdownList->save();
         $breakdownItem->clientApplication->save();
 
-        $newItemBalance = $breakdownItem->item_balance;
-        $newListBalance = $breakdownItem->breakdownList->list_balance;
-        $newListDeposit = $breakdownItem->breakdownList->list_deposit;
-        $newProjectBalance = $breakdownItem->clientApplication->project_balance;
-        $newProjectDeposit = $breakdownItem->clientApplication->project_deposit;
-
         $breakdownItem->delete();
 
         event(new BreakdownItemPaymentStatusChange($breakdownItem));
 
         echo json_encode([
-            'newItemBalance' => $newItemBalance,
-            'newListBalance' => $newListBalance,
-            'newListDeposit' => $newListDeposit,
-            'newProjectBalance' => $newProjectBalance,
-            'newProjectDeposit' => $newProjectDeposit,
+            'deleted' => true,
             'CAStatus' => $breakdownItem->clientApplication->payment_status,
+            'listBalance' => $breakdownItem->breakdownList->list_balance,
+            'newProjectBalance' => $breakdownItem->clientApplication->project_balance,
         ]);
 
         return;
@@ -203,7 +252,7 @@ class DataHydrationController extends Controller
 
     public function paymentHydration(Request $request)
     {
-        $keys = array($request->input('checkBoxesArray'));
+        $keys = array($request->input('payableArray'));
         for($i = 0; $i < sizeOf($keys); $i++)
         {
             $breakdownLists = collect(BreakdownList::find($keys[$i]));

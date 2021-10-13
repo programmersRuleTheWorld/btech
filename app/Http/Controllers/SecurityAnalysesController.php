@@ -50,15 +50,13 @@ class SecurityAnalysesController extends Controller
         $securityAnalysis->description = $request->input('description');
         $securityAnalysis->save();
 
-        event(new SecurityAnalysisCreated($securityAnalysis));
-
         return redirect()->route('operations.index', [$request])->with('success', "New Security Analysis created for Operation $securityAnalysis->operation_id");
     }
 
     public function generate(SecurityAnalysis $securityAnalysis)
     {
-        event(new SecurityAnalysisGenerated($securityAnalysis));
-        return null;
+
+        
     }
 
     /**

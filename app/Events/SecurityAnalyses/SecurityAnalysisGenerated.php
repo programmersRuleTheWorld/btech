@@ -14,6 +14,8 @@ class SecurityAnalysisGenerated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $securityAnalysis;
+
     /**
      * Create a new event instance.
      *

@@ -261,30 +261,27 @@
     @endif
 
     <div class="row form-group m-auto">
-    @if($clientApplication->payment_status == 'payment' && ($transactions->sum('transaction_amount') < $clientApplication->project_balance))
+        <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
+        <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
+        <div class="col">
+        @if($clientApplication->payment_status == 'payment')
         <form id="paymentForm" action="{{ route('client_application_payment', [$clientApplication]) }}" method="POST">
-    @elseif($clientApplication->payment_status == 'deposit' && ($deposits->sum('transaction_amount') < $clientApplication->project_deposit))
+    @elseif($clientApplication->payment_status == 'deposit')
         <form id="paymentForm" action="{{ route('client_application_deposit', [$clientApplication]) }}" method="POST">        
     @elseif($clientApplication->payment_status == 'nocharge')    
     <form id="paymentForm" action="" method="POST">        
     @endif
         @csrf
-        <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
-        <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
             <input type="hidden" value="{{ $clientApplication->ref_id }}" name="clientApplication">
-    @if($clientApplication->payment_status == 'payment' && ($transactions->sum('transaction_amount') < $clientApplication->project_balance))
+    @if($clientApplication->payment_status == 'payment')
             <button class="btn btn-dark text-info" id="caPaymentButton" type="submit">Make Payment</button>
 
-    @elseif($clientApplication->payment_status == 'deposit' && ($deposits->sum('transaction_amount') < $clientApplication->project_deposit))
+    @elseif($clientApplication->payment_status == 'deposit')
             <button class="btn btn-dark text-info" id="caPaymentButton" type="submit">Make Deposit</button>
     @else
             <div class="btn btn-dark text-info disabled" id="caPaymentButton">No Charge</div>
-    @endif
-
-    @if($clientApplication->services->count() > 0)
-            <button class="btn btn-dark text-info" id="caServicesButton" type="submit">Services Payment</button>
-    @else
-            <button class="btn btn-dark text-info disabled" id="caServicesButton" type="submit">Services Payment</button>            
-    @endif
-            </form>
+    @endif    
+</form>
+            </div>
         </div>
+

@@ -11,16 +11,14 @@ class Opened extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $supportTicket;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($supportTicket)
+    public function __construct()
     {
-        $this->supportTicket = $supportTicket;
+        //
     }
 
     /**
@@ -30,6 +28,6 @@ class Opened extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail/supporttickets/opened');
+        return $this->markdown('emails.supporttickets.opened');
     }
 }

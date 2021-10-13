@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
+use Carbon\Carbon;
 
 class BreakdownItem extends Model
 {
+    
     protected $attributes = [
         'item_status' => false,
         'payment_status' => 'default',
@@ -34,4 +37,16 @@ class BreakdownItem extends Model
     {
         return $this->hasMany('App\Transaction', 'parent_item_id', 'item_id');
     }
+
+    // getters
+
+    public function getUpdatedAtDate()
+    {
+        if(isset($this->updated_at))
+        {
+            $carbon = new Carbon();
+            return $carbon->parse($this->updated_at)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->updated_at)->day;
+        }
+    }
+
 }

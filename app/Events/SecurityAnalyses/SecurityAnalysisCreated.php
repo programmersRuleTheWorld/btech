@@ -19,9 +19,9 @@ class SecurityAnalysisCreated
      *
      * @return void
      */
-    public function __construct($securityAnalysis)
+    public function __construct()
     {
-        $this->securityAnalysis = $securityAnalysis;
+        //
     }
 
     /**

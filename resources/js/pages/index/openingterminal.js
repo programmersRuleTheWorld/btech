@@ -1,4 +1,5 @@
-var cookie = require('cookie')
+var cookie = require('cookie');
+
 if (cookie.parse(document.cookie).cookieconsent != 'y') {
     var authAccepted = document.createElement('p')
     authAccepted.style.color = 'green'

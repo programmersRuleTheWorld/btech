@@ -27,7 +27,10 @@
                 </h3>
             </div>
             <div class="card-body">
-
+                @if($user->isAdmin() == true)
+            @include('clientapplications.include.comments.store')
+                @endif
+            @include('clientapplications.include.comments.show')
         </div>
         </div>
     </div>

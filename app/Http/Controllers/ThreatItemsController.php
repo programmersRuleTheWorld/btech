@@ -103,7 +103,7 @@ class ThreatItemsController extends Controller
             $threatItem->save();
             event(new ThreatItemOpened($threatItem));
 
-            return redirect()->back()->with('success', "Threat Item successfully reopened.");
+            return redirect()->route('securityanalyses.index', [$threatItem->securityAnalysis->operation->securityAnalyses])->with('success', "Threat Item successfully reopened.");
         }
     }
 

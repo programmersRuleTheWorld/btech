@@ -1,55 +1,51 @@
-                        <div class="table-responsive">
-                        <table class="table table-borderless table-sm  table-condensed">
-                                        <tr class="text-center">
-                                            <th>
+                                        <div class="row">
+                                            <div class="col">
                                                 Post Title
-                                            </th>
-                                            <th>
+                                            </div>
+                                            <div class="col">
                                                 Published On
-                                            </th>
-                                            <th>
+                                            </div>
+                                            <div class="col">
                                                 <a class="btn btn-dark text-info" href="/posts/create">Create Post</a>
-                                            </th>
-                                            <th>
-                                            </th>
-                                        </tr>
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                        </div>
                                         @if(count($posts) > 0)
                                             @foreach($posts as $post)   
-                                                <tr class="text-center">
+                                                <div class="row">
                                                     @if(strlen($post->post_title) >= 26)
-                                                    <td>
+                                                    <div class="col">
                                                         <a class="text-dark" href="/posts/{{ $post->post_id }}">
                                                         <u>{{ substr($post->post_title, 0, 25).'...' }}</u>
                                                         </a>
-                                                    </td>
+                                                    </div>
                                                     @else    
-                                                    <td>
+                                                    <div class="col">
                                                         <a class="text-dark" href="/posts/{{ $post->post_id }}">
                                                             <b>{{ $post->post_title }}</b>
                                                         </a>
-                                                    </td>
+                                                    </div>
                                                     @endif
-                                            <td>
+                                            <div class="col">
                                                 {{ $post->created_at }}
-                                            </td>
-                                                    <td>
+                                            </div>
+                                                    <div class="col">
                                                         <a class="btn btn-dark text-info" href="/posts/{{ $post->post_id }}/edit">
                                                             Edit
                                                         </a>
-                                                    </td>
-                                                    <td>
+                                                    </div>
+                                                    <div class="col">
                                                         <form action="{{ route('posts.destroy', [$post->post_id]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')                           
                                                                 <button type="submit" class="btn btn-dark text-info" >Delete</button>
                                                         </form>
-                                                    </td>
+                                                    </div>
                                                     @endforeach
-                                                </tr>
+                                                </div>
                                         @else
                                             <p class="text-center col-md-6">Nothing posted yet!</p>
                                         @endif
-                                    </table>
-                                </div>
 
                                     {{ $posts->links() }}

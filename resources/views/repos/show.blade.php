@@ -17,6 +17,7 @@
                     <select class="form-control" name="repo_type" value="{{ $repo->repo_type }}">
                         <option value="website">Website</option>
                         <option value="mobile app">Mobile App</option>
+                        <option value="desktop program">Desktop Program</option>
                     </select>
             <button class="btn btn-dark text-info m-2" type="submit">Update Repo</button>
                 </div>

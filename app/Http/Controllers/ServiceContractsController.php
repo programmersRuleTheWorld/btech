@@ -63,8 +63,6 @@ class ServiceContractsController extends Controller
         Storage::disk('local')->makeDirectory('pdfs/' . $serviceContract->clientApplication->email);
         Storage::disk('local')->put('pdfs/' . $serviceContract->clientApplication->email . '/' . $serviceContract->name . '.pdf', $pdf);
 
-        event(new ServiceContractGenerated($serviceContract));
-
         return redirect()->route('clientapplications.show', [$clientApplication->ref_id])->with('success', 'Service contract generated successfully!');
     }
 

@@ -1,9 +1,9 @@
 if (typeof (ref_id.value) != 'undefined') {
     if (typeof (ref_id.value) != 'undefined' && window.location.pathname == '/clientapplications/' + ref_id.value) 
     {
-        var cardHeaders = document.getElementsByClassName('bl-header');
-        var cardHeaderStates = document.getElementsByClassName('bl-header-state');
-        var cardBodies = document.getElementsByClassName('bl-body');
+        window.cardHeaders = document.getElementsByClassName('bl-header');
+        window.cardHeaderStates = document.getElementsByClassName('bl-header-state');
+        window.cardBodies = document.getElementsByClassName('bl-body');
         for(var i = 0; i <= cardBodies.length -1; i++)
         {
             cardBodies[i].style.display = 'none';

@@ -108,9 +108,7 @@ class OperationsController extends Controller
         $operation->uptime_status = $request->input('uptime_status');
         $operation->payment_status = $request->input('payment_status');
         $operation->save();
-
-        event(new OperationUpdated($operation));
-
+        
         return redirect()->route('dashboard')->with('success', "Operation successfully updated for Client Application $operation->parent_ref_id.");
     }
 

@@ -44,10 +44,9 @@ class ClientApplicationCommentsController extends Controller
         $validatedData = $this->validate($request, 
         [
             'comment_body' => 'required',
+            'comment_title' => 'required',
             'comment_status' => 'required'
         ]);
-
-        return 'lol';
 
         $user = auth()->user();
         $clientApplicationComment = new ClientApplicationComment();
@@ -58,9 +57,7 @@ class ClientApplicationCommentsController extends Controller
         $clientApplicationComment->comment_status = $request->input('comment_status');
         $clientApplicationComment->clientApplication->updated_at = ClientApplication::where(['ref_id' => $clientApplicationComment->parent_ref_id])->update(['updated_at' => now()]);
         $clientApplicationComment->save();
-
-        event(new ClientApplicationCommentCreated($clientApplicationComment));
-
+        
         $clientApplication = ClientApplication::find($request->input('ref_id'));
 
         return redirect()->route('clientapplications.show', [$clientApplication])->with('success', "Comment added!");
@@ -109,7 +106,6 @@ class ClientApplicationCommentsController extends Controller
     public function destroy($clientApplicationComment)
     {
         $clientApplicationComment = ClientApplicationComment::find($clientApplicationComment);
-        $commentUpdate = ClientApplication::find($clientApplicationComment->parent_ref_id)->update(['updated_at' => now()]);
         $clientApplicationComment->delete();
 
         return redirect()->back()->with('success',"Comment deleted!");

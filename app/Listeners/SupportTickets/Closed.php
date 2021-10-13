@@ -37,7 +37,5 @@ class Closed
         }
         $supportTicket->operation->clientApplication->support = false;
         $supportTicket->operation->clientApplication->save();
-
-        Mail::to($event->supportTicket->operation->clientApplication->email)->send(new MailClosed($event->supportTicket));
     }
 }

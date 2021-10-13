@@ -26,6 +26,7 @@
                 <div class="row card bg-info m-1">
                     <div class="card-header bl-header">
                         <div class="row m-1">
+                            <input type="hidden" class="breakdownlist" value="{{ $breakdownList->list_id }}">
                             List Total Deposit:
                             <div class="bg-dark text-success text-left ml-1 col-md-2">
                                 ${{ $breakdownList->list_deposit }}

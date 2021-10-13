@@ -40,6 +40,7 @@ class StatusChange
         {
             $event->breakdownItem->breakdownList->list_status = 1;
             $event->breakdownItem->breakdownList->save();
+            
         }
         return;
     }

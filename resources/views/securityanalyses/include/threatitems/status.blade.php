@@ -1,9 +1,9 @@
 @if($threatItem->status == 'open')
-<td class="incomplete">
+<div class="incomplete">
     {{ strToUpper($threatItem->status) }}
-</td>
+</div>
 @elseif($threatItem->status == 'closed')
-<td class="complete">
+<div class="complete">
     {{ strToUpper($threatItem->status) }}
-</td>
+</div>
 @endif

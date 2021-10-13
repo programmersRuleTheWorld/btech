@@ -42,7 +42,9 @@
                     My Posts
                 </h3>
             </div>
+            <div class="card-body">
             @include('dashboard.include.myposts')
+            </div>
         </div>
     </div>
 </div>

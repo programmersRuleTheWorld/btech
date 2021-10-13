@@ -3,7 +3,7 @@
 namespace App\Listeners\ClientApplications\Deposit;
 
 use App\Transaction;
-use App\BreakdownItem;
+use App\BreakdownList;
 use App\ClientApplication;
 use App\Events\BreakdownItems\BreakdownItemPaymentStatusChange;
 use App\Events\ClientApplications\ClientApplicationDepositPaid;
@@ -29,26 +29,37 @@ class Paid
      * @return void
      */
     public function handle(ClientApplicationDepositPaid $event)
-    {
-        $clientApplication = ClientApplication::find($event->clientApplication);
-        $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id, 'payment_status' => 'deposit'])->get();
-        session()->forget('clientId');
+    {    
+        $breakdownListArray = json_decode($event->clientApplication, true);
+
+            $breakdownLists = collect(BreakdownList::find($breakdownListArray['keys']));
+
+            //        session()->forget('clientId');
         
-        foreach($breakdownItems as $breakdownItem)
-        {
-            $deposit = Transaction::where(['parent_item_id' => $breakdownItem->item_id, 'transaction_type' => 'deposit'])->get();
-            $transaction = new Transaction();
-            $transaction->parent_item_id = $breakdownItem->item_id;
-            $transaction->parent_ref_id = $breakdownItem->parent_ref_id;
-            $transaction->parent_list_id = $breakdownItem->parent_list_id;
-            $transaction->transaction_description = $breakdownItem->item_description;
-            $transaction->transaction_type = $clientApplication->payment_status;
-            $transaction->transaction_status = 'paid';
-            $transaction->transaction_amount = ($breakdownItem->item_deposit - $deposit->sum('transaction_amount'));
-            $transaction->save();
+        foreach($breakdownLists as $breakdownList)
+        {        
+            foreach($breakdownList->breakdownItems as $breakdownItem)
+            {
+                $deposit = Transaction::where(['parent_item_id' => $breakdownItem->item_id, 'transaction_type' => 'deposit'])->get();
+                \Log::debug([
+                    $deposit->sum('transaction_amount'),
+                    $breakdownItem->item_deposit,
+                ]);
+                if($breakdownItem->item_deposit > $deposit->sum('transaction_amount'))
+                {
+                $transaction = new Transaction();
+                $transaction->parent_item_id = $breakdownItem->item_id;
+                $transaction->parent_ref_id = $breakdownItem->parent_ref_id;
+                $transaction->parent_list_id = $breakdownItem->parent_list_id;
+                $transaction->transaction_description = $breakdownItem->item_description;
+                $transaction->transaction_type = $breakdownItem->clientApplication->payment_status;
+                $transaction->transaction_status = 'paid';
+                $transaction->transaction_amount = ($breakdownItem->item_deposit - $deposit->sum('transaction_amount'));
+                $transaction->save();
 
-
-            event(new BreakdownItemPaymentStatusChange($breakdownItem));
+                event(new BreakdownItemPaymentStatusChange($breakdownItem));
+                }
+            }
         }
     }
 }

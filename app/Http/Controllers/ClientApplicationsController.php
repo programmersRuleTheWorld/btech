@@ -129,7 +129,7 @@ class ClientApplicationsController extends Controller
         $user = auth()->user();
         $clientApplication = ClientApplication::find($clientApplication);
         $this->authorize('view', $clientApplication);
-        $clientApplicationComments = ClientApplicationComment::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $clientApplicationComments = ClientApplicationComment::where(['parent_ref_id' => $clientApplication->ref_id])->paginate(5, ['*'], 'clientApplicationComments');
         $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $serviceContracts = ServiceContract::where(['parent_ref_id' => $clientApplication->ref_id])->get();
@@ -139,6 +139,7 @@ class ClientApplicationsController extends Controller
         return view('clientapplications/show')->with([
             'clientApplication' => $clientApplication,
             'ref_id' => $clientApplication->ref_id,
+            'comments' => $clientApplication->clientApplicationComments,
             'clientApplicationComments' => $clientApplicationComments,
             'breakdownItems' => $breakdownItems,
             'serviceContracts' => $serviceContracts,

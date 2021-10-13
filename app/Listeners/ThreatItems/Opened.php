@@ -30,7 +30,5 @@ class Opened
     {
         $event->threatItem->securityAnalysis->operation->clientApplication->vulnerability = true;
         $event->threatItem->securityAnalysis->operation->clientApplication->save();
-
-        Mail::to($event->threatItem->securityAnalysis->operation->clientApplication->email)->send(new MailOpened($event->threatItem));
     }
 }
