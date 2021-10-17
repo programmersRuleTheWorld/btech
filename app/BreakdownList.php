@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Transaction;
 
 class BreakdownList extends Model
 {
@@ -17,7 +18,7 @@ class BreakdownList extends Model
 
     protected $fillable = ['list_status'];
 
-    public function clientApplication()
+     public function clientApplication()
     {
         return $this->belongsTo('App\ClientApplication', 'parent_ref_id', 'ref_id');
     }
@@ -39,5 +40,5 @@ class BreakdownList extends Model
             $carbon = new Carbon();
             return $carbon->parse($this->due_date)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->due_date)->day;
         }
-    }
+    } 
 }

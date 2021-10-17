@@ -1,34 +1,32 @@
+
 if(window.location.pathname == '/payment' || window.location.pathname == '/deposit')
 {
-
 // A reference to Stripe.js initialized with your real test publishable API key.
 var stripe = Stripe("pk_test_PizxswoWx6ETSdrqta2omBy400RkXKyv20");
 var csrf = document.getElementById('csrf').value;
 
-
-
 // Disable the button until we have Stripe set up on the page
 document.querySelector("button").disabled = true;
 
-const data = {'payableArray': payableArray, 'pathname': window.location.pathname}
-
-fetch("/paymentintent", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    'X-CSRF-TOKEN': csrf,
-  },
-  body: JSON.stringify(data),
-})
+const data = {
+  'payableArray': window.payableArray, 
+  'pathname': window.location.pathname}
+  fetch("/paymentintent", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'X-CSRF-TOKEN': csrf,
+    },
+    body: JSON.stringify(data),
+  })
   .then(function(result) {
     return result.json();
   })
   .then(function(data) {
     var elements = stripe.elements();
-
     var style = {
       base: {
-        color: "#32325d",
+        color: "black",
         fontFamily: 'Arial, sans-serif',
         fontSmoothing: "antialiased",
         fontSize: "16px",
@@ -53,6 +51,7 @@ fetch("/paymentintent", {
       document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
     });
 
+    
     var form = document.getElementById("payment-form");
     form.addEventListener("submit", function(event) {
       event.preventDefault();
@@ -60,18 +59,18 @@ fetch("/paymentintent", {
       payWithCard(stripe, card, data.clientSecret);
     });
   });
-
-// Calls stripe.confirmCardPayment
-// If the card requires authentication Stripe shows a pop-up modal to
-// prompt the user to enter authentication details without leaving your page.
-var payWithCard = function(stripe, card, clientSecret) {
-  loading(true);
+  
+  // Calls stripe.confirmCardPayment
+  // If the card requires authentication Stripe shows a pop-up modal to
+  // prompt the user to enter authentication details without leaving your page.
+  var payWithCard = function(stripe, card, clientSecret) {
+    loading(true);
   stripe
-    .confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card
-      }
-    })
+  .confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: card
+    }
+  })
     .then(function(result) {
       if (result.error) {
         // Show error to your customer
@@ -81,11 +80,14 @@ var payWithCard = function(stripe, card, clientSecret) {
         orderComplete(result.paymentIntent.id);
       }
     });
-};
-
-/* ------- UI helpers ------- */
-
-// Shows a success message when the payment is complete
+  };
+  
+  /* ------- UI helpers ------- */
+  
+  // Shows a success message when the payment is complete
+  
+  var submit = document.getElementById('submit');
+  submit.className = 'btn btn-dark text-info';
 var orderComplete = function(paymentIntentId) {
   loading(false);
   document

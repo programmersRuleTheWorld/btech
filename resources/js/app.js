@@ -1,13 +1,11 @@
-require('./extern_modules');
 require('./bootstrap');
 require('./pages/admin_panel/logic.js');
 require('./pages/index/client_application');
-if(window.location.pathname == '/payment' || window.location.pathname == '/deposit' || window.location.pathname == '/service_payment')
+require('./client');
 require('./pages/payment/payment/breakdownlist_visibility');
 require('./pages/payment/payment/datahydration');
-require('./pages/payment/deposit/datahydration');
 require('./pages/payment/deposit/breakdownlist_visibility');
-require('./client');
+require('./pages/payment/deposit/datahydration');
 if(ref_id.value != null)
 {
 require('./clientapplications/edit/custom');

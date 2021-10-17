@@ -7,6 +7,8 @@ if (typeof (ref_id.value) != 'undefined') {
         window.blList = Array.from(document.getElementsByClassName('blList'));
         window.caPaymentButton = document.getElementById('caPaymentButton');
         window.paymentForm = document.getElementById('paymentForm');
+        window.depositValue = document.getElementById('depositValue');
+        window.paymentValue = document.getElementById('paymentValue');
         window.pBalance = document.getElementById('pBalance');
 
         require('./hydration_modules/onclicks');

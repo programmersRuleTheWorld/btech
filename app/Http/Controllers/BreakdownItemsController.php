@@ -134,6 +134,8 @@ class BreakdownItemsController extends Controller
         $breakdownItem->breakdownList->list_deposit += $breakdownItem->item_deposit;
         $breakdownItem->clientApplication->project_balance += $breakdownItem->item_balance;
         $breakdownItem->clientApplication->project_deposit += $breakdownItem->item_deposit;
+        $breakdownItem->item_balance * (1 - $breakdownItem->breakdownList->clientApplication->project_deposit_rate);
+        $breakdownItem->breakdownList->list_balance * (1 - $breakdownItem->breakdownList->clientApplication->project_deposit_rate);
         if(isset($breakdownItem->user))
         {
             $breakdownItem->user->user_balance += $breakdownItem->clientApplication->project_balance;

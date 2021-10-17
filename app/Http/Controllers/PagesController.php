@@ -124,6 +124,20 @@ class PagesController extends Controller
             return $breakdownList->breakdownItems->count() > 0;
         });
 
+        $breakdownLists->transform(function($breakdownList)
+        {            
+            $breakdownList->breakdownItems->transform(function($breakdownItem)
+            {
+                $transactions = $breakdownItem->transactions->whereIn('transaction_type', ['payment']);
+                $breakdownItem->item_balance -= $transactions->sum('transaction_amount');
+                return $breakdownItem;
+            });
+            $transactions = $breakdownList->transactions->whereIn('transaction_type', ['payment']);
+            $breakdownList->list_balance -= $transactions->sum('transaction_amount');
+            return $breakdownList;
+        });
+ 
+
         return view('pages.payment.payment')->with([
             'clientApplication' => $clientApplication,
             'breakdownLists' => $breakdownLists,
@@ -138,9 +152,9 @@ class PagesController extends Controller
         {
             return redirect()->route('client_application_payment', [$clientApplication])->with('error', "You entered the deposit page but there are no deposits payable, You are now on the payments page. Please see your outstanding balances.");
         }
-        $breakdownLists = collect(BreakdownList::where('parent_ref_id', $request->clientApplication)
-        ->where('list_deposit', '>', 0)->get());
-        
+        $breakdownLists = BreakdownList::where('parent_ref_id', $request->clientApplication)
+        ->where('list_deposit', '>', 0)->get();
+
         $breakdownLists = $breakdownLists->filter(function($breakdownList)
         {
             $breakdownItems = $breakdownList->breakdownItems->filter(function($breakdownItem)
@@ -153,8 +167,21 @@ class PagesController extends Controller
             });
             $breakdownList->breakdownItems = $breakdownItems;
             return $breakdownList->breakdownItems->count() > 0;
-        });      
-        
+        });
+
+        $breakdownLists->transform(function($breakdownList)
+        {            
+            $breakdownList->breakdownItems->transform(function($breakdownItem)
+            {
+                $transactions = $breakdownItem->transactions->whereIn('transaction_type', ['deposit']);
+                $breakdownItem->item_deposit -= $transactions->sum('transaction_amount');
+                return $breakdownItem;
+            });
+            $transactions = $breakdownList->transactions->whereIn('transaction_type', ['deposit']);
+            $breakdownList->list_deposit -= $transactions->sum('transaction_amount');
+            return $breakdownList;
+        });
+ 
         return view('pages.payment.deposit')->with([
             'breakdownLists' => $breakdownLists,
         ]);

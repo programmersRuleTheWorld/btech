@@ -2,7 +2,8 @@
 
 if(window.location.pathname == '/deposit') 
 {
-    var totalSelected = document.getElementById('totalSelected');
+    window.totalSelected = document.getElementById('totalSelected');
+    window.csrf = totalSelected.children[0].value;
     window.breakdownLists = document.getElementsByClassName('breakdownlist');
     window.payableArray = Array();
 
@@ -10,4 +11,6 @@ if(window.location.pathname == '/deposit')
             {
                 payableArray.push(breakdownLists[i].value);
             }
+            require('../payment/paymentSubmission');
+            paymentSubmission(window.payableArray);
 }   

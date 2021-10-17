@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DateTimeInterface;
+use App\Transaction;
 use Carbon\Carbon;
 
 class BreakdownItem extends Model
@@ -48,5 +49,4 @@ class BreakdownItem extends Model
             return $carbon->parse($this->updated_at)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->updated_at)->day;
         }
     }
-
 }

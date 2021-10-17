@@ -23,6 +23,7 @@ window.biPriceUpdate =        function biPriceUpdate()
                                 pBalance.textContent = ('Project Balance: $' + data.newProjectBalance);
                                 blPriceField[0].textContent = ('$' + data.newListBalance);
                                 biPriceField[0].textContent = ('$' + data.newItemBalance);
+
                                 if(data.newItemBalance > 0)
                                 {
                                     biPriceField[0].className = 'text-success bg-dark text-left border border-info biPriceField'
@@ -36,15 +37,13 @@ window.biPriceUpdate =        function biPriceUpdate()
                                 if(data.CAStatus == 'deposit')
                                 {
                                     caPaymentButton.textContent = 'Make Deposit';
-                                    caPaymentButton.action = "route('client_application_deposit', [$clientapplication])"
-                                    caPaymentButton.method = 'POST'
+                                    paymentForm.action = depositValue.value;
                                     caPaymentButton.className = 'btn btn-dark text-info';
                                 }
                                 else if(data.CAStatus == 'payment')
                                 {
                                     caPaymentButton.textContent = 'Make Payment';
-                                    caPaymentButton.action = "route('client_application_payment', [$clientapplication])"
-                                    caPaymentButton.method = 'POST'
+                                    paymentForm.action = paymentValue.value;
                                     caPaymentButton.className = 'btn btn-dark text-info';
                                 }
                                 else if(data.CAStatus == 'nocharge')

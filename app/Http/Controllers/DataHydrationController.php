@@ -209,6 +209,9 @@ class DataHydrationController extends Controller
         $breakdownItem->breakdownList->list_deposit += $breakdownItem->item_deposit;
         $breakdownItem->clientApplication->project_balance += $breakdownItem->item_balance;
         $breakdownItem->clientApplication->project_deposit += $breakdownItem->item_deposit;
+        $breakdownItem->item_balance -= $breakdownItem->item_deposit;
+        $breakdownItem->breakdownList->list_balance -= $breakdownItem->item_deposit;
+        $breakdownItem->breakdownList->list_balance * (1 - $breakdownItem->breakdownList->clientApplication->project_deposit_rate);
         if(isset($breakdownItem->user))
         {
             $breakdownItem->user->user_balance += $breakdownItem->clientApplication->project_balance;
@@ -252,15 +255,20 @@ class DataHydrationController extends Controller
 
     public function paymentHydration(Request $request)
     {
-        $keys = array($request->input('payableArray'));
-        for($i = 0; $i < sizeOf($keys); $i++)
+        if($request->payableArray != null)
         {
-            $breakdownLists = collect(BreakdownList::find($keys[$i]));
-        }
-        $paymentDue = $breakdownLists->sum('list_balance');
+            $keys = array($request->input('payableArray'));
+            for($i = 0; $i < sizeOf($keys); $i++)
+            {
+                $breakdownLists = collect(BreakdownList::find($keys[$i]));
+            }
+            $paymentDue = $breakdownLists->sum('list_balance');
+        }    
+        else
+        {
+            $paymentDue = 0;
+        }   
         echo json_encode(['paymentDue' => $paymentDue]);
-        
-        
         return;
     }
 }

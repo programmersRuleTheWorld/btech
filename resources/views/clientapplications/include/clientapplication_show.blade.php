@@ -259,8 +259,12 @@
         </div>
     </div>
     @endif
+    
+    <input type="hidden" id="depositValue" value="{{ route('client_application_deposit', [$clientApplication]) }}">
+    <input type="hidden" id="paymentValue" value="{{ route('client_application_payment', [$clientApplication]) }}">
 
     <div class="row form-group m-auto">
+
         <a href="/dashboard" class="btn btn-dark text-info m-1">Back</a>
         <a href="/clientapplications/{{$clientApplication->ref_id}}/edit" class="btn btn-dark text-info m-1">Edit</a>
         <div class="col">

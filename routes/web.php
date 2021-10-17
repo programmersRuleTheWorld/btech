@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use App\BreakdownList;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,9 +118,8 @@ Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistration
 Route::post('/register', 'Auth\RegisterController@register');
     
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('two_factor_authentication');
-    
-Route::get('/mailable', function(){
-    $breakdownItem = App\BreakdownItem::find(1);
-        
-    return new App\Mail\BreakdownItems\StatusChange($breakdownItem);
+Route::get('/bi', function()
+{
+    $breakdownList = BreakdownList::find(10);
+    return $breakdownList->computedDeposit($breakdownList);
 });

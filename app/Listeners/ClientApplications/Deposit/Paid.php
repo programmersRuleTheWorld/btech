@@ -61,5 +61,6 @@ class Paid
                 }
             }
         }
+        session()->forget('paymentIntentId');
     }
 }

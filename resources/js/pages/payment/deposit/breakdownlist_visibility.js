@@ -13,12 +13,12 @@
             {
                 if(this.parentNode.children[1].style.display == 'none')
                 {
-                    this.children[0].children[2].textContent = '[VIEW MODE]';
+                    this.children[0].children[3].textContent = '[VIEW MODE]';
                     this.parentNode.children[1].style.display = 'block';
                 }
                 else if(this.parentNode.children[1].style.display = 'block')
                 {
-                    this.children[0].children[2].textContent = '[HIDE MODE]';
+                    this.children[0].children[3].textContent = '[HIDE MODE]';
                     this.parentNode.children[1].style.display = 'none';
                 }
             }

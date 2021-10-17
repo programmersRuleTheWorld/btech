@@ -84,7 +84,9 @@ class ClientApplicationPaidController
       
           $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
 
-
+          \Log::debug(session('paymentIntentId'));
+          session()->forget('paymentIntentId');
+          \Log::debug(session('paymentIntentId'));
           // Then define and call a method to handle the successful payment intent.
           if($paymentIntent['metadata']['paymentType'] == "payment")
           {
