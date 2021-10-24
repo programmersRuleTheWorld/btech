@@ -42,6 +42,13 @@ class ContactUsController extends Controller
             'body' => 'required'
         ]);
 
+        $message = new ContactUs();
+        $message->name = $request->input('name');
+        $message->phone_number = $request->input('phone_number');
+        $message->email = $request->input('email');
+        $message->body = $request->input('body');
+        $message->save();
+
         return redirect()->back()->with('success', "Thanks for messaging us $message->name, your query
         has been submitted to and will be processed.");
     }

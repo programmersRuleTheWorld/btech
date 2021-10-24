@@ -20,6 +20,7 @@ window.biDelete = function biDelete()
                 {
                     this.parentNode.parentNode.style.display = 'none';
                     pBalance.textContent = ('Project Balance: $' + data.newProjectBalance);
+                    pDeposit.textContent = ('Project Deposit: $' + data.newProjectDeposit);
                     blPriceField.textContent = '$' + data.listBalance;
 
                     console.log(blPriceField)

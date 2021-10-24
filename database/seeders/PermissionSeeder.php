@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
         $deleteClientApplication = new Permission();
         $deleteClientApplication->name = 'Delete Client Application';
         $deleteClientApplication->slug = 'delete-client-application';
-        $deleteClientApplication->category = 'Client';
+        $deleteClientApplication->category = 'Developer';
         $deleteClientApplication->save();
         $appendClientApplication = new Permission();
         $appendClientApplication->name = 'Append Client Application';
@@ -234,29 +234,34 @@ class PermissionSeeder extends Seeder
 
         $storeServiceContract = new Permission();
         $storeServiceContract->name = 'Store Service Contract';
-        $storeServiceContract->slug = 'store-sevice-contract';
+        $storeServiceContract->slug = 'store-service-contract';
         $storeServiceContract->category = 'Developer';
         $storeServiceContract->save();
         $editServiceContract = new Permission();
         $editServiceContract->name = 'Edit Service Contract';
-        $editServiceContract->slug = 'edit-sevice-contract';
+        $editServiceContract->slug = 'edit-service-contract';
         $editServiceContract->category = 'Developer';
         $editServiceContract->save();
         $updateServiceContract = new Permission();
         $updateServiceContract->name = 'Update Service Contract';
-        $updateServiceContract->slug = 'update-sevice-contract';
+        $updateServiceContract->slug = 'update-service-contract';
         $updateServiceContract->category = 'Developer';
         $updateServiceContract->save();
         $showServiceContract = new Permission();
         $showServiceContract->name = 'Show Service Contract';
-        $showServiceContract->slug = 'show-sevice-contract';
+        $showServiceContract->slug = 'show-service-contract';
         $showServiceContract->category = 'Client';
         $showServiceContract->save();
         $deleteServiceContract = new Permission();
         $deleteServiceContract->name = 'Delete Service Contract';
-        $deleteServiceContract->slug = 'delete-sevice-contract';
+        $deleteServiceContract->slug = 'delete-service-contract';
         $deleteServiceContract->category = 'Developer';
         $deleteServiceContract->save();
+        $downloadServiceContract = new Permission();
+        $downloadServiceContract->name = 'Download Service Contract';
+        $downloadServiceContract->slug = 'download-service-contract';
+        $downloadServiceContract->category = 'Client';
+        $downloadServiceContract->save();
 
         $storeOperation = new Permission();
         $storeOperation->name = 'Store Operation';
@@ -459,5 +464,31 @@ class PermissionSeeder extends Seeder
         $deleteSecurityAnalysis->slug = 'delete-security-analysis';
         $deleteSecurityAnalysis->category = 'Developer';
         $deleteSecurityAnalysis->save();
+
+        $storeTransaction = new Permission();
+        $storeTransaction->name = 'Store Transaction';
+        $storeTransaction->slug = 'store-transaction';
+        $storeTransaction->category = 'Developer';
+        $storeTransaction->save();
+        $editTransaction = new Permission();
+        $editTransaction->name = 'Edit Transaction';
+        $editTransaction->slug = 'edit-transaction';
+        $editTransaction->category = 'Developer';
+        $editTransaction->save();
+        $updateTransaction = new Permission();
+        $updateTransaction->name = 'Update Transaction';
+        $updateTransaction->slug = 'update-transaction';
+        $updateTransaction->category = 'Developer';
+        $updateTransaction->save();
+        $showTransaction = new Permission();
+        $showTransaction->name = 'Show Transaction';
+        $showTransaction->slug = 'show-transaction';
+        $showTransaction->category = 'Developer';
+        $showTransaction->save();
+        $deleteTransaction = new Permission();
+        $deleteTransaction->name = 'Delete Transaction';
+        $deleteTransaction->slug = 'delete-transaction';
+        $deleteTransaction->category = 'Developer';
+        $deleteTransaction->save();
     }
 }

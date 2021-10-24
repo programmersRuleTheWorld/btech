@@ -94,7 +94,7 @@ class ClientApplicationsController extends Controller
         $clientApplication->ref_id = mt_rand(100000000000000,999999999999999);
         $clientApplication->auth_code = Uuid::uuid4();
         $auth = $clientApplication->auth_code;
-        event(new ClientApplicationCreated($clientApplication));
+        \Mail::to($clientApplication->email)->queue(new \App\Mail\ClientApplications\Created($clientApplication));
         $clientApplication->auth_code = Hash::make($clientApplication->auth_code);
         $clientApplication->save();
         
@@ -132,9 +132,11 @@ class ClientApplicationsController extends Controller
         $clientApplicationComments = ClientApplicationComment::where(['parent_ref_id' => $clientApplication->ref_id])->paginate(5, ['*'], 'clientApplicationComments');
         $breakdownLists = BreakdownList::where(['parent_ref_id' => $clientApplication->ref_id])->get();
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $clientApplication->ref_id])->get();
-        $serviceContracts = ServiceContract::where(['parent_ref_id' => $clientApplication->ref_id])->get();
-        $transactions = Transaction::where(['parent_ref_id' => $clientApplication->ref_id])->get();
+        $serviceContracts = ServiceContract::where(['parent_ref_id' => $clientApplication->ref_id])->paginate(5, ['*'], 'serviceContracts');
+        $payments = Transaction::where(['parent_ref_id' => $clientApplication->ref_id, 'transaction_type' => 'payment'])->get();
         $deposits = Transaction::where(['parent_ref_id' => $clientApplication->ref_id, 'transaction_type' => 'deposit'])->get();
+        $clientApplication->project_balance -= $payments->sum('transaction_amount');
+        $clientApplication->project_deposit -= $deposits->sum('transaction_amount');
         $count = 1;
         return view('clientapplications/show')->with([
             'clientApplication' => $clientApplication,
@@ -142,12 +144,10 @@ class ClientApplicationsController extends Controller
             'comments' => $clientApplication->clientApplicationComments,
             'clientApplicationComments' => $clientApplicationComments,
             'breakdownItems' => $breakdownItems,
-            'serviceContracts' => $serviceContracts,
             'count' => $count,
             'user' => $user,
             'serviceContracts' => $serviceContracts,
             'breakdownLists' => $breakdownLists,
-            'transactions' => $transactions,
             'deposits' => $deposits,
             ]);
     }

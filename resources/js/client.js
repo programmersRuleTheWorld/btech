@@ -26,18 +26,18 @@ const data = {
     var elements = stripe.elements();
     var style = {
       base: {
-        color: "black",
+        color: "blue",
         fontFamily: 'Arial, sans-serif',
         fontSmoothing: "antialiased",
         fontSize: "16px",
         "::placeholder": {
-          color: "#32325d"
+          color: "blue"
         }
       },
       invalid: {
         fontFamily: 'Arial, sans-serif',
-        color: "#fa755a",
-        iconColor: "#fa755a"
+        color: "red",
+        iconColor: "red"
       }
     };
 
@@ -56,7 +56,14 @@ const data = {
     form.addEventListener("submit", function(event) {
       event.preventDefault();
       // Complete payment when the submit button is clicked
-      payWithCard(stripe, card, data.clientSecret);
+      if(amount > 0)
+      {
+        payWithCard(stripe, card, data.clientSecret);
+      }
+      else
+      {
+        alert('You must pay for at least one Breakdown list before submitting your payment information.');
+      }
     });
   });
   
@@ -92,10 +99,7 @@ var orderComplete = function(paymentIntentId) {
   loading(false);
   document
     .querySelector(".result-message a")
-    .setAttribute(
-      "href",
-      "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-    );
+
   document.querySelector(".result-message").classList.remove("hidden");
   document.querySelector("button").disabled = true;
 };
@@ -115,12 +119,11 @@ var loading = function(isLoading) {
   if (isLoading) {
     // Disable the button and show a spinner
     document.querySelector("button").disabled = true;
-    document.querySelector("#spinner").classList.remove("hidden");
-    document.querySelector("#button-text").classList.add("hidden");
+    document.querySelector("button").classList.add("disabled");
   } else {
     document.querySelector("button").disabled = false;
     document.querySelector("#spinner").classList.add("hidden");
-    document.querySelector("#button-text").classList.remove("hidden");
+    document.querySelector("button").classList.remove("disabled");
   }
 };
 }

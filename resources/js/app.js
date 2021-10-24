@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('./phonemask');
+require('./datepicker');
 require('./pages/admin_panel/logic.js');
 require('./pages/index/client_application');
 require('./client');
@@ -12,5 +14,3 @@ require('./clientapplications/edit/custom');
 require('./clientapplications/show/breakdownlist_visibility');
 require('./clientapplications/show/datahydration');
 }
-require('./phonemask');
-require('./datepicker');

@@ -3,6 +3,7 @@
     if(window.location.pathname == '/payment') 
     {
         window.totalSelected = document.getElementById('totalSelected');
+        window.amount = document.createElement('input').type = 'hidden';
         window.csrf = totalSelected.children[0].value;
         window.checkBoxes = document.getElementsByClassName('checkbox');
         window.payableArray = Array();

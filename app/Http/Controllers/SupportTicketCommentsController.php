@@ -39,6 +39,9 @@ class SupportTicketCommentsController extends Controller
             'comment' => 'required|max:1000',
         ]);
         $user = auth()->user();
+
+        $this->authorize('create', $supportTicketComment);
+
         $supportTicketComment = new SupportTicketComment();
         $supportTicketComment->support_ticket_id = $request->input('support_ticket_id');
         if($user->isAdmin() == true)

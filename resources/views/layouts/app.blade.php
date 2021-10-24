@@ -11,7 +11,7 @@
     <!-- Scripts -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     
     <!-- Fonts -->
@@ -24,11 +24,11 @@
     <title>Bertram Technologies</title>
 </head>
 <body>
-    <div class="container-fluid">   
+    <div class="container-fluid m-1">   
         <div id="app">
             @include('include.messages')
             @include('include.navbar')
-            <div class="p-1 bg-info">
+            <div class="bg-info">
                 <main class="py-4">
                     @yield('content')
                 </main>

@@ -2,9 +2,8 @@
 
 namespace App\Listeners\BreakdownItems;
 
-use App\Events\BreakdownItems\BreakdownItemStatusChange;
 use App\BreakdownItem;
-use App\Mail\BreakdownItems\StatusChange as MailStatusChange;
+use App\Events\BreakdownItems\BreakdownItemStatusChange;
 use App\Mail\BreakdownLists\Completed as MailCompleted;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -40,7 +39,8 @@ class StatusChange
         {
             $event->breakdownItem->breakdownList->list_status = 1;
             $event->breakdownItem->breakdownList->save();
-            
+
+            Mail::to($event->breakdownItem->breakdownList->clientApplication->email)->queue(new MailCompleted($event->breakdownItem->breakdownList));
         }
         return;
     }

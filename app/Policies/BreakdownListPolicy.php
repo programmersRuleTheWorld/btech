@@ -12,6 +12,7 @@ class BreakdownListPolicy
 
     public function before(User $user, $ability)
     {
+        \Log($user->isAdmin());
         return $user->isAdmin();
     }
 

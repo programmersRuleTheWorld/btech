@@ -53,6 +53,7 @@ class PaymentsController extends Controller
           $metadata = [
             'paymentDue' => $paymentDue,
             'paymentType' => $breakdownList->clientApplication->payment_status,
+            'refId' => $breakdownList->parent_ref_id,
             'breakdownLists' => $payableArrayJsonified,
           ];          
         }
@@ -88,7 +89,6 @@ class PaymentsController extends Controller
                   'metadata' => $metadata,
               
                   'currency' => 'usd',
-              
                 ]);
               
                 $output = [

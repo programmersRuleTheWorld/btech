@@ -13,12 +13,14 @@
                 @include('clientapplications.include.comments.comment_status')
             </div>
             </div>
-        <div class="card-body">
-            <form action="{{ route('clientapplicationcomments.destroy', [$clientApplicationComment]) }}" method="POST">
+            <div class="card-body">
+                @can(ClientApplicationComment::class, 'delete')
+                <form action="{{ route('clientapplicationcomments.destroy', [$clientApplicationComment]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-dark text-info ml-auto" type="submit">Delete</button>
             </form>
+            @endcan
             {{ $clientApplicationComment->comment_body }}
         </div>
     </div>

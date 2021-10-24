@@ -18,7 +18,7 @@
             </div>
             @endcan
             @cannot('update', $breakdownList)
-            <h5>Due Date: {{ $breakdownList->getDueDate() }}</h5>
+            <h5 class="text-center">Due Date: {{ $breakdownList->getDueDate() }}</h5>
             @endcannot
                 @include('clientapplications.include.list_status')
                 @can('delete', $breakdownList)
@@ -28,7 +28,7 @@
                     <button class="btn btn-dark text-info blDeleteButton" type="submit">Delete</button>
                 <!-- </form> !-->
                 @endcan
-                <p class="text-left">{{ $breakdownList->list_description }}</p>
+                <p class="text-center">{{ $breakdownList->list_description }}</p>
                 @include('clientapplications.include.breakdownitems.breakdownitems_store')
                 @include('clientapplications.include.breakdownitems.breakdownitems_show')
             </div>

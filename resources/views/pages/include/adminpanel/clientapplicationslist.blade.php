@@ -12,12 +12,9 @@
                                     <div class="card-header">
                                         <div class="row mb-2">
                                         <h3 class="m-auto">{{ $clientApplication->first_name . ' ' . $clientApplication->last_name . ' ' . $clientApplication->ref_id }}</h3><h3>Project Status: {{ $clientApplication->getProjectStatus() }}</h3>
-                                        <form class="ml-auto" action="{{ route('clientapplications.show', [$clientApplication]) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="clientApplication" value="{{ $clientApplication->id }}">
-                                            <button class="btn btn-dark text-info" type="submit">
+                                            <a href="{{ route('clientapplications.show', [$clientApplication->ref_id]) }}" class="btn btn-dark text-info" type="submit">
                                                 View
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="card-body">

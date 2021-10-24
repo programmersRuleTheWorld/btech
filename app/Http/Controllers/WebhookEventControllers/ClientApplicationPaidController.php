@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\WebhookEventControllers;
 
+use App\ClientApplication;
 use App\Events\ClientApplications\ClientApplicationPaymentPaid;
 use App\Events\ClientApplications\ClientApplicationDepositPaid;
 use App\Events\ClientApplications\ClientApplicationCompleted;
@@ -83,10 +84,11 @@ class ClientApplicationPaidController
         case 'payment_intent.succeeded':
       
           $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
+          $clientApplication = ClientApplication::find($paymentIntent['metadata']['refId']);
+          \Mail::to($clientApplication->email)->send(new \App\Mail\ClientApplications\Paid($paymentIntent['metadata']));
 
-          \Log::debug(session('paymentIntentId'));
           session()->forget('paymentIntentId');
-          \Log::debug(session('paymentIntentId'));
+          
           // Then define and call a method to handle the successful payment intent.
           if($paymentIntent['metadata']['paymentType'] == "payment")
           {
@@ -97,6 +99,18 @@ class ClientApplicationPaidController
             event(new ClientApplicationDepositPaid($paymentIntent['metadata']['breakdownLists']));
           }      
       
+              // if project's owner was referred by another user, add commission to corresponding affiliate campaign on payment confirmation
+
+              if($clientApplication->user->referred_by != null)
+              {
+                $affiliateCampaign = $clientApplication->user->affiliateCampaign;
+                $affiliateCampaign->campaign_balance = ($affiliateCampaign->commission_rate * ($paymentIntent['metadata']['paymentDue'] / 100));
+                $affiliateCampaign->affiliateUser->user_earnings += $affiliateCampaign->campaign_balance;
+                $affiliateCampaign->affiliateUser->save();
+                $affiliateCampaign->save();
+              }
+              
+
           break;
       
         case 'payment_method.attached':

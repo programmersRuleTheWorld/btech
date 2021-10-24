@@ -6,17 +6,18 @@
 {{ $user->isAdmin() }}
 @endif
 <div class="row mb-2">
-    <div class="col-md-4 mb-2">
+    <!-- <div class="col-md mb-2">
         <div class="card bg-info ">
             <div class="card-header text-center">
                 <h3>Security News</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body carouselcard">
                 @include('pages.include.newsstream')
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-2">
+    !-->
+    <div class="col-md-8 m-auto mb-2">
         <div class="card bg-info">
                 <div class="card-header text-center">
                         <h3>Client Application</h3>
@@ -38,16 +39,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-2">
+<!--    <div class="col-md mb-2">
         <div class="card bg-info ">
                 <div class="card-header text-center">
                         <h3>Our Services</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body carouselcard">
             @include('pages.include.featuredservices')
                     </div>
         </div>
-    </div>
+    </div> !-->
 </div>
 
 

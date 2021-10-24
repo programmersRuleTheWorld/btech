@@ -11,14 +11,16 @@ class Created extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $clientApplication;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($clientApplication)
     {
-        //
+        $this->clientApplication = $clientApplication;
     }
 
     /**

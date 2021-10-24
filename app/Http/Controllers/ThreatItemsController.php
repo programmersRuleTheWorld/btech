@@ -89,6 +89,7 @@ class ThreatItemsController extends Controller
 
     public function isComplete(ThreatItem $threatItem)
     {
+        $this->authorize('update', $threatItem);
         if($threatItem->status == 'open')
         {
             $threatItem->status = 'closed';

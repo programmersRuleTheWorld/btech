@@ -21,6 +21,7 @@ window.biPriceUpdate =        function biPriceUpdate()
                 .then(response => response.json())
                 .then(data => {
                                 pBalance.textContent = ('Project Balance: $' + data.newProjectBalance);
+                                pDeposit.textContent = ('Project Deposit: $' + data.newProjectDeposit);
                                 blPriceField[0].textContent = ('$' + data.newListBalance);
                                 biPriceField[0].textContent = ('$' + data.newItemBalance);
 
@@ -49,6 +50,7 @@ window.biPriceUpdate =        function biPriceUpdate()
                                 else if(data.CAStatus == 'nocharge')
                                 {
                                     caPaymentButton.textContent = 'No Charge';
+                                    paymentForm.action = null;
                                     caPaymentButton.className = 'btn btn-dark text-info disabled';
                                 }
 

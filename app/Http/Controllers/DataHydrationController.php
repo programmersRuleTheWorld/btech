@@ -20,6 +20,7 @@ class DataHydrationController extends Controller
     public function clientapplication(Request $request)
     {
         $clientApplication = ClientApplication::find($request->refId);
+        $this->authorize('update', $clientApplication);
         $clientApplicationResp = [
             'gov_contract' => $clientApplication->gov_contract,
             'existing_site' => $clientApplication->existing_site,
@@ -56,6 +57,7 @@ class DataHydrationController extends Controller
     public function blDateUpdate(Request $request)
     {
         $breakdownList = BreakdownList::find($request->input('blToken'));
+        $this->authorize('update', $breakdownList);
         $breakdownList->due_date = new Carbon($request->input('blDateField'));
         $breakdownList->save();
 
@@ -72,7 +74,7 @@ class DataHydrationController extends Controller
             'blTitle' => 'required|max:255',
             'blDescription' => 'required|max:2000',
         ]);
-        
+        $this->authorize('create', BreakdownList::class);
         $breakdownList = new BreakdownList();
         $breakdownList->parent_ref_id = $request->input('ref_id');
         $breakdownList->due_date = new Carbon($request->input('due_date'));
@@ -136,6 +138,7 @@ class DataHydrationController extends Controller
     public function biCreate(Request $request)
     {
         $user = auth()->user();
+        $this->authorize('create', BreakdownItem::class);
         $breakdownItem = new BreakdownItem();
         $breakdownItem->item_description = $request->input('biDescription');
         $breakdownItem->frontend = $request->input('biFrontend');
@@ -192,6 +195,7 @@ class DataHydrationController extends Controller
     public function biPriceUpdate(Request $request)
     {
         $breakdownItem = BreakdownItem::find($request->input('biToken'));
+
         $this->authorize('updatePrice', $breakdownItem);
         if($request->input('biPrice') != $breakdownItem->item_balance)
         {
@@ -205,13 +209,12 @@ class DataHydrationController extends Controller
         $breakdownItem->clientApplication->project_deposit -= $breakdownItem->item_deposit;
         $breakdownItem->item_balance = $request->input('biPrice');
         $breakdownItem->item_deposit = $breakdownItem->item_balance * $breakdownItem->breakdownList->clientApplication->project_deposit_rate;
+        $breakdownItem->item_balance -= $breakdownItem->item_deposit;
         $breakdownItem->breakdownList->list_balance += $breakdownItem->item_balance;
         $breakdownItem->breakdownList->list_deposit += $breakdownItem->item_deposit;
         $breakdownItem->clientApplication->project_balance += $breakdownItem->item_balance;
         $breakdownItem->clientApplication->project_deposit += $breakdownItem->item_deposit;
-        $breakdownItem->item_balance -= $breakdownItem->item_deposit;
-        $breakdownItem->breakdownList->list_balance -= $breakdownItem->item_deposit;
-        $breakdownItem->breakdownList->list_balance * (1 - $breakdownItem->breakdownList->clientApplication->project_deposit_rate);
+
         if(isset($breakdownItem->user))
         {
             $breakdownItem->user->user_balance += $breakdownItem->clientApplication->project_balance;
@@ -221,7 +224,7 @@ class DataHydrationController extends Controller
         $breakdownItem->user->save();
         $breakdownItem->save();
         
-        event(new BreakdownItemPaymentStatusChange($breakdownItem));        
+        event(new BreakdownItemPaymentStatusChange($breakdownItem));
 
         $newItemBalance = $breakdownItem->item_balance;
         $newListBalance = $breakdownItem->breakdownList->list_balance;

@@ -14,34 +14,30 @@
             </div>
             <div class="card bg-info col-md-4">
                 @if($affiliateCampaigns->count() > 0)
-                    <div class="table-responsive">
-                        <table class="table table-borderless table-sm table-condensed">
-                            <tr>
+                            <div class="row">
                                 <td class="text-left">
                                     Campaign Count:
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col">
                                     {{ $affiliateCampaigns->count() }}
-                                </td>
-                                <td>
+                                </div>
+                                <div class="col">
                                     Total Earnings:
-                                </td>
+                                </div>
                                 <td class="bg-dark text-success">
                                     {{ $user->user_earnings }}
-                                </td>
-                            </tr>
-                            <tr>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <td class="text-left">
                                     Referred Projects Completed:
-                                </td>
+                                </div>
 
-                                <td>
+                                <div class="col">
                                     {{ $completedProjects }}
-                                </td>
+                                </div>
 
-                            </tr>
-                        </table>
-                </div>
+                            </div>
             </div>
         </div>        
     </div>
@@ -52,48 +48,48 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-borderless table-condensed">
-                <tr>
-                    <td>
+                <div class="row">
+                    <div class="col">
                         Name:
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col">
                         Sign-on Date
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col">
                         Commission Rate
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col">
                         Earnings
-                    </td>
-                </tr>
+                    </div>
+                </div>
                 @foreach($affiliateCampaigns as $affiliateCampaign)
-                <tr>
-                    <td>
+                <div class="row">
+                    <div class="col">
                         {{ $affiliateCampaign->referredUser->first_name . ' ' }}
                         @if(isset($affiliateCampaign->referredUser->last_name))
                         {{ $affiliateCampaign->referredUser->last_name[0] . ' ' }}
                         @endif
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col">
                         {{ $affiliateCampaign->getCreatedAt() }}
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col">
                         {{ $affiliateCampaign->commission_rate }}
-                    </td>
-                    <td class="bg-dark text-success">
+                    </div>
+                    <div class="bg-dark text-success">
                         ${{ $affiliateCampaign->campaign_balance }}
-                    </td>
+                    </div>
                     @if($user->isAdmin())
-                    <td>
+                    <div class="col">
                         <form action="{{ route('affiliatecampaigns.update', [$affiliateCampaign->id]) }}" method="POST">
                         @csrf
                         @method('PATCH')
                             <input class="form-control form-control-sm" type="text" value="{{ $affiliateCampaign->commission_rate }}" name="commission_rate">
                             <button class="btn btn-dark text-info m-2" type="submit">Update Commission</button>
-                    </form>
-                    </td>
+                         </form>
+                    </div>
                     @endif
-                </tr>
+                </div>
                 @endforeach
             </table>
             @else
@@ -101,5 +97,4 @@
             @endif
         </div>
     </div>
-</div>
 @endsection

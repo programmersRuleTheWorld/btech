@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorize(Transaction::class, 'App\Transaction');
+    }
     /**
      * Display a listing of the resource.
      *

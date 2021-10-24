@@ -3,8 +3,6 @@
 namespace App\Listeners\ClientApplications;
 
 use App\Events\ClientApplications\ClientApplicationCompleted;
-use \App\BreakdownList;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -28,16 +26,6 @@ class AddCompletedToAffiliateCampaign
      */
     public function handle(ClientApplicationCompleted $event)
     {
-        $breakdownList = BreakdownList::find($event->clientApplication);
-        $clientApplication = $breakdownList->clientApplication;
-        if($clientApplication->user->referred_by != null)
-        {
-            if($clientApplication->transactions->sum('transaction_amount') >= $clientApplication->project_balance)
-            {
-            $affiliateCampaign = $clientApplication->user->affiliateCampaign;
-            $affiliateCampaign->campaign_balance = ($affiliateCampaign->commission_rate * $clientApplication->transactions->sum('transaction_amount'));
-            $affiliateCampaign->save();
-            }
-        }
+        //
     }
 }

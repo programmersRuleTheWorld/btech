@@ -15,6 +15,7 @@ window.paymentHydration = function paymentHydration(payableArray)
     .then(data => {
         console.log('paymentDue: ' + data.paymentDue)
         window.totalSelected.textContent = '$' + data.paymentDue
+        window.amount = data.paymentDue
 
         require('./paymentSubmission');
         paymentSubmission(window.payableArray);

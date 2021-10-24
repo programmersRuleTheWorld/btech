@@ -7,14 +7,14 @@
     {{ session('status') }}
 </div>
 @endif
-<div class="row mb-5">
+<!-- <div class="row mb-5">
     <div class="col">
         <div class="card bg-info">
             <div class="card-header text-center">
                 Affiliate Panel
             </div>
             <div class="card-body">
-                @include('dashboard.include.affiliate_panel')
+                // zinclude('dashboard.include.affiliate_panel') 
             </div>
         </div>
     </div>
@@ -28,11 +28,11 @@
                 </h3>
             </div>
             <div class="card-body">
-            @include('dashboard.include.myoperations')
+
             </div>
         </div>
     </div>
-</div>
+</div> !-->
 @can('create', App\Post::class)
 <div class="row mb-2">
     <div class="col-md-12">
@@ -59,7 +59,12 @@
                     </h3>
                 </div>
             </div>
-            <div class="card-body">
+        </div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-12">
+        <div class="card-body">
             <div class="col-md-3 mt-2">
                 <div class="text-success text-center bg-dark text-left">
                     My balance: ${{ $user->user_balance }}

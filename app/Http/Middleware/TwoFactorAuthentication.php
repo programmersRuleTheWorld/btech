@@ -17,8 +17,6 @@ class TwoFactorAuthentication
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
-        /*
         if(auth()->user())
         {
             $user = auth()->user();
@@ -28,14 +26,12 @@ class TwoFactorAuthentication
             $user->two_factor_token = Uuid::uuid4();
             $user->save();
     
-            \Mail::to($user)->send(new TwoFactorAuthMail($user->two_factor_token));
+            \Mail::to($user->email)->queue(new TwoFactorAuthMail($user->two_factor_token));
             return redirect('/2fa');
         }
         else
         {
             return redirect()->route('login');
         }
-        */
-
     }
 }

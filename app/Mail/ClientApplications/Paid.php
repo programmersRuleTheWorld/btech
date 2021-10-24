@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\ClientApplications\Payment;
+namespace App\Mail\ClientApplications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,14 +11,16 @@ class Paid extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $paymentIntent;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($paymentIntent)
     {
-        //
+        $this->paymentIntent = $paymentIntent;
     }
 
     /**
@@ -28,6 +30,6 @@ class Paid extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.clientapplications.payment.paid');
+        return $this->markdown('emails.clientapplications.paid');
     }
 }

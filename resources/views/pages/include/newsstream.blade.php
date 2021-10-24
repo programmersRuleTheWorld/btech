@@ -1,4 +1,3 @@
-
 @if($feed)
 
 <div class="bd-example">

@@ -58,7 +58,7 @@ class ClientApplicationCommentPolicy
      */
     public function update(User $user, ClientApplicationComment $clientApplicationComment)
     {
-        //
+        return false;
     }
 
     /**

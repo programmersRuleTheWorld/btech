@@ -28,6 +28,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        \Gate::authorize('show-dashboard');
         $user = auth()->user();
         $clients = User::where('referred_by', $user->affiliate_id)->get();
         $clientApplications = ClientApplication::where(['user_id' => $user->id])->paginate(5, ['*'], 'clientApplications');

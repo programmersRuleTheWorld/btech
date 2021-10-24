@@ -1,24 +1,27 @@
 <?php
 
-namespace App\Mail\ClientApplications\Deposit;
+namespace App\Mail\BreakdownLists;
 
+use App\BreakdownList;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Paid extends Mailable
+class Completed extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $breakdownList;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($breakdownList)
     {
-        //
+        $this->breakdownList = $breakdownList;
     }
 
     /**
@@ -28,6 +31,6 @@ class Paid extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.clientapplications.deposit.paid');
+        return $this->markdown('emails.breakdownlists.completed');
     }
 }

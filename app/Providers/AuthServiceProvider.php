@@ -48,15 +48,5 @@ class AuthServiceProvider extends ServiceProvider
         {
             return $user->isAdmin();
         });
-
-        Gate::define('generate-paymentintent-payment', function($user, $breakdownList)
-        {
-            return $breakdownList->clientApplication->user_id == $user->id;
-        });
-
-        Gate::define('generate-paymentintent-deposit', function($user, $clientApplication)
-        {
-            return $clientApplication->user_id == $user->id;
-        });
     }
 }

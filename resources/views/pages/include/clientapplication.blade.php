@@ -1,5 +1,5 @@
     
-                <form action="{{ route('clientapplications.store') }}" id="services" method="POST">
+                <form action="{{ route('clientapplications.store') }}" class="m-auto" id="services" method="POST">
                 @csrf
                 <div class="row mb-2">
                 <div class="col-md-6">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group"> 
-                        Last Name*:
+                        Last Name:
                         @if(isset($user) && isset($user->last_name))
                         <input id="last_name" name="last_name" class="form-control form-control-sm mb-2" type="text" value="{{ $user->last_name }}">
                         @else
@@ -44,7 +44,7 @@
                 <div class="row mb-2">
                     <div class="col-md-6">
                     <div class="form-group">
-                        Company Name*:
+                        Company Name:
                         <input id="company_name" name="company_name" class="form-control form-control-sm mb-2" type="text" placeholder="Company Name">
                     </div>
                 </div>

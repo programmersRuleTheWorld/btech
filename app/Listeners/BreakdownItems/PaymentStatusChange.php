@@ -29,9 +29,6 @@ class PaymentStatusChange
     public function handle(BreakdownItemPaymentStatusChange $event)
     {
         $breakdownItems = BreakdownItem::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id])->get();
-        $payments = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'payment'])->get();
-        $deposits = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'deposit'])->get();
-
         if($breakdownItems->count() > 0)
         {
             foreach($breakdownItems as $breakdownItem)
@@ -54,8 +51,10 @@ class PaymentStatusChange
                     $breakdownItem->payment_status = 'nocharge';
                 }   
                 $breakdownItem->save();
-                return;
             }
+            $payments = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'payment'])->get();
+            $deposits = Transaction::where(['parent_ref_id' => $event->breakdownItem->parent_ref_id, 'transaction_type' => 'deposit'])->get();
+
             if($deposits->sum('transaction_amount') >= $breakdownItems->sum('item_deposit') && $breakdownItems->sum('item_deposit') > 0)
             {
                 $event->breakdownItem->clientApplication->payment_status = 'payment';
@@ -64,12 +63,12 @@ class PaymentStatusChange
             {
                 $event->breakdownItem->clientApplication->payment_status = 'deposit';
             }
-            elseif($breakdownItems->sum('item_balance') == $deposits->sum('transaction_amount') && $breakdownItems->sum('item_deposit') == $payments->sum('transaction_amount'))
+            elseif($event->breakdownItem->clientApplication->project_balance == 0 && $event->breakdownItem->clientApplication->project_deposit == 0)
             {
                 $event->breakdownItem->clientApplication->payment_status = 'nocharge';
             }
                 $event->breakdownItem->clientApplication->save();
-                
+            
         }
     }
 }

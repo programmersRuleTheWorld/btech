@@ -34,10 +34,9 @@
         </div>
         </div>
     </div>
-    
 </div>
 <div class="row mb-2">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card bg-info">
             <div class="card-header">
                 <h3 class="text-center">
@@ -49,9 +48,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        @include('clientapplications.include.servicecontracts')
-    </div>
 </div>
-        
+    <div class="row mb-2">
+        <div class="col-md-12">
+            @include('clientapplications.include.servicecontracts')
+        </div>
+    </div>        
 @endsection

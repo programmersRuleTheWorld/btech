@@ -173,11 +173,11 @@ class PagesController extends Controller
         {            
             $breakdownList->breakdownItems->transform(function($breakdownItem)
             {
-                $transactions = $breakdownItem->transactions->whereIn('transaction_type', ['deposit']);
+                $transactions = $breakdownItem->transactions->where('transaction_type', 'deposit');
                 $breakdownItem->item_deposit -= $transactions->sum('transaction_amount');
                 return $breakdownItem;
             });
-            $transactions = $breakdownList->transactions->whereIn('transaction_type', ['deposit']);
+            $transactions = $breakdownList->transactions->where('transaction_type', 'deposit');
             $breakdownList->list_deposit -= $transactions->sum('transaction_amount');
             return $breakdownList;
         });

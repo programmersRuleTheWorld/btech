@@ -11,14 +11,16 @@ class Created extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $serviceContract;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($serviceContract)
     {
-        //
+        $this->serviceContract = $serviceContract;
     }
 
     /**

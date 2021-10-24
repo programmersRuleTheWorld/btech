@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use App\BreakdownList;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +22,7 @@ Route::get('/company_services', 'PagesController@services')->name('company_servi
 // Route::get('/blog', 'PagesController@blog')->name('blog');
 Route::get('/privacy_policy', 'PagesController@privacy_policy')->name('privacy');
 Route::get('/service_agreement', 'PagesController@service_agreement')->name('service_agreement');
-Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('affiliate_details')->middleware('two_factor_authentication');
+// Route::get('/affiliate_details', 'PagesController@affiliate_details')->name('affiliate_details')->middleware('two_factor_authentication');
 Route::get('/admin/{user?}', 'PagesController@admin')->name('admin')->middleware('two_factor_authentication');
 Route::post('/payment', 'PagesController@client_application_payment')->name('client_application_payment');
 Route::post('/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit');
@@ -69,7 +68,7 @@ Route::patch('/affiliatecampaigns/update/{affiliatecampaign}', 'AffiliateCampaig
 Route::patch('/supporttickets/{supportticket}/iscomplete', 'SupportTicketsController@iscomplete')->name('supporttickets.iscomplete')->middleware('two_factor_authentication');
 
 //custom ServiceContracts routes
-Route::get('/servicecontracts/download/{servicecontract}', 'ServiceContractsController@download')->name('servicecontracts.download')->middleware('two_factor_authentication');
+Route::post('/servicecontracts/download/{servicecontract}', 'ServiceContractsController@download')->name('servicecontracts.download')->middleware('two_factor_authentication');
 
 //custom BreakdownItems routes    
 Route::put('/breakdownitems/updateprice/{breakdownitem}', 'BreakdownItemsController@updatePrice')->name('breakdownitems.updateprice')->middleware('two_factor_authentication');
@@ -97,15 +96,15 @@ Route::post('/paymentintent', 'PaymentsController@paymentIntent')->middleware('t
 //client application hydration routes
 Route::post('/clientapplication/data', 'DataHydrationController@clientapplication');
 Route::get('/clientapplication/privacy', 'DataHydrationController@privacy');
-Route::post('/breakdownlists/blDateUpdate', 'DataHydrationController@blDateUpdate')->name('blDateUpdate');
-Route::post('/breakdownlists/blDelete', 'DataHydrationController@blDelete')->name('blDelete');
-Route::post('/breakdownlists/blCreate', 'DataHydrationController@blCreate')->name('blCreate');
-Route::post('/breakdownitems/biStatusUpdate', 'DataHydrationController@biStatusUpdate')->name('biStatusUpdate');
-Route::post('/breakdownitems/biCreate', 'DataHydrationController@biCreate')->name('biCreate');
-Route::post('/breakdownitems/biDelete', 'DataHydrationController@biDelete')->name('biDelete');
-Route::post('/breakdownitems/biPriceUpdate', 'DataHydrationController@biPriceUpdate')->name('biPriceUpdate');
-Route::post('/comments/commentDelete', 'DataHydrationController@commentDelete')->name('commentDelete');
-Route::post('/comments/commentCreate', 'DataHydrationController@commentCreate')->name('commentCreate');
+Route::post('/breakdownlists/blDateUpdate', 'DataHydrationController@blDateUpdate')->name('blDateUpdate')->middleware('two_factor_authentication');
+Route::post('/breakdownlists/blDelete', 'DataHydrationController@blDelete')->name('blDelete')->middleware('two_factor_authentication');
+Route::post('/breakdownlists/blCreate', 'DataHydrationController@blCreate')->name('blCreate')->middleware('two_factor_authentication');
+Route::post('/breakdownitems/biStatusUpdate', 'DataHydrationController@biStatusUpdate')->name('biStatusUpdate')->middleware('two_factor_authentication');
+Route::post('/breakdownitems/biCreate', 'DataHydrationController@biCreate')->name('biCreate')->middleware('two_factor_authentication');
+Route::post('/breakdownitems/biDelete', 'DataHydrationController@biDelete')->name('biDelete')->middleware('two_factor_authentication');
+Route::post('/breakdownitems/biPriceUpdate', 'DataHydrationController@biPriceUpdate')->name('biPriceUpdate')->middleware('two_factor_authentication');
+Route::post('/comments/commentDelete', 'DataHydrationController@commentDelete')->name('commentDelete')->middleware('two_factor_authentication');
+Route::post('/comments/commentCreate', 'DataHydrationController@commentCreate')->name('commentCreate')->middleware('two_factor_authentication');
 
 //webhook endpoints
 Route::post('/ca_paid', 'WebhookEventControllers\ClientApplicationPaidController@paymentintent_succeeded');
@@ -118,8 +117,3 @@ Route::get('/register/{referred_by?}', 'Auth\RegisterController@showRegistration
 Route::post('/register', 'Auth\RegisterController@register');
     
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('two_factor_authentication');
-Route::get('/bi', function()
-{
-    $breakdownList = BreakdownList::find(10);
-    return $breakdownList->computedDeposit($breakdownList);
-});

@@ -10,6 +10,7 @@ if (typeof (ref_id.value) != 'undefined') {
         window.depositValue = document.getElementById('depositValue');
         window.paymentValue = document.getElementById('paymentValue');
         window.pBalance = document.getElementById('pBalance');
+        window.pDeposit = document.getElementById('pDeposit');
 
         require('./hydration_modules/onclicks');
 

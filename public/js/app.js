@@ -5209,6 +5209,10 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./phonemask */ "./resources/js/phonemask.js");
+
+__webpack_require__(/*! ./datepicker */ "./resources/js/datepicker.js");
+
 __webpack_require__(/*! ./pages/admin_panel/logic.js */ "./resources/js/pages/admin_panel/logic.js");
 
 __webpack_require__(/*! ./pages/index/client_application */ "./resources/js/pages/index/client_application.js");
@@ -5230,10 +5234,6 @@ if (ref_id.value != null) {
 
   __webpack_require__(/*! ./clientapplications/show/datahydration */ "./resources/js/clientapplications/show/datahydration.js");
 }
-
-__webpack_require__(/*! ./phonemask */ "./resources/js/phonemask.js");
-
-__webpack_require__(/*! ./datepicker */ "./resources/js/datepicker.js");
 
 /***/ }),
 
@@ -5310,18 +5310,18 @@ if (window.location.pathname == '/payment' || window.location.pathname == '/depo
     var elements = stripe.elements();
     var style = {
       base: {
-        color: "black",
+        color: "blue",
         fontFamily: 'Arial, sans-serif',
         fontSmoothing: "antialiased",
         fontSize: "16px",
         "::placeholder": {
-          color: "#32325d"
+          color: "blue"
         }
       },
       invalid: {
         fontFamily: 'Arial, sans-serif',
-        color: "#fa755a",
-        iconColor: "#fa755a"
+        color: "red",
+        iconColor: "red"
       }
     };
     var card = elements.create("card", {
@@ -5338,7 +5338,11 @@ if (window.location.pathname == '/payment' || window.location.pathname == '/depo
     form.addEventListener("submit", function (event) {
       event.preventDefault(); // Complete payment when the submit button is clicked
 
-      payWithCard(stripe, card, data.clientSecret);
+      if (amount > 0) {
+        payWithCard(stripe, card, data.clientSecret);
+      } else {
+        alert('You must pay for at least one Breakdown list before submitting your payment information.');
+      }
     });
   }); // Calls stripe.confirmCardPayment
   // If the card requires authentication Stripe shows a pop-up modal to
@@ -5369,7 +5373,7 @@ if (window.location.pathname == '/payment' || window.location.pathname == '/depo
 
   var orderComplete = function orderComplete(paymentIntentId) {
     loading(false);
-    document.querySelector(".result-message a").setAttribute("href", "https://dashboard.stripe.com/test/payments/" + paymentIntentId);
+    document.querySelector(".result-message a");
     document.querySelector(".result-message").classList.remove("hidden");
     document.querySelector("button").disabled = true;
   }; // Show the customer the error from Stripe if their card fails to charge
@@ -5389,12 +5393,11 @@ if (window.location.pathname == '/payment' || window.location.pathname == '/depo
     if (isLoading) {
       // Disable the button and show a spinner
       document.querySelector("button").disabled = true;
-      document.querySelector("#spinner").classList.remove("hidden");
-      document.querySelector("#button-text").classList.add("hidden");
+      document.querySelector("button").classList.add("disabled");
     } else {
       document.querySelector("button").disabled = false;
       document.querySelector("#spinner").classList.add("hidden");
-      document.querySelector("#button-text").classList.remove("hidden");
+      document.querySelector("button").classList.remove("disabled");
     }
   };
 }
@@ -5690,6 +5693,7 @@ if (typeof ref_id.value != 'undefined') {
     window.depositValue = document.getElementById('depositValue');
     window.paymentValue = document.getElementById('paymentValue');
     window.pBalance = document.getElementById('pBalance');
+    window.pDeposit = document.getElementById('pDeposit');
 
     __webpack_require__(/*! ./hydration_modules/onclicks */ "./resources/js/clientapplications/show/hydration_modules/onclicks.js");
 
@@ -5839,6 +5843,7 @@ window.biDelete = function biDelete() {
     if (data.deleted == true) {
       _this.parentNode.parentNode.style.display = 'none';
       pBalance.textContent = 'Project Balance: $' + data.newProjectBalance;
+      pDeposit.textContent = 'Project Deposit: $' + data.newProjectDeposit;
       blPriceField.textContent = '$' + data.listBalance;
       console.log(blPriceField);
     }
@@ -5876,6 +5881,7 @@ window.biPriceUpdate = function biPriceUpdate() {
     return response.json();
   }).then(function (data) {
     pBalance.textContent = 'Project Balance: $' + data.newProjectBalance;
+    pDeposit.textContent = 'Project Deposit: $' + data.newProjectDeposit;
     blPriceField[0].textContent = '$' + data.newListBalance;
     biPriceField[0].textContent = '$' + data.newItemBalance;
 
@@ -5896,6 +5902,7 @@ window.biPriceUpdate = function biPriceUpdate() {
       caPaymentButton.className = 'btn btn-dark text-info';
     } else if (data.CAStatus == 'nocharge') {
       caPaymentButton.textContent = 'No Charge';
+      paymentForm.action = null;
       caPaymentButton.className = 'btn btn-dark text-info disabled';
     }
 
@@ -6883,6 +6890,7 @@ if (window.location.pathname == '/payment') {
 //client application ajax event implementation
 if (window.location.pathname == '/payment') {
   window.totalSelected = document.getElementById('totalSelected');
+  window.amount = document.createElement('input').type = 'hidden';
   window.csrf = totalSelected.children[0].value;
   window.checkBoxes = document.getElementsByClassName('checkbox');
   window.payableArray = Array();
@@ -6928,6 +6936,7 @@ window.paymentHydration = function paymentHydration(payableArray) {
   }).then(function (data) {
     console.log('paymentDue: ' + data.paymentDue);
     window.totalSelected.textContent = '$' + data.paymentDue;
+    window.amount = data.paymentDue;
 
     __webpack_require__(/*! ./paymentSubmission */ "./resources/js/pages/payment/payment/paymentSubmission.js");
 

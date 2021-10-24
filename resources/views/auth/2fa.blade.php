@@ -5,7 +5,7 @@
 <div class="col-md-6 m-auto">
     <div class="card bg-info">
         <div class="card-header text-center">
-        <img src="{{ asset('images/logos/btlogo.gif') }}" class="img-round float-right" width=40>
+        <img src="{{ asset('images/btlogo.gif') }}" class="img-round float-right" width=100>
             <h3>Two-Factor Authentication In Progress...</h3>
         </div>
         <div class="card-body">

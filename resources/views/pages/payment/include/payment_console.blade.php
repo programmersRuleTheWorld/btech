@@ -24,9 +24,7 @@
 
       <p class="result-message hidden">
 
-        Payment succeeded, see the result in your
-
-        <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+        Payment successful! <a class="btn btn-dark text-info" href="{{ route('dashboard') }}">Return to My User Dashboard</a>.
 
       </p>
 

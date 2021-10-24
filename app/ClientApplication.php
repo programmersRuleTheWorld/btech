@@ -102,7 +102,7 @@ class ClientApplication extends Model
         if(isset($this->due_date))
         {
             $carbon = new Carbon();
-            return $carbon->parse($this->due_date)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->due_date)->day;
+            return $carbon->parse($this->due_date)->englishDayOfWeek . ' ' . $carbon->parse($this->due_date)->englishMonth . ' ' . $carbon->parse($this->due_date)->day . ' ' . $carbon->parse($this->due_date)->year;
         }
     }
 

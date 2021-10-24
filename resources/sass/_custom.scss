@@ -17,7 +17,7 @@ html{
 @media(max-width: 1300px){
     
     html{
-        font-size: .9em;
+        font-size: .7em;
     }
     
     .carousel-caption > h6{
@@ -209,9 +209,30 @@ select.form-control:focus{
 
 //pagination customizations
 
+
 .pagination{
-    border: transparent;
-    margin-left: 2%;
+
+    margin-left: 3%;
+}
+
+.page-link{
+    background: black;
+    border-color:black;
+}
+
+.page-item-active{
+    background: blue;
+    color: black;
+}
+
+.page-item{
+    background: black;
+    color: blue;
+}
+
+li.disabled{
+    background: black;
+    color: blue;
 }
 
 textarea#body{
@@ -374,10 +395,6 @@ textarea#item_description{
 .carousel-indicators.button.active {
     background: rgb(0, 140, 255);
     height: 8px;
-  }
-
-  .carousel-inner{
-    overflow: auto;
   }
 
   .carousel-caption{

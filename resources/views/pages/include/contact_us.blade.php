@@ -9,7 +9,7 @@
                 <div class="card bg-info">
                     <div class="card-body">
                     If you have comments, questions, suggestions, or concerns, please contact us using the
-                    form below; the <b>Media Affairs Bureau</b> will receive your query and respond as 
+                    form below; the appropriate division will receive your query and respond as 
                     soon as possible. We appreciate your feedback!
                     </div>
                 </div>

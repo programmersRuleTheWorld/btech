@@ -46,7 +46,7 @@ class ServiceContractPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->getPermission('store-service-contract') && $user->id == $serviceContract->clientApplication->user_id;
     }
 
     /**
@@ -96,4 +96,10 @@ class ServiceContractPolicy
     {
         //
     }
+
+    public function download(User $user, ServiceContract $serviceContract)
+    {
+        return $user->getPermission('download-service-contract') && $user->id == $serviceContract->clientApplication->user_id;
+    }
+
 }

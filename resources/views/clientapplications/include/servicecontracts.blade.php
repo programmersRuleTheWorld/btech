@@ -13,23 +13,32 @@
             </form>
             @endcan
                 @if($serviceContracts->count() > 0)
-        <h6 class="text-center">All service contracts associated with this project can be accessed below. To download, click the title; to view in your browser, click the corresponding "view" button.</h6>
-        <table class="table table-condensed table-borderless">
-        @foreach($serviceContracts as $serviceContract)
-        <tr>
-        <td>
-        <a class="text-dark" href="{{ route('servicecontracts.download', [$serviceContract]) }}"><u>{!! $serviceContract->name !!}</u></a>
-        </td>
-<!--        <td>
-        <form action="{{ route('servicecontracts.show', [$serviceContract->id]) }}" method="GET">
-        <button class="btn btn-dark text-info" type="submit">View</button>
-        </form>
-        </td> !-->
-        </tr>
-        @endforeach
-        </table>
+                <h6 class="text-center">All service contracts associated with this project can be accessed below. To download, click the title; to view in your browser, click the corresponding "view" button.</h6>
+                @foreach($serviceContracts as $serviceContract)
+                    <div class="row m-1">
+                        <div class="col">
+                            <strong>Name</strong>: {{ $serviceContract->name }}
+                        </div>
+                        <div class="col">
+                            <strong>C Number</strong>: {{ $serviceContract->control_number }}
+                        </div>
+                        <div class="col">
+                            <strong>Created At</strong>: {{ $serviceContract->getCreatedAt() }}
+                        </div>
+                        @can('download', $serviceContract)
+                        <div class="col">
+                            <form action="{{ route('servicecontracts.download', [$serviceContract]) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-dark text-info col-12" type="submit">Download</button>
+                            </form>
+                        </div>
+                        @endcan
+                    </div>
+                @endforeach
+
+                {{ $serviceContracts->links() }}
                 @else
-        <h5 class="text-center">No service contracts currently available for this project</h5>
+                <h5 class="text-center">No service contracts currently available for this project</h5>
                 @endif
-        </div>
+            </div>
     </div>
