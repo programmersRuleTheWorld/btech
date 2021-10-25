@@ -22,6 +22,6 @@
                             </div>
                                 @endforeach
                                 @else
-                        <p class="text-center col-md-6">No projects located.</p>
+                        <p class="text-center col-md-6 m-auto">No projects located.</p>
                     @endif
                         {{ $clientApplications->links() }}

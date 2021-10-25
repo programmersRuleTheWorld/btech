@@ -26,8 +26,8 @@ class PagesController extends Controller
     
     public function index(){
         $user = auth()->user();
+        /*
         $posts = Post::latest()->take(3)->with('user')->get();
-        
         $feed = Feeds::make('https://www.techrepublic.com/rssfeeds/topic/security/?feedType=rssfeeds');
         $feed->set_image_handler('handler_image.php','image');
         $feed->set_cache_location('mysql://root:root@localhost:3306/btech?prefix=sp_');
@@ -35,13 +35,13 @@ class PagesController extends Controller
         $feed->init();      
 
             $items = $feed->get_items(0,6);
-            
+            */
             return view('pages.index')->with(
             [
-                'posts' => $posts,
+//                'posts' => $posts,
                 'user' => $user,
-                'feed' => $feed,
-                'items' => $items,
+                //'feed' => $feed,
+//                'items' => $items,
                 ]
             );
     }

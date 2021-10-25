@@ -1,3 +1,4 @@
+require('./pages/index/openingterminal');
 require('./bootstrap');
 require('./phonemask');
 require('./datepicker');

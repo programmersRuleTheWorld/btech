@@ -12,7 +12,7 @@
                 <h3>Security News</h3>
             </div>
             <div class="card-body carouselcard">
-                @include('pages.include.newsstream')
+
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                         <h3>Our Services</h3>
                     </div>
                     <div class="card-body carouselcard">
-            @include('pages.include.featuredservices')
+
                     </div>
         </div>
     </div> !-->

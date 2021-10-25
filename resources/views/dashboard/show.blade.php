@@ -65,7 +65,7 @@
 <div class="row mb-2">
     <div class="col-md-12">
         <div class="card-body">
-            <div class="col-md-3 mt-2">
+            <div class="col-md-3 m-auto mt-2">
                 <div class="text-success text-center bg-dark text-left">
                     My balance: ${{ $user->user_balance }}
                 </div>
