@@ -1,6 +1,6 @@
 @component('mail::message')
 
-<img src="{{ asset('images/btlogo.gif') }}" width=200>
+<img src="www.bertramtechnologies.com/images/btlogoMinified.gif" width=200>
 
 You successfully made a {{ $paymentIntent['paymentType'] }} of ${{ $paymentIntent['paymentDue'] / 100 }} on {{ now() }} for project {{ $paymentIntent['refId'] }}. Please keep this receipt for your records. Your project balance/deposit totals have been updated to reflect this change.
 

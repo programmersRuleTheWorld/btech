@@ -62,7 +62,7 @@ const data = {
       }
       else
       {
-        alert('You must pay for at least one Breakdown list before submitting your payment information.');
+        alert('You must select at least one payable Breakdown List before submitting your payment information.');
       }
     });
   });

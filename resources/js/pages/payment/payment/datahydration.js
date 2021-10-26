@@ -17,7 +17,7 @@
                     {
                         payableArray.push(this.value);
                     }
-                    else
+                    else if(this.checked == false)
                     {
                         payableArray.pop(this.value);
                     }

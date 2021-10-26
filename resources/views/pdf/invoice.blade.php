@@ -254,10 +254,11 @@ Client Application Details: [NOT ALL FIELDS MAY BE APPLICABLE TO YOUR PROJECT]
                             Transaction Type
                         </th>
                         <th>
-                            Transaction DateTime
+                            Transaction Amount
                         </th>
-                        <th>
-                        </th>
+                            <th>
+                                Transaction DateTime
+                            </th>
                         <th>
                         </th>
                         <th>
@@ -272,10 +273,11 @@ Client Application Details: [NOT ALL FIELDS MAY BE APPLICABLE TO YOUR PROJECT]
                             {{ $transaction->transaction_type }}  
                         </td>
                         <td>
-                            {{ $transaction->created_at }} 
-                        </td>
-                        <td>
-                        </td>
+                            {{ number_format($transaction->transaction_amount, 2) }}
+                            </td>
+                            <td>
+                                {{ $transaction->created_at }} 
+                            </td>
                         <td>
                         </td>
                         <td>

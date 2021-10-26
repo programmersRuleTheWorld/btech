@@ -1,5 +1,5 @@
 @component('mail::message')
-<img src="{{ asset('images/btlogo.gif') }}" width=200>
+<img src="www.bertramtechnologies.com/images/btlogoMinified.gif" width=200>
 
 Hello,
 

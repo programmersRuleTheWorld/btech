@@ -2,19 +2,19 @@
     <div class="biList">
     @foreach($breakdownList->breakdownItems as $breakdownItem)
     <div class="row text-center biField">
-            <div class="col-sm">
+            <div class="col">
             <b>Item</b>: {{ $count++ }}
             </div>
-            <div class="col-sm">
+            <div class="col">
             <b>Description</b>: <b>{{ $breakdownItem->item_description }}</b>
             </div>
-            <div class="col-sm">
+            <div class="col">
             <b>Status</b>: @include('clientapplications.include.item_status')
             </div>    
-            <div class="col-sm">
+            <div class="col">
             <b>Updated At</b>: <small>{{ $breakdownItem->updated_at }}</small>
             </div>
-            <div class="col-sm">
+            <div class="col">
             @can('update', $breakdownItem)
             <input type="hidden" class="itemId" value="{{ $breakdownItem->item_id }}">
             @csrf
@@ -22,13 +22,13 @@
             @endcan   
             </div>
             @can('delete', $breakdownItem)
-            <div class="col-sm">
+            <div class="col">
                     @csrf
                 <button class="btn btn-dark text-info biDeleteButton" type="submit">Delete</button>
             </div>
             @endcan
             @can('updatePrice', $breakdownItem)
-            <div class="col-sm">
+            <div class="col">
                     @csrf
                     <input type="input" class="form-control biPriceValue" name="item_balance" value="{{ $breakdownItem->item_balance }}">
                     <button class="btn btn-dark text-info m-2 biPriceUpdateButton" type="submit">Submit</button>
