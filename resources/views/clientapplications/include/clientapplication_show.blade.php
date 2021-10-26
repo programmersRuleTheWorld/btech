@@ -1,10 +1,10 @@
 <input type="hidden" id="ref_id" value={{ $clientApplication->ref_id }}>
 
-    <div class="col-sm-6 m-1 ml-auto">
-    <div class="text-success text-center bg-dark" id="pBalance">
+    <div class="row">
+    <div class="text-success text-center bg-dark col-sm" id="pBalance">
             Project Balance: ${{ $clientApplication->project_balance }}
         </div>
-        <div class="text-warning text-center bg-dark" id="pDeposit">
+        <div class="text-warning text-center bg-dark col-sm" id="pDeposit">
             Project Deposit: ${{ $clientApplication->project_deposit }}
         </div>
     </div>
@@ -13,8 +13,6 @@
             Project Name:
            {{ $clientApplication->getProjectName() }}
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             Reference Identification Number:
            {{ $clientApplication->getRefID() }}
@@ -25,8 +23,6 @@
             Project Status:
             @include('clientapplications.include.clientapplication_status')
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             Name:
             {{ $clientApplication->getName() }}
@@ -37,8 +33,6 @@
             Company Name:
         {{ $clientApplication->getCompanyName() }}
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             Phone Number:
         {{ $clientApplication->getPhoneNumber() }}
@@ -49,8 +43,6 @@
             Project Type:
         {{ $clientApplication->getProjectType() }}
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             Project Due Date:
         {{ $clientApplication->getDueDate() }}
