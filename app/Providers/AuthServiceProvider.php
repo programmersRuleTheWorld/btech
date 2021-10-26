@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('show-dashboard', function($user)
         {
-            return $user->getPermission('show-dashboard');
+            return $user->getPermission('show-dashboard') || $user->isAdmin();
         });
 
         Gate::define('adminSearch', function($user)

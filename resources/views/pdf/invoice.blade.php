@@ -8,6 +8,10 @@
 
 <table>
     <tr>
+    <td style="font-size:.75em; text-align:left;">
+        New York Department of State ID #: 5659795
+        </td>
+
         <td style="font-size:.75em; text-align:center;">
             WORK WILL NOT BEGIN UNLESS YOU READ AND SIGN SIGNATURE PAGE (LAST PAGE) AND SCAN/EMAIL TO CONTRACTS@BERTRAMTECHNOLOGIES.COM
         </td>
@@ -302,13 +306,12 @@ Client Application Details: [NOT ALL FIELDS MAY BE APPLICABLE TO YOUR PROJECT]
         </tr>
     </table>
     <br>
-    Please sign the following affirmation: I, the undersigned, hereby attest to have read and understood the Service Agreement and Privacy Policy, the work and on which terms it is to be completed, and further attest to my agreement to such terms exactly as they are written. I understand that this is a binding legal contract with Bertram Technologies Corporation of Albany, New York:<br><br>
+    Please sign the following affirmation: I, the undersigned, hereby attest to have read and understood the Service Agreement and Privacy Policy, the work and on which terms it is to be completed, and further attest to my agreement to such terms exactly as they are written. I further understand that this is a binding legal contract with Bertram Technologies Corporation of Albany, New York, <br><br>
                 Client Name (Print): ______________________
                 Client Name (Signature): ______________________
                 Signed Date: ______________________<br><br>
                 Contact us if you have any problems!<br>
                 Mailing: PO Box 2021, Albany, NY; 12220<br>
                 E-mail: contracts@bertramtechnologies.com<br>
-                Digitally: Login to your user portal at bertramtechnologies.com or access bertramtechnologies.com/contact for any questions or concerns
-</body>
+        </body>
 </html>

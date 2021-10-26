@@ -24,6 +24,11 @@ use Illuminate\Support\Facades\DB;
 
 class ClientApplicationsController extends Controller
 {    
+    public function __construct()
+    {
+        $this->middleware('two_factor_authentication', ['except' => ['store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -94,7 +99,7 @@ class ClientApplicationsController extends Controller
         $clientApplication->ref_id = mt_rand(100000000000000,999999999999999);
         $clientApplication->auth_code = Uuid::uuid4();
         $auth = $clientApplication->auth_code;
-        \Mail::to($clientApplication->email)->queue(new \App\Mail\ClientApplications\Created($clientApplication));
+        \Mail::to($clientApplication->email)->queue(new \App\Mail\ClientApplications\Created($clientApplication, $auth));
         $clientApplication->auth_code = Hash::make($clientApplication->auth_code);
         $clientApplication->save();
         

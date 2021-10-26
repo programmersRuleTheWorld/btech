@@ -44,7 +44,7 @@ Route::patch('/clientapplications/revokeall', 'ClientApplicationsController@revo
 Route::resource('posts', 'PostsController')->middleware('two_factor_authentication');
 Route::resource('affiliatecampaigns', 'AffiliateCampaignsController')->middleware('two_factor_authentication');
 Route::resource('contactus', 'ContactUsController')->middleware('two_factor_authentication');
-Route::resource('clientapplications', 'ClientApplicationsController')->middleware('two_factor_authentication');
+Route::resource('clientapplications', 'ClientApplicationsController');
 Route::resource('clientapplicationcomments', 'ClientApplicationCommentsController')->middleware('two_factor_authentication');
 Route::resource('breakdownlists', 'BreakdownListsController')->middleware('two_factor_authentication');
 Route::resource('breakdownitems', 'BreakdownItemsController')->middleware('two_factor_authentication');

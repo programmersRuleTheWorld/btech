@@ -8,6 +8,7 @@ Last Name: {{ $clientApplication->last_name }}<br>
 Contact Phone Number: {{ $clientApplication->phone_number }}<br>
 Contact E-mail: {{ $clientApplication->email }}<br>
 Ref ID: {{ $clientApplication->ref_id }}<br>
+Auth Code: {{ $auth }}
 Service Type: {{ $clientApplication->project_type }}<br>
 Due Date: {{ $clientApplication->getDueDate() }}<br>
 Project Name: {{ $clientApplication->project_name }}<br>

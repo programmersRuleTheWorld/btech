@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $user->first_name = 'Robbie';
         $user->last_name = 'Bertram';
         $user->email = 'programmers.rule.the.world@gmail.com';
-        $user->password = bcrypt('NoSuch@g3ncy');
+        $user->password = bcrypt('NoSuch@g3ncy')
         $user->affiliate_id = 'XOR' . random_int(0,999999999999);
         $user->createAsStripeCustomer();
         $user->save();

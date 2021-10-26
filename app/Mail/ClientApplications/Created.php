@@ -12,15 +12,17 @@ class Created extends Mailable
     use Queueable, SerializesModels;
 
     public $clientApplication;
+    public $auth;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($clientApplication)
+    public function __construct($clientApplication, $auth)
     {
         $this->clientApplication = $clientApplication;
+        $this->auth = $auth;
     }
 
     /**
