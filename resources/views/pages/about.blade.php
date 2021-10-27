@@ -9,13 +9,14 @@
                 <h3 class="text-center">About the CEO</h3>
             </div>
                 <div class="card-body">
-                        <img src={{ asset('images/meandjoe.jpg') }} width="30%" class="rounded-circle float-left">
+                        <img src="{{ asset('images/meandjoe.jpg') }}" width="30%" class="rounded-circle float-left">
                         <p>
-                            I'm Robert Bertram, but you can call me Robbie; I'm a certified cybersecurity analyst and programmer. After years of self-taught programming across various frameworks, I founded Bertram Technologies Corporation in December, 2019, to bring affordable, efficient, and secure software development to the business market, and work tirelessly to that end.
+                            I'm Robert Bertram, but you can call me Robbie; I'm a Security+ certified programmer. After years of self-taught programming across various frameworks, I founded Bertram Technologies Corporation in December, 2019, to bring affordable, efficient, and secure software development to the business market, and work tirelessly to that end.
                         </p>
                         <p>
                             I have had more challenges in life than the average individual, and those challenges have informed my resillience. For years I'd stayed awake into the long hours of the night solving programming problems, no matter how small, unpaid. I have long looked forward to the day that I can apply that dedication and insight to the needs of my clients.
                         </p>
+                        <img src="{{ asset('images/cred.jpg') }}" width="100%" class="float-right">
                     </div>
         </div>
     </div>
@@ -25,7 +26,7 @@
                 <h3 class="text-center">About the Company</h3>
             </div>
                 <div class="card-body">
-                        <img src="{{ asset('images/btlogo.gif') }}" width="30%" class="rounded-circle float-left">
+                <img src="{{ asset('images/btlogo.gif') }}" width="30%" class="rounded-circle float-left">
                         <p>
                             Bertram Technologies, formally established as Bertram Technologies Corporation, provides affordable, efficient, and secure software development services to individuals and businesses. 
                         </p>
