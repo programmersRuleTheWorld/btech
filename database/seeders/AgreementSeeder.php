@@ -117,7 +117,7 @@ class AgreementSeeder extends Seeder
         <p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.</p>
         <b class="text-center">Contact Us</b><br><br>
     
-        <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to <a class="text-dark" contact us at www.bertramtechnologies.com/contact, by e-mail at support@bertramtechnologies.com or by mail at PO Box 2021, Albany, NY; 12220.</p>
+        <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at www.bertramtechnologies.com/contact, by e-mail at support@bertramtechnologies.com or by mail at PO Box 2021, Albany, NY; 12220.</p>
         </div>
     </div>
         ';
