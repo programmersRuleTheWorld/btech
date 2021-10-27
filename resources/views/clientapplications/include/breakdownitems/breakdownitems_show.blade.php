@@ -46,7 +46,7 @@
             </div>
     @endforeach
     </div>
-    <div class="row ml-auto">
+    <div class="row">
         <div class="col-sm-6">
             Subtotal:
             <div class="text-success bg-dark border border-info blPriceField">
