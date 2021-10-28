@@ -79,7 +79,7 @@
             <div class="mb-2" id="wrapper">
             </div>
                     <div class="form-group" id="client_application">
-                        <textarea id="project" name="project_description" class="form-control form-control-sm  mb-2" placeholder="A brief description of your project... preexisting or new site? Budgetary and time constraints? Biggest challenges so far?..."></textarea>
+                        <textarea id="project" name="project_description" class="form-control form-control-sm  mb-2" placeholder="A brief description of your project... is this a preexisting or new project? What are your budgetary and time constraints? Biggest challenges so far?... etc."></textarea>
                     </div>
                     <button class="btn btn-dark text-info" type="submit">Submit</button>  
     

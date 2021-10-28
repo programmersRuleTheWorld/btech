@@ -33,7 +33,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        return $user->getPermission('show-user') === true;
+        return $user->getPermission('show-user');
     }
 
     /**
