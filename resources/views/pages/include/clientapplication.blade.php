@@ -3,6 +3,7 @@
                 @csrf
                 <div class="row mb-2">
                 <div class="col-md-6">
+                    <label for="first_name"></label>
                     <div class="form-group"> 
                         First Name*:
                         @if(isset($user) && isset($user->first_name))
@@ -13,6 +14,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                <label for="last_name"></label>
                     <div class="form-group"> 
                         Last Name:
                         @if(isset($user) && isset($user->last_name))
@@ -25,6 +27,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-6">
+                    <label for="email"></label>
                         <div class="form-group">
                         Email*:
                         @if(isset($user) && isset($user->email))
@@ -35,6 +38,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                    <label for="phone_number"></label>
                         <div class="form-group">
                         Phone Number*:
                             <input id="phone_number" name="phone_number" class="form-control form-control-sm mb-2" type="tel" maxlength="15" placeholder="Phone Number">
@@ -43,12 +47,14 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-6">
+                    <label for="company_name"></label>
                     <div class="form-group">
                         Company Name:
                         <input id="company_name" name="company_name" class="form-control form-control-sm mb-2" type="text" placeholder="Company Name">
                     </div>
                 </div>
                 <div class="col-md-6">
+                <label for="project_type"></label>
                     <div class="form-group">
                         Project Type*:
                         <select class="form-control form-control-sm" name="project_type" id="project_type">
@@ -63,13 +69,15 @@
                 </div>
             </div>
             <div class="row mb-2">
-                <div class="col-md-6">    
+                <div class="col-md-6">  
+                <label for="due_date"></label>  
                     <div class="form-group">
                         Project Due Date*:
-                        <input type="text" class="form-control form-control-sm due-date"  name="due_date" placeholder="Click to open calendar">
+                        <input type="text" class="form-control form-control-sm due-date" id="due_date"  name="due_date" placeholder="Click to open calendar">
                     </div>
                 </div>
                 <div class="col-md-6">    
+                <label for="project_name"></label>  
                     <div class="form-group">
                         Project Name*:
                         <input type="text" class="form-control form-control-sm"  name="project_name" placeholder="Please choose a descriptive name">
@@ -78,6 +86,7 @@
             </div>
             <div class="mb-2" id="wrapper">
             </div>
+            <label for="project_description"></label>  
                     <div class="form-group" id="client_application">
                         <textarea id="project" name="project_description" class="form-control form-control-sm  mb-2" placeholder="A brief description of your project... is this a preexisting or new project? What are your budgetary and time constraints? Biggest challenges so far?... etc."></textarea>
                     </div>

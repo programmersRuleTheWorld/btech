@@ -49,7 +49,6 @@ this.inputType = new makeFormField(inputType, 'form-control form-control-sm', id
 formCol.tagName.appendChild(formGroup.tagName);
 formGroup.tagName.appendChild(this.inputType.tagName);
 clientApplication.insertBefore(wrapper, currentDiv);
-
 return formGroup, formCol, this.inputType;
 }
 
