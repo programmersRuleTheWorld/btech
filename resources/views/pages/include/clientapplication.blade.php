@@ -88,7 +88,7 @@
             </div>
             <label for="project_description"></label>  
                     <div class="form-group" id="client_application">
-                        <textarea id="project" name="project_description" class="form-control form-control-sm  mb-2" placeholder="A brief description of your project... is this a preexisting or new project? What are your budgetary and time constraints? Biggest challenges so far?... etc."></textarea>
+                        <textarea id="project" name="project_description" class="form-control form-control-sm  mb-2" placeholder="A brief description of your project..."></textarea>
                     </div>
                     <button class="btn btn-dark text-info" type="submit">Submit</button>  
     
