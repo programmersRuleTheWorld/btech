@@ -6642,6 +6642,9 @@ function makeInput(inputType, id, innerText, placeholder) {
   formCol.tagName.appendChild(formGroup.tagName);
   formGroup.tagName.appendChild(this.inputType.tagName);
   clientApplication.insertBefore(wrapper, currentDiv);
+  label = document.createElement('label');
+  label["for"] = id;
+  document.body.appendChild(label);
   return formGroup, formCol, this.inputType;
 } //form creation
 //create Web Design/Development dropdown general options

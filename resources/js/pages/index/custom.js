@@ -49,6 +49,12 @@ this.inputType = new makeFormField(inputType, 'form-control form-control-sm', id
 formCol.tagName.appendChild(formGroup.tagName);
 formGroup.tagName.appendChild(this.inputType.tagName);
 clientApplication.insertBefore(wrapper, currentDiv);
+
+label = document.createElement('label');
+label.for = id;
+
+document.body.appendChild(label)
+
 return formGroup, formCol, this.inputType;
 }
 
