@@ -15,28 +15,32 @@
                 </div>
             <div class="row mb-2">
                 <div class="col-md">
-                    <div class="form-group text-center">
+                    <div class="form-group text-left">
                         <label for="name"></label>
+                        Name:
                         <input id="name" name="name" class="form-control form-control-sm mb-2" placeholder="Name...">
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-group text-center">
+                    <div class="form-group text-left">
                         <label for="phone_number"></label>
+                        Phone Number:
                         <input id="phone_number" name="phone_number" class="form-control form-control-sm mb-2" placeholder="Phone Number...">
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-group text-center">
+                    <div class="form-group text-left">
                         <label for="email"></label>
-                        <input id="email" name="email" class="form-control form-control-sm mb-2" placeholder="Email Address...">
+                        E-mail:
+                        <input id="email" name="email" class="form-control form-control-sm mb-2" placeholder="E-mail Address...">
                     </div>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-md">
-                    <div class="form-group text-center">
+                    <div class="form-group text-left">
                         <label for="body"></label>
+                        Body:
                         <textarea id="body" name="body" class="form-control form-control-sm mb-2" placeholder="Body..."></textarea>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function __construct(){
-        $this->middleware('verified', ['except' => ['index', 'services', 'about', 'contact', 'privacy', 'service_agreement', 'blog', 'affiliate']]);
+        $this->middleware('verified', ['except' => ['index', 'services', 'about', 'contact', 'privacy_policy', 'service_agreement', 'blog', 'affiliate']]);
     }
     
     public function index(){
