@@ -1,4 +1,4 @@
-if(window.location.pathname == '/')
+if(window.location.pathname == '/client_application')
 {
     require('./custom')
 
