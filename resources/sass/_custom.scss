@@ -4,6 +4,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Bootstrap Icons
+@import 'bootstrap-icons/font/bootstrap-icons';
+
 
 html{
     font-size: 1rem;
@@ -17,7 +20,7 @@ html{
 @media(max-width: 1300px){
     
     html{
-        font-size: .7em;
+        font-size: .9em;
     }
     
     .carousel-caption > h6{
@@ -38,7 +41,7 @@ html{
     }
     
     a.nav-link{
-        font-size: .7em;
+        font-size: 1em;
     }
 }
 
@@ -91,7 +94,7 @@ a.navbar-brand{
 
 .nav-link{
     font-weight: bold;
-    font-size: .8em;
+    font-size: 1em;
     color: black;
     border: 1px solid transparent;
     border-radius: 25px;
@@ -131,6 +134,13 @@ li > .dropdown-menu > a.dropdown-item:hover{
 .flashy2
 {
     animation-name: flashy2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.flashy3
+{
+    animation-name: flashy3;
     animation-duration: 5s;
     animation-iteration-count: infinite;
 }
@@ -179,6 +189,18 @@ li > .dropdown-menu > a.dropdown-item:hover{
     100%{
         color: aquamarine;
         background: transparent;
+    }
+}
+
+@keyframes flashy3{
+    0%{
+        color: red;
+    }
+    50%{
+        color: transparent;
+    }
+    100%{
+        color: red;
     }
 }
 
@@ -436,6 +458,31 @@ textarea#item_description{
           border: 1px solid yellow;
       }
   }
+
+  ul.greencheck{
+    list-style: none;
+    }
+    
+    svg.lockfill{
+        background-image: url('../../public/icons/shield-lock-fill.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+    }
+
+    svg.filelockfill{
+        background-image: url('../../public/icons/file-lock-fill.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+    }
+
+    svg.personworkspace{
+        background-image: url('../../public/icons/person-workspace.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+    }
 
   #appwarning{
       font-size: .9em;

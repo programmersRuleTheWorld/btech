@@ -102,6 +102,7 @@ class UsersController extends Controller
             $user->first_name = $request->input('first_name');
             $user->last_name = $request->input('last_name');
             $user->email = $request->input('email');
+            $user->phone_number = $request->input('phone_number');
             
             if($oldPassword !== null && Hash::check($oldPassword, $user->password) === true)
             {

@@ -72,6 +72,10 @@
                     <a class="dropdown-item text-center" href="{{ route('users.show', [Auth::user()->id]) }}">
                         {{ __('My Profile') }}
                     </a>
+
+                    <a class="dropdown-item text-center" href="{{ route('client_application') }}">
+                        {{ __('Client Application') }}
+                    </a>
 <!--
                     <a class="dropdown-item text-center" href=" route('affiliate_details' ) ">
                         {{ __('Affiliate Details') }}

@@ -28,7 +28,7 @@ Route::post('/payment', 'PagesController@client_application_payment')->name('cli
 Route::post('/deposit', 'PagesController@client_application_deposit')->name('client_application_deposit');
 Route::post('/services_payment', "PagesController@client_application_services")->name('client_application_services');
 Route::post('/dashboard_privileged/{user}', "DashboardController@privileged")->name('dashboard_privileged');
-
+Route::get('/client_application', 'PagesController@client_application')->name('client_application');
 
 //query routes
 Route::post('/admin/querySearch', 'QueriesController@adminSearch')->name('adminSearch');

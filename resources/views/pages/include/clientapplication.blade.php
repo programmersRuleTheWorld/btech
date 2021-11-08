@@ -1,4 +1,15 @@
-    
+<h5 class="text-center text-dark">
+                        We create, test and host high-security software applications for web, mobile and more. Do you have a project that needs fulfilled?
+                    </h5>
+                    <h2 class="text-center">
+                        Let us know today!
+                    </h2>
+                    @if(!$user)
+                    <div id="appwarning" class="alert bg-warning col mb-2 m-auto text-center text-dark">
+                            Before you complete the Client Application, you should <a class="text-dark" href={{route('register') }}><b>create an account</b></a>! This allows you to track your project status anytime you want!
+                    </div>
+                    @endif                        
+                        Fields marked * required
                 <form action="{{ route('clientapplications.store') }}" class="m-auto" id="services" method="POST">
                 @csrf
                 <div class="row mb-2">
@@ -6,7 +17,7 @@
                     <label for="first_name"></label>
                     <div class="form-group"> 
                         First Name*:
-                        @if(isset($user) && isset($user->first_name))
+                        @if(isset($user) && isset($user->first_name) && $auth == true)
                         <input id="first_name" name="first_name" class="form-control form-control-sm mb-2" type="text" value="{{ $user->first_name }}">
                         @else
                         <input id="first_name" name="first_name" class="form-control form-control-sm mb-2" type="text" placeholder="First Name">
@@ -17,7 +28,7 @@
                 <label for="last_name"></label>
                     <div class="form-group"> 
                         Last Name:
-                        @if(isset($user) && isset($user->last_name))
+                        @if(isset($user) && isset($user->last_name) && $auth == true)
                         <input id="last_name" name="last_name" class="form-control form-control-sm mb-2" type="text" value="{{ $user->last_name }}">
                         @else
                         <input id="last_name" name="last_name" class="form-control form-control-sm mb-2" type="text" placeholder="Last Name">
@@ -30,7 +41,7 @@
                     <label for="email"></label>
                         <div class="form-group">
                         Email*:
-                        @if(isset($user) && isset($user->email))
+                        @if(isset($user) && isset($user->email) && $auth == true)
                         <input id="email" name="email" class="form-control form-control-sm mb-2" type="email" value="{{ $user->email }}">
                         @else
                         <input id="email" name="email" class="form-control form-control-sm mb-2" type="email" placeholder="Email">
@@ -41,7 +52,11 @@
                     <label for="phone_number"></label>
                         <div class="form-group">
                         Phone Number*:
+                        @if(isset($user) && isset($user->phone_number) && $auth == true)
+                            <input id="phone_number" name="phone_number" class="form-control form-control-sm mb-2" type="tel" maxlength="15" placeholder="Phone Number" value="{{ $user->phone_number }}">
+                        @else
                             <input id="phone_number" name="phone_number" class="form-control form-control-sm mb-2" type="tel" maxlength="15" placeholder="Phone Number">
+                        @endif
                         </div>
                     </div>
                 </div>

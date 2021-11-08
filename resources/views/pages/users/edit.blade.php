@@ -35,7 +35,7 @@
                     <div class="col-md">
                         <div class="form-group">    
                             Phone Number: 
-                            <input type="text" name="phone_number" class="form-control form-control-sm" value="{{ $user->phone_number }}"> 
+                            <input type="text" id="phone_number" name="phone_number" class="form-control form-control-sm" value="{{ $user->phone_number }}"> 
                         </div>
                     </div>
                 </div>

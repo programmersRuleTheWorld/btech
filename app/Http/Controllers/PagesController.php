@@ -21,25 +21,21 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function __construct(){
-        $this->middleware('verified', ['except' => ['index', 'services', 'about', 'contact', 'privacy_policy', 'service_agreement', 'blog', 'affiliate']]);
+        $this->middleware('verified', ['except' => ['index', 'services', 'about', 'contact', 'client_application', 'privacy_policy', 'service_agreement', 'blog', 'affiliate']]);
     }
     
     public function index(){
         $user = auth()->user();
-        /*
-        $posts = Post::latest()->take(3)->with('user')->get();
-        $feed = Feeds::make('https://www.techrepublic.com/rssfeeds/topic/security/?feedType=rssfeeds');
-        $feed->set_image_handler('handler_image.php','image');
-        $feed->set_cache_location('mysql://root:root@localhost:3306/btech?prefix=sp_');
-        $feed->handle_content_type();
-        $feed->init();      
-
-            $items = $feed->get_items(0,6);
-            */
+        $auth = false;
+        if($user)
+        {
+            $auth = true;
+        }
             return view('pages.index')->with(
             [
 //                'posts' => $posts,
                 'user' => $user,
+                'auth' => $auth,
                 //'feed' => $feed,
 //                'items' => $items,
                 ]
@@ -95,6 +91,25 @@ class PagesController extends Controller
             'user' => $user,
             'completedProjects' => $completedProjects,
         ]);
+    }
+
+    public function client_application(Request $request)
+    {
+        $user = auth()->user();
+        $auth = false;
+        
+        if($user)
+        {
+        if($user->two_factor_expiry > \Carbon\Carbon::now())
+        {
+            $auth = true;
+        }
+        else
+        {
+            $auth = false;
+        }
+        }
+        return view('pages.client_application')->with(['user' => $user, 'auth' => $auth]);
     }
 
     public function client_application_payment(Request $request)

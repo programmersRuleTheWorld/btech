@@ -12,6 +12,12 @@ if (cookie.parse(document.cookie).cookieconsent != 'y') {
     authAccepted.style.wordWrap = 'normal'
     authAccepted.style.display = 'none'
 
+    var lock = document.createElement('i');
+    lock.className = 'bi-lock-fill flashy3';
+    lock.style.opacity = .7;
+    lock.style.color = 'red';
+    lock.style.fontSize = '5em';
+
     var scanLine = document.createElement('div')
     scanLine.id = 'scanLine'
     scanLine.style.width = 100 + '%'
@@ -21,7 +27,7 @@ if (cookie.parse(document.cookie).cookieconsent != 'y') {
     scanLine.style.opacity = .3
     scanLine.style.backgroundColor = 'red'
 
-    var privacyPolicy = document.createElement('div')
+    var privacyPolicy = document.createElement('p')
     privacyPolicy.id = 'privacyPolicy'
     privacyPolicy.style.display = 'none'
     privacyPolicy.style.textAlign = 'center'
@@ -32,27 +38,34 @@ if (cookie.parse(document.cookie).cookieconsent != 'y') {
     privacyPolicy.style.padding = 4 + '%'
     privacyPolicy.style.marginLeft = 5 + '%'
     privacyPolicy.style.marginRight = 5 + '%'
-    policyRoller = document.createElement('p')
+
+    
+    var privacyPolicyElement = document.createElement('p')
+    privacyPolicyElement.style.color = 'orange'
+    privacyPolicyElement.style.fontWeight = 'bold'
+    
+    var policyRow = document.createElement('div');
+    policyRow.className = 'row';
+
+    var policyRoller = document.createElement('div')
     policyRoller.id = 'policyRoller'
+    policyRoller.className = 'col'
     policyRoller.innerText = 'View Policy'
     policyRoller.style.color = 'orange'
     policyRoller.style.fontWeight = 'bold'
     policyRoller.style.textDecoration = 'underline'
 
-
-    var privacyPolicyElement = document.createElement('p')
-    privacyPolicyElement.style.color = 'orange'
-    privacyPolicyElement.style.fontWeight = 'bold'
-
-    var policyAccept = document.createElement('p')
+    var policyAccept = document.createElement('div')
     policyAccept.id = 'policyAccept'
+    policyAccept.className = 'col'
     policyAccept.innerText = 'Accept Policy'
     policyAccept.style.color = 'orange'
     policyAccept.style.fontWeight = 'bold'
     policyAccept.style.textDecoration = 'underline'
 
-    var policyDecline = document.createElement('p')
+    var policyDecline = document.createElement('div')
     policyDecline.id = 'policyDecline'
+    policyDecline.className = 'col'
     policyDecline.innerText = 'Decline Policy'
     policyDecline.style.color = 'orange'
     policyDecline.style.fontWeight = 'bold'
@@ -139,19 +152,21 @@ if (cookie.parse(document.cookie).cookieconsent != 'y') {
 
     var footer = document.createElement('p')
     footer.innerText = '©Copyright 2021 Bertram Technologies Corporation All Rights Reserved'
-    footer.style.color = 'orange'
+    footer.style.color = 'orange';
 
     terminal.appendChild(innerElement)
     terminal.appendChild(scanLine)
+    innerElement.appendChild(lock);
     innerElement.appendChild(welcomeText)
     innerElement.appendChild(stars)
     innerElement.appendChild(warningText)
     innerElement.appendChild(heroText2)
     heroText2.appendChild(appendedText)
     innerElement.appendChild(stars2)
-    innerElement.appendChild(policyRoller)
-    innerElement.appendChild(policyAccept)
-    innerElement.appendChild(policyDecline)
+    innerElement.appendChild(policyRow)
+    policyRow.appendChild(policyRoller)
+    policyRow.appendChild(policyAccept)
+    policyRow.appendChild(policyDecline)
     innerElement.appendChild(privacyPolicy)
     privacyPolicy.appendChild(privacyPolicyElement)
     innerElement.appendChild(footer)
