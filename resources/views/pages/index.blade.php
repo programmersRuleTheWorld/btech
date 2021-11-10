@@ -15,7 +15,7 @@
                 </div>
             <div class="card-body">
             <div class="row">
-                <div class="col-md">
+                <div class="col-md mb-1">
                     <div class="card bg-info">
                         <div class="card-header">
                             <h3 class="text-center">Software Development
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-md mb-1">
                     <div class="card bg-info">
                         <div class="card-header">
                             <h3 class="text-center">Security Auditing
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md">
+                <div class="col-md mb-1">
                     <div class="card bg-info">
                         <div class="card-header">
                             <h3 class="text-center">Fully Managed Hosting
