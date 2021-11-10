@@ -24,6 +24,7 @@
                         </div>
                         <div class="card-body">
                                 <p class="text-center">
+                                    <img src="{{ asset('images/lock.gif') }}" class="m-auto row col-6">
                                     Rapid, secure, HIPAA-compliant software development on-budget, on-time, everytime will allow your organization to gain and maintain digital superiority without compromising your customer experience; some of what our world-class programmers can offer are:
                                 </p>
                             <ul class="greencheck">
@@ -64,6 +65,7 @@
                         </div>
                         <div class="card-body">
                             <p class="text-center">
+                                <img src="{{ asset('images/shield.gif') }}" class="m-auto row col-6">
                                 Sophisticated Red Team security auditing by Security+ certified staff will reveal weaknesses in your organization and infrastructure according to your desired auditing scope in accordance with U.S. Department of Defense Directive 8140/8570.01-M IAM Level I:
                             </p>
                             <ul class="greencheck">
@@ -87,6 +89,10 @@
                                     <i class="bi-shield-fill-exclamation" style="color:red;"></i>
                                     Ongoing Communication With Your Blue Team to Resolve Vulnerabilities
                                 </li>
+                                <li>
+                                    <i class="bi-shield-fill-exclamation" style="color:red;"></i>
+                                    Security and Confidentiality From Breach to Patch Date
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -101,6 +107,7 @@
                         <div class="card-body">
 
                                 <p class="text-center">
+                                <img src="{{ asset('images/person.gif') }}" class="m-auto row col-6">
                                     Our no-hassle, fully-managed hosting experience for your frontend or backend infrastructure is accessible on-demand; our sysadmins work all day, every day ensuring your mission-critical infrastructure is functioning properly at all hours, day or night:
                                 </p>
                             <ul class="greencheck">
@@ -129,7 +136,6 @@
                                     AWS GovCloud Available For Eligible Customers
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
