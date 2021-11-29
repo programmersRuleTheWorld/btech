@@ -38,6 +38,10 @@
                                 </li>
                                 <li>
                                     <i class="bi-lock-fill" style="color:green;"></i>
+                                    Legacy Code Refactor and Modernization
+                                </li>
+                                <li>
+                                    <i class="bi-lock-fill" style="color:green;"></i>
                                     Stylish App-Like Frontends Using the Latest Frameworks
                                 </li>
                                 <li>
